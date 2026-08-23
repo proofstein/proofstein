@@ -1,0 +1,200 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "version": 1,
+  "metadata": {
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "name": "demo-srcfile",
+          "version": "0.0.0-demo"
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/c-l4-conf-cipher",
+      "name": "AES-256-GCM",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "etc/tinyattest.conf"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/c-l4-conf-sig",
+      "name": "Ed25519",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "etc/tinyattest.conf"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/c-l4-conf-kem",
+      "name": "ML-KEM-512",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "etc/tinyattest.conf"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/c-l4-conf-digest",
+      "name": "SHA-256",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "etc/tinyattest.conf"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/c-l6-provisioning-cert",
+      "name": "RSA-2048",
+      "cryptoProperties": {
+        "assetType": "certificate"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "keys/provisioning-cert.pem"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/c-l6-provisioning-key",
+      "name": "RSA-2048",
+      "cryptoProperties": {
+        "assetType": "related-crypto-material"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "keys/provisioning-key.pem"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/c-l6-report-key",
+      "name": "Ed25519",
+      "cryptoProperties": {
+        "assetType": "related-crypto-material"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "keys/report-signing-key.pem"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/c-l2-sha256",
+      "name": "SHA-256",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/digest.c"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/c-l1-ecdsa",
+      "name": "ECDSA-P256",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/identity.c"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/c-l1-ed25519",
+      "name": "Ed25519",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/identity.c"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/c-l1-rsa",
+      "name": "RSA-2048",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/identity.c"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/c-l1-mlkem",
+      "name": "ML-KEM-512",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/kem.c"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/c-l1-aesgcm",
+      "name": "AES-256-GCM",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/seal.c"
+        }
+      ]
+    }
+  ]
+}

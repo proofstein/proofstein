@@ -1,0 +1,16 @@
+# JVM options for a ledger node.
+#
+# Applied by the systemd unit; see deploy/ledger-svc.service.
+
+-Xms1g
+-Xmx4g
+-XX:+ExitOnOutOfMemoryError
+-XX:+UseZGC
+
+# Restrict the TLS surface the node offers to peers.
+-Djdk.tls.client.protocols=TLSv1.3 #@PS java-l4-jvm-tls|TLSv1.3|4|protocol|TLS version pinned by JVM property
+-Djdk.tls.namedGroups=x25519mlkem768,secp256r1 #@PS java-l4-jvm-groups|X25519MLKEM768|4|algorithm|TLS key exchange groups pinned by JVM property
+-Djdk.tls.disabledAlgorithms=SSLv3,TLSv1,TLSv1.1,RC4,DES,MD5withRSA
+
+-Djava.security.egd=file:/dev/urandom
+-Dfile.encoding=UTF-8

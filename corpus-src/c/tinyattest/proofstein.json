@@ -1,0 +1,60 @@
+{
+  "description": "Attestation helper: seals device reports, signs them, agrees a post-quantum verifier session key.",
+  "build": [
+    "make",
+    "make check"
+  ],
+  "toolchain": {
+    "cc": "any C11 compiler",
+    "openssl": ">=3.5",
+    "notes": "ML-KEM-512 is reached through EVP_PKEY_CTX_new_from_name, which needs OpenSSL 3.5 or newer."
+  },
+  "file_assets": [
+    {
+      "id": "c-l6-report-key",
+      "path": "keys/report-signing-key.pem",
+      "algorithm": "Ed25519",
+      "layer": 6,
+      "cyclonedx_asset_type": "related-crypto-material",
+      "note": "PKCS#8 Ed25519 report signing key, throwaway test material"
+    },
+    {
+      "id": "c-l6-provisioning-key",
+      "path": "keys/provisioning-key.pem",
+      "algorithm": "RSA-2048",
+      "layer": 6,
+      "cyclonedx_asset_type": "related-crypto-material",
+      "note": "RSA private key for the legacy provisioning service, throwaway test material"
+    },
+    {
+      "id": "c-l6-provisioning-cert",
+      "path": "keys/provisioning-cert.pem",
+      "algorithm": "RSA-2048",
+      "layer": 6,
+      "cyclonedx_asset_type": "certificate",
+      "note": "self-signed X.509 presented to the provisioning service, throwaway test material"
+    }
+  ],
+  "holdout": {
+    "variant_name": "microquote",
+    "seed": 19,
+    "rename_symbols": {
+      "ta_seal": "mq_wrap",
+      "ta_open": "mq_unwrap",
+      "ta_transport_seal": "mq_transport_wrap",
+      "ta_md_sha256": "mq_md_digest",
+      "ta_md_ctx_new": "mq_md_new",
+      "ta_md_ctx_free": "mq_md_free",
+      "verifier-direct": "attestor-direct",
+      "ta_report_digest": "mq_report_digest"
+    },
+    "substitutions": [
+      {
+        "from": "ML-KEM-512",
+        "to": "ML-KEM-768",
+        "from_algorithm": "ML-KEM-512",
+        "to_algorithm": "ML-KEM-768"
+      }
+    ]
+  }
+}

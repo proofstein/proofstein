@@ -1,0 +1,12 @@
+[requires]
+openssl/3.5.5
+# Pulled in for the mesh transport prototype in the `wip/mesh` branch. Nothing
+# on main links against it yet.
+libsodium/1.0.20
+
+[generators]
+CMakeDeps
+CMakeToolchain
+
+[options]
+openssl/*:shared=True

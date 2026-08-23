@@ -1,0 +1,238 @@
+{
+  "project": "session-broker",
+  "language": "javascript",
+  "corpus_path": "corpus/javascript/session-broker",
+  "build": [
+    "npm ci",
+    "npm run build"
+  ],
+  "description": "Session broker: seals session payloads, signs tokens, agrees an upstream key post-quantum.",
+  "toolchain": {
+    "node": ">=20",
+    "typescript": "5.7.2",
+    "notes": "Node's crypto has no ML-KEM, so the PQC call site uses @noble/post-quantum (pure JS, no native build)."
+  },
+  "layer_counts": {
+    "1": 7,
+    "2": 2,
+    "3": 1,
+    "4": 6,
+    "5": 1,
+    "6": 3
+  },
+  "asset_count": 20,
+  "assets": [
+    {
+      "id": "js-l4-yaml-cipher",
+      "file": "config/broker.yaml",
+      "line": 15,
+      "algorithm": "AES-256-GCM",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "session AEAD selected by config"
+    },
+    {
+      "id": "js-l4-yaml-sig",
+      "file": "config/broker.yaml",
+      "line": 16,
+      "algorithm": "Ed25519",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "token signature selected by config"
+    },
+    {
+      "id": "js-l4-yaml-assertion",
+      "file": "config/broker.yaml",
+      "line": 17,
+      "algorithm": "ML-DSA-65",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "session assertion signature selected by config"
+    },
+    {
+      "id": "js-l4-yaml-kem",
+      "file": "config/broker.yaml",
+      "line": 18,
+      "algorithm": "ML-KEM-768",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "upstream key agreement selected by config"
+    },
+    {
+      "id": "js-l4-yaml-jwks",
+      "file": "config/broker.yaml",
+      "line": 19,
+      "algorithm": "RS256",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "legacy JWKS signature selected by config; RS256 is RSASSA-PKCS1-v1_5 with SHA-256"
+    },
+    {
+      "id": "js-l4-yaml-hash",
+      "file": "config/broker.yaml",
+      "line": 23,
+      "algorithm": "SHA-256",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "replay cache fingerprint hash selected by config"
+    },
+    {
+      "id": "js-l6-jwks-cert",
+      "file": "keys/legacy-jwks-cert.pem",
+      "line": 1,
+      "algorithm": "RSA-2048",
+      "layer": 6,
+      "layer_name": "key, certificate or keystore file",
+      "cyclonedx_asset_type": "certificate",
+      "note": "self-signed X.509 for the legacy JWKS endpoint, throwaway test material"
+    },
+    {
+      "id": "js-l6-jwks-key",
+      "file": "keys/legacy-jwks-key.pem",
+      "line": 1,
+      "algorithm": "RSA-2048",
+      "layer": 6,
+      "layer_name": "key, certificate or keystore file",
+      "cyclonedx_asset_type": "related-crypto-material",
+      "note": "RSA private key behind the legacy JWKS endpoint, throwaway test material"
+    },
+    {
+      "id": "js-l6-token-key",
+      "file": "keys/token-signing-key.pem",
+      "line": 1,
+      "algorithm": "Ed25519",
+      "layer": 6,
+      "layer_name": "key, certificate or keystore file",
+      "cyclonedx_asset_type": "related-crypto-material",
+      "note": "PKCS#8 Ed25519 token signing key, throwaway test material"
+    },
+    {
+      "id": "js-dep-forge",
+      "file": "package.json",
+      "line": 16,
+      "algorithm": "node-forge",
+      "layer": 5,
+      "layer_name": "declared dependency, not called",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "declared crypto dependency (provides RSA-OAEP, AES, X.509); only used by the 2.x migration script, which is not shipped"
+    },
+    {
+      "id": "js-l1-mldsa",
+      "file": "src/attest.ts",
+      "line": 13,
+      "algorithm": "ML-DSA-65",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "@noble/post-quantum ml_dsa65 signing key"
+    },
+    {
+      "id": "js-l2-slhdsa",
+      "file": "src/attest.ts",
+      "line": 32,
+      "algorithm": "SLH-DSA",
+      "layer": 2,
+      "layer_name": "aliased import",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "SLH-DSA sha2_128f reached through a named import of @noble/post-quantum/slh-dsa"
+    },
+    {
+      "id": "js-l1-aesgcm",
+      "file": "src/envelope.ts",
+      "line": 31,
+      "algorithm": "AES-256-GCM",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "session payload AEAD"
+    },
+    {
+      "id": "js-l2-sha256",
+      "file": "src/fingerprint.ts",
+      "line": 14,
+      "algorithm": "SHA-256",
+      "layer": 2,
+      "layer_name": "aliased import",
+      "cyclonedx_asset_type": "algorithm",
+      "accept_locations": [
+        {
+          "file": "src/fingerprint.ts",
+          "line": 8
+        }
+      ],
+      "note": "aliased import: createHash imported as digest"
+    },
+    {
+      "id": "js-l1-ed25519",
+      "file": "src/identity.ts",
+      "line": 19,
+      "algorithm": "Ed25519",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "session token signing key"
+    },
+    {
+      "id": "js-l1-rsa",
+      "file": "src/identity.ts",
+      "line": 20,
+      "algorithm": "RSA-2048",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "legacy JWKS endpoint key"
+    },
+    {
+      "id": "js-l1-ecdsa",
+      "file": "src/identity.ts",
+      "line": 21,
+      "algorithm": "ECDSA-P256",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "upstream mutual TLS key"
+    },
+    {
+      "id": "js-l1-sha256",
+      "file": "src/identity.ts",
+      "line": 33,
+      "algorithm": "SHA-256",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "JWKS thumbprint digest"
+    },
+    {
+      "id": "js-l1-mlkem",
+      "file": "src/kem.ts",
+      "line": 18,
+      "algorithm": "ML-KEM-768",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "upstream key agreement"
+    },
+    {
+      "id": "js-l3-wrapper",
+      "file": "src/store.ts",
+      "line": 22,
+      "algorithm": "AES-256-GCM",
+      "layer": 3,
+      "layer_name": "wrapper function",
+      "cyclonedx_asset_type": "algorithm",
+      "accept_locations": [
+        {
+          "file": "src/store.ts",
+          "line": 47
+        }
+      ],
+      "note": "AEAD reached only through the store registry"
+    }
+  ]
+}

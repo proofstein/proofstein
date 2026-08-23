@@ -1,0 +1,32 @@
+# Helm values for the vaultkeeper chart.
+#
+# Anything under `crypto` is rendered into the node ConfigMap and overrides the
+# defaults baked into the image.
+
+replicaCount: 3
+
+image:
+  repository: ghcr.io/proofstein/vaultkeeper
+  tag: "2.4.1"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 7701
+
+crypto:
+  envelopeCipher: "AES-256-GCM"
+  meshKeyAgreement: "ML-KEM-768"
+  tlsMinVersion: "TLSv1.3"
+
+ingress:
+  enabled: false
+
+resources:
+  requests:
+    cpu: 250m
+    memory: 256Mi
+
+persistence:
+  enabled: true
+  size: 8Gi

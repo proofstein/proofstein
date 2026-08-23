@@ -1,0 +1,53 @@
+{
+  "description": "Session broker: seals session payloads, signs tokens, agrees an upstream key post-quantum.",
+  "build": [
+    "npm ci",
+    "npm run build"
+  ],
+  "toolchain": {
+    "node": ">=20",
+    "typescript": "5.7.2",
+    "notes": "Node's crypto has no ML-KEM, so the PQC call site uses @noble/post-quantum (pure JS, no native build)."
+  },
+  "file_assets": [
+    {
+      "id": "js-l6-token-key",
+      "path": "keys/token-signing-key.pem",
+      "algorithm": "Ed25519",
+      "layer": 6,
+      "cyclonedx_asset_type": "related-crypto-material",
+      "note": "PKCS#8 Ed25519 token signing key, throwaway test material"
+    },
+    {
+      "id": "js-l6-jwks-key",
+      "path": "keys/legacy-jwks-key.pem",
+      "algorithm": "RSA-2048",
+      "layer": 6,
+      "cyclonedx_asset_type": "related-crypto-material",
+      "note": "RSA private key behind the legacy JWKS endpoint, throwaway test material"
+    },
+    {
+      "id": "js-l6-jwks-cert",
+      "path": "keys/legacy-jwks-cert.pem",
+      "algorithm": "RSA-2048",
+      "layer": 6,
+      "cyclonedx_asset_type": "certificate",
+      "note": "self-signed X.509 for the legacy JWKS endpoint, throwaway test material"
+    }
+  ],
+  "holdout": {
+    "variant_name": "ticket-gateway",
+    "seed": 13,
+    "rename_symbols": {
+      "SealedStore": "WrappedStore",
+      "openStore": "resolveStore",
+      "REGISTRY": "STORE_TABLE",
+      "newDataKey": "freshDataKey",
+      "signToken": "signTicket",
+      "jwksThumbprint": "keysetThumbprint",
+      "sealed-memory": "wrapped-memory",
+      "BrokerIdentity": "GatewayIdentity"
+    },
+    "substitutions": []
+  }
+}

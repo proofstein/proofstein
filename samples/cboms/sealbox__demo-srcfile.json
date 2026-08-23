@@ -1,0 +1,228 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "version": 1,
+  "metadata": {
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "name": "demo-srcfile",
+          "version": "0.0.0-demo"
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/rust-l4-toml-cipher",
+      "name": "AES-256-GCM",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "config/sealbox.toml"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/rust-l4-toml-sig",
+      "name": "Ed25519",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "config/sealbox.toml"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/rust-l4-toml-kem",
+      "name": "ML-KEM-768",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "config/sealbox.toml"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/rust-l4-toml-archive",
+      "name": "RSA-2048",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "config/sealbox.toml"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/rust-l4-toml-hash",
+      "name": "SHA-256",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "config/sealbox.toml"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/rust-l6-archive-cert",
+      "name": "RSA-2048",
+      "cryptoProperties": {
+        "assetType": "certificate"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "keys/archive-gateway-cert.pem"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/rust-l6-archive-key",
+      "name": "RSA-2048",
+      "cryptoProperties": {
+        "assetType": "related-crypto-material"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "keys/archive-gateway-key.pem"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/rust-l6-manifest-key",
+      "name": "Ed25519",
+      "cryptoProperties": {
+        "assetType": "related-crypto-material"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "keys/manifest-signing-key.pem"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/rust-l1-aesgcm",
+      "name": "AES-256-GCM",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/envelope.rs"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/rust-l2-sha256",
+      "name": "SHA-256",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/fingerprint.rs"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/rust-l1-ed25519",
+      "name": "Ed25519",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/identity.rs"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/rust-l1-ecdsa",
+      "name": "ECDSA-P256",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/identity.rs"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/rust-l1-rsa",
+      "name": "RSA-2048",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/identity.rs"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/rust-l1-sha256",
+      "name": "SHA-256",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/identity.rs"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/rust-l1-mlkem",
+      "name": "ML-KEM-768",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/kem.rs"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,270 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "version": 1,
+  "metadata": {
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "name": "demo-srcfile",
+          "version": "0.0.0-demo"
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/py-l4-yaml-cipher",
+      "name": "AES-256-GCM",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "config/vaultkeeper.yaml"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/py-l4-yaml-sig",
+      "name": "Ed25519",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "config/vaultkeeper.yaml"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/py-l4-yaml-kem",
+      "name": "ML-KEM-768",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "config/vaultkeeper.yaml"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/py-l4-yaml-audit",
+      "name": "RSA-2048",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "config/vaultkeeper.yaml"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/py-l4-yaml-hash",
+      "name": "SHA-256",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "config/vaultkeeper.yaml"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/py-l4-helm-cipher",
+      "name": "AES-256-GCM",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "deploy/values.yaml"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/py-l4-helm-kem",
+      "name": "ML-KEM-768",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "deploy/values.yaml"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/py-l4-helm-tls",
+      "name": "TLSv1.3",
+      "cryptoProperties": {
+        "assetType": "protocol"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "deploy/values.yaml"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/py-l6-manifest-key",
+      "name": "Ed25519",
+      "cryptoProperties": {
+        "assetType": "related-crypto-material"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "secrets/node-manifest-key.pem"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/py-l6-mesh-cert",
+      "name": "ECDSA-P256",
+      "cryptoProperties": {
+        "assetType": "certificate"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "secrets/peer-mesh-cert.pem"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/py-l6-mesh-key",
+      "name": "ECDSA-P256",
+      "cryptoProperties": {
+        "assetType": "related-crypto-material"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "secrets/peer-mesh-key.pem"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/py-l1-aesgcm",
+      "name": "AES-256-GCM",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/vaultkeeper/envelope.py"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/py-l2-sha256",
+      "name": "SHA-256",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/vaultkeeper/fingerprint.py"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/py-l1-rsa",
+      "name": "RSA-2048",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/vaultkeeper/identity.py"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/py-l1-ecdsa",
+      "name": "ECDSA-P256",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/vaultkeeper/identity.py"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/py-l1-ed25519",
+      "name": "Ed25519",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/vaultkeeper/identity.py"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/py-l1-sha256",
+      "name": "SHA-256",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/vaultkeeper/identity.py"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/py-l1-mlkem",
+      "name": "ML-KEM-768",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/vaultkeeper/kem.py"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "description": "Append-only ledger node: seals segments, signs blocks, agrees a post-quantum replication key.",
+  "build": [
+    "mvn -q -B package",
+    "mvn -q -B exec:java"
+  ],
+  "toolchain": {
+    "maven": "3.9+",
+    "jdk_build": "21",
+    "jdk_runtime": "24+ for the ML-KEM path",
+    "notes": "JAVA_HOME must point at a JDK. The ML-KEM call site compiles on 21 because the algorithm is a JCA string; it resolves only on a Java 24+ runtime, and App falls back cleanly when it does not."
+  },
+  "file_assets": [
+    {
+      "id": "java-l6-keystore",
+      "path": "keys/ledger-node.p12",
+      "algorithm": "PKCS#12",
+      "layer": 6,
+      "cyclonedx_asset_type": "related-crypto-material",
+      "note": "PKCS#12 keystore, throwaway test material. The askable asset is the container itself. It holds a P-256 key and certificate, but that is behind password-based encryption, so no static scanner can name the inner key algorithm without the password; expecting it was a ground-truth error. See docs/pending-review.md entry 4."
+    },
+    {
+      "id": "java-l6-block-key",
+      "path": "keys/block-signing-key.pem",
+      "algorithm": "Ed25519",
+      "layer": 6,
+      "cyclonedx_asset_type": "related-crypto-material",
+      "note": "PKCS#8 Ed25519 block signing key, throwaway test material"
+    }
+  ],
+  "holdout": {
+    "variant_name": "journal-svc",
+    "seed": 23,
+    "rename_symbols": {
+      "SegmentStore": "PageStore",
+      "Sealed": "Wrapped",
+      "REGISTRY": "STORE_TABLE",
+      "signBlock": "signPage",
+      "peerThumbprint": "peerDigest",
+      "newDataKey": "freshDataKey",
+      "sealed-memory": "wrapped-memory",
+      "segmentCipher": "pageCipher"
+    },
+    "substitutions": [],
+    "rename_files": {
+      "src/main/java/io/proofstein/ledger/store/SegmentStore.java": "src/main/java/io/proofstein/ledger/store/PageStore.java"
+    }
+  }
+}

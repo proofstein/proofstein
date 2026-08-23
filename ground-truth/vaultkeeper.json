@@ -1,0 +1,269 @@
+{
+  "project": "vaultkeeper",
+  "language": "python",
+  "corpus_path": "corpus/python/vaultkeeper",
+  "build": [
+    "python3 -m venv .venv",
+    ".venv/bin/pip install -r requirements.txt",
+    ".venv/bin/pip install -e .",
+    ".venv/bin/python -m compileall -q src"
+  ],
+  "description": "Secrets sync daemon: envelope-encrypts secrets, signs sync manifests, agrees mesh keys post-quantum.",
+  "toolchain": {
+    "python": ">=3.11",
+    "notes": "cryptography 49.0.0 provides ML-KEM natively; no native toolchain needed beyond wheels."
+  },
+  "layer_counts": {
+    "1": 7,
+    "2": 1,
+    "3": 1,
+    "4": 9,
+    "5": 2,
+    "6": 3
+  },
+  "asset_count": 23,
+  "assets": [
+    {
+      "id": "py-l4-yaml-cipher",
+      "file": "config/vaultkeeper.yaml",
+      "line": 15,
+      "algorithm": "AES-256-GCM",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "envelope AEAD selected by config"
+    },
+    {
+      "id": "py-l4-yaml-sig",
+      "file": "config/vaultkeeper.yaml",
+      "line": 16,
+      "algorithm": "Ed25519",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "manifest signature selected by config"
+    },
+    {
+      "id": "py-l4-yaml-kem",
+      "file": "config/vaultkeeper.yaml",
+      "line": 17,
+      "algorithm": "ML-KEM-768",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "mesh key agreement selected by config"
+    },
+    {
+      "id": "py-l4-yaml-audit",
+      "file": "config/vaultkeeper.yaml",
+      "line": 18,
+      "algorithm": "RSA-2048",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "audit export signature selected by config"
+    },
+    {
+      "id": "py-l4-yaml-attestation",
+      "file": "config/vaultkeeper.yaml",
+      "line": 19,
+      "algorithm": "SLH-DSA",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "vault attestation signature selected by config"
+    },
+    {
+      "id": "py-l4-yaml-hash",
+      "file": "config/vaultkeeper.yaml",
+      "line": 24,
+      "algorithm": "SHA-256",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "ledger fingerprint hash selected by config"
+    },
+    {
+      "id": "py-l4-helm-cipher",
+      "file": "deploy/values.yaml",
+      "line": 18,
+      "algorithm": "AES-256-GCM",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "Helm override for the envelope AEAD"
+    },
+    {
+      "id": "py-l4-helm-kem",
+      "file": "deploy/values.yaml",
+      "line": 19,
+      "algorithm": "ML-KEM-768",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "Helm override for mesh key agreement"
+    },
+    {
+      "id": "py-l4-helm-tls",
+      "file": "deploy/values.yaml",
+      "line": 20,
+      "algorithm": "TLSv1.3",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "protocol",
+      "note": "minimum TLS version for the mesh listener"
+    },
+    {
+      "id": "py-dep-pynacl",
+      "file": "pyproject.toml",
+      "line": 15,
+      "algorithm": "PyNaCl",
+      "layer": 5,
+      "layer_name": "declared dependency, not called",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "declared crypto dependency (provides XSalsa20-Poly1305, Ed25519); never imported by the daemon"
+    },
+    {
+      "id": "py-dep-pynacl-req",
+      "file": "requirements.txt",
+      "line": 4,
+      "algorithm": "PyNaCl",
+      "layer": 5,
+      "layer_name": "declared dependency, not called",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "declared crypto dependency (provides XSalsa20-Poly1305, Ed25519); never imported by the daemon"
+    },
+    {
+      "id": "py-l6-manifest-key",
+      "file": "secrets/node-manifest-key.pem",
+      "line": 1,
+      "algorithm": "Ed25519",
+      "layer": 6,
+      "layer_name": "key, certificate or keystore file",
+      "cyclonedx_asset_type": "related-crypto-material",
+      "note": "PKCS#8 Ed25519 manifest signing key, throwaway test material"
+    },
+    {
+      "id": "py-l6-mesh-cert",
+      "file": "secrets/peer-mesh-cert.pem",
+      "line": 1,
+      "algorithm": "ECDSA-P256",
+      "layer": 6,
+      "layer_name": "key, certificate or keystore file",
+      "cyclonedx_asset_type": "certificate",
+      "note": "self-signed X.509 for the mesh listener, throwaway test material"
+    },
+    {
+      "id": "py-l6-mesh-key",
+      "file": "secrets/peer-mesh-key.pem",
+      "line": 1,
+      "algorithm": "ECDSA-P256",
+      "layer": 6,
+      "layer_name": "key, certificate or keystore file",
+      "cyclonedx_asset_type": "related-crypto-material",
+      "note": "P-256 private key for the mesh listener, throwaway test material"
+    },
+    {
+      "id": "py-l1-falcon",
+      "file": "src/vaultkeeper/attest.py",
+      "line": 34,
+      "algorithm": "Falcon-1024",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "liboqs Python binding oqs.Signature(\"Falcon-1024\")"
+    },
+    {
+      "id": "py-l3-wrapper",
+      "file": "src/vaultkeeper/backend.py",
+      "line": 31,
+      "algorithm": "AES-256-GCM",
+      "layer": 3,
+      "layer_name": "wrapper function",
+      "cyclonedx_asset_type": "algorithm",
+      "accept_locations": [
+        {
+          "file": "src/vaultkeeper/backend.py",
+          "line": 56
+        }
+      ],
+      "note": "AEAD reached only through the backend registry"
+    },
+    {
+      "id": "py-l1-aesgcm",
+      "file": "src/vaultkeeper/envelope.py",
+      "line": 44,
+      "algorithm": "AES-256-GCM",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "envelope AEAD"
+    },
+    {
+      "id": "py-l2-sha256",
+      "file": "src/vaultkeeper/fingerprint.py",
+      "line": 16,
+      "algorithm": "SHA-256",
+      "layer": 2,
+      "layer_name": "aliased import",
+      "cyclonedx_asset_type": "algorithm",
+      "accept_locations": [
+        {
+          "file": "src/vaultkeeper/fingerprint.py",
+          "line": 9
+        }
+      ],
+      "note": "aliased import: hashlib imported as digestlib"
+    },
+    {
+      "id": "py-l1-rsa",
+      "file": "src/vaultkeeper/identity.py",
+      "line": 27,
+      "algorithm": "RSA-2048",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "legacy audit export key"
+    },
+    {
+      "id": "py-l1-ecdsa",
+      "file": "src/vaultkeeper/identity.py",
+      "line": 28,
+      "algorithm": "ECDSA-P256",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "peer mesh TLS key"
+    },
+    {
+      "id": "py-l1-ed25519",
+      "file": "src/vaultkeeper/identity.py",
+      "line": 29,
+      "algorithm": "Ed25519",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "manifest signing key"
+    },
+    {
+      "id": "py-l1-sha256",
+      "file": "src/vaultkeeper/identity.py",
+      "line": 41,
+      "algorithm": "SHA-256",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "digest algorithm for audit export signatures"
+    },
+    {
+      "id": "py-l1-mlkem",
+      "file": "src/vaultkeeper/kem.py",
+      "line": 23,
+      "algorithm": "ML-KEM-768",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "mesh key agreement"
+    }
+  ]
+}

@@ -1,0 +1,1408 @@
+{
+  "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:e07fc353-a276-5d25-ab5b-12b14fab6bef",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-08-23T10:08:57Z",
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "bom-ref": "tool-pqprobe-static",
+          "name": "pqprobe-static",
+          "version": "3.5.0"
+        }
+      ]
+    },
+    "properties": [
+      {
+        "name": "pqprobe:filesScanned",
+        "value": "18"
+      },
+      {
+        "name": "pqprobe:findings",
+        "value": "38"
+      },
+      {
+        "name": "pqprobe:unmapped:doc_claim",
+        "value": "2"
+      }
+    ]
+  },
+  "components": [
+    {
+      "type": "library",
+      "bom-ref": "algorithm-cdd6a58cfc0532fc",
+      "name": "PyNaCl",
+      "version": "1.6.2",
+      "properties": [
+        {
+          "name": "pqprobe:ecosystem",
+          "value": "pypi"
+        },
+        {
+          "name": "pqprobe:findingType",
+          "value": "dependency"
+        },
+        {
+          "name": "pqprobe:providesAlgorithms",
+          "value": "X25519, Ed25519, XSalsa20, Poly1305"
+        },
+        {
+          "name": "pqprobe:severity",
+          "value": "info"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "name",
+            "confidence": 0.9,
+            "concludedValue": "PyNaCl",
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.9
+              }
+            ]
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "pyproject.toml",
+            "line": 15
+          },
+          {
+            "location": "requirements.txt",
+            "line": 4
+          }
+        ]
+      }
+    },
+    {
+      "type": "library",
+      "bom-ref": "algorithm-250da769757f5603",
+      "name": "cryptography",
+      "version": "49.0.0",
+      "properties": [
+        {
+          "name": "pqprobe:ecosystem",
+          "value": "pypi"
+        },
+        {
+          "name": "pqprobe:findingType",
+          "value": "dependency"
+        },
+        {
+          "name": "pqprobe:providesAlgorithms",
+          "value": "RSA, ECDSA, Ed25519, AES, ChaCha20, X25519"
+        },
+        {
+          "name": "pqprobe:severity",
+          "value": "info"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "name",
+            "confidence": 0.9,
+            "concludedValue": "cryptography",
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.9
+              }
+            ]
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "pyproject.toml",
+            "line": 12
+          },
+          {
+            "location": "requirements.txt",
+            "line": 3
+          }
+        ]
+      }
+    },
+    {
+      "type": "library",
+      "bom-ref": "algorithm-7436e4000e89a32e",
+      "name": "liboqs-python",
+      "version": "0.14.0",
+      "properties": [
+        {
+          "name": "pqprobe:ecosystem",
+          "value": "pypi"
+        },
+        {
+          "name": "pqprobe:findingType",
+          "value": "dependency"
+        },
+        {
+          "name": "pqprobe:pqcReady",
+          "value": "true"
+        },
+        {
+          "name": "pqprobe:providesAlgorithms",
+          "value": "ML-KEM, ML-DSA, SPHINCS+"
+        },
+        {
+          "name": "pqprobe:severity",
+          "value": "info"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "name",
+            "confidence": 0.9,
+            "concludedValue": "liboqs-python",
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.9
+              }
+            ]
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "requirements.txt",
+            "line": 8
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "algorithm-a70b4b0102d87e8a",
+      "name": "AES-256-GCM",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "ae",
+          "mode": "gcm",
+          "cryptoFunctions": [
+            "decrypt",
+            "encrypt"
+          ]
+        },
+        "oid": "2.16.840.1.101.3.4.1.42"
+      },
+      "properties": [
+        {
+          "name": "pqprobe:findingType",
+          "value": "config_algorithm"
+        },
+        {
+          "name": "pqprobe:severity",
+          "value": "info"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "name",
+            "confidence": 0.9,
+            "concludedValue": "AES-256-GCM",
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.9
+              }
+            ]
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "config/vaultkeeper.yaml",
+            "line": 15,
+            "additionalContext": "envelope_cipher: \"AES-256-GCM\""
+          },
+          {
+            "location": "deploy/values.yaml",
+            "line": 18,
+            "additionalContext": "envelopeCipher: \"AES-256-GCM\""
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "algorithm-54c1c793dcfb6a0d",
+      "name": "AES-GCM",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "ae",
+          "mode": "gcm",
+          "cryptoFunctions": [
+            "decrypt",
+            "encrypt"
+          ]
+        }
+      },
+      "properties": [
+        {
+          "name": "pqprobe:degraded",
+          "value": "the call site does not reveal the AES key size"
+        },
+        {
+          "name": "pqprobe:findingType",
+          "value": "symmetric"
+        },
+        {
+          "name": "pqprobe:severity",
+          "value": "info"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "name",
+            "confidence": 0.5,
+            "concludedValue": "AES-GCM",
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5
+              }
+            ]
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "src/vaultkeeper/envelope.py",
+            "line": 12,
+            "additionalContext": "from cryptography.hazmat.primitives.ciphers.aead import AESGCM"
+          },
+          {
+            "location": "src/vaultkeeper/envelope.py",
+            "line": 44,
+            "additionalContext": "aead = AESGCM(data_key)"
+          },
+          {
+            "location": "src/vaultkeeper/envelope.py",
+            "line": 51,
+            "additionalContext": "aead = AESGCM(data_key)"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "algorithm-14de25535b8e424f",
+      "name": "EC (unspecified curve)",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "key-agree",
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.2.840.10045.2.1"
+      },
+      "properties": [
+        {
+          "name": "pqprobe:composition",
+          "value": "implied"
+        },
+        {
+          "name": "pqprobe:findingType",
+          "value": "ecc"
+        },
+        {
+          "name": "pqprobe:quantumVulnerable",
+          "value": "true"
+        },
+        {
+          "name": "pqprobe:severity",
+          "value": "medium"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "name",
+            "confidence": 0.6,
+            "concludedValue": "EC (unspecified curve)",
+            "methods": [
+              {
+                "technique": "other",
+                "confidence": 0.6
+              }
+            ]
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "secrets/peer-mesh-key.pem",
+            "line": 1
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "algorithm-0457e2f441ea30ce",
+      "name": "ECDSA",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "nistQuantumSecurityLevel": 0
+        }
+      },
+      "properties": [
+        {
+          "name": "pqprobe:composition",
+          "value": "implied"
+        },
+        {
+          "name": "pqprobe:findingType",
+          "value": "certificate"
+        },
+        {
+          "name": "pqprobe:quantumVulnerable",
+          "value": "true"
+        },
+        {
+          "name": "pqprobe:severity",
+          "value": "info"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "name",
+            "confidence": 0.6,
+            "concludedValue": "ECDSA",
+            "methods": [
+              {
+                "technique": "other",
+                "confidence": 0.6
+              }
+            ]
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "secrets/peer-mesh-cert.pem",
+            "line": 1
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "algorithm-5afeb6e3820d1798",
+      "name": "ECDSA-P-256",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "curve": "P-256",
+          "cryptoFunctions": [
+            "sign",
+            "verify"
+          ],
+          "nistQuantumSecurityLevel": 0
+        }
+      },
+      "properties": [
+        {
+          "name": "pqprobe:findingType",
+          "value": "ecc"
+        },
+        {
+          "name": "pqprobe:quantumVulnerable",
+          "value": "true"
+        },
+        {
+          "name": "pqprobe:severity",
+          "value": "medium"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "name",
+            "confidence": 0.9,
+            "concludedValue": "ECDSA-P-256",
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.9
+              }
+            ]
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "src/vaultkeeper/identity.py",
+            "line": 28,
+            "additionalContext": "peer = ec.generate_private_key(ec.SECP256R1())"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "algorithm-51252194b1cc2f96",
+      "name": "ECDSA-SHA256",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "cryptoFunctions": [
+            "sign",
+            "verify"
+          ],
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.2.840.10045.4.3.2"
+      },
+      "properties": [
+        {
+          "name": "pqprobe:findingType",
+          "value": "certificate"
+        },
+        {
+          "name": "pqprobe:quantumVulnerable",
+          "value": "true"
+        },
+        {
+          "name": "pqprobe:severity",
+          "value": "info"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "name",
+            "confidence": 0.9,
+            "concludedValue": "ECDSA-SHA256",
+            "methods": [
+              {
+                "technique": "filename",
+                "confidence": 0.9
+              }
+            ]
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "secrets/peer-mesh-cert.pem",
+            "line": 1
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "algorithm-733b8576e83567de",
+      "name": "Ed25519",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "curve": "Ed25519",
+          "cryptoFunctions": [
+            "sign",
+            "verify"
+          ],
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.3.101.112"
+      },
+      "properties": [
+        {
+          "name": "pqprobe:findingType",
+          "value": "config_algorithm"
+        },
+        {
+          "name": "pqprobe:quantumVulnerable",
+          "value": "true"
+        },
+        {
+          "name": "pqprobe:severity",
+          "value": "medium"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "name",
+            "confidence": 0.9,
+            "concludedValue": "Ed25519",
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.9
+              },
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.9
+              }
+            ]
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "config/vaultkeeper.yaml",
+            "line": 16,
+            "additionalContext": "manifest_signature: \"Ed25519\""
+          },
+          {
+            "location": "src/vaultkeeper/identity.py",
+            "line": 12,
+            "additionalContext": "from cryptography.hazmat.primitives.asymmetric import ec, ed25519, padding, rsa"
+          },
+          {
+            "location": "src/vaultkeeper/identity.py",
+            "line": 23,
+            "additionalContext": "manifest: ed25519.Ed25519PrivateKey"
+          },
+          {
+            "location": "src/vaultkeeper/identity.py",
+            "line": 29,
+            "additionalContext": "manifest = ed25519.Ed25519PrivateKey.generate()"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "algorithm-9802c9e5f69d24bd",
+      "name": "Falcon-1024",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "parameterSetIdentifier": "1024",
+          "cryptoFunctions": [
+            "sign",
+            "verify"
+          ]
+        }
+      },
+      "properties": [
+        {
+          "name": "pqprobe:findingType",
+          "value": "pqc"
+        },
+        {
+          "name": "pqprobe:severity",
+          "value": "info"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "name",
+            "confidence": 0.9,
+            "concludedValue": "Falcon-1024",
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.9
+              }
+            ]
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "src/vaultkeeper/attest.py",
+            "line": 21,
+            "additionalContext": "\"compact\": \"Falcon-1024\","
+          },
+          {
+            "location": "src/vaultkeeper/attest.py",
+            "line": 30,
+            "additionalContext": "self._scheme = _SCHEMES.get(settings.attestation_profile, \"Falcon-1024\")"
+          },
+          {
+            "location": "src/vaultkeeper/attest.py",
+            "line": 34,
+            "additionalContext": "with oqs.Signature(\"Falcon-1024\") as signer:"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "algorithm-bcc2e57f38017a69",
+      "name": "ML-KEM",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "kem",
+          "cryptoFunctions": [
+            "decapsulate",
+            "encapsulate"
+          ]
+        }
+      },
+      "properties": [
+        {
+          "name": "pqprobe:degraded",
+          "value": "the parameter set is not named, so no OID or NIST security category is asserted"
+        },
+        {
+          "name": "pqprobe:findingType",
+          "value": "pqc"
+        },
+        {
+          "name": "pqprobe:severity",
+          "value": "info"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "name",
+            "confidence": 0.5,
+            "concludedValue": "ML-KEM",
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5
+              }
+            ]
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "src/vaultkeeper/kem.py",
+            "line": 12,
+            "additionalContext": "from cryptography.hazmat.primitives.asymmetric import mlkem"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "algorithm-345633c0bc4cda3d",
+      "name": "ML-KEM-768",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "kem",
+          "parameterSetIdentifier": "768",
+          "nistQuantumSecurityLevel": 3
+        },
+        "oid": "2.16.840.1.101.3.4.4.2"
+      },
+      "properties": [
+        {
+          "name": "pqprobe:findingType",
+          "value": "config_algorithm"
+        },
+        {
+          "name": "pqprobe:severity",
+          "value": "info"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "name",
+            "confidence": 0.9,
+            "concludedValue": "ML-KEM-768",
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.9
+              },
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.9
+              }
+            ]
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "config/vaultkeeper.yaml",
+            "line": 17,
+            "additionalContext": "mesh_key_agreement: \"ML-KEM-768\""
+          },
+          {
+            "location": "deploy/values.yaml",
+            "line": 19,
+            "additionalContext": "meshKeyAgreement: \"ML-KEM-768\""
+          },
+          {
+            "location": "src/vaultkeeper/kem.py",
+            "line": 19,
+            "additionalContext": "private_key: mlkem.MLKEM768PrivateKey"
+          },
+          {
+            "location": "src/vaultkeeper/kem.py",
+            "line": 23,
+            "additionalContext": "return cls(private_key=mlkem.MLKEM768PrivateKey.generate())"
+          },
+          {
+            "location": "src/vaultkeeper/kem.py",
+            "line": 39,
+            "additionalContext": "encapsulation_key = mlkem.MLKEM768PublicKey.from_public_bytes(peer_public)"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "algorithm-ffb931ce01575704",
+      "name": "RSA",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "pke",
+          "cryptoFunctions": [
+            "keygen"
+          ],
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.2.840.113549.1.1.1"
+      },
+      "properties": [
+        {
+          "name": "pqprobe:findingType",
+          "value": "config_algorithm"
+        },
+        {
+          "name": "pqprobe:quantumVulnerable",
+          "value": "true"
+        },
+        {
+          "name": "pqprobe:severity",
+          "value": "high"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "name",
+            "confidence": 0.9,
+            "concludedValue": "RSA",
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.9
+              },
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.9
+              }
+            ]
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "config/vaultkeeper.yaml",
+            "line": 18,
+            "additionalContext": "audit_export_signature: \"RSA-PSS-2048\""
+          },
+          {
+            "location": "src/vaultkeeper/identity.py",
+            "line": 27,
+            "additionalContext": "audit = rsa.generate_private_key(public_exponent=65537, key_size=AUDIT_KEY_BITS)"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "algorithm-e5fda3cf8c259831",
+      "name": "SHA-2",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash",
+          "cryptoFunctions": [
+            "digest"
+          ]
+        }
+      },
+      "properties": [
+        {
+          "name": "pqprobe:degraded",
+          "value": "the call site names the SHA-2 family without a determinable digest length"
+        },
+        {
+          "name": "pqprobe:findingType",
+          "value": "symmetric"
+        },
+        {
+          "name": "pqprobe:severity",
+          "value": "info"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "name",
+            "confidence": 0.5,
+            "concludedValue": "SHA-2",
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5
+              }
+            ]
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "src/vaultkeeper/fingerprint.py",
+            "line": 16,
+            "additionalContext": "digest = digestlib.sha256(payload).hexdigest()"
+          },
+          {
+            "location": "src/vaultkeeper/identity.py",
+            "line": 40,
+            "additionalContext": "padding.PSS(mgf=padding.MGF1(hashes.SHA256()), salt_length=padding.PSS.MAX_LENGTH),"
+          },
+          {
+            "location": "src/vaultkeeper/identity.py",
+            "line": 41,
+            "additionalContext": "hashes.SHA256(),"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "algorithm-67b02b3deb9f92c9",
+      "name": "SHA-256",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash",
+          "classicalSecurityLevel": 256
+        },
+        "oid": "2.16.840.1.101.3.4.2.1"
+      },
+      "properties": [
+        {
+          "name": "pqprobe:findingType",
+          "value": "config_algorithm"
+        },
+        {
+          "name": "pqprobe:severity",
+          "value": "info"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "name",
+            "confidence": 0.9,
+            "concludedValue": "SHA-256",
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.9
+              }
+            ]
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "config/vaultkeeper.yaml",
+            "line": 24,
+            "additionalContext": "fingerprint_hash: \"SHA-256\""
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "algorithm-f82b670f05fc6887",
+      "name": "SLH-DSA",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "cryptoFunctions": [
+            "sign",
+            "verify"
+          ]
+        }
+      },
+      "properties": [
+        {
+          "name": "pqprobe:findingType",
+          "value": "config_algorithm"
+        },
+        {
+          "name": "pqprobe:severity",
+          "value": "info"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "name",
+            "confidence": 0.9,
+            "concludedValue": "SLH-DSA",
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.9
+              }
+            ]
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "config/vaultkeeper.yaml",
+            "line": 19,
+            "additionalContext": "attestation_signature: \"SLH-DSA-SHA2-128s\""
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "algorithm-3337a9fcbcad9c38",
+      "name": "SPHINCS+",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "cryptoFunctions": [
+            "sign",
+            "verify"
+          ]
+        }
+      },
+      "properties": [
+        {
+          "name": "pqprobe:degraded",
+          "value": "the parameter set is not named, so no OID or NIST security category is asserted"
+        },
+        {
+          "name": "pqprobe:findingType",
+          "value": "pqc"
+        },
+        {
+          "name": "pqprobe:severity",
+          "value": "info"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "name",
+            "confidence": 0.5,
+            "concludedValue": "SPHINCS+",
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5
+              }
+            ]
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "src/vaultkeeper/attest.py",
+            "line": 22,
+            "additionalContext": "\"hash-based\": \"SPHINCS+-SHA2-128s-simple\","
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "certificate-ee2463d47dc9143a",
+      "name": "X.509 certificate: CN=vk-eu-central-1,OU=NOT A REAL KEY,O=Proofstein Corpus",
+      "cryptoProperties": {
+        "assetType": "certificate",
+        "certificateProperties": {
+          "subjectName": "CN=vk-eu-central-1,OU=NOT A REAL KEY,O=Proofstein Corpus",
+          "issuerName": "CN=vk-eu-central-1,OU=NOT A REAL KEY,O=Proofstein Corpus",
+          "notValidBefore": "2026-07-27T14:42:49Z",
+          "notValidAfter": "2036-07-24T14:42:49Z",
+          "signatureAlgorithmRef": "algorithm-51252194b1cc2f96",
+          "subjectPublicKeyRef": "key-bd5e19b9b2ae2394",
+          "certificateFormat": "X.509"
+        }
+      },
+      "properties": [
+        {
+          "name": "pqprobe:certificateEncoding",
+          "value": "PEM"
+        },
+        {
+          "name": "pqprobe:findingType",
+          "value": "certificate"
+        },
+        {
+          "name": "pqprobe:quantumVulnerable",
+          "value": "true"
+        },
+        {
+          "name": "pqprobe:selfSigned",
+          "value": "true"
+        },
+        {
+          "name": "pqprobe:serialNumber",
+          "value": "27996017842719648816582337084476621886212861975"
+        },
+        {
+          "name": "pqprobe:severity",
+          "value": "info"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "name",
+            "confidence": 0.9,
+            "concludedValue": "X.509 certificate: CN=vk-eu-central-1,OU=NOT A REAL KEY,O=Proofstein Corpus",
+            "methods": [
+              {
+                "technique": "filename",
+                "confidence": 0.9
+              }
+            ]
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "secrets/peer-mesh-cert.pem",
+            "line": 1
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "protocol-eaece10ccf9509d8",
+      "name": "TLS (config/vaultkeeper.yaml)",
+      "cryptoProperties": {
+        "assetType": "protocol",
+        "protocolProperties": {
+          "type": "tls",
+          "cipherSuites": [
+            {
+              "name": "RSA-PSS-2048",
+              "algorithms": [
+                "protocol-eaece10ccf9509d8"
+              ]
+            }
+          ]
+        }
+      },
+      "properties": [
+        {
+          "name": "pqprobe:cipherSuite",
+          "value": "RSA-PSS-2048"
+        },
+        {
+          "name": "pqprobe:findingType",
+          "value": "config_algorithm"
+        },
+        {
+          "name": "pqprobe:severity",
+          "value": "info"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "name",
+            "confidence": 0.9,
+            "concludedValue": "TLS (config/vaultkeeper.yaml)",
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.9
+              }
+            ]
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "config/vaultkeeper.yaml",
+            "line": 18,
+            "additionalContext": "audit_export_signature: \"RSA-PSS-2048\""
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "protocol-7260909833a475cd",
+      "name": "TLS 1.3 (deploy/values.yaml)",
+      "cryptoProperties": {
+        "assetType": "protocol",
+        "protocolProperties": {
+          "type": "tls",
+          "version": "1.3"
+        }
+      },
+      "properties": [
+        {
+          "name": "pqprobe:findingType",
+          "value": "config_algorithm"
+        },
+        {
+          "name": "pqprobe:severity",
+          "value": "info"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "name",
+            "confidence": 0.9,
+            "concludedValue": "TLS 1.3 (deploy/values.yaml)",
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.9
+              }
+            ]
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "deploy/values.yaml",
+            "line": 20,
+            "additionalContext": "tlsMinVersion: \"TLSv1.3\""
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "key-ee40501af21d26cb",
+      "name": "EC private key (PKCS#8)",
+      "cryptoProperties": {
+        "assetType": "related-crypto-material",
+        "relatedCryptoMaterialProperties": {
+          "type": "private-key",
+          "algorithmRef": "algorithm-14de25535b8e424f",
+          "size": 256
+        }
+      },
+      "properties": [
+        {
+          "name": "pqprobe:findingType",
+          "value": "ecc"
+        },
+        {
+          "name": "pqprobe:severity",
+          "value": "medium"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "name",
+            "confidence": 0.9,
+            "concludedValue": "EC private key (PKCS#8)",
+            "methods": [
+              {
+                "technique": "filename",
+                "confidence": 0.9
+              }
+            ]
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "secrets/peer-mesh-key.pem",
+            "line": 1
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "key-bd5e19b9b2ae2394",
+      "name": "ECDSA public key (P-256) of CN=vk-eu-central-1,OU=NOT A REAL KEY,O=Proofstein Corpus",
+      "cryptoProperties": {
+        "assetType": "related-crypto-material",
+        "relatedCryptoMaterialProperties": {
+          "type": "public-key",
+          "algorithmRef": "algorithm-0457e2f441ea30ce",
+          "size": 256
+        }
+      },
+      "properties": [
+        {
+          "name": "pqprobe:findingType",
+          "value": "certificate"
+        },
+        {
+          "name": "pqprobe:quantumVulnerable",
+          "value": "true"
+        },
+        {
+          "name": "pqprobe:severity",
+          "value": "info"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "name",
+            "confidence": 0.9,
+            "concludedValue": "ECDSA public key (P-256) of CN=vk-eu-central-1,OU=NOT A REAL KEY,O=Proofstein Corpus",
+            "methods": [
+              {
+                "technique": "filename",
+                "confidence": 0.9
+              }
+            ]
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "secrets/peer-mesh-cert.pem",
+            "line": 1
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "key-0ae25665354d01cc",
+      "name": "Ed25519 private key (PKCS#8)",
+      "cryptoProperties": {
+        "assetType": "related-crypto-material",
+        "relatedCryptoMaterialProperties": {
+          "type": "private-key",
+          "algorithmRef": "algorithm-733b8576e83567de",
+          "size": 256
+        }
+      },
+      "properties": [
+        {
+          "name": "pqprobe:findingType",
+          "value": "ecc"
+        },
+        {
+          "name": "pqprobe:severity",
+          "value": "medium"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "name",
+            "confidence": 0.9,
+            "concludedValue": "Ed25519 private key (PKCS#8)",
+            "methods": [
+              {
+                "technique": "filename",
+                "confidence": 0.9
+              }
+            ]
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "secrets/node-manifest-key.pem",
+            "line": 1
+          }
+        ]
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "algorithm-0457e2f441ea30ce"
+    },
+    {
+      "ref": "algorithm-14de25535b8e424f"
+    },
+    {
+      "ref": "algorithm-250da769757f5603"
+    },
+    {
+      "ref": "algorithm-3337a9fcbcad9c38"
+    },
+    {
+      "ref": "algorithm-345633c0bc4cda3d"
+    },
+    {
+      "ref": "algorithm-51252194b1cc2f96",
+      "dependsOn": [
+        "algorithm-67b02b3deb9f92c9"
+      ]
+    },
+    {
+      "ref": "algorithm-54c1c793dcfb6a0d"
+    },
+    {
+      "ref": "algorithm-5afeb6e3820d1798"
+    },
+    {
+      "ref": "algorithm-67b02b3deb9f92c9"
+    },
+    {
+      "ref": "algorithm-733b8576e83567de"
+    },
+    {
+      "ref": "algorithm-7436e4000e89a32e"
+    },
+    {
+      "ref": "algorithm-9802c9e5f69d24bd"
+    },
+    {
+      "ref": "algorithm-a70b4b0102d87e8a"
+    },
+    {
+      "ref": "algorithm-bcc2e57f38017a69"
+    },
+    {
+      "ref": "algorithm-cdd6a58cfc0532fc"
+    },
+    {
+      "ref": "algorithm-e5fda3cf8c259831"
+    },
+    {
+      "ref": "algorithm-f82b670f05fc6887"
+    },
+    {
+      "ref": "algorithm-ffb931ce01575704"
+    },
+    {
+      "ref": "certificate-ee2463d47dc9143a"
+    },
+    {
+      "ref": "key-0ae25665354d01cc",
+      "dependsOn": [
+        "algorithm-733b8576e83567de"
+      ]
+    },
+    {
+      "ref": "key-bd5e19b9b2ae2394",
+      "dependsOn": [
+        "algorithm-0457e2f441ea30ce"
+      ]
+    },
+    {
+      "ref": "key-ee40501af21d26cb",
+      "dependsOn": [
+        "algorithm-14de25535b8e424f"
+      ]
+    },
+    {
+      "ref": "protocol-7260909833a475cd"
+    },
+    {
+      "ref": "protocol-eaece10ccf9509d8"
+    }
+  ]
+}

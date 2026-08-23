@@ -1,0 +1,256 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "version": 1,
+  "metadata": {
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "name": "demo-srcfile",
+          "version": "0.0.0-demo"
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/java-l4-jvm-tls",
+      "name": "TLSv1.3",
+      "cryptoProperties": {
+        "assetType": "protocol"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "deploy/jvm.options"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/java-l4-jvm-groups",
+      "name": "X25519MLKEM768",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "deploy/jvm.options"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/java-l6-block-key",
+      "name": "Ed25519",
+      "cryptoProperties": {
+        "assetType": "related-crypto-material"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "keys/block-signing-key.pem"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/java-l6-keystore",
+      "name": "ECDSA-P256",
+      "cryptoProperties": {
+        "assetType": "related-crypto-material"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "keys/ledger-node.p12"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/java-l1-aesgcm",
+      "name": "AES-256-GCM",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/main/java/io/proofstein/ledger/crypto/Envelope.java"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/java-l2-sha256",
+      "name": "SHA-256",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/main/java/io/proofstein/ledger/crypto/Fingerprint.java"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/java-l1-ed25519",
+      "name": "Ed25519",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/main/java/io/proofstein/ledger/crypto/Identity.java"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/java-l1-ecdsa",
+      "name": "ECDSA-P256",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/main/java/io/proofstein/ledger/crypto/Identity.java"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/java-l1-rsa",
+      "name": "RSA-2048",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/main/java/io/proofstein/ledger/crypto/Identity.java"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/java-l1-sha256rsa",
+      "name": "RSA-2048",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/main/java/io/proofstein/ledger/crypto/Identity.java"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/java-l1-sha256",
+      "name": "SHA-256",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/main/java/io/proofstein/ledger/crypto/Identity.java"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/java-l1-mlkem",
+      "name": "ML-KEM",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/main/java/io/proofstein/ledger/crypto/Kem.java"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/java-l4-prop-cipher",
+      "name": "AES-256-GCM",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/main/resources/application.properties"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/java-l4-prop-sig",
+      "name": "Ed25519",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/main/resources/application.properties"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/java-l4-prop-kem",
+      "name": "ML-KEM-768",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/main/resources/application.properties"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/java-l4-prop-settlement",
+      "name": "RSA-2048",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/main/resources/application.properties"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/java-l4-prop-hash",
+      "name": "SHA-256",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/main/resources/application.properties"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+# Helm values for the vaultkeeper chart.
+#
+# Anything under `crypto` is rendered into the node ConfigMap and overrides the
+# defaults baked into the image.
+
+replicaCount: 3
+
+image:
+  repository: ghcr.io/proofstein/vaultkeeper
+  tag: "2.4.1"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 7701
+
+crypto:
+  envelopeCipher: "AES-256-GCM" #@PS py-l4-helm-cipher|AES-256-GCM|4|algorithm|Helm override for the envelope AEAD
+  meshKeyAgreement: "ML-KEM-768" #@PS py-l4-helm-kem|ML-KEM-768|4|algorithm|Helm override for mesh key agreement
+  tlsMinVersion: "TLSv1.3" #@PS py-l4-helm-tls|TLSv1.3|4|protocol|minimum TLS version for the mesh listener
+
+ingress:
+  enabled: false
+
+resources:
+  requests:
+    cpu: 250m
+    memory: 256Mi
+
+persistence:
+  enabled: true
+  size: 8Gi

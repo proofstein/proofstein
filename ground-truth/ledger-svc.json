@@ -1,0 +1,283 @@
+{
+  "project": "ledger-svc",
+  "language": "java",
+  "corpus_path": "corpus/java/ledger-svc",
+  "build": [
+    "mvn -q -B package",
+    "mvn -q -B exec:java"
+  ],
+  "description": "Append-only ledger node: seals segments, signs blocks, agrees a post-quantum replication key.",
+  "toolchain": {
+    "maven": "3.9+",
+    "jdk_build": "21",
+    "jdk_runtime": "24+ for the ML-KEM path",
+    "notes": "JAVA_HOME must point at a JDK. The ML-KEM call site compiles on 21 because the algorithm is a JCA string; it resolves only on a Java 24+ runtime, and App falls back cleanly when it does not."
+  },
+  "layer_counts": {
+    "1": 10,
+    "2": 3,
+    "3": 1,
+    "4": 8,
+    "5": 1,
+    "6": 2
+  },
+  "asset_count": 25,
+  "assets": [
+    {
+      "id": "java-l4-jvm-tls",
+      "file": "deploy/jvm.options",
+      "line": 11,
+      "algorithm": "TLSv1.3",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "protocol",
+      "note": "TLS version pinned by JVM property"
+    },
+    {
+      "id": "java-l4-jvm-groups",
+      "file": "deploy/jvm.options",
+      "line": 12,
+      "algorithm": "X25519MLKEM768",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "TLS key exchange groups pinned by JVM property"
+    },
+    {
+      "id": "java-l6-block-key",
+      "file": "keys/block-signing-key.pem",
+      "line": 1,
+      "algorithm": "Ed25519",
+      "layer": 6,
+      "layer_name": "key, certificate or keystore file",
+      "cyclonedx_asset_type": "related-crypto-material",
+      "note": "PKCS#8 Ed25519 block signing key, throwaway test material"
+    },
+    {
+      "id": "java-l6-keystore",
+      "file": "keys/ledger-node.p12",
+      "line": 1,
+      "algorithm": "PKCS#12",
+      "layer": 6,
+      "layer_name": "key, certificate or keystore file",
+      "cyclonedx_asset_type": "related-crypto-material",
+      "note": "PKCS#12 keystore, throwaway test material. The askable asset is the container itself. It holds a P-256 key and certificate, but that is behind password-based encryption, so no static scanner can name the inner key algorithm without the password; expecting it was a ground-truth error. See docs/pending-review.md entry 4."
+    },
+    {
+      "id": "java-dep-bouncycastle",
+      "file": "pom.xml",
+      "line": 26,
+      "algorithm": "bcprov-jdk18on",
+      "layer": 5,
+      "layer_name": "declared dependency, not called",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "declared crypto dependency (Bouncy Castle provider); never called by the service"
+    },
+    {
+      "id": "java-l1-xmss",
+      "file": "src/main/java/io/proofstein/ledger/crypto/AuditSeal.java",
+      "line": 51,
+      "algorithm": "XMSS",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "Bouncy Castle XMSS via KeyPairGenerator.getInstance(\"XMSS\", \"BC\"); stateful hash-based signature"
+    },
+    {
+      "id": "java-l2-lms",
+      "file": "src/main/java/io/proofstein/ledger/crypto/AuditSeal.java",
+      "line": 56,
+      "algorithm": "LMS",
+      "layer": 2,
+      "layer_name": "aliased import",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "LMS parameter set lms_sha256_n32_h10 reached through a static import of LMSigParameters"
+    },
+    {
+      "id": "java-l1-mldsa",
+      "file": "src/main/java/io/proofstein/ledger/crypto/BlockSeal.java",
+      "line": 37,
+      "algorithm": "ML-DSA",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "Bouncy Castle ML-DSA via KeyPairGenerator.getInstance(\"ML-DSA\", \"BC\")"
+    },
+    {
+      "id": "java-l2-slhdsa",
+      "file": "src/main/java/io/proofstein/ledger/crypto/BlockSeal.java",
+      "line": 44,
+      "algorithm": "SLH-DSA",
+      "layer": 2,
+      "layer_name": "aliased import",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "SLH-DSA reached through a static import of KeyPairGenerator.getInstance"
+    },
+    {
+      "id": "java-l1-falcon",
+      "file": "src/main/java/io/proofstein/ledger/crypto/BlockSeal.java",
+      "line": 52,
+      "algorithm": "Falcon-512",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "Bouncy Castle FalconParameterSpec.falcon_512"
+    },
+    {
+      "id": "java-l1-aesgcm",
+      "file": "src/main/java/io/proofstein/ledger/crypto/Envelope.java",
+      "line": 46,
+      "algorithm": "AES-256-GCM",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "ledger entry AEAD"
+    },
+    {
+      "id": "java-l2-sha256",
+      "file": "src/main/java/io/proofstein/ledger/crypto/Fingerprint.java",
+      "line": 24,
+      "algorithm": "SHA-256",
+      "layer": 2,
+      "layer_name": "aliased import",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "aliased API: MessageDigest.getInstance reached through a static import"
+    },
+    {
+      "id": "java-l1-ed25519",
+      "file": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
+      "line": 32,
+      "algorithm": "Ed25519",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "ledger block signing key"
+    },
+    {
+      "id": "java-l1-ecdsa",
+      "file": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
+      "line": 33,
+      "algorithm": "ECDSA-P256",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "peer mutual TLS key"
+    },
+    {
+      "id": "java-l1-rsa",
+      "file": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
+      "line": 36,
+      "algorithm": "RSA-2048",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "clearing house settlement export key"
+    },
+    {
+      "id": "java-l1-sha256rsa",
+      "file": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
+      "line": 52,
+      "algorithm": "RSA-2048",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "settlement export signature"
+    },
+    {
+      "id": "java-l1-sha256",
+      "file": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
+      "line": 60,
+      "algorithm": "SHA-256",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "peer certificate thumbprint"
+    },
+    {
+      "id": "java-l1-mlkem",
+      "file": "src/main/java/io/proofstein/ledger/crypto/Kem.java",
+      "line": 24,
+      "algorithm": "ML-KEM",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "ledger replication key agreement"
+    },
+    {
+      "id": "java-l3-wrapper",
+      "file": "src/main/java/io/proofstein/ledger/store/SegmentStore.java",
+      "line": 37,
+      "algorithm": "AES-256-GCM",
+      "layer": 3,
+      "layer_name": "wrapper function",
+      "cyclonedx_asset_type": "algorithm",
+      "accept_locations": [
+        {
+          "file": "src/main/java/io/proofstein/ledger/store/SegmentStore.java",
+          "line": 61
+        }
+      ],
+      "note": "AEAD reached only through the store registry"
+    },
+    {
+      "id": "java-l4-prop-cipher",
+      "file": "src/main/resources/application.properties",
+      "line": 11,
+      "algorithm": "AES-256-GCM",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "segment AEAD selected by config"
+    },
+    {
+      "id": "java-l4-prop-sig",
+      "file": "src/main/resources/application.properties",
+      "line": 12,
+      "algorithm": "Ed25519",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "block signature selected by config"
+    },
+    {
+      "id": "java-l4-prop-kem",
+      "file": "src/main/resources/application.properties",
+      "line": 13,
+      "algorithm": "ML-KEM-768",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "replication key agreement selected by config"
+    },
+    {
+      "id": "java-l4-prop-settlement",
+      "file": "src/main/resources/application.properties",
+      "line": 14,
+      "algorithm": "RSA-2048",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "settlement export signature selected by config"
+    },
+    {
+      "id": "java-l4-prop-audit-seal",
+      "file": "src/main/resources/application.properties",
+      "line": 15,
+      "algorithm": "XMSS",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "audit seal parameter set selected by config"
+    },
+    {
+      "id": "java-l4-prop-hash",
+      "file": "src/main/resources/application.properties",
+      "line": 18,
+      "algorithm": "SHA-256",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "ledger index fingerprint hash selected by config"
+    }
+  ]
+}

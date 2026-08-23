@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools==80.9.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vaultkeeper"
+version = "2.4.1"
+description = "Secrets sync daemon for vault meshes"
+requires-python = ">=3.11"
+
+dependencies = [
+  "cryptography==49.0.0",
+  # Kept for the NaCl-format import path used by the 1.x migration tool. The
+  # daemon itself no longer calls into it.
+  "PyNaCl==1.6.2", #@PS py-dep-pynacl|PyNaCl|5|algorithm|declared crypto dependency (provides XSalsa20-Poly1305, Ed25519); never imported by the daemon
+]
+
+[project.scripts]
+vaultkeeper = "vaultkeeper.daemon:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-dir]
+"" = "src"

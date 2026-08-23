@@ -1,0 +1,25 @@
+# Settings for one vaultkeeper node.
+#
+# The crypto block decides what the daemon builds at startup. No algorithm is
+# hard-coded in the daemon entry point.
+
+node:
+  name: "vk-eu-central-1"
+  listen: "127.0.0.1:7701"
+
+storage:
+  backend: "sealed-memory"
+  scratch_dir: "/var/lib/vaultkeeper/scratch"
+
+crypto:
+  envelope_cipher: "AES-256-GCM"
+  manifest_signature: "Ed25519"
+  mesh_key_agreement: "ML-KEM-768"
+  audit_export_signature: "RSA-PSS-2048"
+  attestation_signature: "SLH-DSA-SHA2-128s"
+  attestation_profile: "compact"
+  key_file: "secrets/node-manifest-key.pem"
+
+ledger:
+  fingerprint_hash: "SHA-256"
+  retain_days: 400

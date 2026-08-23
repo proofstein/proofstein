@@ -1,0 +1,8 @@
+# Pinned runtime dependencies. Regenerate with:
+#   pip-compile --generate-hashes pyproject.toml
+cryptography==49.0.0
+PyNaCl==1.6.2
+# Admin HTTP surface (health and readiness only; see src/vaultkeeper/api.py).
+falcon==4.3.1
+# Post-quantum signatures for vault attestations (src/vaultkeeper/attest.py).
+liboqs-python==0.14.0

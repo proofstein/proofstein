@@ -1,0 +1,52 @@
+{
+  "description": "Encrypted blob store node: seals blobs, signs manifests, agrees a post-quantum replication key.",
+  "build": [
+    "cargo build --locked",
+    "cargo run --locked"
+  ],
+  "toolchain": {
+    "rust": "1.74+",
+    "notes": "Versions are exact-pinned. The RustCrypto stack is held at the rand_core 0.6 generation because the 0.11/3.0 releases do not interoperate; ML-KEM comes from fips203, which is self-contained."
+  },
+  "file_assets": [
+    {
+      "id": "rust-l6-manifest-key",
+      "path": "keys/manifest-signing-key.pem",
+      "algorithm": "Ed25519",
+      "layer": 6,
+      "cyclonedx_asset_type": "related-crypto-material",
+      "note": "PKCS#8 Ed25519 manifest signing key, throwaway test material"
+    },
+    {
+      "id": "rust-l6-archive-key",
+      "path": "keys/archive-gateway-key.pem",
+      "algorithm": "RSA-2048",
+      "layer": 6,
+      "cyclonedx_asset_type": "related-crypto-material",
+      "note": "RSA private key for the archive gateway, throwaway test material"
+    },
+    {
+      "id": "rust-l6-archive-cert",
+      "path": "keys/archive-gateway-cert.pem",
+      "algorithm": "RSA-2048",
+      "layer": 6,
+      "cyclonedx_asset_type": "certificate",
+      "note": "self-signed X.509 presented to the archive gateway, throwaway test material"
+    }
+  ],
+  "holdout": {
+    "variant_name": "vaultcrate",
+    "seed": 17,
+    "rename_symbols": {
+      "SealedStore": "WrappedStore",
+      "ContentHash": "IndexHash",
+      "new_data_key": "fresh_data_key",
+      "sign_manifest": "sign_index",
+      "Responder": "Agreement",
+      "build_sealed_store": "build_wrapped_store",
+      "sealed-memory": "wrapped-memory",
+      "peer_thumbprint": "peer_digest"
+    },
+    "substitutions": []
+  }
+}

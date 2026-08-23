@@ -1,0 +1,28 @@
+# Settings for one session broker.
+#
+# The crypto block decides what the broker builds at startup. No algorithm is
+# hard-coded in the entry point.
+
+broker:
+  name: "sb-eu-west-1"
+  listen: "127.0.0.1:8710"
+
+sessions:
+  store: "sealed-memory"
+  ttl_seconds: 900
+
+crypto:
+  session_cipher: "AES-256-GCM"
+  token_signature: "Ed25519"
+  assertion_signature: "ML-DSA-65"
+  upstream_key_agreement: "ML-KEM-768"
+  legacy_jwks_signature: "RS256"
+  key_file: "keys/token-signing-key.pem"
+
+replay:
+  fingerprint_hash: "SHA-256"
+
+roster:
+  base_url: https://learning.internal/api
+  tenant: eu-central
+  window_seconds: 300

@@ -1,0 +1,77 @@
+{
+ "_comment": [
+  "Generator definitions for a scoring run.",
+  "",
+  "Paths may use ${VAR}, expanded from the environment when the config is",
+  "loaded. A referenced variable that is not set is a hard error naming the",
+  "variable: an empty expansion would scan the wrong tree and an unexpanded",
+  "literal would name a file nobody can find, and either way the run would be",
+  "attributed to a binary that did not produce it.",
+  "",
+  "  PQPROBE_STATIC_BIN  path to the pqprobe-static binary to score.",
+  "",
+  "This is what makes the config portable between machines. A build root lives",
+  "on whichever host has the disk for it, so the config carries the name and the",
+  "environment supplies the path. The manifest still records the resolved path",
+  "and its sha256, because a run record must say what actually ran.",
+  "",
+  "cdxgen needs no variable: it is named relative to the repository root and is",
+  "invoked through a pinned image, so it runs the same anywhere Docker does.",
+  "",
+  "cdxgen is deliberately pinned at 12.8.2 across every run: it is the control,",
+  "and holding it still is what makes a score change attributable to the tool",
+  "that moved."
+ ],
+ "tools": [
+  {
+   "name": "cdxgen",
+   "binary": "tools/cdxgen-docker.sh",
+   "package_version": "@cyclonedx/cdxgen@12.8.2",
+   "version_command": [
+    "tools/cdxgen-docker.sh",
+    "--version"
+   ],
+   "invocation": [
+    "tools/cdxgen-docker.sh",
+    "--json-pretty",
+    "--include-crypto",
+    "-o",
+    "{out}",
+    "{project}"
+   ],
+   "output": "file",
+   "cwd": "project",
+   "accept_exit": [
+    0
+   ],
+   "env": {
+    "CDXGEN_DEBUG_MODE": "info",
+    "FETCH_LICENSE": "false"
+   },
+   "notes": "Arguments mirror BF-CBOM's cdxgen worker. Records source files in properties[].SrcFile without line numbers. Invoked through the pinned image ghcr.io/cyclonedx/cdxgen:12.8.2, so it needs no build root and runs the same on any host with Docker."
+  },
+  {
+   "name": "pqprobe-static",
+   "binary": "${PQPROBE_STATIC_BIN}",
+   "package_version": "pqprobe-static @ ${PQPROBE_STATIC_BIN}",
+   "version_command": [
+    "${PQPROBE_STATIC_BIN}",
+    "version"
+   ],
+   "invocation": [
+    "${PQPROBE_STATIC_BIN}",
+    "--output",
+    "cbom",
+    "scan",
+    "."
+   ],
+   "output": "stdout",
+   "cwd": "project",
+   "accept_exit": [
+    0,
+    1
+   ],
+   "notes": "Exit 1 means findings present, not failure. The binary path comes from PQPROBE_STATIC_BIN; the manifest records what it resolved to and that file's sha256. Maintained by the same party as Proofstein; see the governance section in README.md."
+  }
+ ]
+}

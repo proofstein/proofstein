@@ -1,0 +1,227 @@
+{
+  "project": "beacon-relay",
+  "language": "go",
+  "corpus_path": "corpus/go/beacon-relay",
+  "build": [
+    "go build ./...",
+    "go vet ./..."
+  ],
+  "description": "Telemetry beacon relay: seals device payloads, signs envelopes, negotiates a post-quantum peer session key.",
+  "toolchain": {
+    "go": "1.24",
+    "notes": "Standard library only for every call site; crypto/mlkem requires Go 1.24 or newer."
+  },
+  "layer_counts": {
+    "1": 7,
+    "2": 1,
+    "3": 1,
+    "4": 6,
+    "5": 1,
+    "6": 3
+  },
+  "asset_count": 19,
+  "assets": [
+    {
+      "id": "go-l4-yaml-suite",
+      "file": "configs/relay.yaml",
+      "line": 13,
+      "algorithm": "AES-256-GCM",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "payload AEAD selected by config"
+    },
+    {
+      "id": "go-l4-yaml-sig",
+      "file": "configs/relay.yaml",
+      "line": 14,
+      "algorithm": "Ed25519",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "envelope signature algorithm selected by config"
+    },
+    {
+      "id": "go-l4-yaml-kex",
+      "file": "configs/relay.yaml",
+      "line": 15,
+      "algorithm": "ML-KEM-768",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "peer link key exchange selected by config"
+    },
+    {
+      "id": "go-l4-yaml-hash",
+      "file": "configs/relay.yaml",
+      "line": 20,
+      "algorithm": "SHA-256",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "content address hash selected by config"
+    },
+    {
+      "id": "go-l4-nginx-proto",
+      "file": "deploy/nginx.conf",
+      "line": 22,
+      "algorithm": "TLSv1.3",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "protocol",
+      "note": "edge TLS versions"
+    },
+    {
+      "id": "go-l4-nginx-ciphers",
+      "file": "deploy/nginx.conf",
+      "line": 23,
+      "algorithm": "ECDHE-ECDSA-AES256-GCM-SHA384",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "edge cipher suite list"
+    },
+    {
+      "id": "go-dep-xcrypto",
+      "file": "go.mod",
+      "line": 8,
+      "algorithm": "golang.org/x/crypto",
+      "layer": 5,
+      "layer_name": "declared dependency, not called",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "declared crypto dependency (provides Curve25519, NaCl, HKDF); never imported by the default build"
+    },
+    {
+      "id": "go-l2-sha256",
+      "file": "internal/digest/digest.go",
+      "line": 19,
+      "algorithm": "SHA-256",
+      "layer": 2,
+      "layer_name": "aliased import",
+      "cyclonedx_asset_type": "algorithm",
+      "accept_locations": [
+        {
+          "file": "internal/digest/digest.go",
+          "line": 11
+        }
+      ],
+      "note": "aliased import: crypto/sha256 imported as \"checksum\""
+    },
+    {
+      "id": "go-l1-rsa",
+      "file": "internal/identity/identity.go",
+      "line": 28,
+      "algorithm": "RSA-2048",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "legacy fleet management API key"
+    },
+    {
+      "id": "go-l1-ecdsa",
+      "file": "internal/identity/identity.go",
+      "line": 33,
+      "algorithm": "ECDSA-P256",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "peer mutual TLS key"
+    },
+    {
+      "id": "go-l1-ed25519",
+      "file": "internal/identity/identity.go",
+      "line": 38,
+      "algorithm": "Ed25519",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "beacon envelope signing key"
+    },
+    {
+      "id": "go-l1-sha256",
+      "file": "internal/identity/identity.go",
+      "line": 53,
+      "algorithm": "SHA-256",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "digest algorithm for fleet request signatures"
+    },
+    {
+      "id": "go-l1-aes-block",
+      "file": "internal/seal/seal.go",
+      "line": 35,
+      "algorithm": "AES-256",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "block cipher construction"
+    },
+    {
+      "id": "go-l1-aes-gcm",
+      "file": "internal/seal/seal.go",
+      "line": 39,
+      "algorithm": "AES-256-GCM",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "AEAD construction"
+    },
+    {
+      "id": "go-l3-wrapper",
+      "file": "internal/seal/seal.go",
+      "line": 54,
+      "algorithm": "AES-256-GCM",
+      "layer": 3,
+      "layer_name": "wrapper function",
+      "cyclonedx_asset_type": "algorithm",
+      "accept_locations": [
+        {
+          "file": "cmd/beacon-relay/main.go",
+          "line": 50
+        }
+      ],
+      "note": "AEAD reached only via the constructor table"
+    },
+    {
+      "id": "go-l1-mlkem",
+      "file": "internal/session/session.go",
+      "line": 20,
+      "algorithm": "ML-KEM-768",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "post-quantum key encapsulation for peer links"
+    },
+    {
+      "id": "go-l6-peer-key",
+      "file": "testdata/peer-mtls-key.pem",
+      "line": 1,
+      "algorithm": "ECDSA-P256",
+      "layer": 6,
+      "layer_name": "key, certificate or keystore file",
+      "cyclonedx_asset_type": "related-crypto-material",
+      "note": "SEC1 EC private key for peer mutual TLS, throwaway test material"
+    },
+    {
+      "id": "go-l6-relay-cert",
+      "file": "testdata/relay-cert.pem",
+      "line": 1,
+      "algorithm": "RSA-2048",
+      "layer": 6,
+      "layer_name": "key, certificate or keystore file",
+      "cyclonedx_asset_type": "certificate",
+      "note": "self-signed X.509 for the edge terminator, throwaway test material"
+    },
+    {
+      "id": "go-l6-relay-key",
+      "file": "testdata/relay-key.pem",
+      "line": 1,
+      "algorithm": "RSA-2048",
+      "layer": 6,
+      "layer_name": "key, certificate or keystore file",
+      "cyclonedx_asset_type": "related-crypto-material",
+      "note": "PKCS#8 private key, throwaway test material"
+    }
+  ]
+}

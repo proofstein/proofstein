@@ -1,0 +1,9 @@
+{
+  "bomFormat": "CycloneDX",
+  "components": [
+    {
+      "type": "not-a-valid-component-type",
+      "name": "AES-256-GCM"
+    }
+  ]
+}

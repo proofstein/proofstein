@@ -1,0 +1,44 @@
+{
+  "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:11111111-2222-5333-8444-555555555555",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-07-30T00:00:00Z",
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "name": "synthetic-l5",
+          "version": "1.0.0",
+          "bom-ref": "tool-synthetic"
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "lib-bcprov",
+      "name": "bcprov-jdk18on",
+      "group": "org.bouncycastle",
+      "version": "1.78",
+      "purl": "pkg:maven/org.bouncycastle/bcprov-jdk18on@1.78",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "pom.xml",
+            "line": 26
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "related-crypto-material",
+        "relatedCryptoMaterialProperties": {
+          "type": "other"
+        }
+      }
+    }
+  ]
+}

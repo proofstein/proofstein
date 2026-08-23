@@ -1,0 +1,228 @@
+{
+  "project": "tinyattest",
+  "language": "c",
+  "corpus_path": "corpus/c/tinyattest",
+  "build": [
+    "make",
+    "make check"
+  ],
+  "description": "Attestation helper: seals device reports, signs them, agrees a post-quantum verifier session key.",
+  "toolchain": {
+    "cc": "any C11 compiler",
+    "openssl": ">=3.5",
+    "notes": "ML-KEM-512 is reached through EVP_PKEY_CTX_new_from_name, which needs OpenSSL 3.5 or newer."
+  },
+  "layer_counts": {
+    "1": 7,
+    "2": 1,
+    "3": 1,
+    "4": 6,
+    "5": 1,
+    "6": 3
+  },
+  "asset_count": 19,
+  "assets": [
+    {
+      "id": "c-dep-libsodium",
+      "file": "conanfile.txt",
+      "line": 5,
+      "algorithm": "libsodium",
+      "layer": 5,
+      "layer_name": "declared dependency, not called",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "declared crypto dependency (provides XSalsa20-Poly1305, Ed25519); nothing on main links against it"
+    },
+    {
+      "id": "c-l4-conf-cipher",
+      "file": "etc/tinyattest.conf",
+      "line": 9,
+      "algorithm": "AES-256-GCM",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "report AEAD selected by config"
+    },
+    {
+      "id": "c-l4-conf-sig",
+      "file": "etc/tinyattest.conf",
+      "line": 10,
+      "algorithm": "Ed25519",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "report signature selected by config"
+    },
+    {
+      "id": "c-l4-conf-kem",
+      "file": "etc/tinyattest.conf",
+      "line": 11,
+      "algorithm": "ML-KEM-512",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "verifier session key agreement selected by config"
+    },
+    {
+      "id": "c-l4-conf-digest",
+      "file": "etc/tinyattest.conf",
+      "line": 12,
+      "algorithm": "SHA-256",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "report digest selected by config"
+    },
+    {
+      "id": "c-l4-conf-record-seal",
+      "file": "etc/tinyattest.conf",
+      "line": 13,
+      "algorithm": "LMS",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "record seal parameter set selected by config"
+    },
+    {
+      "id": "c-l4-conf-archive-sig",
+      "file": "etc/tinyattest.conf",
+      "line": 14,
+      "algorithm": "Falcon-512",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "archive signature in the oqs-provider algorithm spelling"
+    },
+    {
+      "id": "c-l6-provisioning-cert",
+      "file": "keys/provisioning-cert.pem",
+      "line": 1,
+      "algorithm": "RSA-2048",
+      "layer": 6,
+      "layer_name": "key, certificate or keystore file",
+      "cyclonedx_asset_type": "certificate",
+      "note": "self-signed X.509 presented to the provisioning service, throwaway test material"
+    },
+    {
+      "id": "c-l6-provisioning-key",
+      "file": "keys/provisioning-key.pem",
+      "line": 1,
+      "algorithm": "RSA-2048",
+      "layer": 6,
+      "layer_name": "key, certificate or keystore file",
+      "cyclonedx_asset_type": "related-crypto-material",
+      "note": "RSA private key for the legacy provisioning service, throwaway test material"
+    },
+    {
+      "id": "c-l6-report-key",
+      "file": "keys/report-signing-key.pem",
+      "line": 1,
+      "algorithm": "Ed25519",
+      "layer": 6,
+      "layer_name": "key, certificate or keystore file",
+      "cyclonedx_asset_type": "related-crypto-material",
+      "note": "PKCS#8 Ed25519 report signing key, throwaway test material"
+    },
+    {
+      "id": "c-l2-sha256",
+      "file": "src/digest.c",
+      "line": 30,
+      "algorithm": "SHA-256",
+      "layer": 2,
+      "layer_name": "aliased import",
+      "cyclonedx_asset_type": "algorithm",
+      "accept_locations": [
+        {
+          "file": "src/digest.c",
+          "line": 15
+        }
+      ],
+      "note": "aliased API: EVP_sha256 reached through the ta_md_sha256 macro"
+    },
+    {
+      "id": "c-l1-ecdsa",
+      "file": "src/identity.c",
+      "line": 57,
+      "algorithm": "ECDSA-P256",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "verifier mutual TLS key"
+    },
+    {
+      "id": "c-l1-ed25519",
+      "file": "src/identity.c",
+      "line": 75,
+      "algorithm": "Ed25519",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "attestation report signing key"
+    },
+    {
+      "id": "c-l1-rsa",
+      "file": "src/identity.c",
+      "line": 77,
+      "algorithm": "RSA-2048",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "legacy provisioning service key"
+    },
+    {
+      "id": "c-l1-mlkem",
+      "file": "src/kem.c",
+      "line": 22,
+      "algorithm": "ML-KEM-512",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "verifier session key agreement"
+    },
+    {
+      "id": "c-l1-aesgcm",
+      "file": "src/seal.c",
+      "line": 32,
+      "algorithm": "AES-256-GCM",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "attestation report AEAD"
+    },
+    {
+      "id": "c-l1-xmss",
+      "file": "src/seal_longterm.c",
+      "line": 28,
+      "algorithm": "XMSS",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "XMSS-SHA2_10_256 parameter set passed to wolfSSL wc_XmssKey_SetParamStr"
+    },
+    {
+      "id": "c-l1-lms",
+      "file": "src/seal_longterm.c",
+      "line": 87,
+      "algorithm": "LMS",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "wolfSSL wc_LmsKey_SetLmsParm selecting the two-level H10/W8 parameter set"
+    },
+    {
+      "id": "c-l3-wrapper",
+      "file": "src/transport.c",
+      "line": 39,
+      "algorithm": "AES-256-GCM",
+      "layer": 3,
+      "layer_name": "wrapper function",
+      "cyclonedx_asset_type": "algorithm",
+      "accept_locations": [
+        {
+          "file": "src/main.c",
+          "line": 59
+        }
+      ],
+      "note": "AEAD reached only through the transport table"
+    }
+  ]
+}

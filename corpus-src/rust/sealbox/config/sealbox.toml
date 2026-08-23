@@ -1,0 +1,23 @@
+# sealbox node configuration.
+#
+# The crypto section decides what the node builds at startup; nothing is
+# hard-coded in main.rs.
+
+[node]
+name = "sb-eu-north-1"
+listen = "127.0.0.1:7810"
+
+[store]
+backend = "sealed-memory"
+scratch_dir = "/var/lib/sealbox/scratch"
+
+[crypto]
+blob_cipher = "AES-256-GCM" #@PS rust-l4-toml-cipher|AES-256-GCM|4|algorithm|blob AEAD selected by config
+manifest_signature = "Ed25519" #@PS rust-l4-toml-sig|Ed25519|4|algorithm|manifest signature selected by config
+replication_key_agreement = "ML-KEM-768" #@PS rust-l4-toml-kem|ML-KEM-768|4|algorithm|replication key agreement selected by config
+archive_gateway_signature = "RSA-PKCS1-2048" #@PS rust-l4-toml-archive|RSA-2048|4|algorithm|archive gateway signature selected by config
+key_file = "keys/manifest-signing-key.pem"
+
+[index]
+fingerprint_hash = "SHA-256" #@PS rust-l4-toml-hash|SHA-256|4|algorithm|blob index fingerprint hash selected by config
+retain_days = 3650

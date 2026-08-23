@@ -1,0 +1,23 @@
+# sealbox node configuration.
+#
+# The crypto section decides what the node builds at startup; nothing is
+# hard-coded in main.rs.
+
+[node]
+name = "sb-eu-north-1"
+listen = "127.0.0.1:7810"
+
+[store]
+backend = "sealed-memory"
+scratch_dir = "/var/lib/sealbox/scratch"
+
+[crypto]
+blob_cipher = "AES-256-GCM"
+manifest_signature = "Ed25519"
+replication_key_agreement = "ML-KEM-768"
+archive_gateway_signature = "RSA-PKCS1-2048"
+key_file = "keys/manifest-signing-key.pem"
+
+[index]
+fingerprint_hash = "SHA-256"
+retain_days = 3650

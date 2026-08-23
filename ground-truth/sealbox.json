@@ -1,0 +1,223 @@
+{
+  "project": "sealbox",
+  "language": "rust",
+  "corpus_path": "corpus/rust/sealbox",
+  "build": [
+    "cargo build --locked",
+    "cargo run --locked"
+  ],
+  "description": "Encrypted blob store node: seals blobs, signs manifests, agrees a post-quantum replication key.",
+  "toolchain": {
+    "rust": "1.74+",
+    "notes": "Versions are exact-pinned. The RustCrypto stack is held at the rand_core 0.6 generation because the 0.11/3.0 releases do not interoperate; ML-KEM comes from fips203, which is self-contained."
+  },
+  "layer_counts": {
+    "1": 6,
+    "2": 1,
+    "3": 1,
+    "4": 5,
+    "5": 2,
+    "6": 3
+  },
+  "asset_count": 18,
+  "assets": [
+    {
+      "id": "rust-dep-mldsa",
+      "file": "Cargo.toml",
+      "line": 15,
+      "algorithm": "ML-DSA",
+      "layer": 5,
+      "layer_name": "declared dependency, not called",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "declared RustCrypto ML-DSA dependency; not reached by the default build"
+    },
+    {
+      "id": "rust-dep-chacha",
+      "file": "Cargo.toml",
+      "line": 23,
+      "algorithm": "chacha20poly1305",
+      "layer": 5,
+      "layer_name": "declared dependency, not called",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "declared crypto dependency (provides ChaCha20-Poly1305); not reached by the default build"
+    },
+    {
+      "id": "rust-l4-toml-cipher",
+      "file": "config/sealbox.toml",
+      "line": 15,
+      "algorithm": "AES-256-GCM",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "blob AEAD selected by config"
+    },
+    {
+      "id": "rust-l4-toml-sig",
+      "file": "config/sealbox.toml",
+      "line": 16,
+      "algorithm": "Ed25519",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "manifest signature selected by config"
+    },
+    {
+      "id": "rust-l4-toml-kem",
+      "file": "config/sealbox.toml",
+      "line": 17,
+      "algorithm": "ML-KEM-768",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "replication key agreement selected by config"
+    },
+    {
+      "id": "rust-l4-toml-archive",
+      "file": "config/sealbox.toml",
+      "line": 18,
+      "algorithm": "RSA-2048",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "archive gateway signature selected by config"
+    },
+    {
+      "id": "rust-l4-toml-hash",
+      "file": "config/sealbox.toml",
+      "line": 22,
+      "algorithm": "SHA-256",
+      "layer": 4,
+      "layer_name": "config-driven selection",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "blob index fingerprint hash selected by config"
+    },
+    {
+      "id": "rust-l6-archive-cert",
+      "file": "keys/archive-gateway-cert.pem",
+      "line": 1,
+      "algorithm": "RSA-2048",
+      "layer": 6,
+      "layer_name": "key, certificate or keystore file",
+      "cyclonedx_asset_type": "certificate",
+      "note": "self-signed X.509 presented to the archive gateway, throwaway test material"
+    },
+    {
+      "id": "rust-l6-archive-key",
+      "file": "keys/archive-gateway-key.pem",
+      "line": 1,
+      "algorithm": "RSA-2048",
+      "layer": 6,
+      "layer_name": "key, certificate or keystore file",
+      "cyclonedx_asset_type": "related-crypto-material",
+      "note": "RSA private key for the archive gateway, throwaway test material"
+    },
+    {
+      "id": "rust-l6-manifest-key",
+      "file": "keys/manifest-signing-key.pem",
+      "line": 1,
+      "algorithm": "Ed25519",
+      "layer": 6,
+      "layer_name": "key, certificate or keystore file",
+      "cyclonedx_asset_type": "related-crypto-material",
+      "note": "PKCS#8 Ed25519 manifest signing key, throwaway test material"
+    },
+    {
+      "id": "rust-l1-aesgcm",
+      "file": "src/envelope.rs",
+      "line": 70,
+      "algorithm": "AES-256-GCM",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "blob AEAD"
+    },
+    {
+      "id": "rust-l2-sha256",
+      "file": "src/fingerprint.rs",
+      "line": 13,
+      "algorithm": "SHA-256",
+      "layer": 2,
+      "layer_name": "aliased import",
+      "cyclonedx_asset_type": "algorithm",
+      "accept_locations": [
+        {
+          "file": "src/fingerprint.rs",
+          "line": 7
+        }
+      ],
+      "note": "aliased import: sha2::Sha256 imported as ContentHash"
+    },
+    {
+      "id": "rust-l1-ed25519",
+      "file": "src/identity.rs",
+      "line": 26,
+      "algorithm": "Ed25519",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "accept_locations": [
+        {
+          "file": "src/identity.rs",
+          "line": 8
+        }
+      ],
+      "note": "manifest signing key"
+    },
+    {
+      "id": "rust-l1-ecdsa",
+      "file": "src/identity.rs",
+      "line": 27,
+      "algorithm": "ECDSA-P256",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "peer mutual TLS key"
+    },
+    {
+      "id": "rust-l1-rsa",
+      "file": "src/identity.rs",
+      "line": 28,
+      "algorithm": "RSA-2048",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "archive gateway key"
+    },
+    {
+      "id": "rust-l1-sha256",
+      "file": "src/identity.rs",
+      "line": 44,
+      "algorithm": "SHA-256",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "peer key thumbprint"
+    },
+    {
+      "id": "rust-l1-mlkem",
+      "file": "src/kem.rs",
+      "line": 19,
+      "algorithm": "ML-KEM-768",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "cluster replication key agreement"
+    },
+    {
+      "id": "rust-l3-wrapper",
+      "file": "src/store.rs",
+      "line": 33,
+      "algorithm": "AES-256-GCM",
+      "layer": 3,
+      "layer_name": "wrapper function",
+      "cyclonedx_asset_type": "algorithm",
+      "accept_locations": [
+        {
+          "file": "src/store.rs",
+          "line": 69
+        }
+      ],
+      "note": "AEAD reached only through the store table"
+    }
+  ]
+}

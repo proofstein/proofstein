@@ -1,0 +1,62 @@
+{
+  "description": "Secrets sync daemon: envelope-encrypts secrets, signs sync manifests, agrees mesh keys post-quantum.",
+  "build": [
+    "python3 -m venv .venv",
+    ".venv/bin/pip install -r requirements.txt",
+    ".venv/bin/pip install -e .",
+    ".venv/bin/python -m compileall -q src"
+  ],
+  "toolchain": {
+    "python": ">=3.11",
+    "notes": "cryptography 49.0.0 provides ML-KEM natively; no native toolchain needed beyond wheels."
+  },
+  "file_assets": [
+    {
+      "id": "py-l6-manifest-key",
+      "path": "secrets/node-manifest-key.pem",
+      "algorithm": "Ed25519",
+      "layer": 6,
+      "cyclonedx_asset_type": "related-crypto-material",
+      "note": "PKCS#8 Ed25519 manifest signing key, throwaway test material"
+    },
+    {
+      "id": "py-l6-mesh-key",
+      "path": "secrets/peer-mesh-key.pem",
+      "algorithm": "ECDSA-P256",
+      "layer": 6,
+      "cyclonedx_asset_type": "related-crypto-material",
+      "note": "P-256 private key for the mesh listener, throwaway test material"
+    },
+    {
+      "id": "py-l6-mesh-cert",
+      "path": "secrets/peer-mesh-cert.pem",
+      "algorithm": "ECDSA-P256",
+      "layer": 6,
+      "cyclonedx_asset_type": "certificate",
+      "note": "self-signed X.509 for the mesh listener, throwaway test material"
+    }
+  ],
+  "holdout": {
+    "variant_name": "cachekeeper",
+    "seed": 11,
+    "rename_symbols": {
+      "digestlib": "hashmod",
+      "SealedStore": "WrappedStore",
+      "open_backend": "resolve_store",
+      "REGISTRY": "STORE_TABLE",
+      "_build_sealed_store": "_make_wrapped_store",
+      "new_data_key": "fresh_data_key",
+      "open_envelope": "unseal",
+      "sealed-memory": "wrapped-memory",
+      "NodeIdentity": "NodeKeys"
+    },
+    "substitutions": [
+      {
+        "from": "AES-256-GCM",
+        "to": "AES-128-GCM",
+        "from_algorithm": "AES-256-GCM",
+        "to_algorithm": "AES-128-GCM"
+      }
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+# Runtime configuration for a single beacon relay.
+#
+# The crypto block selects which primitives the relay uses on the wire. Changing
+# `suite` here changes what internal/seal builds at startup -- the algorithm is
+# not hard-coded at any call site in cmd/.
+
+relay:
+  listen: "0.0.0.0:8443"
+  transport: "device-uplink"
+  max_batch: 512
+
+crypto:
+  suite: "AES-256-GCM" #@PS go-l4-yaml-suite|AES-256-GCM|4|algorithm|payload AEAD selected by config
+  signature: "Ed25519" #@PS go-l4-yaml-sig|Ed25519|4|algorithm|envelope signature algorithm selected by config
+  key_exchange: "ML-KEM-768" #@PS go-l4-yaml-kex|ML-KEM-768|4|algorithm|peer link key exchange selected by config
+  key_file: "testdata/relay-key.pem"
+  cert_file: "testdata/relay-cert.pem"
+
+dedup:
+  address_hash: "SHA-256" #@PS go-l4-yaml-hash|SHA-256|4|algorithm|content address hash selected by config
+  window_seconds: 900

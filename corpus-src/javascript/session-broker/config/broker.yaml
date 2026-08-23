@@ -1,0 +1,28 @@
+# Settings for one session broker.
+#
+# The crypto block decides what the broker builds at startup. No algorithm is
+# hard-coded in the entry point.
+
+broker:
+  name: "sb-eu-west-1"
+  listen: "127.0.0.1:8710"
+
+sessions:
+  store: "sealed-memory"
+  ttl_seconds: 900
+
+crypto:
+  session_cipher: "AES-256-GCM" #@PS js-l4-yaml-cipher|AES-256-GCM|4|algorithm|session AEAD selected by config
+  token_signature: "Ed25519" #@PS js-l4-yaml-sig|Ed25519|4|algorithm|token signature selected by config
+  assertion_signature: "ML-DSA-65" #@PS js-l4-yaml-assertion|ML-DSA-65|4|algorithm|session assertion signature selected by config
+  upstream_key_agreement: "ML-KEM-768" #@PS js-l4-yaml-kem|ML-KEM-768|4|algorithm|upstream key agreement selected by config
+  legacy_jwks_signature: "RS256" #@PS js-l4-yaml-jwks|RS256|4|algorithm|legacy JWKS signature selected by config; RS256 is RSASSA-PKCS1-v1_5 with SHA-256
+  key_file: "keys/token-signing-key.pem"
+
+replay:
+  fingerprint_hash: "SHA-256" #@PS js-l4-yaml-hash|SHA-256|4|algorithm|replay cache fingerprint hash selected by config
+
+roster:
+  base_url: https://learning.internal/api
+  tenant: eu-central
+  window_seconds: 300

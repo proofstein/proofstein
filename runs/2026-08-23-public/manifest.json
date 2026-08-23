@@ -1,0 +1,336 @@
+{
+ "run": {
+  "started_utc": "2026-08-23T10:08:22Z",
+  "scan_tree": "git archive HEAD",
+  "ground_truth": "ground-truth",
+  "holdout": false,
+  "corpus_commit": "4497df4e34fe422aee686a94d99f605330bab2e4",
+  "corpus_commit_short": "4497df4",
+  "corpus_tree_dirty": true,
+  "uncommitted_paths": [
+   "runs/generators-run4.json",
+   "tools/cdxgen-docker.sh"
+  ],
+  "host_platform": "linux",
+  "python": "3.12.3",
+  "finished_utc": "2026-08-23T10:08:57Z",
+  "succeeded": 12,
+  "attempted": 12,
+  "paths": "Paths are recorded relative to the repository root. A tool that lived outside the checkout is shown as <external>/<filename>; its identity is fixed by binary_sha256, which is unmodified and is what a reviewer checks. The absolute paths of the machine that ran this are not a property of the run."
+ },
+ "judgement_tables": {
+  "oid_algorithms": {
+   "entries": 27,
+   "sha256_16": "031a3c27915e6dde"
+  },
+  "location_property_names": {
+   "entries": 8,
+   "sha256_16": "0b8c15cc33ce242a"
+  },
+  "line_property_names": {
+   "entries": 5,
+   "sha256_16": "ed438ed351a5b930"
+  },
+  "token_aliases": {
+   "entries": 32,
+   "sha256_16": "637f0e9d5f2cf137"
+  },
+  "family_markers": {
+   "entries": 37,
+   "sha256_16": "2aef68bf8064cccc"
+  },
+  "whole_token_only": {
+   "entries": 7,
+   "sha256_16": "88a20cf6715e9c84"
+  },
+  "known_unplanted": {
+   "entries": 15,
+   "sha256_16": "3a7fca80174e0cdd"
+  }
+ },
+ "tools": {
+  "cdxgen": {
+   "version": "\u001b[1mCycloneDX Generator 12.8.2\u001b[0m",
+   "binary": "tools/cdxgen-docker.sh",
+   "binary_sha256": "b15c141c13783dfecabd4deae1a50b9013d2a2e0fed5e2770a7901c5a2c1e4b9",
+   "package_version": "@cyclonedx/cdxgen@12.8.2",
+   "accept_exit": [
+    0
+   ],
+   "notes": "Arguments mirror BF-CBOM's cdxgen worker. Records source files in properties[].SrcFile without line numbers. The 2026-08-23 run invokes the pinned image ghcr.io/cyclonedx/cdxgen:12.8.2 through tools/cdxgen-docker.sh; the 2026-07-27, 2026-07-28 and 2026-08-01 runs used a node_modules install of the same version."
+  },
+  "pqprobe-static": {
+   "version": "PQProbe Static v3.5.0",
+   "binary": "<external>/pqprobe-static-v3.5.0",
+   "binary_sha256": "b5e9f611f694b802a80b103be48419b13b36af899f77df563601958a23633ea9",
+   "package_version": "pqprobe-static @ v3.5.0 (55fa4b9)",
+   "accept_exit": [
+    0,
+    1
+   ],
+   "notes": "Exit 1 means findings present, not failure. Built from source at 3.5.0, CGO_ENABLED=0, -ldflags '-s -w'. Maintained by the same party as Proofstein; see the governance section in README.md."
+  }
+ },
+ "projects": {
+  "beacon-relay": {
+   "language": "go",
+   "assets": 19
+  },
+  "ledger-svc": {
+   "language": "java",
+   "assets": 25
+  },
+  "sealbox": {
+   "language": "rust",
+   "assets": 18
+  },
+  "session-broker": {
+   "language": "javascript",
+   "assets": 20
+  },
+  "tinyattest": {
+   "language": "c",
+   "assets": 19
+  },
+  "vaultkeeper": {
+   "language": "python",
+   "assets": 23
+  }
+ },
+ "invocations": [
+  {
+   "argv": [
+    "tools/cdxgen-docker.sh",
+    "--json-pretty",
+    "--include-crypto",
+    "-o",
+    "runs/2026-08-23-public/.work/bom.json",
+    "runs/2026-08-23-public/.work/scan/beacon-relay"
+   ],
+   "exit_code": 0,
+   "exit_accepted": true,
+   "duration_sec": 3.22,
+   "bytes": 5542,
+   "stderr_tail": "",
+   "status": "ok",
+   "written": "beacon-relay__cdxgen.json",
+   "tool": "cdxgen",
+   "project": "beacon-relay",
+   "language": "go"
+  },
+  {
+   "argv": [
+    "tools/cdxgen-docker.sh",
+    "--json-pretty",
+    "--include-crypto",
+    "-o",
+    "runs/2026-08-23-public/.work/bom.json",
+    "runs/2026-08-23-public/.work/scan/ledger-svc"
+   ],
+   "exit_code": 0,
+   "exit_accepted": true,
+   "duration_sec": 18.16,
+   "bytes": 7831,
+   "stderr_tail": "",
+   "status": "ok",
+   "written": "ledger-svc__cdxgen.json",
+   "tool": "cdxgen",
+   "project": "ledger-svc",
+   "language": "java"
+  },
+  {
+   "argv": [
+    "tools/cdxgen-docker.sh",
+    "--json-pretty",
+    "--include-crypto",
+    "-o",
+    "runs/2026-08-23-public/.work/bom.json",
+    "runs/2026-08-23-public/.work/scan/sealbox"
+   ],
+   "exit_code": 0,
+   "exit_accepted": true,
+   "duration_sec": 2.58,
+   "bytes": 90745,
+   "stderr_tail": "",
+   "status": "ok",
+   "written": "sealbox__cdxgen.json",
+   "tool": "cdxgen",
+   "project": "sealbox",
+   "language": "rust"
+  },
+  {
+   "argv": [
+    "tools/cdxgen-docker.sh",
+    "--json-pretty",
+    "--include-crypto",
+    "-o",
+    "runs/2026-08-23-public/.work/bom.json",
+    "runs/2026-08-23-public/.work/scan/session-broker"
+   ],
+   "exit_code": 0,
+   "exit_accepted": true,
+   "duration_sec": 2.5,
+   "bytes": 21101,
+   "stderr_tail": "",
+   "status": "ok",
+   "written": "session-broker__cdxgen.json",
+   "tool": "cdxgen",
+   "project": "session-broker",
+   "language": "javascript"
+  },
+  {
+   "argv": [
+    "tools/cdxgen-docker.sh",
+    "--json-pretty",
+    "--include-crypto",
+    "-o",
+    "runs/2026-08-23-public/.work/bom.json",
+    "runs/2026-08-23-public/.work/scan/tinyattest"
+   ],
+   "exit_code": 0,
+   "exit_accepted": true,
+   "duration_sec": 2.37,
+   "bytes": 4566,
+   "stderr_tail": "",
+   "status": "ok",
+   "written": "tinyattest__cdxgen.json",
+   "tool": "cdxgen",
+   "project": "tinyattest",
+   "language": "c"
+  },
+  {
+   "argv": [
+    "tools/cdxgen-docker.sh",
+    "--json-pretty",
+    "--include-crypto",
+    "-o",
+    "runs/2026-08-23-public/.work/bom.json",
+    "runs/2026-08-23-public/.work/scan/vaultkeeper"
+   ],
+   "exit_code": 0,
+   "exit_accepted": true,
+   "duration_sec": 5.32,
+   "bytes": 7751,
+   "stderr_tail": "",
+   "status": "ok",
+   "written": "vaultkeeper__cdxgen.json",
+   "tool": "cdxgen",
+   "project": "vaultkeeper",
+   "language": "python"
+  },
+  {
+   "argv": [
+    "<external>/pqprobe-static-v3.5.0",
+    "--output",
+    "cbom",
+    "scan",
+    "."
+   ],
+   "exit_code": 1,
+   "exit_accepted": true,
+   "duration_sec": 0.01,
+   "bytes": 34189,
+   "stderr_tail": "cbom: no CycloneDX representation for doc_claim finding \"Documentation: Post-quantum cryptography claim \u2014 verify against actual implementation\" (README.md:23) | cbom: no CycloneDX representation for doc_claim finding \"Documentation: ML-KEM claim \u2014 verify actual implementation exists\" (README.md:30) | cbom: \"SHA-2\" mapped with loss: the call site names the SHA-2 family without a determinable digest length | cbom: no CycloneDX representation for symmetric finding \"AES block cipher in use\" (internal/seal/seal.go:35) | cbom: \"AES-GCM\" mapped with loss: the call site does not reveal the AES key size | cbom: \"ML-KEM\" mapped with loss: the parameter set is not named, so no OID or NIST security category is asserted",
+   "status": "ok",
+   "written": "beacon-relay__pqprobe-static.json",
+   "tool": "pqprobe-static",
+   "project": "beacon-relay",
+   "language": "go"
+  },
+  {
+   "argv": [
+    "<external>/pqprobe-static-v3.5.0",
+    "--output",
+    "cbom",
+    "scan",
+    "."
+   ],
+   "exit_code": 1,
+   "exit_accepted": true,
+   "duration_sec": 0.01,
+   "bytes": 42306,
+   "stderr_tail": "cbom: \"SLH-DSA\" mapped with loss: the parameter set is not named, so no OID or NIST security category is asserted | cbom: \"AES-GCM\" mapped with loss: the call site does not reveal the AES key size | cbom: \"ML-KEM\" mapped with loss: the parameter set is not named, so no OID or NIST security category is asserted | cbom: no CycloneDX representation for config_algorithm finding \"ledger.crypto.block-signature disables Ed25519\" (src/main/resources/application.properties:12) | cbom: \"TLS (src/main/resources/application.properties)\" mapped with loss: the directive names a class or list rather than individual algorithms | cbom: \"TLS (src/main/resources/application.properties)\" mapped with loss: the directive selects a keystore container type, not an algorithm",
+   "status": "ok",
+   "written": "ledger-svc__pqprobe-static.json",
+   "tool": "pqprobe-static",
+   "project": "ledger-svc",
+   "language": "java"
+  },
+  {
+   "argv": [
+    "<external>/pqprobe-static-v3.5.0",
+    "--output",
+    "cbom",
+    "scan",
+    "."
+   ],
+   "exit_code": 1,
+   "exit_accepted": true,
+   "duration_sec": 0.01,
+   "bytes": 32662,
+   "stderr_tail": "cbom: no CycloneDX representation for doc_claim finding \"Documentation: ML-KEM claim \u2014 verify actual implementation exists\" (README.md:29) | cbom: no CycloneDX representation for doc_claim finding \"Documentation: Post-quantum cryptography claim \u2014 verify against actual implementation\" (README.md:36) | cbom: \"AES-GCM\" mapped with loss: the call site does not reveal the AES key size | cbom: \"SHA-2\" mapped with loss: the call site names the SHA-2 family without a determinable digest length",
+   "status": "ok",
+   "written": "sealbox__pqprobe-static.json",
+   "tool": "pqprobe-static",
+   "project": "sealbox",
+   "language": "rust"
+  },
+  {
+   "argv": [
+    "<external>/pqprobe-static-v3.5.0",
+    "--output",
+    "cbom",
+    "scan",
+    "."
+   ],
+   "exit_code": 1,
+   "exit_accepted": true,
+   "duration_sec": 0.01,
+   "bytes": 25625,
+   "stderr_tail": "cbom: no CycloneDX representation for doc_claim finding \"Documentation: Post-quantum cryptography claim \u2014 verify against actual implementation\" (README.md:25) | cbom: no CycloneDX representation for doc_claim finding \"Documentation: ML-KEM claim \u2014 verify actual implementation exists\" (README.md:27) | cbom: no CycloneDX representation for config_algorithm finding \"legacy_jwks_signature disables RS256\" (config/broker.yaml:19) | cbom: \"SLH-DSA\" mapped with loss: the parameter set is not named, so no OID or NIST security category is asserted | cbom: \"AES-GCM\" mapped with loss: the call site does not reveal the AES key size | cbom: \"SHA-2\" mapped with loss: the call site names the SHA-2 family without a determinable digest length",
+   "status": "ok",
+   "written": "session-broker__pqprobe-static.json",
+   "tool": "pqprobe-static",
+   "project": "session-broker",
+   "language": "javascript"
+  },
+  {
+   "argv": [
+    "<external>/pqprobe-static-v3.5.0",
+    "--output",
+    "cbom",
+    "scan",
+    "."
+   ],
+   "exit_code": 1,
+   "exit_accepted": true,
+   "duration_sec": 0.01,
+   "bytes": 29726,
+   "stderr_tail": "cbom: no CycloneDX representation for doc_claim finding \"Documentation: ML-KEM claim \u2014 verify actual implementation exists\" (README.md:13) | cbom: \"SHA-2\" mapped with loss: the call site names the SHA-2 family without a determinable digest length | cbom: \"AES-GCM\" mapped with loss: the call site does not reveal the AES key size | cbom: \"XMSS\" mapped with loss: the parameter set is not named, so the signature capacity of the key is unknown | cbom: \"LMS\" mapped with loss: the parameter set is not named, so the signature capacity of the key is unknown",
+   "status": "ok",
+   "written": "tinyattest__pqprobe-static.json",
+   "tool": "pqprobe-static",
+   "project": "tinyattest",
+   "language": "c"
+  },
+  {
+   "argv": [
+    "<external>/pqprobe-static-v3.5.0",
+    "--output",
+    "cbom",
+    "scan",
+    "."
+   ],
+   "exit_code": 1,
+   "exit_accepted": true,
+   "duration_sec": 0.01,
+   "bytes": 34984,
+   "stderr_tail": "cbom: no CycloneDX representation for doc_claim finding \"Documentation: Post-quantum cryptography claim \u2014 verify against actual implementation\" (README.md:27) | cbom: no CycloneDX representation for doc_claim finding \"Documentation: ML-KEM claim \u2014 verify actual implementation exists\" (README.md:31) | cbom: \"SPHINCS+\" mapped with loss: the parameter set is not named, so no OID or NIST security category is asserted | cbom: \"AES-GCM\" mapped with loss: the call site does not reveal the AES key size | cbom: \"SHA-2\" mapped with loss: the call site names the SHA-2 family without a determinable digest length | cbom: \"ML-KEM\" mapped with loss: the parameter set is not named, so no OID or NIST security category is asserted",
+   "status": "ok",
+   "written": "vaultkeeper__pqprobe-static.json",
+   "tool": "pqprobe-static",
+   "project": "vaultkeeper",
+   "language": "python"
+  }
+ ]
+}

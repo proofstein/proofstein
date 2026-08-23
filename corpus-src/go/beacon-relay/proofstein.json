@@ -1,0 +1,61 @@
+{
+  "description": "Telemetry beacon relay: seals device payloads, signs envelopes, negotiates a post-quantum peer session key.",
+  "build": [
+    "go build ./...",
+    "go vet ./..."
+  ],
+  "toolchain": {
+    "go": "1.24",
+    "notes": "Standard library only for every call site; crypto/mlkem requires Go 1.24 or newer."
+  },
+  "file_assets": [
+    {
+      "id": "go-l6-relay-key",
+      "path": "testdata/relay-key.pem",
+      "algorithm": "RSA-2048",
+      "layer": 6,
+      "cyclonedx_asset_type": "related-crypto-material",
+      "note": "PKCS#8 private key, throwaway test material"
+    },
+    {
+      "id": "go-l6-relay-cert",
+      "path": "testdata/relay-cert.pem",
+      "algorithm": "RSA-2048",
+      "layer": 6,
+      "cyclonedx_asset_type": "certificate",
+      "note": "self-signed X.509 for the edge terminator, throwaway test material"
+    },
+    {
+      "id": "go-l6-peer-key",
+      "path": "testdata/peer-mtls-key.pem",
+      "algorithm": "ECDSA-P256",
+      "layer": 6,
+      "cyclonedx_asset_type": "related-crypto-material",
+      "note": "SEC1 EC private key for peer mutual TLS, throwaway test material"
+    }
+  ],
+  "holdout": {
+    "variant_name": "signal-bridge",
+    "seed": 7,
+    "rename_symbols": {
+      "NewSealer": "OpenCourier",
+      "Sealer": "Courier",
+      "newPayloadAEAD": "buildTransitAEAD",
+      "aeadFactory": "transitFactory",
+      "registry": "transitTable",
+      "checksum": "contentSum",
+      "ErrUnknownTransport": "ErrNoSuchTransport",
+      "SignEnvelope": "SignBundle",
+      "Bundle": "KeySet",
+      "device-uplink": "edge-ingest"
+    },
+    "substitutions": [
+      {
+        "from": "ML-KEM-768",
+        "to": "ML-KEM-1024",
+        "from_algorithm": "ML-KEM-768",
+        "to_algorithm": "ML-KEM-1024"
+      }
+    ]
+  }
+}

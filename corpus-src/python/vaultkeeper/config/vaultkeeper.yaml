@@ -1,0 +1,25 @@
+# Settings for one vaultkeeper node.
+#
+# The crypto block decides what the daemon builds at startup. No algorithm is
+# hard-coded in the daemon entry point.
+
+node:
+  name: "vk-eu-central-1"
+  listen: "127.0.0.1:7701"
+
+storage:
+  backend: "sealed-memory"
+  scratch_dir: "/var/lib/vaultkeeper/scratch"
+
+crypto:
+  envelope_cipher: "AES-256-GCM" #@PS py-l4-yaml-cipher|AES-256-GCM|4|algorithm|envelope AEAD selected by config
+  manifest_signature: "Ed25519" #@PS py-l4-yaml-sig|Ed25519|4|algorithm|manifest signature selected by config
+  mesh_key_agreement: "ML-KEM-768" #@PS py-l4-yaml-kem|ML-KEM-768|4|algorithm|mesh key agreement selected by config
+  audit_export_signature: "RSA-PSS-2048" #@PS py-l4-yaml-audit|RSA-2048|4|algorithm|audit export signature selected by config
+  attestation_signature: "SLH-DSA-SHA2-128s" #@PS py-l4-yaml-attestation|SLH-DSA|4|algorithm|vault attestation signature selected by config
+  attestation_profile: "compact"
+  key_file: "secrets/node-manifest-key.pem"
+
+ledger:
+  fingerprint_hash: "SHA-256" #@PS py-l4-yaml-hash|SHA-256|4|algorithm|ledger fingerprint hash selected by config
+  retain_days: 400
