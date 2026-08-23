@@ -1,10 +1,10 @@
 {
   "bomFormat": "CycloneDX",
   "specVersion": "1.7",
-  "serialNumber": "urn:uuid:cc239d10-bb2b-490c-97a6-05f191dffd14",
+  "serialNumber": "urn:uuid:1ca6e40a-7ac7-44db-8d3c-21230efb32e7",
   "version": 2,
   "metadata": {
-    "timestamp": "2026-08-23T10:08:47Z",
+    "timestamp": "2026-08-23T12:54:52Z",
     "tools": {
       "components": [
         {
@@ -3704,7 +3704,7 @@
           ]
         }
       },
-      "timestamp": "2026-08-23T10:08:47Z",
+      "timestamp": "2026-08-23T12:54:52Z",
       "text": "This Cryptography Bill-of-Materials (CBOM) document was created on Sunday, August 23, 2026 with cdxgen. The data was captured during the build lifecycle phase. The document describes an application named 'sealbox' with version '0.7.2'. There are 3 cryptographic assets listed under components in this CBOM. There are 85 components."
     }
   ]

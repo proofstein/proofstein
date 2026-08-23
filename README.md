@@ -77,19 +77,20 @@ The full rules are in [METHODOLOGY.md](METHODOLOGY.md), sections 3 and 3.3.
 
 ## An example run
 
-[`runs/2026-08-23-public/`](runs/2026-08-23-public/) has a complete scored
-run already done using cdxgen 12.8.2 and pqprobe-static 3.5.0, with
+[`runs/2026-08-23T1254Z-public/`](runs/2026-08-23T1254Z-public/) has a complete scored
+run already done: two tools, cdxgen 12.8.2 and pqprobe-static 3.6.0, with
 their output files and their scores. You can re-score it yourself and check
 you get the same numbers:
 
 ```bash
-./score.py --cboms runs/2026-08-23-public/cboms --out /tmp/proofstein
-diff <(grep -A4 'by language' /tmp/proofstein/results.md) <(grep -A4 'by language' runs/2026-08-23-public/results/results.md)
+./score.py --cboms runs/2026-08-23T1254Z-public/cboms --out /tmp/proofstein
+diff <(grep -A4 'by language' /tmp/proofstein/results.md) <(grep -A4 'by language' runs/2026-08-23T1254Z-public/results/results.md)
 ```
 
 The same two tools were also run over a scrambled copy of the six programs,
-as another verification run. Those results are in
-[`runs/2026-08-23-holdout/`](runs/2026-08-23-holdout/).
+to check they were finding cryptography rather than remembering these
+particular files. Those results are in
+[`runs/2026-08-23T1254Z-holdout/`](runs/2026-08-23T1254Z-holdout/).
 
 To run the tests: `python3 -m unittest discover -s tests`.
 

@@ -3,7 +3,9 @@
 # Copyright 2026 Ottenheimer GmbH
 """Run CBOM generators over the corpus and record exactly what was run.
 
-    tools/collect-cboms.py --config runs/generators.json --out runs/2026-07-27
+    tools/collect-cboms.py --config runs/generators.json --out runs/<id>-public
+
+Run ids are UTC to the minute: ``2026-08-23T1254Z-public``.
 
 Writes one CycloneDX document per (project, tool) under ``<out>/cboms/`` using
 the documented ``<project>__<tool>.json`` convention, plus ``<out>/manifest.json``.
@@ -402,6 +404,33 @@ def resolve_repo_paths(specs):
     return specs
 
 
+#: A path outside the repository, recorded by filename only. Its identity is
+#: fixed by the sha256 recorded beside it, which is what a reviewer checks; the
+#: absolute path of the machine that ran a scan is not a property of the run.
+_SCRATCH = re.compile(r"^.*/(?=[^/]+$)")
+
+
+def record_paths_deep(value):
+    """Apply record_path through a whole manifest, argv included."""
+    if isinstance(value, str):
+        return record_path(value) if value.startswith("/") else value
+    if isinstance(value, list):
+        return [record_paths_deep(v) for v in value]
+    if isinstance(value, dict):
+        return {k: record_paths_deep(v) for k, v in value.items()}
+    return value
+
+
+def record_path(value):
+    """Render a path for the manifest: repo-relative, or <external>/<name>."""
+    if not value:
+        return value
+    try:
+        return str(Path(value).resolve().relative_to(REPO_ROOT))
+    except ValueError:
+        return "<external>/" + Path(value).name
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
@@ -499,7 +528,7 @@ def main() -> int:
         binary = spec.get("binary")
         manifest["tools"][spec["name"]] = {
             "version": tool_version(spec),
-            "binary": binary,
+            "binary": record_path(binary),
             "binary_sha256": sha256_file(Path(binary)) if binary and Path(binary).exists() else None,
             "package_version": spec.get("package_version"),
             "accept_exit": spec.get("accept_exit", [0]),
@@ -567,7 +596,7 @@ def main() -> int:
     manifest["run"]["attempted"] = len(manifest["invocations"])
 
     (args.out / "manifest.json").write_text(
-        json.dumps(manifest, indent=2, sort_keys=False) + "\n", encoding="utf-8"
+        json.dumps(record_paths_deep(manifest), indent=2, sort_keys=False) + "\n", encoding="utf-8"
     )
     shutil.rmtree(workdir, ignore_errors=True)
 

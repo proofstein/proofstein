@@ -5,14 +5,14 @@
   "serialNumber": "urn:uuid:e07fc353-a276-5d25-ab5b-12b14fab6bef",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-08-23T10:08:57Z",
+    "timestamp": "2026-08-23T12:55:03Z",
     "tools": {
       "components": [
         {
           "type": "application",
           "bom-ref": "tool-pqprobe-static",
           "name": "pqprobe-static",
-          "version": "3.5.0"
+          "version": "3.6.0"
         }
       ]
     },

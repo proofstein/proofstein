@@ -2,57 +2,52 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:fb08ac66-f7a9-5b90-96b6-214c285e2fd9",
+  "serialNumber": "urn:uuid:4eea0ac0-97f3-5895-bdfb-db88cb03b091",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-08-23T10:08:57Z",
+    "timestamp": "2026-08-23T12:55:03Z",
     "tools": {
       "components": [
         {
           "type": "application",
           "bom-ref": "tool-pqprobe-static",
           "name": "pqprobe-static",
-          "version": "3.5.0"
+          "version": "3.6.0"
         }
       ]
     },
     "properties": [
       {
         "name": "pqprobe:filesScanned",
-        "value": "14"
+        "value": "13"
       },
       {
         "name": "pqprobe:findings",
-        "value": "37"
+        "value": "32"
       },
       {
         "name": "pqprobe:unmapped:doc_claim",
-        "value": "3"
+        "value": "2"
+      },
+      {
+        "name": "pqprobe:unmapped:symmetric",
+        "value": "1"
       }
     ]
   },
   "components": [
     {
       "type": "library",
-      "bom-ref": "algorithm-71eb8cb4f07dc8c0",
-      "name": "aes-gcm",
-      "version": "=0.10.3",
+      "bom-ref": "algorithm-d34a3ad685796a19",
+      "name": "Go crypto/mlkem",
       "properties": [
         {
-          "name": "pqprobe:ecosystem",
-          "value": "crate"
-        },
-        {
           "name": "pqprobe:findingType",
-          "value": "dependency"
+          "value": "crypto_library"
         },
         {
-          "name": "pqprobe:pqcReady",
-          "value": "true"
-        },
-        {
-          "name": "pqprobe:providesAlgorithms",
-          "value": "AES-GCM"
+          "name": "pqprobe:provides",
+          "value": "post-quantum"
         },
         {
           "name": "pqprobe:severity",
@@ -64,7 +59,7 @@
           {
             "field": "name",
             "confidence": 0.9,
-            "concludedValue": "aes-gcm",
+            "concludedValue": "Go crypto/mlkem",
             "methods": [
               {
                 "technique": "source-code-analysis",
@@ -75,33 +70,30 @@
         ],
         "occurrences": [
           {
-            "location": "Cargo.toml",
-            "line": 10
+            "location": "internal/session/session.go",
+            "line": 9,
+            "additionalContext": "\"crypto/mlkem\""
           }
         ]
       }
     },
     {
       "type": "library",
-      "bom-ref": "algorithm-d28ead16fe1f5b44",
-      "name": "chacha20poly1305",
-      "version": "=0.10.1",
+      "bom-ref": "algorithm-cafe8cc407335643",
+      "name": "golang.org/x/crypto",
+      "version": "v0.36.0",
       "properties": [
         {
           "name": "pqprobe:ecosystem",
-          "value": "crate"
+          "value": "go"
         },
         {
           "name": "pqprobe:findingType",
           "value": "dependency"
         },
         {
-          "name": "pqprobe:pqcReady",
-          "value": "true"
-        },
-        {
           "name": "pqprobe:providesAlgorithms",
-          "value": "ChaCha20-Poly1305"
+          "value": "ChaCha20-Poly1305, Curve25519, NaCl, SSH, Argon2"
         },
         {
           "name": "pqprobe:severity",
@@ -113,7 +105,7 @@
           {
             "field": "name",
             "confidence": 0.9,
-            "concludedValue": "chacha20poly1305",
+            "concludedValue": "golang.org/x/crypto",
             "methods": [
               {
                 "technique": "source-code-analysis",
@@ -124,290 +116,8 @@
         ],
         "occurrences": [
           {
-            "location": "Cargo.toml",
-            "line": 23
-          }
-        ]
-      }
-    },
-    {
-      "type": "library",
-      "bom-ref": "algorithm-de38b9680a9714b7",
-      "name": "ed25519-dalek",
-      "version": "=2.1.1",
-      "properties": [
-        {
-          "name": "pqprobe:ecosystem",
-          "value": "crate"
-        },
-        {
-          "name": "pqprobe:findingType",
-          "value": "dependency"
-        },
-        {
-          "name": "pqprobe:providesAlgorithms",
-          "value": "Ed25519"
-        },
-        {
-          "name": "pqprobe:severity",
-          "value": "info"
-        }
-      ],
-      "evidence": {
-        "identity": [
-          {
-            "field": "name",
-            "confidence": 0.9,
-            "concludedValue": "ed25519-dalek",
-            "methods": [
-              {
-                "technique": "source-code-analysis",
-                "confidence": 0.9
-              }
-            ]
-          }
-        ],
-        "occurrences": [
-          {
-            "location": "Cargo.toml",
-            "line": 11
-          }
-        ]
-      }
-    },
-    {
-      "type": "library",
-      "bom-ref": "algorithm-9f9db1c8471959ef",
-      "name": "fips203",
-      "version": "=0.4.3",
-      "properties": [
-        {
-          "name": "pqprobe:ecosystem",
-          "value": "crate"
-        },
-        {
-          "name": "pqprobe:findingType",
-          "value": "dependency"
-        },
-        {
-          "name": "pqprobe:pqcReady",
-          "value": "true"
-        },
-        {
-          "name": "pqprobe:providesAlgorithms",
-          "value": "ML-KEM"
-        },
-        {
-          "name": "pqprobe:severity",
-          "value": "info"
-        }
-      ],
-      "evidence": {
-        "identity": [
-          {
-            "field": "name",
-            "confidence": 0.9,
-            "concludedValue": "fips203",
-            "methods": [
-              {
-                "technique": "source-code-analysis",
-                "confidence": 0.9
-              }
-            ]
-          }
-        ],
-        "occurrences": [
-          {
-            "location": "Cargo.toml",
-            "line": 12
-          }
-        ]
-      }
-    },
-    {
-      "type": "library",
-      "bom-ref": "algorithm-d9e502e8a2144280",
-      "name": "ml-dsa",
-      "version": "=0.0.4",
-      "properties": [
-        {
-          "name": "pqprobe:ecosystem",
-          "value": "crate"
-        },
-        {
-          "name": "pqprobe:findingType",
-          "value": "dependency"
-        },
-        {
-          "name": "pqprobe:pqcReady",
-          "value": "true"
-        },
-        {
-          "name": "pqprobe:providesAlgorithms",
-          "value": "ML-DSA"
-        },
-        {
-          "name": "pqprobe:severity",
-          "value": "info"
-        }
-      ],
-      "evidence": {
-        "identity": [
-          {
-            "field": "name",
-            "confidence": 0.9,
-            "concludedValue": "ml-dsa",
-            "methods": [
-              {
-                "technique": "source-code-analysis",
-                "confidence": 0.9
-              }
-            ]
-          }
-        ],
-        "occurrences": [
-          {
-            "location": "Cargo.toml",
-            "line": 15
-          }
-        ]
-      }
-    },
-    {
-      "type": "library",
-      "bom-ref": "algorithm-c085e0491a7b8608",
-      "name": "p256",
-      "version": "=0.13.2",
-      "properties": [
-        {
-          "name": "pqprobe:ecosystem",
-          "value": "crate"
-        },
-        {
-          "name": "pqprobe:findingType",
-          "value": "dependency"
-        },
-        {
-          "name": "pqprobe:providesAlgorithms",
-          "value": "ECDSA-P256, ECDH-P256"
-        },
-        {
-          "name": "pqprobe:severity",
-          "value": "info"
-        }
-      ],
-      "evidence": {
-        "identity": [
-          {
-            "field": "name",
-            "confidence": 0.9,
-            "concludedValue": "p256",
-            "methods": [
-              {
-                "technique": "source-code-analysis",
-                "confidence": 0.9
-              }
-            ]
-          }
-        ],
-        "occurrences": [
-          {
-            "location": "Cargo.toml",
-            "line": 16
-          }
-        ]
-      }
-    },
-    {
-      "type": "library",
-      "bom-ref": "algorithm-698aae398bdbe2a9",
-      "name": "rsa",
-      "version": "=0.9.10",
-      "properties": [
-        {
-          "name": "pqprobe:ecosystem",
-          "value": "crate"
-        },
-        {
-          "name": "pqprobe:findingType",
-          "value": "dependency"
-        },
-        {
-          "name": "pqprobe:providesAlgorithms",
-          "value": "RSA"
-        },
-        {
-          "name": "pqprobe:severity",
-          "value": "info"
-        }
-      ],
-      "evidence": {
-        "identity": [
-          {
-            "field": "name",
-            "confidence": 0.9,
-            "concludedValue": "rsa",
-            "methods": [
-              {
-                "technique": "source-code-analysis",
-                "confidence": 0.9
-              }
-            ]
-          }
-        ],
-        "occurrences": [
-          {
-            "location": "Cargo.toml",
-            "line": 18
-          }
-        ]
-      }
-    },
-    {
-      "type": "library",
-      "bom-ref": "algorithm-4778421687843665",
-      "name": "sha2",
-      "version": "=0.10.8",
-      "properties": [
-        {
-          "name": "pqprobe:ecosystem",
-          "value": "crate"
-        },
-        {
-          "name": "pqprobe:findingType",
-          "value": "dependency"
-        },
-        {
-          "name": "pqprobe:pqcReady",
-          "value": "true"
-        },
-        {
-          "name": "pqprobe:providesAlgorithms",
-          "value": "SHA-256, SHA-512"
-        },
-        {
-          "name": "pqprobe:severity",
-          "value": "info"
-        }
-      ],
-      "evidence": {
-        "identity": [
-          {
-            "field": "name",
-            "confidence": 0.9,
-            "concludedValue": "sha2",
-            "methods": [
-              {
-                "technique": "source-code-analysis",
-                "confidence": 0.9
-              }
-            ]
-          }
-        ],
-        "occurrences": [
-          {
-            "location": "Cargo.toml",
-            "line": 19
+            "location": "go.mod",
+            "line": 8
           }
         ]
       }
@@ -454,9 +164,14 @@
         ],
         "occurrences": [
           {
-            "location": "config/sealbox.toml",
-            "line": 15,
-            "additionalContext": "blob_cipher = \"AES-256-GCM\""
+            "location": "configs/relay.yaml",
+            "line": 13,
+            "additionalContext": "suite: \"AES-256-GCM\""
+          },
+          {
+            "location": "deploy/nginx.conf",
+            "line": 23,
+            "additionalContext": "ssl_ciphers ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384;"
           }
         ]
       }
@@ -506,60 +221,30 @@
         ],
         "occurrences": [
           {
-            "location": "src/envelope.rs",
-            "line": 6,
-            "additionalContext": "use aes_gcm::aead::{Aead, AeadCore, KeyInit, OsRng};"
-          },
-          {
-            "location": "src/envelope.rs",
-            "line": 7,
-            "additionalContext": "use aes_gcm::{Aes256Gcm, Key, Nonce};"
-          },
-          {
-            "location": "src/envelope.rs",
-            "line": 62,
-            "additionalContext": "Aes256Gcm::generate_key(\u0026mut OsRng).to_vec()"
-          },
-          {
-            "location": "src/envelope.rs",
-            "line": 70,
-            "additionalContext": "let cipher = Aes256Gcm::new(Key::\u003cAes256Gcm\u003e::from_slice(data_key));"
-          },
-          {
-            "location": "src/envelope.rs",
-            "line": 71,
-            "additionalContext": "let nonce = Aes256Gcm::generate_nonce(\u0026mut OsRng);"
-          },
-          {
-            "location": "src/envelope.rs",
-            "line": 84,
-            "additionalContext": "let cipher = Aes256Gcm::new(Key::\u003cAes256Gcm\u003e::from_slice(data_key));"
-          },
-          {
-            "location": "src/identity.rs",
-            "line": 7,
-            "additionalContext": "use aes_gcm::aead::OsRng;"
+            "location": "internal/seal/seal.go",
+            "line": 39,
+            "additionalContext": "return cipher.NewGCM(block)"
           }
         ]
       }
     },
     {
       "type": "cryptographic-asset",
-      "bom-ref": "algorithm-5afeb6e3820d1798",
-      "name": "ECDSA-P-256",
+      "bom-ref": "algorithm-14de25535b8e424f",
+      "name": "EC (unspecified curve)",
       "cryptoProperties": {
         "assetType": "algorithm",
         "algorithmProperties": {
-          "primitive": "signature",
-          "curve": "P-256",
-          "cryptoFunctions": [
-            "sign",
-            "verify"
-          ],
+          "primitive": "key-agree",
           "nistQuantumSecurityLevel": 0
-        }
+        },
+        "oid": "1.2.840.10045.2.1"
       },
       "properties": [
+        {
+          "name": "pqprobe:composition",
+          "value": "implied"
+        },
         {
           "name": "pqprobe:findingType",
           "value": "ecc"
@@ -577,9 +262,115 @@
         "identity": [
           {
             "field": "name",
-            "confidence": 0.9,
-            "concludedValue": "ECDSA-P-256",
+            "confidence": 0.6,
+            "concludedValue": "EC (unspecified curve)",
             "methods": [
+              {
+                "technique": "other",
+                "confidence": 0.6
+              }
+            ]
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "testdata/peer-mtls-key.pem",
+            "line": 1
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "algorithm-8d9f6e57fb1d0f09",
+      "name": "ECDH",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "key-agree",
+          "cryptoFunctions": [
+            "keygen"
+          ],
+          "nistQuantumSecurityLevel": 0
+        }
+      },
+      "properties": [
+        {
+          "name": "pqprobe:findingType",
+          "value": "config_algorithm"
+        },
+        {
+          "name": "pqprobe:quantumVulnerable",
+          "value": "true"
+        },
+        {
+          "name": "pqprobe:severity",
+          "value": "info"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "name",
+            "confidence": 0.9,
+            "concludedValue": "ECDH",
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.9
+              }
+            ]
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "deploy/nginx.conf",
+            "line": 23,
+            "additionalContext": "ssl_ciphers ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384;"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "algorithm-0457e2f441ea30ce",
+      "name": "ECDSA",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "cryptoFunctions": [
+            "sign",
+            "verify"
+          ],
+          "nistQuantumSecurityLevel": 0
+        }
+      },
+      "properties": [
+        {
+          "name": "pqprobe:findingType",
+          "value": "config_algorithm"
+        },
+        {
+          "name": "pqprobe:quantumVulnerable",
+          "value": "true"
+        },
+        {
+          "name": "pqprobe:severity",
+          "value": "medium"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "name",
+            "confidence": 0.9,
+            "concludedValue": "ECDSA",
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.9
+              },
               {
                 "technique": "source-code-analysis",
                 "confidence": 0.9
@@ -589,9 +380,14 @@
         ],
         "occurrences": [
           {
-            "location": "src/identity.rs",
-            "line": 9,
-            "additionalContext": "use p256::ecdsa::SigningKey as EcdsaSigningKey;"
+            "location": "deploy/nginx.conf",
+            "line": 23,
+            "additionalContext": "ssl_ciphers ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384;"
+          },
+          {
+            "location": "internal/identity/identity.go",
+            "line": 33,
+            "additionalContext": "peer, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
           }
         ]
       }
@@ -647,14 +443,80 @@
         ],
         "occurrences": [
           {
-            "location": "config/sealbox.toml",
-            "line": 16,
-            "additionalContext": "manifest_signature = \"Ed25519\""
+            "location": "configs/relay.yaml",
+            "line": 14,
+            "additionalContext": "signature: \"Ed25519\""
           },
           {
-            "location": "src/identity.rs",
-            "line": 8,
-            "additionalContext": "use ed25519_dalek::{Signer, SigningKey};"
+            "location": "internal/identity/identity.go",
+            "line": 38,
+            "additionalContext": "_, envelopes, err := ed25519.GenerateKey(rand.Reader)"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "algorithm-bcc2e57f38017a69",
+      "name": "ML-KEM",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "kem",
+          "cryptoFunctions": [
+            "decapsulate",
+            "encapsulate"
+          ]
+        }
+      },
+      "properties": [
+        {
+          "name": "pqprobe:degraded",
+          "value": "the parameter set is not named, so no OID or NIST security category is asserted"
+        },
+        {
+          "name": "pqprobe:findingType",
+          "value": "pqc"
+        },
+        {
+          "name": "pqprobe:severity",
+          "value": "info"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "name",
+            "confidence": 0.5,
+            "concludedValue": "ML-KEM",
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.5
+              }
+            ]
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "internal/session/session.go",
+            "line": 9,
+            "additionalContext": "\"crypto/mlkem\""
+          },
+          {
+            "location": "internal/session/session.go",
+            "line": 15,
+            "additionalContext": "key *mlkem.DecapsulationKey768"
+          },
+          {
+            "location": "internal/session/session.go",
+            "line": 20,
+            "additionalContext": "key, err := mlkem.GenerateKey768()"
+          },
+          {
+            "location": "internal/session/session.go",
+            "line": 43,
+            "additionalContext": "encapsulation, err := mlkem.NewEncapsulationKey768(peerKey)"
           }
         ]
       }
@@ -692,39 +554,15 @@
               {
                 "technique": "manifest-analysis",
                 "confidence": 0.9
-              },
-              {
-                "technique": "source-code-analysis",
-                "confidence": 0.9
               }
             ]
           }
         ],
         "occurrences": [
           {
-            "location": "config/sealbox.toml",
-            "line": 17,
-            "additionalContext": "replication_key_agreement = \"ML-KEM-768\""
-          },
-          {
-            "location": "src/kem.rs",
-            "line": 7,
-            "additionalContext": "use fips203::ml_kem_768;"
-          },
-          {
-            "location": "src/kem.rs",
-            "line": 12,
-            "additionalContext": "decapsulation_key: ml_kem_768::DecapsKey,"
-          },
-          {
-            "location": "src/kem.rs",
-            "line": 13,
-            "additionalContext": "encapsulation_key: ml_kem_768::EncapsKey,"
-          },
-          {
-            "location": "src/kem.rs",
-            "line": 19,
-            "additionalContext": "let (encapsulation_key, decapsulation_key) = ml_kem_768::KG::try_keygen()?;"
+            "location": "configs/relay.yaml",
+            "line": 15,
+            "additionalContext": "key_exchange: \"ML-KEM-768\""
           }
         ]
       }
@@ -778,14 +616,14 @@
         ],
         "occurrences": [
           {
-            "location": "config/sealbox.toml",
-            "line": 18,
-            "additionalContext": "archive_gateway_signature = \"RSA-PKCS1-2048\""
+            "location": "deploy/nginx.conf",
+            "line": 23,
+            "additionalContext": "ssl_ciphers ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384;"
           },
           {
-            "location": "src/identity.rs",
+            "location": "internal/identity/identity.go",
             "line": 28,
-            "additionalContext": "let archive_gateway = RsaPrivateKey::new(\u0026mut rand::thread_rng(), ARCHIVE_KEY_BITS)?;"
+            "additionalContext": "fleet, err := rsa.GenerateKey(rand.Reader, 2048)"
           }
         ]
       }
@@ -804,6 +642,10 @@
         }
       },
       "properties": [
+        {
+          "name": "pqprobe:context",
+          "value": "string"
+        },
         {
           "name": "pqprobe:degraded",
           "value": "the call site names the SHA-2 family without a determinable digest length"
@@ -833,19 +675,14 @@
         ],
         "occurrences": [
           {
-            "location": "src/fingerprint.rs",
-            "line": 7,
-            "additionalContext": "use sha2::Sha256 as ContentHash;"
+            "location": "internal/digest/digest.go",
+            "line": 11,
+            "additionalContext": "checksum \"crypto/sha256\""
           },
           {
-            "location": "src/identity.rs",
-            "line": 12,
-            "additionalContext": "use sha2::{Digest, Sha256};"
-          },
-          {
-            "location": "src/identity.rs",
-            "line": 44,
-            "additionalContext": "Sha256::digest(encoded).to_vec()"
+            "location": "internal/identity/identity.go",
+            "line": 53,
+            "additionalContext": "return b.FleetAPI.Sign(rand.Reader, digest, crypto.SHA256)"
           }
         ]
       }
@@ -888,9 +725,54 @@
         ],
         "occurrences": [
           {
-            "location": "config/sealbox.toml",
-            "line": 22,
-            "additionalContext": "fingerprint_hash = \"SHA-256\""
+            "location": "configs/relay.yaml",
+            "line": 20,
+            "additionalContext": "address_hash: \"SHA-256\""
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "algorithm-7f6c55981691d116",
+      "name": "SHA-384",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash",
+          "classicalSecurityLevel": 384
+        },
+        "oid": "2.16.840.1.101.3.4.2.2"
+      },
+      "properties": [
+        {
+          "name": "pqprobe:findingType",
+          "value": "config_algorithm"
+        },
+        {
+          "name": "pqprobe:severity",
+          "value": "info"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "name",
+            "confidence": 0.9,
+            "concludedValue": "SHA-384",
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.9
+              }
+            ]
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "deploy/nginx.conf",
+            "line": 23,
+            "additionalContext": "ssl_ciphers ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384;"
           }
         ]
       }
@@ -941,7 +823,7 @@
         ],
         "occurrences": [
           {
-            "location": "keys/archive-gateway-cert.pem",
+            "location": "testdata/relay-cert.pem",
             "line": 1
           }
         ]
@@ -949,8 +831,8 @@
     },
     {
       "type": "cryptographic-asset",
-      "bom-ref": "algorithm-f4fd7cfaaa7dbabf",
-      "name": "thread_rng/SmallRng",
+      "bom-ref": "algorithm-df0d3cbd65b4ad22",
+      "name": "math/rand",
       "cryptoProperties": {
         "assetType": "algorithm",
         "algorithmProperties": {
@@ -979,7 +861,7 @@
           {
             "field": "name",
             "confidence": 0.9,
-            "concludedValue": "thread_rng/SmallRng",
+            "concludedValue": "math/rand",
             "methods": [
               {
                 "technique": "source-code-analysis",
@@ -990,26 +872,51 @@
         ],
         "occurrences": [
           {
-            "location": "src/identity.rs",
+            "location": "cmd/beacon-relay/main.go",
+            "line": 46,
+            "additionalContext": "if _, err := rand.Read(key); err != nil {"
+          },
+          {
+            "location": "internal/identity/identity.go",
             "line": 28,
-            "additionalContext": "let archive_gateway = RsaPrivateKey::new(\u0026mut rand::thread_rng(), ARCHIVE_KEY_BITS)?;"
+            "additionalContext": "fleet, err := rsa.GenerateKey(rand.Reader, 2048)"
+          },
+          {
+            "location": "internal/identity/identity.go",
+            "line": 33,
+            "additionalContext": "peer, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)"
+          },
+          {
+            "location": "internal/identity/identity.go",
+            "line": 38,
+            "additionalContext": "_, envelopes, err := ed25519.GenerateKey(rand.Reader)"
+          },
+          {
+            "location": "internal/identity/identity.go",
+            "line": 53,
+            "additionalContext": "return b.FleetAPI.Sign(rand.Reader, digest, crypto.SHA256)"
+          },
+          {
+            "location": "internal/seal/seal.go",
+            "line": 64,
+            "additionalContext": "if _, err := io.ReadFull(rand.Reader, nonce); err != nil {"
           }
         ]
       }
     },
     {
       "type": "cryptographic-asset",
-      "bom-ref": "certificate-c29b4e42ed0a49c8",
-      "name": "X.509 certificate: CN=sb-eu-north-1,OU=NOT A REAL KEY,O=Proofstein Corpus",
+      "bom-ref": "certificate-f2aad7090cbb5a33",
+      "name": "X.509 certificate: CN=relay.beacon.internal,OU=NOT A REAL KEY,O=Proofstein Corpus",
       "cryptoProperties": {
         "assetType": "certificate",
         "certificateProperties": {
-          "subjectName": "CN=sb-eu-north-1,OU=NOT A REAL KEY,O=Proofstein Corpus",
-          "issuerName": "CN=sb-eu-north-1,OU=NOT A REAL KEY,O=Proofstein Corpus",
-          "notValidBefore": "2026-07-27T15:22:59Z",
-          "notValidAfter": "2036-07-24T15:22:59Z",
+          "subjectName": "CN=relay.beacon.internal,OU=NOT A REAL KEY,O=Proofstein Corpus",
+          "issuerName": "CN=relay.beacon.internal,OU=NOT A REAL KEY,O=Proofstein Corpus",
+          "notValidBefore": "2026-07-27T14:34:43Z",
+          "notValidAfter": "2036-07-24T14:34:43Z",
           "signatureAlgorithmRef": "algorithm-b7cec2bcbb2d002d",
-          "subjectPublicKeyRef": "key-964f474b7735db9f",
+          "subjectPublicKeyRef": "key-964fea801f9ea050",
           "certificateFormat": "X.509"
         }
       },
@@ -1032,7 +939,7 @@
         },
         {
           "name": "pqprobe:serialNumber",
-          "value": "418114702423842761576764144372649298660596021490"
+          "value": "671311151977981485361771206273809643961043948072"
         },
         {
           "name": "pqprobe:severity",
@@ -1044,7 +951,7 @@
           {
             "field": "name",
             "confidence": 0.9,
-            "concludedValue": "X.509 certificate: CN=sb-eu-north-1,OU=NOT A REAL KEY,O=Proofstein Corpus",
+            "concludedValue": "X.509 certificate: CN=relay.beacon.internal,OU=NOT A REAL KEY,O=Proofstein Corpus",
             "methods": [
               {
                 "technique": "filename",
@@ -1055,7 +962,7 @@
         ],
         "occurrences": [
           {
-            "location": "keys/archive-gateway-cert.pem",
+            "location": "testdata/relay-cert.pem",
             "line": 1
           }
         ]
@@ -1063,17 +970,23 @@
     },
     {
       "type": "cryptographic-asset",
-      "bom-ref": "protocol-b06ae03070a17f26",
-      "name": "TLS (config/sealbox.toml)",
+      "bom-ref": "protocol-d1308d34ad50307d",
+      "name": "TLS (deploy/nginx.conf)",
       "cryptoProperties": {
         "assetType": "protocol",
         "protocolProperties": {
           "type": "tls",
           "cipherSuites": [
             {
-              "name": "RSA-PKCS1-2048",
+              "name": "ECDHE-ECDSA-AES256-GCM-SHA384",
               "algorithms": [
-                "protocol-b06ae03070a17f26"
+                "protocol-d1308d34ad50307d"
+              ]
+            },
+            {
+              "name": "ECDHE-RSA-AES256-GCM-SHA384",
+              "algorithms": [
+                "protocol-d1308d34ad50307d"
               ]
             }
           ]
@@ -1082,7 +995,11 @@
       "properties": [
         {
           "name": "pqprobe:cipherSuite",
-          "value": "RSA-PKCS1-2048"
+          "value": "ECDHE-ECDSA-AES256-GCM-SHA384"
+        },
+        {
+          "name": "pqprobe:cipherSuite",
+          "value": "ECDHE-RSA-AES256-GCM-SHA384"
         },
         {
           "name": "pqprobe:findingType",
@@ -1098,7 +1015,7 @@
           {
             "field": "name",
             "confidence": 0.9,
-            "concludedValue": "TLS (config/sealbox.toml)",
+            "concludedValue": "TLS (deploy/nginx.conf)",
             "methods": [
               {
                 "technique": "manifest-analysis",
@@ -1109,23 +1026,138 @@
         ],
         "occurrences": [
           {
-            "location": "config/sealbox.toml",
-            "line": 18,
-            "additionalContext": "archive_gateway_signature = \"RSA-PKCS1-2048\""
+            "location": "deploy/nginx.conf",
+            "line": 23,
+            "additionalContext": "ssl_ciphers ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384;"
           }
         ]
       }
     },
     {
       "type": "cryptographic-asset",
-      "bom-ref": "key-0ae25665354d01cc",
-      "name": "Ed25519 private key (PKCS#8)",
+      "bom-ref": "protocol-ea0bd4a0d2859df2",
+      "name": "TLS 1.2 (deploy/nginx.conf)",
+      "cryptoProperties": {
+        "assetType": "protocol",
+        "protocolProperties": {
+          "type": "tls",
+          "version": "1.2",
+          "cipherSuites": [
+            {
+              "name": "ECDHE-ECDSA-AES256-GCM-SHA384",
+              "algorithms": [
+                "protocol-d1308d34ad50307d"
+              ]
+            },
+            {
+              "name": "ECDHE-RSA-AES256-GCM-SHA384",
+              "algorithms": [
+                "protocol-d1308d34ad50307d"
+              ]
+            }
+          ]
+        }
+      },
+      "properties": [
+        {
+          "name": "pqprobe:findingType",
+          "value": "config_algorithm"
+        },
+        {
+          "name": "pqprobe:severity",
+          "value": "info"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "name",
+            "confidence": 0.9,
+            "concludedValue": "TLS 1.2 (deploy/nginx.conf)",
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.9
+              }
+            ]
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "deploy/nginx.conf",
+            "line": 22,
+            "additionalContext": "ssl_protocols TLSv1.2 TLSv1.3;"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "protocol-a9c9281650e4b29e",
+      "name": "TLS 1.3 (deploy/nginx.conf)",
+      "cryptoProperties": {
+        "assetType": "protocol",
+        "protocolProperties": {
+          "type": "tls",
+          "version": "1.3",
+          "cipherSuites": [
+            {
+              "name": "ECDHE-ECDSA-AES256-GCM-SHA384",
+              "algorithms": [
+                "protocol-d1308d34ad50307d"
+              ]
+            },
+            {
+              "name": "ECDHE-RSA-AES256-GCM-SHA384",
+              "algorithms": [
+                "protocol-d1308d34ad50307d"
+              ]
+            }
+          ]
+        }
+      },
+      "properties": [
+        {
+          "name": "pqprobe:findingType",
+          "value": "config_algorithm"
+        },
+        {
+          "name": "pqprobe:severity",
+          "value": "info"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "name",
+            "confidence": 0.9,
+            "concludedValue": "TLS 1.3 (deploy/nginx.conf)",
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.9
+              }
+            ]
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "deploy/nginx.conf",
+            "line": 22,
+            "additionalContext": "ssl_protocols TLSv1.2 TLSv1.3;"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "key-e2d04042214f0b0c",
+      "name": "EC private key",
       "cryptoProperties": {
         "assetType": "related-crypto-material",
         "relatedCryptoMaterialProperties": {
           "type": "private-key",
-          "algorithmRef": "algorithm-733b8576e83567de",
-          "size": 256
+          "algorithmRef": "algorithm-14de25535b8e424f"
         }
       },
       "properties": [
@@ -1143,7 +1175,7 @@
           {
             "field": "name",
             "confidence": 0.9,
-            "concludedValue": "Ed25519 private key (PKCS#8)",
+            "concludedValue": "EC private key",
             "methods": [
               {
                 "technique": "filename",
@@ -1154,7 +1186,7 @@
         ],
         "occurrences": [
           {
-            "location": "keys/manifest-signing-key.pem",
+            "location": "testdata/peer-mtls-key.pem",
             "line": 1
           }
         ]
@@ -1198,7 +1230,7 @@
         ],
         "occurrences": [
           {
-            "location": "keys/archive-gateway-key.pem",
+            "location": "testdata/relay-key.pem",
             "line": 1
           }
         ]
@@ -1206,8 +1238,8 @@
     },
     {
       "type": "cryptographic-asset",
-      "bom-ref": "key-964f474b7735db9f",
-      "name": "RSA public key (2048-bit) of CN=sb-eu-north-1,OU=NOT A REAL KEY,O=Proofstein Corpus",
+      "bom-ref": "key-964fea801f9ea050",
+      "name": "RSA public key (2048-bit) of CN=relay.beacon.internal,OU=NOT A REAL KEY,O=Proofstein Corpus",
       "cryptoProperties": {
         "assetType": "related-crypto-material",
         "relatedCryptoMaterialProperties": {
@@ -1235,7 +1267,7 @@
           {
             "field": "name",
             "confidence": 0.9,
-            "concludedValue": "RSA public key (2048-bit) of CN=sb-eu-north-1,OU=NOT A REAL KEY,O=Proofstein Corpus",
+            "concludedValue": "RSA public key (2048-bit) of CN=relay.beacon.internal,OU=NOT A REAL KEY,O=Proofstein Corpus",
             "methods": [
               {
                 "technique": "filename",
@@ -1246,7 +1278,7 @@
         ],
         "occurrences": [
           {
-            "location": "keys/archive-gateway-cert.pem",
+            "location": "testdata/relay-cert.pem",
             "line": 1
           }
         ]
@@ -1255,34 +1287,28 @@
   ],
   "dependencies": [
     {
-      "ref": "algorithm-345633c0bc4cda3d"
+      "ref": "algorithm-0457e2f441ea30ce"
     },
     {
-      "ref": "algorithm-4778421687843665"
+      "ref": "algorithm-14de25535b8e424f"
+    },
+    {
+      "ref": "algorithm-345633c0bc4cda3d"
     },
     {
       "ref": "algorithm-54c1c793dcfb6a0d"
     },
     {
-      "ref": "algorithm-5afeb6e3820d1798"
-    },
-    {
       "ref": "algorithm-67b02b3deb9f92c9"
-    },
-    {
-      "ref": "algorithm-698aae398bdbe2a9",
-      "dependsOn": [
-        "algorithm-ffb931ce01575704"
-      ]
-    },
-    {
-      "ref": "algorithm-71eb8cb4f07dc8c0"
     },
     {
       "ref": "algorithm-733b8576e83567de"
     },
     {
-      "ref": "algorithm-9f9db1c8471959ef"
+      "ref": "algorithm-7f6c55981691d116"
+    },
+    {
+      "ref": "algorithm-8d9f6e57fb1d0f09"
     },
     {
       "ref": "algorithm-a70b4b0102d87e8a"
@@ -1294,40 +1320,28 @@
       ]
     },
     {
-      "ref": "algorithm-c085e0491a7b8608"
+      "ref": "algorithm-bcc2e57f38017a69"
     },
     {
-      "ref": "algorithm-d28ead16fe1f5b44"
+      "ref": "algorithm-cafe8cc407335643"
     },
     {
-      "ref": "algorithm-d9e502e8a2144280"
+      "ref": "algorithm-d34a3ad685796a19"
     },
     {
-      "ref": "algorithm-de38b9680a9714b7",
-      "dependsOn": [
-        "algorithm-733b8576e83567de"
-      ]
+      "ref": "algorithm-df0d3cbd65b4ad22"
     },
     {
       "ref": "algorithm-e5fda3cf8c259831"
     },
     {
-      "ref": "algorithm-f4fd7cfaaa7dbabf"
-    },
-    {
       "ref": "algorithm-ffb931ce01575704"
     },
     {
-      "ref": "certificate-c29b4e42ed0a49c8"
+      "ref": "certificate-f2aad7090cbb5a33"
     },
     {
-      "ref": "key-0ae25665354d01cc",
-      "dependsOn": [
-        "algorithm-733b8576e83567de"
-      ]
-    },
-    {
-      "ref": "key-964f474b7735db9f",
+      "ref": "key-964fea801f9ea050",
       "dependsOn": [
         "algorithm-ffb931ce01575704"
       ]
@@ -1339,7 +1353,19 @@
       ]
     },
     {
-      "ref": "protocol-b06ae03070a17f26"
+      "ref": "key-e2d04042214f0b0c",
+      "dependsOn": [
+        "algorithm-14de25535b8e424f"
+      ]
+    },
+    {
+      "ref": "protocol-a9c9281650e4b29e"
+    },
+    {
+      "ref": "protocol-d1308d34ad50307d"
+    },
+    {
+      "ref": "protocol-ea0bd4a0d2859df2"
     }
   ]
 }

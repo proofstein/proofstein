@@ -1,6 +1,6 @@
 {
   "meta": {
-    "corpus_version": "4497df4-dirty",
+    "corpus_version": "f09fb25-dirty",
     "line_tolerance": 2,
     "corpus": "holdout",
     "schema_validated": true,
@@ -66,21 +66,21 @@
       }
     },
     "pqprobe-static": {
-      "detected": 111,
+      "detected": 119,
       "total": 124,
-      "detection_rate": 0.8952,
-      "precision": 0.7054,
-      "claim_precision": 0.599,
-      "matched_components": 79,
-      "reported_components": 112,
-      "credited_claims": 118,
-      "total_claims": 197,
+      "detection_rate": 0.9597,
+      "precision": 0.7281,
+      "claim_precision": 0.6127,
+      "matched_components": 83,
+      "reported_components": 114,
+      "credited_claims": 125,
+      "total_claims": 204,
       "false_positives": 0,
       "by_layer": {
         "1": {
-          "detected": 40,
+          "detected": 44,
           "total": 44,
-          "rate": 0.9091
+          "rate": 1.0
         },
         "2": {
           "detected": 9,
@@ -93,9 +93,9 @@
           "rate": 0.1667
         },
         "4": {
-          "detected": 36,
+          "detected": 40,
           "total": 40,
-          "rate": 0.9
+          "rate": 1.0
         },
         "5": {
           "detected": 8,
@@ -172,33 +172,9 @@
       },
       "assets": [
         {
-          "id": "py-l4-yaml-attestation",
-          "file": "config/vaultkeeper.yaml",
-          "line": 20,
-          "algorithm": "SLH-DSA",
-          "layer": 4,
-          "cyclonedx_asset_type": "algorithm",
-          "detected": false,
-          "located": false,
-          "file_only": false,
-          "name_only": false
-        },
-        {
-          "id": "py-l4-yaml-sig",
-          "file": "config/vaultkeeper.yaml",
-          "line": 21,
-          "algorithm": "Ed25519",
-          "layer": 4,
-          "cyclonedx_asset_type": "algorithm",
-          "detected": false,
-          "located": false,
-          "file_only": false,
-          "name_only": false
-        },
-        {
           "id": "py-l4-yaml-cipher",
           "file": "config/vaultkeeper.yaml",
-          "line": 22,
+          "line": 21,
           "algorithm": "AES-128-GCM",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -210,7 +186,7 @@
         {
           "id": "py-l4-yaml-audit",
           "file": "config/vaultkeeper.yaml",
-          "line": 24,
+          "line": 22,
           "algorithm": "RSA-2048",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -222,8 +198,32 @@
         {
           "id": "py-l4-yaml-kem",
           "file": "config/vaultkeeper.yaml",
-          "line": 26,
+          "line": 23,
           "algorithm": "ML-KEM-768",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "py-l4-yaml-attestation",
+          "file": "config/vaultkeeper.yaml",
+          "line": 24,
+          "algorithm": "SLH-DSA",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "py-l4-yaml-sig",
+          "file": "config/vaultkeeper.yaml",
+          "line": 26,
+          "algorithm": "Ed25519",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
           "detected": false,
@@ -244,21 +244,9 @@
           "name_only": false
         },
         {
-          "id": "py-l4-helm-tls",
-          "file": "deploy/values.yaml",
-          "line": 23,
-          "algorithm": "TLSv1.3",
-          "layer": 4,
-          "cyclonedx_asset_type": "protocol",
-          "detected": false,
-          "located": false,
-          "file_only": false,
-          "name_only": false
-        },
-        {
           "id": "py-l4-helm-cipher",
           "file": "deploy/values.yaml",
-          "line": 24,
+          "line": 23,
           "algorithm": "AES-128-GCM",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -270,10 +258,22 @@
         {
           "id": "py-l4-helm-kem",
           "file": "deploy/values.yaml",
-          "line": 25,
+          "line": 24,
           "algorithm": "ML-KEM-768",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "py-l4-helm-tls",
+          "file": "deploy/values.yaml",
+          "line": 25,
+          "algorithm": "TLSv1.3",
+          "layer": 4,
+          "cyclonedx_asset_type": "protocol",
           "detected": false,
           "located": false,
           "file_only": false,
@@ -510,33 +510,9 @@
       },
       "assets": [
         {
-          "id": "py-l4-yaml-attestation",
-          "file": "config/vaultkeeper.yaml",
-          "line": 20,
-          "algorithm": "SLH-DSA",
-          "layer": 4,
-          "cyclonedx_asset_type": "algorithm",
-          "detected": true,
-          "located": true,
-          "file_only": true,
-          "name_only": true
-        },
-        {
-          "id": "py-l4-yaml-sig",
-          "file": "config/vaultkeeper.yaml",
-          "line": 21,
-          "algorithm": "Ed25519",
-          "layer": 4,
-          "cyclonedx_asset_type": "algorithm",
-          "detected": true,
-          "located": true,
-          "file_only": true,
-          "name_only": true
-        },
-        {
           "id": "py-l4-yaml-cipher",
           "file": "config/vaultkeeper.yaml",
-          "line": 22,
+          "line": 21,
           "algorithm": "AES-128-GCM",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -548,7 +524,7 @@
         {
           "id": "py-l4-yaml-audit",
           "file": "config/vaultkeeper.yaml",
-          "line": 24,
+          "line": 22,
           "algorithm": "RSA-2048",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -560,8 +536,32 @@
         {
           "id": "py-l4-yaml-kem",
           "file": "config/vaultkeeper.yaml",
-          "line": 26,
+          "line": 23,
           "algorithm": "ML-KEM-768",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "py-l4-yaml-attestation",
+          "file": "config/vaultkeeper.yaml",
+          "line": 24,
+          "algorithm": "SLH-DSA",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "py-l4-yaml-sig",
+          "file": "config/vaultkeeper.yaml",
+          "line": 26,
+          "algorithm": "Ed25519",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
           "detected": true,
@@ -582,21 +582,9 @@
           "name_only": true
         },
         {
-          "id": "py-l4-helm-tls",
-          "file": "deploy/values.yaml",
-          "line": 23,
-          "algorithm": "TLSv1.3",
-          "layer": 4,
-          "cyclonedx_asset_type": "protocol",
-          "detected": true,
-          "located": true,
-          "file_only": true,
-          "name_only": true
-        },
-        {
           "id": "py-l4-helm-cipher",
           "file": "deploy/values.yaml",
-          "line": 24,
+          "line": 23,
           "algorithm": "AES-128-GCM",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -608,10 +596,22 @@
         {
           "id": "py-l4-helm-kem",
           "file": "deploy/values.yaml",
-          "line": 25,
+          "line": 24,
           "algorithm": "ML-KEM-768",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "py-l4-helm-tls",
+          "file": "deploy/values.yaml",
+          "line": 25,
+          "algorithm": "TLSv1.3",
+          "layer": 4,
+          "cyclonedx_asset_type": "protocol",
           "detected": true,
           "located": true,
           "file_only": true,
@@ -1076,6 +1076,18 @@
           "name_only": true
         },
         {
+          "id": "java-l4-prop-cipher",
+          "file": "src/main/resources/application.properties",
+          "line": 16,
+          "algorithm": "AES-256-GCM",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": true
+        },
+        {
           "id": "java-l4-prop-sig",
           "file": "src/main/resources/application.properties",
           "line": 17,
@@ -1090,7 +1102,7 @@
         {
           "id": "java-l4-prop-kem",
           "file": "src/main/resources/application.properties",
-          "line": 18,
+          "line": 19,
           "algorithm": "ML-KEM-768",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -1098,18 +1110,6 @@
           "located": false,
           "file_only": false,
           "name_only": false
-        },
-        {
-          "id": "java-l4-prop-cipher",
-          "file": "src/main/resources/application.properties",
-          "line": 19,
-          "algorithm": "AES-256-GCM",
-          "layer": 4,
-          "cyclonedx_asset_type": "algorithm",
-          "detected": false,
-          "located": false,
-          "file_only": false,
-          "name_only": true
         },
         {
           "id": "java-l4-prop-audit-seal",
@@ -1138,7 +1138,7 @@
         {
           "id": "java-l4-prop-hash",
           "file": "src/main/resources/application.properties",
-          "line": 24,
+          "line": 23,
           "algorithm": "SHA-256",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -1157,13 +1157,13 @@
       "schema_valid": true,
       "schema_errors": [],
       "parse_error": null,
-      "detected": 22,
+      "detected": 24,
       "total": 25,
-      "detection_rate": 0.88,
+      "detection_rate": 0.96,
       "precision": 0.68,
-      "claim_precision": 0.5349,
+      "claim_precision": 0.5682,
       "matched_components": 17,
-      "credited_claims": 23,
+      "credited_claims": 25,
       "by_layer": {
         "1": {
           "detected": 10,
@@ -1178,7 +1178,7 @@
           "total": 1
         },
         "4": {
-          "detected": 6,
+          "detected": 8,
           "total": 8
         },
         "5": {
@@ -1196,17 +1196,17 @@
       "unmatched_reports": 0,
       "evidence": {
         "crypto_components": 25,
-        "total_occurrences": 43,
-        "distinct_claims": 43,
+        "total_occurrences": 44,
+        "distinct_claims": 44,
         "with_location": 25,
         "with_location_pct": 1.0,
         "with_line": 25,
         "with_line_pct": 1.0,
         "using_spec_evidence": 25,
         "using_properties_only": 0,
-        "resolvable_locations": 43,
+        "resolvable_locations": 44,
         "unresolvable_locations": 0,
-        "occurrences_per_component": 1.72
+        "occurrences_per_component": 1.76
       },
       "assets": [
         {
@@ -1438,22 +1438,10 @@
           "name_only": true
         },
         {
-          "id": "java-l4-prop-sig",
+          "id": "java-l4-prop-cipher",
           "file": "src/main/resources/application.properties",
-          "line": 17,
-          "algorithm": "Ed25519",
-          "layer": 4,
-          "cyclonedx_asset_type": "algorithm",
-          "detected": false,
-          "located": true,
-          "file_only": true,
-          "name_only": true
-        },
-        {
-          "id": "java-l4-prop-kem",
-          "file": "src/main/resources/application.properties",
-          "line": 18,
-          "algorithm": "ML-KEM-768",
+          "line": 16,
+          "algorithm": "AES-256-GCM",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
           "detected": true,
@@ -1462,10 +1450,22 @@
           "name_only": true
         },
         {
-          "id": "java-l4-prop-cipher",
+          "id": "java-l4-prop-sig",
+          "file": "src/main/resources/application.properties",
+          "line": 17,
+          "algorithm": "Ed25519",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "java-l4-prop-kem",
           "file": "src/main/resources/application.properties",
           "line": 19,
-          "algorithm": "AES-256-GCM",
+          "algorithm": "ML-KEM-768",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
           "detected": true,
@@ -1492,7 +1492,7 @@
           "algorithm": "RSA-2048",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
-          "detected": false,
+          "detected": true,
           "located": true,
           "file_only": true,
           "name_only": true
@@ -1500,7 +1500,7 @@
         {
           "id": "java-l4-prop-hash",
           "file": "src/main/resources/application.properties",
-          "line": 24,
+          "line": 23,
           "algorithm": "SHA-256",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -1584,22 +1584,10 @@
           "name_only": true
         },
         {
-          "id": "c-l4-conf-sig",
+          "id": "c-l4-conf-cipher",
           "file": "etc/tinyattest.conf",
           "line": 14,
-          "algorithm": "Ed25519",
-          "layer": 4,
-          "cyclonedx_asset_type": "algorithm",
-          "detected": false,
-          "located": false,
-          "file_only": false,
-          "name_only": false
-        },
-        {
-          "id": "c-l4-conf-record-seal",
-          "file": "etc/tinyattest.conf",
-          "line": 15,
-          "algorithm": "LMS",
+          "algorithm": "AES-256-GCM",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
           "detected": false,
@@ -1610,7 +1598,7 @@
         {
           "id": "c-l4-conf-kem",
           "file": "etc/tinyattest.conf",
-          "line": 16,
+          "line": 15,
           "algorithm": "ML-KEM-768",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -1622,7 +1610,7 @@
         {
           "id": "c-l4-conf-digest",
           "file": "etc/tinyattest.conf",
-          "line": 17,
+          "line": 16,
           "algorithm": "SHA-256",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -1632,10 +1620,22 @@
           "name_only": false
         },
         {
-          "id": "c-l4-conf-cipher",
+          "id": "c-l4-conf-record-seal",
+          "file": "etc/tinyattest.conf",
+          "line": 17,
+          "algorithm": "LMS",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "c-l4-conf-sig",
           "file": "etc/tinyattest.conf",
           "line": 18,
-          "algorithm": "AES-256-GCM",
+          "algorithm": "Ed25519",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
           "detected": false,
@@ -1809,16 +1809,16 @@
       "schema_valid": true,
       "schema_errors": [],
       "parse_error": null,
-      "detected": 16,
+      "detected": 18,
       "total": 19,
-      "detection_rate": 0.8421,
-      "precision": 0.8667,
-      "claim_precision": 0.5333,
-      "matched_components": 13,
-      "credited_claims": 16,
+      "detection_rate": 0.9474,
+      "precision": 0.875,
+      "claim_precision": 0.5625,
+      "matched_components": 14,
+      "credited_claims": 18,
       "by_layer": {
         "1": {
-          "detected": 5,
+          "detected": 7,
           "total": 7
         },
         "2": {
@@ -1847,16 +1847,16 @@
       "phantom_algorithm": 0,
       "unmatched_reports": 0,
       "evidence": {
-        "crypto_components": 15,
-        "total_occurrences": 30,
-        "distinct_claims": 30,
-        "with_location": 15,
+        "crypto_components": 16,
+        "total_occurrences": 32,
+        "distinct_claims": 32,
+        "with_location": 16,
         "with_location_pct": 1.0,
-        "with_line": 15,
+        "with_line": 16,
         "with_line_pct": 1.0,
-        "using_spec_evidence": 15,
+        "using_spec_evidence": 16,
         "using_properties_only": 0,
-        "resolvable_locations": 30,
+        "resolvable_locations": 32,
         "unresolvable_locations": 0,
         "occurrences_per_component": 2.0
       },
@@ -1874,22 +1874,10 @@
           "name_only": true
         },
         {
-          "id": "c-l4-conf-sig",
+          "id": "c-l4-conf-cipher",
           "file": "etc/tinyattest.conf",
           "line": 14,
-          "algorithm": "Ed25519",
-          "layer": 4,
-          "cyclonedx_asset_type": "algorithm",
-          "detected": true,
-          "located": true,
-          "file_only": true,
-          "name_only": true
-        },
-        {
-          "id": "c-l4-conf-record-seal",
-          "file": "etc/tinyattest.conf",
-          "line": 15,
-          "algorithm": "LMS",
+          "algorithm": "AES-256-GCM",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
           "detected": true,
@@ -1900,7 +1888,7 @@
         {
           "id": "c-l4-conf-kem",
           "file": "etc/tinyattest.conf",
-          "line": 16,
+          "line": 15,
           "algorithm": "ML-KEM-768",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -1912,7 +1900,7 @@
         {
           "id": "c-l4-conf-digest",
           "file": "etc/tinyattest.conf",
-          "line": 17,
+          "line": 16,
           "algorithm": "SHA-256",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -1922,10 +1910,22 @@
           "name_only": true
         },
         {
-          "id": "c-l4-conf-cipher",
+          "id": "c-l4-conf-record-seal",
+          "file": "etc/tinyattest.conf",
+          "line": 17,
+          "algorithm": "LMS",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "c-l4-conf-sig",
           "file": "etc/tinyattest.conf",
           "line": 18,
-          "algorithm": "AES-256-GCM",
+          "algorithm": "Ed25519",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
           "detected": true,
@@ -2000,10 +2000,10 @@
           "algorithm": "ECDSA-P256",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
-          "detected": false,
-          "located": false,
+          "detected": true,
+          "located": true,
           "file_only": true,
-          "name_only": false
+          "name_only": true
         },
         {
           "id": "c-l1-ed25519",
@@ -2012,8 +2012,8 @@
           "algorithm": "Ed25519",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
-          "detected": false,
-          "located": false,
+          "detected": true,
+          "located": true,
           "file_only": true,
           "name_only": true
         },
@@ -2025,7 +2025,7 @@
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
           "detected": true,
-          "located": false,
+          "located": true,
           "file_only": true,
           "name_only": true
         },
@@ -2152,9 +2152,21 @@
       },
       "assets": [
         {
+          "id": "go-l4-yaml-kex",
+          "file": "configs/relay.yaml",
+          "line": 19,
+          "algorithm": "ML-KEM-1024",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
           "id": "go-l4-yaml-suite",
           "file": "configs/relay.yaml",
-          "line": 18,
+          "line": 20,
           "algorithm": "AES-256-GCM",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -2166,20 +2178,8 @@
         {
           "id": "go-l4-yaml-sig",
           "file": "configs/relay.yaml",
-          "line": 20,
+          "line": 21,
           "algorithm": "Ed25519",
-          "layer": 4,
-          "cyclonedx_asset_type": "algorithm",
-          "detected": false,
-          "located": false,
-          "file_only": false,
-          "name_only": false
-        },
-        {
-          "id": "go-l4-yaml-kex",
-          "file": "configs/relay.yaml",
-          "line": 22,
-          "algorithm": "ML-KEM-1024",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
           "detected": false,
@@ -2389,13 +2389,13 @@
       "schema_valid": true,
       "schema_errors": [],
       "parse_error": null,
-      "detected": 18,
+      "detected": 19,
       "total": 19,
-      "detection_rate": 0.9474,
-      "precision": 0.619,
-      "claim_precision": 0.6667,
-      "matched_components": 13,
-      "credited_claims": 22,
+      "detection_rate": 1.0,
+      "precision": 0.6667,
+      "claim_precision": 0.6765,
+      "matched_components": 14,
+      "credited_claims": 23,
       "by_layer": {
         "1": {
           "detected": 7,
@@ -2410,7 +2410,7 @@
           "total": 1
         },
         "4": {
-          "detected": 5,
+          "detected": 6,
           "total": 6
         },
         "5": {
@@ -2428,36 +2428,24 @@
       "unmatched_reports": 0,
       "evidence": {
         "crypto_components": 21,
-        "total_occurrences": 33,
-        "distinct_claims": 33,
+        "total_occurrences": 34,
+        "distinct_claims": 34,
         "with_location": 21,
         "with_location_pct": 1.0,
         "with_line": 21,
         "with_line_pct": 1.0,
         "using_spec_evidence": 21,
         "using_properties_only": 0,
-        "resolvable_locations": 33,
+        "resolvable_locations": 34,
         "unresolvable_locations": 0,
-        "occurrences_per_component": 1.571
+        "occurrences_per_component": 1.619
       },
       "assets": [
         {
-          "id": "go-l4-yaml-suite",
+          "id": "go-l4-yaml-kex",
           "file": "configs/relay.yaml",
-          "line": 18,
-          "algorithm": "AES-256-GCM",
-          "layer": 4,
-          "cyclonedx_asset_type": "algorithm",
-          "detected": false,
-          "located": true,
-          "file_only": true,
-          "name_only": true
-        },
-        {
-          "id": "go-l4-yaml-sig",
-          "file": "configs/relay.yaml",
-          "line": 20,
-          "algorithm": "Ed25519",
+          "line": 19,
+          "algorithm": "ML-KEM-1024",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
           "detected": true,
@@ -2466,10 +2454,22 @@
           "name_only": true
         },
         {
-          "id": "go-l4-yaml-kex",
+          "id": "go-l4-yaml-suite",
           "file": "configs/relay.yaml",
-          "line": 22,
-          "algorithm": "ML-KEM-1024",
+          "line": 20,
+          "algorithm": "AES-256-GCM",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "go-l4-yaml-sig",
+          "file": "configs/relay.yaml",
+          "line": 21,
+          "algorithm": "Ed25519",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
           "detected": true,
@@ -2756,21 +2756,9 @@
           "name_only": false
         },
         {
-          "id": "js-l4-yaml-sig",
-          "file": "config/broker.yaml",
-          "line": 22,
-          "algorithm": "Ed25519",
-          "layer": 4,
-          "cyclonedx_asset_type": "algorithm",
-          "detected": false,
-          "located": false,
-          "file_only": false,
-          "name_only": true
-        },
-        {
           "id": "js-l4-yaml-assertion",
           "file": "config/broker.yaml",
-          "line": 24,
+          "line": 23,
           "algorithm": "ML-DSA-65",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -2782,8 +2770,20 @@
         {
           "id": "js-l4-yaml-jwks",
           "file": "config/broker.yaml",
-          "line": 25,
+          "line": 24,
           "algorithm": "RS256",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": true
+        },
+        {
+          "id": "js-l4-yaml-sig",
+          "file": "config/broker.yaml",
+          "line": 25,
+          "algorithm": "Ed25519",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
           "detected": false,
@@ -2981,16 +2981,16 @@
       "schema_valid": true,
       "schema_errors": [],
       "parse_error": null,
-      "detected": 16,
+      "detected": 19,
       "total": 20,
-      "detection_rate": 0.8,
-      "precision": 0.7333,
-      "claim_precision": 0.6538,
-      "matched_components": 11,
-      "credited_claims": 17,
+      "detection_rate": 0.95,
+      "precision": 0.8125,
+      "claim_precision": 0.6552,
+      "matched_components": 13,
+      "credited_claims": 19,
       "by_layer": {
         "1": {
-          "detected": 5,
+          "detected": 7,
           "total": 7
         },
         "2": {
@@ -3002,7 +3002,7 @@
           "total": 1
         },
         "4": {
-          "detected": 5,
+          "detected": 6,
           "total": 6
         },
         "5": {
@@ -3019,18 +3019,18 @@
       "phantom_algorithm": 0,
       "unmatched_reports": 0,
       "evidence": {
-        "crypto_components": 15,
-        "total_occurrences": 26,
-        "distinct_claims": 26,
-        "with_location": 15,
+        "crypto_components": 16,
+        "total_occurrences": 29,
+        "distinct_claims": 29,
+        "with_location": 16,
         "with_location_pct": 1.0,
-        "with_line": 15,
+        "with_line": 16,
         "with_line_pct": 1.0,
-        "using_spec_evidence": 15,
+        "using_spec_evidence": 16,
         "using_properties_only": 0,
-        "resolvable_locations": 26,
+        "resolvable_locations": 29,
         "unresolvable_locations": 0,
-        "occurrences_per_component": 1.733
+        "occurrences_per_component": 1.812
       },
       "assets": [
         {
@@ -3058,21 +3058,9 @@
           "name_only": true
         },
         {
-          "id": "js-l4-yaml-sig",
-          "file": "config/broker.yaml",
-          "line": 22,
-          "algorithm": "Ed25519",
-          "layer": 4,
-          "cyclonedx_asset_type": "algorithm",
-          "detected": true,
-          "located": true,
-          "file_only": true,
-          "name_only": true
-        },
-        {
           "id": "js-l4-yaml-assertion",
           "file": "config/broker.yaml",
-          "line": 24,
+          "line": 23,
           "algorithm": "ML-DSA-65",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -3084,11 +3072,23 @@
         {
           "id": "js-l4-yaml-jwks",
           "file": "config/broker.yaml",
-          "line": 25,
+          "line": 24,
           "algorithm": "RS256",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
-          "detected": false,
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "js-l4-yaml-sig",
+          "file": "config/broker.yaml",
+          "line": 25,
+          "algorithm": "Ed25519",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
           "located": true,
           "file_only": true,
           "name_only": true
@@ -3220,7 +3220,7 @@
           "algorithm": "RSA-2048",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
-          "detected": false,
+          "detected": true,
           "located": true,
           "file_only": true,
           "name_only": true
@@ -3232,10 +3232,10 @@
           "algorithm": "ECDSA-P256",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
-          "detected": false,
+          "detected": true,
           "located": true,
           "file_only": true,
-          "name_only": false
+          "name_only": true
         },
         {
           "id": "js-l1-sha256",
@@ -3338,7 +3338,7 @@
         {
           "id": "rust-dep-mldsa",
           "file": "Cargo.toml",
-          "line": 20,
+          "line": 21,
           "algorithm": "ML-DSA",
           "layer": 5,
           "cyclonedx_asset_type": "algorithm",
@@ -3360,6 +3360,18 @@
           "name_only": true
         },
         {
+          "id": "rust-l4-toml-archive",
+          "file": "config/sealbox.toml",
+          "line": 20,
+          "algorithm": "RSA-2048",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
           "id": "rust-l4-toml-kem",
           "file": "config/sealbox.toml",
           "line": 21,
@@ -3372,21 +3384,9 @@
           "name_only": false
         },
         {
-          "id": "rust-l4-toml-archive",
-          "file": "config/sealbox.toml",
-          "line": 22,
-          "algorithm": "RSA-2048",
-          "layer": 4,
-          "cyclonedx_asset_type": "algorithm",
-          "detected": false,
-          "located": false,
-          "file_only": false,
-          "name_only": false
-        },
-        {
           "id": "rust-l4-toml-sig",
           "file": "config/sealbox.toml",
-          "line": 23,
+          "line": 22,
           "algorithm": "Ed25519",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -3616,7 +3616,7 @@
         {
           "id": "rust-dep-mldsa",
           "file": "Cargo.toml",
-          "line": 20,
+          "line": 21,
           "algorithm": "ML-DSA",
           "layer": 5,
           "cyclonedx_asset_type": "algorithm",
@@ -3638,6 +3638,18 @@
           "name_only": true
         },
         {
+          "id": "rust-l4-toml-archive",
+          "file": "config/sealbox.toml",
+          "line": 20,
+          "algorithm": "RSA-2048",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
           "id": "rust-l4-toml-kem",
           "file": "config/sealbox.toml",
           "line": 21,
@@ -3650,21 +3662,9 @@
           "name_only": true
         },
         {
-          "id": "rust-l4-toml-archive",
-          "file": "config/sealbox.toml",
-          "line": 22,
-          "algorithm": "RSA-2048",
-          "layer": 4,
-          "cyclonedx_asset_type": "algorithm",
-          "detected": true,
-          "located": true,
-          "file_only": true,
-          "name_only": true
-        },
-        {
           "id": "rust-l4-toml-sig",
           "file": "config/sealbox.toml",
-          "line": 23,
+          "line": 22,
           "algorithm": "Ed25519",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",

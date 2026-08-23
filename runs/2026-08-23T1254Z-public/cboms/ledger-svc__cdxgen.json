@@ -1,10 +1,10 @@
 {
   "bomFormat": "CycloneDX",
   "specVersion": "1.7",
-  "serialNumber": "urn:uuid:46d851ce-2551-41c3-a2cd-8df3d508d990",
+  "serialNumber": "urn:uuid:d79793fa-52f9-4fad-a963-a1ea7e7f2b44",
   "version": 2,
   "metadata": {
-    "timestamp": "2026-08-23T10:08:44Z",
+    "timestamp": "2026-08-23T12:54:49Z",
     "tools": {
       "components": [
         {
@@ -264,7 +264,7 @@
           ]
         }
       },
-      "timestamp": "2026-08-23T10:08:44Z",
+      "timestamp": "2026-08-23T12:54:49Z",
       "text": "This Cryptography Bill-of-Materials (CBOM) document was created on Sunday, August 23, 2026 with cdxgen. The data was captured during the build lifecycle phase. The document describes an application named 'ledger-svc' with version '1.7.0'. There are 4 cryptographic assets listed under components in this CBOM. There are 5 components. The package type in this CBOM is maven with a single purl namespace 'org.bouncycastle' described under components. The components were identified from 3 source files."
     }
   ]

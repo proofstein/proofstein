@@ -1,10 +1,10 @@
 {
   "bomFormat": "CycloneDX",
   "specVersion": "1.7",
-  "serialNumber": "urn:uuid:58b17c4f-dadb-4bfb-91d6-d3a68dce8de5",
+  "serialNumber": "urn:uuid:092e1eed-9a42-46f6-9c0a-6329ae319f63",
   "version": 2,
   "metadata": {
-    "timestamp": "2026-08-23T10:08:57Z",
+    "timestamp": "2026-08-23T12:55:02Z",
     "tools": {
       "components": [
         {
@@ -279,7 +279,7 @@
           ]
         }
       },
-      "timestamp": "2026-08-23T10:08:57Z",
+      "timestamp": "2026-08-23T12:55:02Z",
       "text": "This Cryptography Bill-of-Materials (CBOM) document was created on Sunday, August 23, 2026 with cdxgen. The data was captured during the build lifecycle phase. The document describes an application named 'vaultkeeper' with version '2.4.1'. There are 3 cryptographic assets listed under components in this CBOM. There are 7 components."
     }
   ]

@@ -1,10 +1,10 @@
 {
   "bomFormat": "CycloneDX",
   "specVersion": "1.7",
-  "serialNumber": "urn:uuid:4ab31a40-45f8-4d21-bffb-d85edee2ff6a",
+  "serialNumber": "urn:uuid:00d2a9a5-09a9-4b7c-9791-cc465cc0d7e2",
   "version": 2,
   "metadata": {
-    "timestamp": "2026-08-23T10:08:49Z",
+    "timestamp": "2026-08-23T12:54:54Z",
     "tools": {
       "components": [
         {
@@ -757,7 +757,7 @@
           ]
         }
       },
-      "timestamp": "2026-08-23T10:08:49Z",
+      "timestamp": "2026-08-23T12:54:54Z",
       "text": "This Cryptography Bill-of-Materials (CBOM) document was created on Sunday, August 23, 2026 with cdxgen. The data was captured during the build lifecycle phase. The document describes an application named 'session-broker' with version '3.1.0'. There are 6 cryptographic assets listed under components in this CBOM. There are 14 components. The package type in this CBOM is npm with 2 purl namespaces described under components. The components were identified from 6 source files."
     }
   ]

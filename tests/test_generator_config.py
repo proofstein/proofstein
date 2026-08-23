@@ -124,6 +124,19 @@ class TestShippedConfig(unittest.TestCase):
         self.assertNotIn("${", entry["binary"])
 
 
+def _public_run() -> Path:
+    """The public run in the tree. Discovered, never named.
+
+    Run directories are named for the minute they started, so hard-coding one
+    breaks on the next run. That is the same brittleness the naming convention
+    itself had when it used the date alone.
+    """
+    runs = sorted((REPO_ROOT / "runs").glob("*-public"))
+    if not runs:
+        raise unittest.SkipTest("no public run in the tree")
+    return runs[-1]
+
+
 class TestManifestRecordsResolvedPaths(unittest.TestCase):
     """A run record must say what ran, not what the config asked for."""
 
@@ -136,18 +149,19 @@ class TestManifestRecordsResolvedPaths(unittest.TestCase):
         property of the run. What identifies the binary is binary_sha256, which
         is never rewritten.
         """
-        manifest = json.loads(
-            (REPO_ROOT / "runs" / "2026-08-23-public" / "manifest.json").read_text()
-        )
+        manifest = json.loads((_public_run() / "manifest.json").read_text())
         entry = manifest["tools"]["pqprobe-static"]
         self.assertNotIn("${", entry["binary"], "a manifest must not carry a placeholder")
         self.assertRegex(entry["binary_sha256"] or "", r"^[0-9a-f]{64}$")
 
     def test_manifest_carries_no_machine_paths(self):
-        for run in ("2026-08-23-public", "2026-08-23-holdout"):
-            raw = (REPO_ROOT / "runs" / run / "manifest.json").read_text()
+        for run in sorted((REPO_ROOT / "runs").glob("*-*")):
+            manifest = run / "manifest.json"
+            if not manifest.is_file():
+                continue
+            raw = manifest.read_text()
             for leak in ("/home/", "/mnt/", "/tmp/claude"):
-                self.assertNotIn(leak, raw, f"{run} manifest carries {leak}")
+                self.assertNotIn(leak, raw, f"{run.name} manifest carries {leak}")
 
 
 if __name__ == "__main__":

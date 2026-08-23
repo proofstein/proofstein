@@ -2,100 +2,45 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:02cb8cab-8149-52a0-a87d-3eff7a0a5f66",
+  "serialNumber": "urn:uuid:4e657f24-d44d-51fc-b6af-c1ce9b150eff",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-08-23T10:08:57Z",
+    "timestamp": "2026-08-23T12:55:03Z",
     "tools": {
       "components": [
         {
           "type": "application",
           "bom-ref": "tool-pqprobe-static",
           "name": "pqprobe-static",
-          "version": "3.5.0"
+          "version": "3.6.0"
         }
       ]
     },
     "properties": [
       {
         "name": "pqprobe:filesScanned",
-        "value": "17"
+        "value": "15"
       },
       {
         "name": "pqprobe:findings",
-        "value": "30"
-      },
-      {
-        "name": "pqprobe:unmapped:config_algorithm",
-        "value": "1"
+        "value": "49"
       },
       {
         "name": "pqprobe:unmapped:doc_claim",
-        "value": "2"
+        "value": "1"
       }
     ]
   },
   "components": [
     {
       "type": "library",
-      "bom-ref": "algorithm-77d558b15d148db9",
-      "name": "@noble/post-quantum",
-      "properties": [
-        {
-          "name": "pqprobe:findingType",
-          "value": "crypto_library"
-        },
-        {
-          "name": "pqprobe:provides",
-          "value": "post-quantum"
-        },
-        {
-          "name": "pqprobe:severity",
-          "value": "info"
-        }
-      ],
-      "evidence": {
-        "identity": [
-          {
-            "field": "name",
-            "confidence": 0.9,
-            "concludedValue": "@noble/post-quantum",
-            "methods": [
-              {
-                "technique": "source-code-analysis",
-                "confidence": 0.9
-              }
-            ]
-          }
-        ],
-        "occurrences": [
-          {
-            "location": "src/attest.ts",
-            "line": 13,
-            "additionalContext": "import { ml_dsa65 } from \"@noble/post-quantum/ml-dsa\";"
-          },
-          {
-            "location": "src/attest.ts",
-            "line": 14,
-            "additionalContext": "import { slh_dsa_sha2_128f } from \"@noble/post-quantum/slh-dsa\";"
-          },
-          {
-            "location": "src/kem.ts",
-            "line": 9,
-            "additionalContext": "import { ml_kem768 } from '@noble/post-quantum/ml-kem.js';"
-          }
-        ]
-      }
-    },
-    {
-      "type": "library",
-      "bom-ref": "algorithm-9a12cec36d8fe565",
-      "name": "node-forge",
-      "version": "1.3.1",
+      "bom-ref": "algorithm-4aadad65fc93b41c",
+      "name": "libsodium",
+      "version": "1.0.20",
       "properties": [
         {
           "name": "pqprobe:ecosystem",
-          "value": "npm"
+          "value": "conan"
         },
         {
           "name": "pqprobe:findingType",
@@ -103,7 +48,7 @@
         },
         {
           "name": "pqprobe:providesAlgorithms",
-          "value": "RSA, AES, DES, 3DES, SHA-1, SHA-256, HMAC"
+          "value": "X25519, Ed25519, XSalsa20, ChaCha20-Poly1305, BLAKE2b, argon2"
         },
         {
           "name": "pqprobe:severity",
@@ -115,7 +60,7 @@
           {
             "field": "name",
             "confidence": 0.9,
-            "concludedValue": "node-forge",
+            "concludedValue": "libsodium",
             "methods": [
               {
                 "technique": "source-code-analysis",
@@ -126,8 +71,168 @@
         ],
         "occurrences": [
           {
-            "location": "package.json",
-            "line": 16
+            "location": "conanfile.txt",
+            "line": 5
+          }
+        ]
+      }
+    },
+    {
+      "type": "library",
+      "bom-ref": "algorithm-667862975cafad08",
+      "name": "openssl",
+      "version": "3.5.5",
+      "properties": [
+        {
+          "name": "pqprobe:ecosystem",
+          "value": "conan"
+        },
+        {
+          "name": "pqprobe:findingType",
+          "value": "dependency"
+        },
+        {
+          "name": "pqprobe:pqcReady",
+          "value": "true"
+        },
+        {
+          "name": "pqprobe:providesAlgorithms",
+          "value": "RSA, ECDSA, ECDH, Ed25519, X25519, AES, ChaCha20, SHA-2, SHA-3, ML-KEM, ML-DSA"
+        },
+        {
+          "name": "pqprobe:severity",
+          "value": "info"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "name",
+            "confidence": 0.9,
+            "concludedValue": "openssl",
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.9
+              }
+            ]
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "conanfile.txt",
+            "line": 2
+          }
+        ]
+      }
+    },
+    {
+      "type": "library",
+      "bom-ref": "algorithm-9397c5c0524df3c3",
+      "name": "wolfSSL",
+      "properties": [
+        {
+          "name": "pqprobe:findingType",
+          "value": "crypto_library"
+        },
+        {
+          "name": "pqprobe:provides",
+          "value": "general"
+        },
+        {
+          "name": "pqprobe:severity",
+          "value": "info"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "name",
+            "confidence": 0.9,
+            "concludedValue": "wolfSSL",
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.9
+              }
+            ]
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "src/seal_longterm.c",
+            "line": 16,
+            "additionalContext": "#include \u003cwolfssl/wolfcrypt/lms.h\u003e"
+          },
+          {
+            "location": "src/seal_longterm.c",
+            "line": 17,
+            "additionalContext": "#include \u003cwolfssl/wolfcrypt/random.h\u003e"
+          },
+          {
+            "location": "src/seal_longterm.c",
+            "line": 18,
+            "additionalContext": "#include \u003cwolfssl/wolfcrypt/xmss.h\u003e"
+          },
+          {
+            "location": "src/seal_longterm.c",
+            "line": 23,
+            "additionalContext": "#include \u003cwolfssl/wolfcrypt/wc_lms.h\u003e"
+          },
+          {
+            "location": "src/seal_longterm.c",
+            "line": 24,
+            "additionalContext": "#include \u003cwolfssl/wolfcrypt/wc_xmss.h\u003e"
+          },
+          {
+            "location": "src/seal_longterm.c",
+            "line": 43,
+            "additionalContext": "if (wc_XmssKey_Init(\u0026key, NULL, INVALID_DEVID) != 0)"
+          },
+          {
+            "location": "src/seal_longterm.c",
+            "line": 46,
+            "additionalContext": "if (wc_XmssKey_SetParamStr(\u0026key, TA_RECORD_SEAL_PARAMS) != 0)"
+          },
+          {
+            "location": "src/seal_longterm.c",
+            "line": 49,
+            "additionalContext": "if (wc_XmssKey_MakeKey(\u0026key, \u0026rng) != 0)"
+          },
+          {
+            "location": "src/seal_longterm.c",
+            "line": 56,
+            "additionalContext": "if (wc_XmssKey_ExportPubRaw(\u0026key, public_key, \u0026pub_len) != 0)"
+          },
+          {
+            "location": "src/seal_longterm.c",
+            "line": 63,
+            "additionalContext": "wc_XmssKey_Free(\u0026key);"
+          },
+          {
+            "location": "src/seal_longterm.c",
+            "line": 84,
+            "additionalContext": "if (wc_LmsKey_Init(\u0026key, NULL, INVALID_DEVID) != 0)"
+          },
+          {
+            "location": "src/seal_longterm.c",
+            "line": 87,
+            "additionalContext": "if (wc_LmsKey_SetLmsParm(\u0026key, WC_LMS_PARM_L2_H10_W8) != 0)"
+          },
+          {
+            "location": "src/seal_longterm.c",
+            "line": 90,
+            "additionalContext": "if (wc_LmsKey_MakeKey(\u0026key, \u0026rng) != 0)"
+          },
+          {
+            "location": "src/seal_longterm.c",
+            "line": 94,
+            "additionalContext": "if (wc_LmsKey_ExportPubRaw(\u0026key, public_key, \u0026pub_len) != 0)"
+          },
+          {
+            "location": "src/seal_longterm.c",
+            "line": 101,
+            "additionalContext": "wc_LmsKey_Free(\u0026key);"
           }
         ]
       }
@@ -174,9 +279,9 @@
         ],
         "occurrences": [
           {
-            "location": "config/broker.yaml",
-            "line": 15,
-            "additionalContext": "session_cipher: \"AES-256-GCM\""
+            "location": "etc/tinyattest.conf",
+            "line": 9,
+            "additionalContext": "report_cipher = AES-256-GCM"
           }
         ]
       }
@@ -197,10 +302,6 @@
         }
       },
       "properties": [
-        {
-          "name": "pqprobe:context",
-          "value": "string"
-        },
         {
           "name": "pqprobe:degraded",
           "value": "the call site does not reveal the AES key size"
@@ -230,14 +331,67 @@
         ],
         "occurrences": [
           {
-            "location": "src/envelope.ts",
-            "line": 31,
-            "additionalContext": "const cipher = createCipheriv('aes-256-gcm', dataKey, nonce);"
+            "location": "src/seal.c",
+            "line": 32,
+            "additionalContext": "if (EVP_EncryptInit_ex(ctx, EVP_aes_256_gcm(), NULL, key, out-\u003enonce) != 1)"
           },
           {
-            "location": "src/envelope.ts",
-            "line": 39,
-            "additionalContext": "const decipher = createDecipheriv('aes-256-gcm', dataKey, sealed.nonce);"
+            "location": "src/seal.c",
+            "line": 71,
+            "additionalContext": "if (EVP_DecryptInit_ex(ctx, EVP_aes_256_gcm(), NULL, key, sealed-\u003enonce) != 1)"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "algorithm-5afeb6e3820d1798",
+      "name": "ECDSA-P-256",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "curve": "P-256",
+          "cryptoFunctions": [
+            "sign",
+            "verify"
+          ],
+          "nistQuantumSecurityLevel": 0
+        }
+      },
+      "properties": [
+        {
+          "name": "pqprobe:findingType",
+          "value": "ecc"
+        },
+        {
+          "name": "pqprobe:quantumVulnerable",
+          "value": "true"
+        },
+        {
+          "name": "pqprobe:severity",
+          "value": "high"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "name",
+            "confidence": 0.9,
+            "concludedValue": "ECDSA-P-256",
+            "methods": [
+              {
+                "technique": "source-code-analysis",
+                "confidence": 0.9
+              }
+            ]
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "src/identity.c",
+            "line": 57,
+            "additionalContext": "if (EVP_PKEY_CTX_set_group_name(ctx, \"P-256\") \u003c= 0)"
           }
         ]
       }
@@ -293,27 +447,26 @@
         ],
         "occurrences": [
           {
-            "location": "config/broker.yaml",
-            "line": 16,
-            "additionalContext": "token_signature: \"Ed25519\""
+            "location": "etc/tinyattest.conf",
+            "line": 10,
+            "additionalContext": "report_signature = Ed25519"
           },
           {
-            "location": "src/identity.ts",
-            "line": 19,
-            "additionalContext": "const tokenSigning = generateKeyPairSync('ed25519');"
+            "location": "src/identity.c",
+            "line": 75,
+            "additionalContext": "identity-\u003ereport_signing = generate_by_name(\"ED25519\", 0);"
           }
         ]
       }
     },
     {
       "type": "cryptographic-asset",
-      "bom-ref": "algorithm-858415225b1ce514",
-      "name": "Falcon-512",
+      "bom-ref": "algorithm-bcc3088993d00c84",
+      "name": "Falcon",
       "cryptoProperties": {
         "assetType": "algorithm",
         "algorithmProperties": {
           "primitive": "signature",
-          "parameterSetIdentifier": "512",
           "cryptoFunctions": [
             "sign",
             "verify"
@@ -323,7 +476,7 @@
       "properties": [
         {
           "name": "pqprobe:findingType",
-          "value": "pqc"
+          "value": "config_algorithm"
         },
         {
           "name": "pqprobe:severity",
@@ -335,10 +488,10 @@
           {
             "field": "name",
             "confidence": 0.9,
-            "concludedValue": "Falcon-512",
+            "concludedValue": "Falcon",
             "methods": [
               {
-                "technique": "source-code-analysis",
+                "technique": "manifest-analysis",
                 "confidence": 0.9
               }
             ]
@@ -346,31 +499,32 @@
         ],
         "occurrences": [
           {
-            "location": "src/attest.ts",
-            "line": 41,
-            "additionalContext": "case \"Falcon-512\":"
+            "location": "etc/tinyattest.conf",
+            "line": 14,
+            "additionalContext": "archive_signature = falcon512"
           }
         ]
       }
     },
     {
       "type": "cryptographic-asset",
-      "bom-ref": "algorithm-1dac6d43c3a53767",
-      "name": "ML-DSA-65",
+      "bom-ref": "algorithm-f2e0ab5fbe8f70e7",
+      "name": "LMS",
       "cryptoProperties": {
         "assetType": "algorithm",
         "algorithmProperties": {
           "primitive": "signature",
-          "parameterSetIdentifier": "65",
           "cryptoFunctions": [
             "sign",
             "verify"
-          ],
-          "nistQuantumSecurityLevel": 3
-        },
-        "oid": "2.16.840.1.101.3.4.3.18"
+          ]
+        }
       },
       "properties": [
+        {
+          "name": "pqprobe:degraded",
+          "value": "the parameter set is not named, so the signature capacity of the key is unknown"
+        },
         {
           "name": "pqprobe:findingType",
           "value": "config_algorithm"
@@ -384,51 +538,70 @@
         "identity": [
           {
             "field": "name",
-            "confidence": 0.9,
-            "concludedValue": "ML-DSA-65",
+            "confidence": 0.5,
+            "concludedValue": "LMS",
             "methods": [
               {
                 "technique": "manifest-analysis",
-                "confidence": 0.9
+                "confidence": 0.5
               },
               {
                 "technique": "source-code-analysis",
-                "confidence": 0.9
+                "confidence": 0.5
               }
             ]
           }
         ],
         "occurrences": [
           {
-            "location": "config/broker.yaml",
-            "line": 17,
-            "additionalContext": "assertion_signature: \"ML-DSA-65\""
-          },
-          {
-            "location": "src/attest.ts",
+            "location": "etc/tinyattest.conf",
             "line": 13,
-            "additionalContext": "import { ml_dsa65 } from \"@noble/post-quantum/ml-dsa\";"
+            "additionalContext": "record_seal = LMS_SHA256_M32_H10"
           },
           {
-            "location": "src/attest.ts",
-            "line": 27,
-            "additionalContext": "return { scheme: \"lattice\", payload, signature: ml_dsa65.sign(secretKey, payload) };"
+            "location": "src/seal_longterm.c",
+            "line": 84,
+            "additionalContext": "if (wc_LmsKey_Init(\u0026key, NULL, INVALID_DEVID) != 0)"
+          },
+          {
+            "location": "src/seal_longterm.c",
+            "line": 87,
+            "additionalContext": "if (wc_LmsKey_SetLmsParm(\u0026key, WC_LMS_PARM_L2_H10_W8) != 0)"
+          },
+          {
+            "location": "src/seal_longterm.c",
+            "line": 90,
+            "additionalContext": "if (wc_LmsKey_MakeKey(\u0026key, \u0026rng) != 0)"
+          },
+          {
+            "location": "src/seal_longterm.c",
+            "line": 94,
+            "additionalContext": "if (wc_LmsKey_ExportPubRaw(\u0026key, public_key, \u0026pub_len) != 0)"
+          },
+          {
+            "location": "src/seal_longterm.c",
+            "line": 101,
+            "additionalContext": "wc_LmsKey_Free(\u0026key);"
           }
         ]
       }
     },
     {
       "type": "cryptographic-asset",
-      "bom-ref": "algorithm-345633c0bc4cda3d",
-      "name": "ML-KEM-768",
+      "bom-ref": "algorithm-47e9bdf8f7257e80",
+      "name": "ML-KEM-512",
       "cryptoProperties": {
         "assetType": "algorithm",
         "algorithmProperties": {
           "primitive": "kem",
-          "parameterSetIdentifier": "768",
-          "nistQuantumSecurityLevel": 3
+          "parameterSetIdentifier": "512",
+          "cryptoFunctions": [
+            "decapsulate",
+            "encapsulate"
+          ],
+          "nistQuantumSecurityLevel": 1
         },
-        "oid": "2.16.840.1.101.3.4.4.2"
+        "oid": "2.16.840.1.101.3.4.4.1"
       },
       "properties": [
         {
@@ -445,7 +618,7 @@
           {
             "field": "name",
             "confidence": 0.9,
-            "concludedValue": "ML-KEM-768",
+            "concludedValue": "ML-KEM-512",
             "methods": [
               {
                 "technique": "manifest-analysis",
@@ -460,29 +633,14 @@
         ],
         "occurrences": [
           {
-            "location": "config/broker.yaml",
-            "line": 18,
-            "additionalContext": "upstream_key_agreement: \"ML-KEM-768\""
+            "location": "etc/tinyattest.conf",
+            "line": 11,
+            "additionalContext": "key_agreement = ML-KEM-512"
           },
           {
-            "location": "src/kem.ts",
-            "line": 9,
-            "additionalContext": "import { ml_kem768 } from '@noble/post-quantum/ml-kem.js';"
-          },
-          {
-            "location": "src/kem.ts",
-            "line": 18,
-            "additionalContext": "const keys = ml_kem768.keygen();"
-          },
-          {
-            "location": "src/kem.ts",
-            "line": 24,
-            "additionalContext": "return ml_kem768.encapsulate(peerPublic);"
-          },
-          {
-            "location": "src/kem.ts",
-            "line": 29,
-            "additionalContext": "return ml_kem768.decapsulate(cipherText, secretKey);"
+            "location": "src/kem.c",
+            "line": 22,
+            "additionalContext": "ctx = EVP_PKEY_CTX_new_from_name(NULL, \"ML-KEM-512\", NULL);"
           }
         ]
       }
@@ -495,15 +653,14 @@
         "assetType": "algorithm",
         "algorithmProperties": {
           "primitive": "pke",
+          "cryptoFunctions": [
+            "keygen"
+          ],
           "nistQuantumSecurityLevel": 0
         },
         "oid": "1.2.840.113549.1.1.1"
       },
       "properties": [
-        {
-          "name": "pqprobe:composition",
-          "value": "implied"
-        },
         {
           "name": "pqprobe:findingType",
           "value": "rsa"
@@ -521,20 +678,21 @@
         "identity": [
           {
             "field": "name",
-            "confidence": 0.6,
+            "confidence": 0.9,
             "concludedValue": "RSA",
             "methods": [
               {
-                "technique": "other",
-                "confidence": 0.6
+                "technique": "source-code-analysis",
+                "confidence": 0.9
               }
             ]
           }
         ],
         "occurrences": [
           {
-            "location": "keys/legacy-jwks-key.pem",
-            "line": 1
+            "location": "src/identity.c",
+            "line": 35,
+            "additionalContext": "if (rsa_bits \u003e 0 \u0026\u0026 EVP_PKEY_CTX_set_rsa_keygen_bits(ctx, (int)rsa_bits) \u003c= 0)"
           }
         ]
       }
@@ -555,7 +713,7 @@
       "properties": [
         {
           "name": "pqprobe:context",
-          "value": "string"
+          "value": "comment"
         },
         {
           "name": "pqprobe:degraded",
@@ -586,14 +744,14 @@
         ],
         "occurrences": [
           {
-            "location": "src/fingerprint.ts",
-            "line": 14,
-            "additionalContext": "const hex = digest('sha256').update(token).digest('hex');"
+            "location": "src/digest.c",
+            "line": 15,
+            "additionalContext": "#define ta_md_sha256 EVP_sha256"
           },
           {
-            "location": "src/identity.ts",
-            "line": 33,
-            "additionalContext": "return createHash('sha256').update(der).digest('base64url');"
+            "location": "src/digest.c",
+            "line": 30,
+            "additionalContext": "if (EVP_DigestInit_ex(ctx, ta_md_sha256(), NULL) != 1)"
           }
         ]
       }
@@ -636,9 +794,9 @@
         ],
         "occurrences": [
           {
-            "location": "config/broker.yaml",
-            "line": 23,
-            "additionalContext": "fingerprint_hash: \"SHA-256\""
+            "location": "etc/tinyattest.conf",
+            "line": 12,
+            "additionalContext": "digest = SHA-256"
           }
         ]
       }
@@ -689,7 +847,7 @@
         ],
         "occurrences": [
           {
-            "location": "keys/legacy-jwks-cert.pem",
+            "location": "keys/provisioning-cert.pem",
             "line": 1
           }
         ]
@@ -697,8 +855,8 @@
     },
     {
       "type": "cryptographic-asset",
-      "bom-ref": "algorithm-f82b670f05fc6887",
-      "name": "SLH-DSA",
+      "bom-ref": "algorithm-e5cc04fb3b1ac867",
+      "name": "XMSS",
       "cryptoProperties": {
         "assetType": "algorithm",
         "algorithmProperties": {
@@ -712,7 +870,7 @@
       "properties": [
         {
           "name": "pqprobe:degraded",
-          "value": "the parameter set is not named, so no OID or NIST security category is asserted"
+          "value": "the parameter set is not named, so the signature capacity of the key is unknown"
         },
         {
           "name": "pqprobe:findingType",
@@ -728,7 +886,7 @@
           {
             "field": "name",
             "confidence": 0.5,
-            "concludedValue": "SLH-DSA",
+            "concludedValue": "XMSS",
             "methods": [
               {
                 "technique": "source-code-analysis",
@@ -739,36 +897,66 @@
         ],
         "occurrences": [
           {
-            "location": "src/attest.ts",
-            "line": 14,
-            "additionalContext": "import { slh_dsa_sha2_128f } from \"@noble/post-quantum/slh-dsa\";"
+            "location": "src/seal_longterm.c",
+            "line": 18,
+            "additionalContext": "#include \u003cwolfssl/wolfcrypt/xmss.h\u003e"
           },
           {
-            "location": "src/attest.ts",
+            "location": "src/seal_longterm.c",
+            "line": 24,
+            "additionalContext": "#include \u003cwolfssl/wolfcrypt/wc_xmss.h\u003e"
+          },
+          {
+            "location": "src/seal_longterm.c",
+            "line": 28,
+            "additionalContext": "#define TA_RECORD_SEAL_PARAMS \"XMSS-SHA2_10_256\""
+          },
+          {
+            "location": "src/seal_longterm.c",
             "line": 32,
-            "additionalContext": "const signature = slh_dsa_sha2_128f.sign(secretKey, payload);"
+            "additionalContext": "XmssKey key;"
           },
           {
-            "location": "src/attest.ts",
-            "line": 39,
-            "additionalContext": "case \"SLH-DSA-SHA2-128f\":"
+            "location": "src/seal_longterm.c",
+            "line": 43,
+            "additionalContext": "if (wc_XmssKey_Init(\u0026key, NULL, INVALID_DEVID) != 0)"
+          },
+          {
+            "location": "src/seal_longterm.c",
+            "line": 46,
+            "additionalContext": "if (wc_XmssKey_SetParamStr(\u0026key, TA_RECORD_SEAL_PARAMS) != 0)"
+          },
+          {
+            "location": "src/seal_longterm.c",
+            "line": 49,
+            "additionalContext": "if (wc_XmssKey_MakeKey(\u0026key, \u0026rng) != 0)"
+          },
+          {
+            "location": "src/seal_longterm.c",
+            "line": 56,
+            "additionalContext": "if (wc_XmssKey_ExportPubRaw(\u0026key, public_key, \u0026pub_len) != 0)"
+          },
+          {
+            "location": "src/seal_longterm.c",
+            "line": 63,
+            "additionalContext": "wc_XmssKey_Free(\u0026key);"
           }
         ]
       }
     },
     {
       "type": "cryptographic-asset",
-      "bom-ref": "certificate-7a3775a0f6a34e58",
-      "name": "X.509 certificate: CN=sb-eu-west-1,OU=NOT A REAL KEY,O=Proofstein Corpus",
+      "bom-ref": "certificate-e5c58e17b21b4e05",
+      "name": "X.509 certificate: CN=field-0417,OU=NOT A REAL KEY,O=Proofstein Corpus",
       "cryptoProperties": {
         "assetType": "certificate",
         "certificateProperties": {
-          "subjectName": "CN=sb-eu-west-1,OU=NOT A REAL KEY,O=Proofstein Corpus",
-          "issuerName": "CN=sb-eu-west-1,OU=NOT A REAL KEY,O=Proofstein Corpus",
-          "notValidBefore": "2026-07-27T14:46:08Z",
-          "notValidAfter": "2036-07-24T14:46:08Z",
+          "subjectName": "CN=field-0417,OU=NOT A REAL KEY,O=Proofstein Corpus",
+          "issuerName": "CN=field-0417,OU=NOT A REAL KEY,O=Proofstein Corpus",
+          "notValidBefore": "2026-07-27T14:51:21Z",
+          "notValidAfter": "2036-07-24T14:51:21Z",
           "signatureAlgorithmRef": "algorithm-b7cec2bcbb2d002d",
-          "subjectPublicKeyRef": "key-62f412b8ee03e64e",
+          "subjectPublicKeyRef": "key-f66fa254af9d0f5d",
           "certificateFormat": "X.509"
         }
       },
@@ -791,7 +979,7 @@
         },
         {
           "name": "pqprobe:serialNumber",
-          "value": "459030811040218834813657610790723450698432493731"
+          "value": "176250724983592784608889532179035964747513794622"
         },
         {
           "name": "pqprobe:severity",
@@ -803,7 +991,7 @@
           {
             "field": "name",
             "confidence": 0.9,
-            "concludedValue": "X.509 certificate: CN=sb-eu-west-1,OU=NOT A REAL KEY,O=Proofstein Corpus",
+            "concludedValue": "X.509 certificate: CN=field-0417,OU=NOT A REAL KEY,O=Proofstein Corpus",
             "methods": [
               {
                 "technique": "filename",
@@ -814,7 +1002,7 @@
         ],
         "occurrences": [
           {
-            "location": "keys/legacy-jwks-cert.pem",
+            "location": "keys/provisioning-cert.pem",
             "line": 1
           }
         ]
@@ -858,7 +1046,7 @@
         ],
         "occurrences": [
           {
-            "location": "keys/token-signing-key.pem",
+            "location": "keys/report-signing-key.pem",
             "line": 1
           }
         ]
@@ -902,7 +1090,7 @@
         ],
         "occurrences": [
           {
-            "location": "keys/legacy-jwks-key.pem",
+            "location": "keys/provisioning-key.pem",
             "line": 1
           }
         ]
@@ -910,8 +1098,8 @@
     },
     {
       "type": "cryptographic-asset",
-      "bom-ref": "key-62f412b8ee03e64e",
-      "name": "RSA public key (2048-bit) of CN=sb-eu-west-1,OU=NOT A REAL KEY,O=Proofstein Corpus",
+      "bom-ref": "key-f66fa254af9d0f5d",
+      "name": "RSA public key (2048-bit) of CN=field-0417,OU=NOT A REAL KEY,O=Proofstein Corpus",
       "cryptoProperties": {
         "assetType": "related-crypto-material",
         "relatedCryptoMaterialProperties": {
@@ -939,7 +1127,7 @@
           {
             "field": "name",
             "confidence": 0.9,
-            "concludedValue": "RSA public key (2048-bit) of CN=sb-eu-west-1,OU=NOT A REAL KEY,O=Proofstein Corpus",
+            "concludedValue": "RSA public key (2048-bit) of CN=field-0417,OU=NOT A REAL KEY,O=Proofstein Corpus",
             "methods": [
               {
                 "technique": "filename",
@@ -950,7 +1138,7 @@
         ],
         "occurrences": [
           {
-            "location": "keys/legacy-jwks-cert.pem",
+            "location": "keys/provisioning-cert.pem",
             "line": 1
           }
         ]
@@ -959,13 +1147,19 @@
   ],
   "dependencies": [
     {
-      "ref": "algorithm-1dac6d43c3a53767"
+      "ref": "algorithm-47e9bdf8f7257e80"
     },
     {
-      "ref": "algorithm-345633c0bc4cda3d"
+      "ref": "algorithm-4aadad65fc93b41c"
     },
     {
       "ref": "algorithm-54c1c793dcfb6a0d"
+    },
+    {
+      "ref": "algorithm-5afeb6e3820d1798"
+    },
+    {
+      "ref": "algorithm-667862975cafad08"
     },
     {
       "ref": "algorithm-67b02b3deb9f92c9"
@@ -974,13 +1168,7 @@
       "ref": "algorithm-733b8576e83567de"
     },
     {
-      "ref": "algorithm-77d558b15d148db9"
-    },
-    {
-      "ref": "algorithm-858415225b1ce514"
-    },
-    {
-      "ref": "algorithm-9a12cec36d8fe565"
+      "ref": "algorithm-9397c5c0524df3c3"
     },
     {
       "ref": "algorithm-a70b4b0102d87e8a"
@@ -992,16 +1180,22 @@
       ]
     },
     {
+      "ref": "algorithm-bcc3088993d00c84"
+    },
+    {
+      "ref": "algorithm-e5cc04fb3b1ac867"
+    },
+    {
       "ref": "algorithm-e5fda3cf8c259831"
     },
     {
-      "ref": "algorithm-f82b670f05fc6887"
+      "ref": "algorithm-f2e0ab5fbe8f70e7"
     },
     {
       "ref": "algorithm-ffb931ce01575704"
     },
     {
-      "ref": "certificate-7a3775a0f6a34e58"
+      "ref": "certificate-e5c58e17b21b4e05"
     },
     {
       "ref": "key-0ae25665354d01cc",
@@ -1010,13 +1204,13 @@
       ]
     },
     {
-      "ref": "key-62f412b8ee03e64e",
+      "ref": "key-df6d2455ed8d11c7",
       "dependsOn": [
         "algorithm-ffb931ce01575704"
       ]
     },
     {
-      "ref": "key-df6d2455ed8d11c7",
+      "ref": "key-f66fa254af9d0f5d",
       "dependsOn": [
         "algorithm-ffb931ce01575704"
       ]
