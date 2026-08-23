@@ -1,0 +1,189 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.7",
+  "serialNumber": "urn:uuid:710b1498-b219-4d97-9334-b3c1fbed6762",
+  "version": 2,
+  "metadata": {
+    "timestamp": "2026-08-23T15:19:23Z",
+    "tools": {
+      "components": [
+        {
+          "group": "@cyclonedx",
+          "name": "cdxgen",
+          "version": "12.8.2",
+          "purl": "pkg:npm/%40cyclonedx/cdxgen@12.8.2",
+          "type": "application",
+          "bom-ref": "pkg:npm/@cyclonedx/cdxgen@12.8.2",
+          "publisher": "OWASP Foundation",
+          "authors": [
+            {
+              "name": "OWASP Foundation"
+            }
+          ]
+        }
+      ]
+    },
+    "authors": [
+      {
+        "name": "OWASP Foundation"
+      }
+    ],
+    "lifecycles": [
+      {
+        "phase": "build"
+      }
+    ],
+    "component": {
+      "group": "",
+      "name": "github.com/proofstein/beacon-relay",
+      "version": "",
+      "purl": "pkg:golang/github.com/proofstein/beacon-relay",
+      "bom-ref": "pkg:golang/github.com/proofstein/beacon-relay",
+      "scope": "required",
+      "properties": [
+        {
+          "name": "SrcGoMod",
+          "value": "/src/go.mod"
+        },
+        {
+          "name": "ModuleGoVersion",
+          "value": "1.24"
+        },
+        {
+          "name": "cdx:go:indirect",
+          "value": "false"
+        },
+        {
+          "name": "cdx:go:local_dir",
+          "value": "/src"
+        }
+      ],
+      "type": "application"
+    },
+    "properties": [
+      {
+        "name": "cdx:bom:componentTypes",
+        "value": "golang"
+      },
+      {
+        "name": "cdx:bom:componentNamespaces",
+        "value": "golang.org/x"
+      },
+      {
+        "name": "cdx:bom:componentSrcFiles",
+        "value": "../src/testdata/peer-mtls-key.pem\\n../src/testdata/relay-cert.pem\\n../src/testdata/relay-key.pem"
+      }
+    ]
+  },
+  "components": [
+    {
+      "group": "",
+      "name": "golang.org/x/crypto",
+      "version": "v0.36.0",
+      "purl": "pkg:golang/golang.org/x/crypto@v0.36.0",
+      "type": "library",
+      "bom-ref": "pkg:golang/golang.org/x/crypto@v0.36.0"
+    },
+    {
+      "name": "relay-key.pem",
+      "type": "cryptographic-asset",
+      "version": "5fdc08a2f82318010382f1e30a8fb3e722709816bbec790ec092629fc928379b",
+      "bom-ref": "crypto/certificate/relay-key.pem@sha256:5fdc08a2f82318010382f1e30a8fb3e722709816bbec790ec092629fc928379b",
+      "cryptoProperties": {
+        "assetType": "certificate",
+        "algorithmProperties": {
+          "executionEnvironment": "unknown",
+          "implementationPlatform": "unknown"
+        }
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "../src/testdata/relay-key.pem"
+        }
+      ],
+      "tags": [
+        "cryptographic-asset"
+      ]
+    },
+    {
+      "name": "relay-cert.pem",
+      "type": "cryptographic-asset",
+      "version": "4563ecf33210ebc7b2a4f64c9793f834cf82943f1166f293e148a8a234a12c91",
+      "bom-ref": "crypto/certificate/relay-cert.pem@sha256:4563ecf33210ebc7b2a4f64c9793f834cf82943f1166f293e148a8a234a12c91",
+      "cryptoProperties": {
+        "assetType": "certificate",
+        "algorithmProperties": {
+          "executionEnvironment": "unknown",
+          "implementationPlatform": "unknown"
+        }
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "../src/testdata/relay-cert.pem"
+        }
+      ],
+      "tags": [
+        "cryptographic-asset"
+      ]
+    },
+    {
+      "name": "peer-mtls-key.pem",
+      "type": "cryptographic-asset",
+      "version": "f0c7ca6b2cf4a3b65153c4986390724c8c3b1891b8cf7466d89bcef1b5de2ec4",
+      "bom-ref": "crypto/certificate/peer-mtls-key.pem@sha256:f0c7ca6b2cf4a3b65153c4986390724c8c3b1891b8cf7466d89bcef1b5de2ec4",
+      "cryptoProperties": {
+        "assetType": "certificate",
+        "algorithmProperties": {
+          "executionEnvironment": "unknown",
+          "implementationPlatform": "unknown"
+        }
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "../src/testdata/peer-mtls-key.pem"
+        }
+      ],
+      "tags": [
+        "cryptographic-asset"
+      ]
+    }
+  ],
+  "services": [],
+  "dependencies": [
+    {
+      "ref": "pkg:golang/github.com/proofstein/beacon-relay",
+      "dependsOn": [
+        "pkg:golang/golang.org/x/crypto@v0.36.0"
+      ]
+    }
+  ],
+  "annotations": [
+    {
+      "bom-ref": "metadata-annotations",
+      "subjects": [
+        "pkg:golang/github.com/proofstein/beacon-relay"
+      ],
+      "annotator": {
+        "component": {
+          "group": "@cyclonedx",
+          "name": "cdxgen",
+          "version": "12.8.2",
+          "purl": "pkg:npm/%40cyclonedx/cdxgen@12.8.2",
+          "type": "application",
+          "bom-ref": "pkg:npm/@cyclonedx/cdxgen@12.8.2",
+          "publisher": "OWASP Foundation",
+          "authors": [
+            {
+              "name": "OWASP Foundation"
+            }
+          ]
+        }
+      },
+      "timestamp": "2026-08-23T15:19:23Z",
+      "text": "This Cryptography Bill-of-Materials (CBOM) document was created on Sunday, August 23, 2026 with cdxgen. The data was captured during the build lifecycle phase. The document describes an application named 'github.com/proofstein/beacon-relay'. There are 3 cryptographic assets listed under components in this CBOM. There are 4 components. The package type in this CBOM is golang with a single purl namespace 'golang.org/x' described under components. The components were identified from 3 source files."
+    }
+  ]
+}

@@ -77,20 +77,27 @@ The full rules are in [METHODOLOGY.md](METHODOLOGY.md), sections 3 and 3.3.
 
 ## An example run
 
-[`runs/2026-08-23T1254Z-public/`](runs/2026-08-23T1254Z-public/) has a complete scored
-run already done: two tools, cdxgen 12.8.2 and pqprobe-static 3.6.0, with
-their output files and their scores. You can re-score it yourself and check
-you get the same numbers:
+[`runs/2026-08-23T1519Z-public/`](runs/2026-08-23T1519Z-public/) has a complete scored
+run already done: three tools, cdxgen 12.8.2, pqprobe-static 3.6.0 and
+sonar-cryptography 1.6.1, with their output files and their scores. You can
+re-score it yourself and check you get the same numbers:
 
 ```bash
-./score.py --cboms runs/2026-08-23T1254Z-public/cboms --out /tmp/proofstein
-diff <(grep -A4 'by language' /tmp/proofstein/results.md) <(grep -A4 'by language' runs/2026-08-23T1254Z-public/results/results.md)
+./score.py --cboms runs/2026-08-23T1519Z-public/cboms --out /tmp/proofstein
+diff <(grep -A5 'by language' /tmp/proofstein/results.md) <(grep -A5 'by language' runs/2026-08-23T1519Z-public/results/results.md)
 ```
 
-The same two tools were also run over a scrambled copy of the six programs,
+One thing to know before reading those numbers. sonar-cryptography reads Java,
+Python and Go, and not the other three languages, so it is scored over 67 of the
+124 assets instead of all of them. Its overall percentage is not comparable with
+the other two tools'; compare the per-language rows instead, where all three
+tools are measured against the same programs. The run's own README explains this
+at more length.
+
+The same three tools were also run over a scrambled copy of the six programs,
 to check they were finding cryptography rather than remembering these
 particular files. Those results are in
-[`runs/2026-08-23T1254Z-holdout/`](runs/2026-08-23T1254Z-holdout/).
+[`runs/2026-08-23T1519Z-holdout/`](runs/2026-08-23T1519Z-holdout/).
 
 To run the tests: `python3 -m unittest discover -s tests`.
 

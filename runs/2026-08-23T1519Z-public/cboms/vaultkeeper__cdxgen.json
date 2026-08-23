@@ -1,0 +1,286 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.7",
+  "serialNumber": "urn:uuid:4ddaec1b-7808-4c2a-b97f-b9dee77365ac",
+  "version": 2,
+  "metadata": {
+    "timestamp": "2026-08-23T15:20:42Z",
+    "tools": {
+      "components": [
+        {
+          "group": "@cyclonedx",
+          "name": "cdxgen",
+          "version": "12.8.2",
+          "purl": "pkg:npm/%40cyclonedx/cdxgen@12.8.2",
+          "type": "application",
+          "bom-ref": "pkg:npm/@cyclonedx/cdxgen@12.8.2",
+          "publisher": "OWASP Foundation",
+          "authors": [
+            {
+              "name": "OWASP Foundation"
+            }
+          ]
+        }
+      ]
+    },
+    "authors": [
+      {
+        "name": "OWASP Foundation"
+      }
+    ],
+    "lifecycles": [
+      {
+        "phase": "build"
+      }
+    ],
+    "component": {
+      "name": "vaultkeeper",
+      "version": "2.4.1",
+      "description": "Secrets sync daemon for vault meshes",
+      "properties": [
+        {
+          "name": "cdx:pypi:requiresPython",
+          "value": ">=3.11"
+        },
+        {
+          "name": "SrcFile",
+          "value": "/src/pyproject.toml"
+        }
+      ],
+      "type": "application",
+      "bom-ref": "pkg:pypi/vaultkeeper@2.4.1",
+      "purl": "pkg:pypi/vaultkeeper@2.4.1"
+    },
+    "properties": [
+      {
+        "name": "cdx:bom:componentTypes",
+        "value": "pypi"
+      },
+      {
+        "name": "cdx:bom:componentSrcFiles",
+        "value": "../src/requirements.txt\\n../src/secrets/node-manifest-key.pem\\n../src/secrets/peer-mesh-cert.pem\\n../src/secrets/peer-mesh-key.pem"
+      }
+    ]
+  },
+  "components": [
+    {
+      "group": "",
+      "name": "cryptography",
+      "version": "49.0.0",
+      "purl": "pkg:pypi/cryptography@49.0.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/cryptography@49.0.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "../src/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "../src/requirements.txt"
+              }
+            ],
+            "concludedValue": "../src/requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "PyNaCl",
+      "version": "1.6.2",
+      "purl": "pkg:pypi/pynacl@1.6.2",
+      "type": "library",
+      "bom-ref": "pkg:pypi/pynacl@1.6.2",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "../src/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "../src/requirements.txt"
+              }
+            ],
+            "concludedValue": "../src/requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "falcon",
+      "version": "4.3.1",
+      "purl": "pkg:pypi/falcon@4.3.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/falcon@4.3.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "../src/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "../src/requirements.txt"
+              }
+            ],
+            "concludedValue": "../src/requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "liboqs-python",
+      "version": "0.14.0",
+      "purl": "pkg:pypi/liboqs-python@0.14.0",
+      "type": "library",
+      "bom-ref": "pkg:pypi/liboqs-python@0.14.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "../src/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "../src/requirements.txt"
+              }
+            ],
+            "concludedValue": "../src/requirements.txt"
+          }
+        ]
+      }
+    },
+    {
+      "name": "peer-mesh-key.pem",
+      "type": "cryptographic-asset",
+      "version": "500be8aef47d4e3bffaa118b4ae0c52b41f475ca874aee7499ef2565c7467cb0",
+      "bom-ref": "crypto/certificate/peer-mesh-key.pem@sha256:500be8aef47d4e3bffaa118b4ae0c52b41f475ca874aee7499ef2565c7467cb0",
+      "cryptoProperties": {
+        "assetType": "certificate",
+        "algorithmProperties": {
+          "executionEnvironment": "unknown",
+          "implementationPlatform": "unknown"
+        }
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "../src/secrets/peer-mesh-key.pem"
+        }
+      ],
+      "tags": [
+        "cryptographic-asset"
+      ]
+    },
+    {
+      "name": "peer-mesh-cert.pem",
+      "type": "cryptographic-asset",
+      "version": "fe749af287936ac1256fed400992dba7f4f634ee2393e8ae8665a58fb43a48da",
+      "bom-ref": "crypto/certificate/peer-mesh-cert.pem@sha256:fe749af287936ac1256fed400992dba7f4f634ee2393e8ae8665a58fb43a48da",
+      "cryptoProperties": {
+        "assetType": "certificate",
+        "algorithmProperties": {
+          "executionEnvironment": "unknown",
+          "implementationPlatform": "unknown"
+        }
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "../src/secrets/peer-mesh-cert.pem"
+        }
+      ],
+      "tags": [
+        "cryptographic-asset"
+      ]
+    },
+    {
+      "name": "node-manifest-key.pem",
+      "type": "cryptographic-asset",
+      "version": "a73542e812da1b732381d2fbcf8429994ee15ae4a23867d57f6626825ec22a50",
+      "bom-ref": "crypto/certificate/node-manifest-key.pem@sha256:a73542e812da1b732381d2fbcf8429994ee15ae4a23867d57f6626825ec22a50",
+      "cryptoProperties": {
+        "assetType": "certificate",
+        "algorithmProperties": {
+          "executionEnvironment": "unknown",
+          "implementationPlatform": "unknown"
+        }
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "../src/secrets/node-manifest-key.pem"
+        }
+      ],
+      "tags": [
+        "cryptographic-asset"
+      ]
+    }
+  ],
+  "services": [],
+  "dependencies": [
+    {
+      "ref": "pkg:pypi/vaultkeeper@2.4.1",
+      "dependsOn": []
+    }
+  ],
+  "annotations": [
+    {
+      "bom-ref": "metadata-annotations",
+      "subjects": [
+        "pkg:pypi/vaultkeeper@2.4.1"
+      ],
+      "annotator": {
+        "component": {
+          "group": "@cyclonedx",
+          "name": "cdxgen",
+          "version": "12.8.2",
+          "purl": "pkg:npm/%40cyclonedx/cdxgen@12.8.2",
+          "type": "application",
+          "bom-ref": "pkg:npm/@cyclonedx/cdxgen@12.8.2",
+          "publisher": "OWASP Foundation",
+          "authors": [
+            {
+              "name": "OWASP Foundation"
+            }
+          ]
+        }
+      },
+      "timestamp": "2026-08-23T15:20:42Z",
+      "text": "This Cryptography Bill-of-Materials (CBOM) document was created on Sunday, August 23, 2026 with cdxgen. The data was captured during the build lifecycle phase. The document describes an application named 'vaultkeeper' with version '2.4.1'. There are 3 cryptographic assets listed under components in this CBOM. There are 7 components."
+    }
+  ]
+}

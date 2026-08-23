@@ -1,0 +1,520 @@
+{
+  "run": {
+    "started_utc": "2026-08-23T15:21:19Z",
+    "scan_tree": "git archive HEAD",
+    "ground_truth": "ground-truth-holdout",
+    "holdout": true,
+    "corpus_commit": "49c979d3e8a3b0f7ef063ea89d61cea5c30ea889",
+    "corpus_commit_short": "49c979d",
+    "corpus_tree_dirty": true,
+    "uncommitted_paths": [
+      "runs/2026-08-23T1519Z-public/"
+    ],
+    "host_platform": "linux",
+    "python": "3.12.3",
+    "finished_utc": "2026-08-23T15:23:23Z",
+    "succeeded": 15,
+    "attempted": 18
+  },
+  "judgement_tables": {
+    "oid_algorithms": {
+      "entries": 27,
+      "sha256_16": "031a3c27915e6dde"
+    },
+    "location_property_names": {
+      "entries": 8,
+      "sha256_16": "0b8c15cc33ce242a"
+    },
+    "line_property_names": {
+      "entries": 5,
+      "sha256_16": "ed438ed351a5b930"
+    },
+    "token_aliases": {
+      "entries": 32,
+      "sha256_16": "637f0e9d5f2cf137"
+    },
+    "family_markers": {
+      "entries": 37,
+      "sha256_16": "2aef68bf8064cccc"
+    },
+    "whole_token_only": {
+      "entries": 7,
+      "sha256_16": "88a20cf6715e9c84"
+    },
+    "known_unplanted": {
+      "entries": 15,
+      "sha256_16": "3a7fca80174e0cdd"
+    }
+  },
+  "tools": {
+    "cdxgen": {
+      "version": "CycloneDX Generator 12.8.2",
+      "binary": "tools/cdxgen-docker.sh",
+      "binary_sha256": "a5301b3cef42cfa4e9af526208b614e2770fbe64e17df272996f078d1d048a49",
+      "package_version": "@cyclonedx/cdxgen@12.8.2",
+      "accept_exit": [
+        0
+      ],
+      "notes": "Arguments mirror BF-CBOM's cdxgen worker. Records source files in properties[].SrcFile without line numbers. Invoked through the pinned image ghcr.io/cyclonedx/cdxgen:12.8.2, so it needs no build root and runs the same on any host with Docker."
+    },
+    "pqprobe-static": {
+      "version": "PQProbe Static v3.6.0",
+      "binary": "<external>/pqprobe-static-v3.6.0",
+      "binary_sha256": "bbf5766feb32248e8e868cbd050a09c9c806c8f29e82c41183be791f5dce8803",
+      "package_version": "pqprobe-static @ <external>/pqprobe-static-v3.6.0",
+      "accept_exit": [
+        0,
+        1
+      ],
+      "notes": "Exit 1 means findings present, not failure. The binary path comes from PQPROBE_STATIC_BIN; the manifest records what it resolved to and that file's sha256. Maintained by the same party as Proofstein; see the governance section in README.md."
+    },
+    "sonar-cryptography": {
+      "version": "sonar-cryptography 1.6.1 on sonarqube:26.8.0.126808-community",
+      "binary": "tools/sonar-cryptography-docker.sh",
+      "binary_sha256": "8f74b978227a5362ca658923fcd3fbc8f498d5221f86d01d9235daee9d847a13",
+      "package_version": "sonar-cryptography 1.6.1 on sonarqube 26.8.0.126808-community",
+      "accept_exit": [
+        0
+      ],
+      "notes": "PQCA plugin, pinned at 1.6.1 by sha256 and run against a pinned SonarQube image. Reads Java, Python and Go only, so its ceiling on this corpus is the assets in those three languages, not all of them; the per-language table is the informative one. Records file and line in evidence.occurrences[]. Requires the server to be up: see _comment."
+    }
+  },
+  "projects": {
+    "cachekeeper": {
+      "language": "python",
+      "assets": 23
+    },
+    "journal-svc": {
+      "language": "java",
+      "assets": 25
+    },
+    "microquote": {
+      "language": "c",
+      "assets": 19
+    },
+    "signal-bridge": {
+      "language": "go",
+      "assets": 19
+    },
+    "ticket-gateway": {
+      "language": "javascript",
+      "assets": 20
+    },
+    "vaultcrate": {
+      "language": "rust",
+      "assets": 18
+    }
+  },
+  "invocations": [
+    {
+      "argv": [
+        "tools/cdxgen-docker.sh",
+        "--json-pretty",
+        "--include-crypto",
+        "-o",
+        "runs/2026-08-23T1519Z-holdout/.work/bom.json",
+        "runs/2026-08-23T1519Z-holdout/.work/scan/cachekeeper"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 7.44,
+      "bytes": 7751,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "cachekeeper__cdxgen.json",
+      "tool": "cdxgen",
+      "project": "cachekeeper",
+      "language": "python"
+    },
+    {
+      "argv": [
+        "tools/cdxgen-docker.sh",
+        "--json-pretty",
+        "--include-crypto",
+        "-o",
+        "runs/2026-08-23T1519Z-holdout/.work/bom.json",
+        "runs/2026-08-23T1519Z-holdout/.work/scan/journal-svc"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 67.73,
+      "bytes": 7963,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "journal-svc__cdxgen.json",
+      "tool": "cdxgen",
+      "project": "journal-svc",
+      "language": "java"
+    },
+    {
+      "argv": [
+        "tools/cdxgen-docker.sh",
+        "--json-pretty",
+        "--include-crypto",
+        "-o",
+        "runs/2026-08-23T1519Z-holdout/.work/bom.json",
+        "runs/2026-08-23T1519Z-holdout/.work/scan/microquote"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 2.3,
+      "bytes": 4566,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "microquote__cdxgen.json",
+      "tool": "cdxgen",
+      "project": "microquote",
+      "language": "c"
+    },
+    {
+      "argv": [
+        "tools/cdxgen-docker.sh",
+        "--json-pretty",
+        "--include-crypto",
+        "-o",
+        "runs/2026-08-23T1519Z-holdout/.work/bom.json",
+        "runs/2026-08-23T1519Z-holdout/.work/scan/signal-bridge"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 3.13,
+      "bytes": 5542,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "signal-bridge__cdxgen.json",
+      "tool": "cdxgen",
+      "project": "signal-bridge",
+      "language": "go"
+    },
+    {
+      "argv": [
+        "tools/cdxgen-docker.sh",
+        "--json-pretty",
+        "--include-crypto",
+        "-o",
+        "runs/2026-08-23T1519Z-holdout/.work/bom.json",
+        "runs/2026-08-23T1519Z-holdout/.work/scan/ticket-gateway"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 2.44,
+      "bytes": 21101,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "ticket-gateway__cdxgen.json",
+      "tool": "cdxgen",
+      "project": "ticket-gateway",
+      "language": "javascript"
+    },
+    {
+      "argv": [
+        "tools/cdxgen-docker.sh",
+        "--json-pretty",
+        "--include-crypto",
+        "-o",
+        "runs/2026-08-23T1519Z-holdout/.work/bom.json",
+        "runs/2026-08-23T1519Z-holdout/.work/scan/vaultcrate"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 2.37,
+      "bytes": 90745,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "vaultcrate__cdxgen.json",
+      "tool": "cdxgen",
+      "project": "vaultcrate",
+      "language": "rust"
+    },
+    {
+      "argv": [
+        "<external>/pqprobe-static-v3.6.0",
+        "--output",
+        "cbom",
+        "scan",
+        "."
+      ],
+      "exit_code": 1,
+      "exit_accepted": true,
+      "duration_sec": 0.01,
+      "bytes": 34981,
+      "stderr_tail": "cbom: no CycloneDX representation for doc_claim finding \"Documentation: Post-quantum cryptography claim \u2014 verify against actual implementation\" (README.md:27) | cbom: no CycloneDX representation for doc_claim finding \"Documentation: ML-KEM claim \u2014 verify actual implementation exists\" (README.md:31) | cbom: \"SPHINCS+\" mapped with loss: the parameter set is not named, so no OID or NIST security category is asserted | cbom: \"AES-GCM\" mapped with loss: the call site does not reveal the AES key size | cbom: \"SHA-2\" mapped with loss: the call site names the SHA-2 family without a determinable digest length | cbom: \"ML-KEM\" mapped with loss: the parameter set is not named, so no OID or NIST security category is asserted",
+      "status": "ok",
+      "written": "cachekeeper__pqprobe-static.json",
+      "tool": "pqprobe-static",
+      "project": "cachekeeper",
+      "language": "python"
+    },
+    {
+      "argv": [
+        "<external>/pqprobe-static-v3.6.0",
+        "--output",
+        "cbom",
+        "scan",
+        "."
+      ],
+      "exit_code": 1,
+      "exit_accepted": true,
+      "duration_sec": 0.01,
+      "bytes": 42728,
+      "stderr_tail": "cbom: \"SPHINCS+\" mapped with loss: the parameter set is not named, so no OID or NIST security category is asserted | cbom: \"ML-DSA\" mapped with loss: the parameter set is not named, so no OID or NIST security category is asserted | cbom: \"SLH-DSA\" mapped with loss: the parameter set is not named, so no OID or NIST security category is asserted | cbom: \"AES-GCM\" mapped with loss: the call site does not reveal the AES key size | cbom: \"ML-KEM\" mapped with loss: the parameter set is not named, so no OID or NIST security category is asserted | cbom: \"TLS (src/main/resources/application.properties)\" mapped with loss: the directive selects a keystore container type, not an algorithm",
+      "status": "ok",
+      "written": "journal-svc__pqprobe-static.json",
+      "tool": "pqprobe-static",
+      "project": "journal-svc",
+      "language": "java"
+    },
+    {
+      "argv": [
+        "<external>/pqprobe-static-v3.6.0",
+        "--output",
+        "cbom",
+        "scan",
+        "."
+      ],
+      "exit_code": 1,
+      "exit_accepted": true,
+      "duration_sec": 0.01,
+      "bytes": 31195,
+      "stderr_tail": "cbom: no CycloneDX representation for doc_claim finding \"Documentation: ML-KEM claim \u2014 verify actual implementation exists\" (README.md:13) | cbom: \"SHA-2\" mapped with loss: the call site names the SHA-2 family without a determinable digest length | cbom: \"AES-GCM\" mapped with loss: the call site does not reveal the AES key size | cbom: \"XMSS\" mapped with loss: the parameter set is not named, so the signature capacity of the key is unknown | cbom: \"LMS\" mapped with loss: the parameter set is not named, so the signature capacity of the key is unknown",
+      "status": "ok",
+      "written": "microquote__pqprobe-static.json",
+      "tool": "pqprobe-static",
+      "project": "microquote",
+      "language": "c"
+    },
+    {
+      "argv": [
+        "<external>/pqprobe-static-v3.6.0",
+        "--output",
+        "cbom",
+        "scan",
+        "."
+      ],
+      "exit_code": 1,
+      "exit_accepted": true,
+      "duration_sec": 0.01,
+      "bytes": 34447,
+      "stderr_tail": "cbom: no CycloneDX representation for doc_claim finding \"Documentation: Post-quantum cryptography claim \u2014 verify against actual implementation\" (README.md:23) | cbom: no CycloneDX representation for doc_claim finding \"Documentation: ML-KEM claim \u2014 verify actual implementation exists\" (README.md:30) | cbom: \"SHA-2\" mapped with loss: the call site names the SHA-2 family without a determinable digest length | cbom: no CycloneDX representation for symmetric finding \"AES block cipher in use\" (internal/seal/seal.go:40) | cbom: \"AES-GCM\" mapped with loss: the call site does not reveal the AES key size | cbom: \"ML-KEM\" mapped with loss: the parameter set is not named, so no OID or NIST security category is asserted",
+      "status": "ok",
+      "written": "signal-bridge__pqprobe-static.json",
+      "tool": "pqprobe-static",
+      "project": "signal-bridge",
+      "language": "go"
+    },
+    {
+      "argv": [
+        "<external>/pqprobe-static-v3.6.0",
+        "--output",
+        "cbom",
+        "scan",
+        "."
+      ],
+      "exit_code": 1,
+      "exit_accepted": true,
+      "duration_sec": 0.01,
+      "bytes": 27448,
+      "stderr_tail": "cbom: no CycloneDX representation for doc_claim finding \"Documentation: Post-quantum cryptography claim \u2014 verify against actual implementation\" (README.md:25) | cbom: no CycloneDX representation for doc_claim finding \"Documentation: ML-KEM claim \u2014 verify actual implementation exists\" (README.md:27) | cbom: \"SLH-DSA\" mapped with loss: the parameter set is not named, so no OID or NIST security category is asserted | cbom: \"AES-GCM\" mapped with loss: the call site does not reveal the AES key size | cbom: \"SHA-2\" mapped with loss: the call site names the SHA-2 family without a determinable digest length",
+      "status": "ok",
+      "written": "ticket-gateway__pqprobe-static.json",
+      "tool": "pqprobe-static",
+      "project": "ticket-gateway",
+      "language": "javascript"
+    },
+    {
+      "argv": [
+        "<external>/pqprobe-static-v3.6.0",
+        "--output",
+        "cbom",
+        "scan",
+        "."
+      ],
+      "exit_code": 1,
+      "exit_accepted": true,
+      "duration_sec": 0.01,
+      "bytes": 32667,
+      "stderr_tail": "cbom: no CycloneDX representation for doc_claim finding \"Documentation: ML-KEM claim \u2014 verify actual implementation exists\" (README.md:29) | cbom: no CycloneDX representation for doc_claim finding \"Documentation: Post-quantum cryptography claim \u2014 verify against actual implementation\" (README.md:36) | cbom: \"AES-GCM\" mapped with loss: the call site does not reveal the AES key size | cbom: \"SHA-2\" mapped with loss: the call site names the SHA-2 family without a determinable digest length",
+      "status": "ok",
+      "written": "vaultcrate__pqprobe-static.json",
+      "tool": "pqprobe-static",
+      "project": "vaultcrate",
+      "language": "rust"
+    },
+    {
+      "argv": [
+        "tools/sonar-cryptography-docker.sh",
+        "-o",
+        "runs/2026-08-23T1519Z-holdout/.work/bom.json",
+        "runs/2026-08-23T1519Z-holdout/.work/scan/cachekeeper"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 6.13,
+      "bytes": 5579,
+      "stderr_tail": "15:22:51.602 INFO   - PrivateKey                    : 3 | 15:22:51.602 INFO  ===================================== | 15:22:51.607 INFO  Analysis total time: 2.764 s | 15:22:51.608 INFO  SonarScanner Engine completed successfully | 15:22:51.655 INFO  EXECUTION SUCCESS | 15:22:51.656 INFO  Total time: 4.982s",
+      "status": "ok",
+      "written": "cachekeeper__sonar-cryptography.json",
+      "tool": "sonar-cryptography",
+      "project": "cachekeeper",
+      "language": "python"
+    },
+    {
+      "argv": [
+        "tools/sonar-cryptography-docker.sh",
+        "-o",
+        "runs/2026-08-23T1519Z-holdout/.work/bom.json",
+        "runs/2026-08-23T1519Z-holdout/.work/scan/journal-svc"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 6.55,
+      "bytes": 23786,
+      "stderr_tail": "15:22:58.159 INFO   - Signature                     : 2 | 15:22:58.159 INFO  ===================================== | 15:22:58.163 INFO  Analysis total time: 3.098 s | 15:22:58.164 INFO  SonarScanner Engine completed successfully | 15:22:58.212 INFO  EXECUTION SUCCESS | 15:22:58.213 INFO  Total time: 5.377s",
+      "status": "ok",
+      "written": "journal-svc__sonar-cryptography.json",
+      "tool": "sonar-cryptography",
+      "project": "journal-svc",
+      "language": "java"
+    },
+    {
+      "argv": [
+        "tools/sonar-cryptography-docker.sh",
+        "-o",
+        "runs/2026-08-23T1519Z-holdout/.work/bom.json",
+        "runs/2026-08-23T1519Z-holdout/.work/scan/microquote"
+      ],
+      "exit_code": 1,
+      "exit_accepted": false,
+      "duration_sec": 4.56,
+      "bytes": 0,
+      "stderr_tail": "15:23:02.751 INFO  More about the report processing at http://proofstein-sonarqube:9000/api/ce/task?id=5c842969-b955-4e19-bf74-2f29ff63b53c | 15:23:02.755 INFO  Analysis total time: 1.075 s | 15:23:02.755 INFO  SonarScanner Engine completed successfully | 15:23:02.793 INFO  EXECUTION SUCCESS | 15:23:02.794 INFO  Total time: 3.384s | sonar: no cbom.json produced for microquote",
+      "status": "empty",
+      "error": "generator produced no document",
+      "tool": "sonar-cryptography",
+      "project": "microquote",
+      "language": "c"
+    },
+    {
+      "argv": [
+        "tools/sonar-cryptography-docker.sh",
+        "-o",
+        "runs/2026-08-23T1519Z-holdout/.work/bom.json",
+        "runs/2026-08-23T1519Z-holdout/.work/scan/signal-bridge"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 5.66,
+      "bytes": 5987,
+      "stderr_tail": "15:23:08.402 INFO   - KeyEncapsulationMechanism     : 2 | 15:23:08.402 INFO  ===================================== | 15:23:08.409 INFO  Analysis total time: 2.194 s | 15:23:08.409 INFO  SonarScanner Engine completed successfully | 15:23:08.448 INFO  EXECUTION SUCCESS | 15:23:08.449 INFO  Total time: 4.477s",
+      "status": "ok",
+      "written": "signal-bridge__sonar-cryptography.json",
+      "tool": "sonar-cryptography",
+      "project": "signal-bridge",
+      "language": "go"
+    },
+    {
+      "argv": [
+        "tools/sonar-cryptography-docker.sh",
+        "-o",
+        "runs/2026-08-23T1519Z-holdout/.work/bom.json",
+        "runs/2026-08-23T1519Z-holdout/.work/scan/ticket-gateway"
+      ],
+      "exit_code": 1,
+      "exit_accepted": false,
+      "duration_sec": 9.48,
+      "bytes": 0,
+      "stderr_tail": "15:23:17.795 INFO  More about the report processing at http://proofstein-sonarqube:9000/api/ce/task?id=e44d2575-88c8-4552-8117-1a22b1bd932e | 15:23:17.858 INFO  Analysis total time: 6.043 s | 15:23:17.858 INFO  SonarScanner Engine completed successfully | 15:23:17.898 INFO  EXECUTION SUCCESS | 15:23:17.899 INFO  Total time: 8.296s | sonar: no cbom.json produced for ticket-gateway",
+      "status": "empty",
+      "error": "generator produced no document",
+      "tool": "sonar-cryptography",
+      "project": "ticket-gateway",
+      "language": "javascript"
+    },
+    {
+      "argv": [
+        "tools/sonar-cryptography-docker.sh",
+        "-o",
+        "runs/2026-08-23T1519Z-holdout/.work/bom.json",
+        "runs/2026-08-23T1519Z-holdout/.work/scan/vaultcrate"
+      ],
+      "exit_code": 1,
+      "exit_accepted": false,
+      "duration_sec": 4.78,
+      "bytes": 0,
+      "stderr_tail": "15:23:22.669 INFO  More about the report processing at http://proofstein-sonarqube:9000/api/ce/task?id=c9fa9f31-2d5c-47f0-b176-9bf210d01bbb | 15:23:22.674 INFO  Analysis total time: 1.362 s | 15:23:22.675 INFO  SonarScanner Engine completed successfully | 15:23:22.713 INFO  EXECUTION SUCCESS | 15:23:22.713 INFO  Total time: 3.605s | sonar: no cbom.json produced for vaultcrate",
+      "status": "empty",
+      "error": "generator produced no document",
+      "tool": "sonar-cryptography",
+      "project": "vaultcrate",
+      "language": "rust"
+    }
+  ],
+  "withheld_cboms": {
+    "reason": "Holdout CBOMs carry the variants' file paths, line numbers and matched source lines. Publishing them would republish most of what the unpublished seed protects (METHODOLOGY.md \u00a76), so they are archived privately and committed here only as digests.",
+    "count": 15,
+    "algorithm": "sha256",
+    "verify_with": "tools/withhold-cboms.py --run <run> --archive <path> --verify",
+    "files": {
+      "cachekeeper__cdxgen.json": {
+        "sha256": "cdcc52fbcaa94d528fdcbae4785ea75d42f1ea7d283a140f7e838a87ff969c85",
+        "bytes": 7751
+      },
+      "cachekeeper__pqprobe-static.json": {
+        "sha256": "c16ab95088e6861db382a1b0cf19abd3875dd1257f08eaf1da3b25b7631d6880",
+        "bytes": 34981
+      },
+      "cachekeeper__sonar-cryptography.json": {
+        "sha256": "dc73949de171710ef61bb0ece08e754e17a010fe1e54274aa2c2f8a5ee17a241",
+        "bytes": 5579
+      },
+      "journal-svc__cdxgen.json": {
+        "sha256": "b94a1cb1791f40e2740edc948d8872fe3255f85a384150076515af9c47aaf5b2",
+        "bytes": 7963
+      },
+      "journal-svc__pqprobe-static.json": {
+        "sha256": "d2c8b4c9278673a80216cc1aee835623221897f87559f02a9000a91e409fe0e3",
+        "bytes": 42728
+      },
+      "journal-svc__sonar-cryptography.json": {
+        "sha256": "680a75f4e69dfa1ec45f87005cb14d187d584820dc7d7f4aa1d8ceb276a98805",
+        "bytes": 23786
+      },
+      "microquote__cdxgen.json": {
+        "sha256": "ea7188a5ed80d453dbedd3e75e8a1f7141cf652f0ddd10efb3d72d102fbeda7a",
+        "bytes": 4566
+      },
+      "microquote__pqprobe-static.json": {
+        "sha256": "d5d5e22f9280afb60c873af2b1381ad76f4403127b67b9b92279183e80b0d000",
+        "bytes": 31195
+      },
+      "signal-bridge__cdxgen.json": {
+        "sha256": "cf4f9f111f5e992bbd8143a792a530c5f820cfafefa31efec64dc2fcecb8a8aa",
+        "bytes": 5542
+      },
+      "signal-bridge__pqprobe-static.json": {
+        "sha256": "5ede6da77e0b801582112e5d59bfe528530597507ee01f895c083f983510412f",
+        "bytes": 34447
+      },
+      "signal-bridge__sonar-cryptography.json": {
+        "sha256": "51a96d1ac544fef6ad92171ba1096744269c7577e9d69b5ca6bd568ba12c9814",
+        "bytes": 5987
+      },
+      "ticket-gateway__cdxgen.json": {
+        "sha256": "4f9f0315ae341a1beccce917d718996e265e9b3941b5d09aae68835b6c9b6e83",
+        "bytes": 21101
+      },
+      "ticket-gateway__pqprobe-static.json": {
+        "sha256": "fea9b7bd8cfaae8b35ff07b71fda5404da07c2f004e0c9a5b863d4f87700372f",
+        "bytes": 27448
+      },
+      "vaultcrate__cdxgen.json": {
+        "sha256": "4f9f31f5ff849b75187614d564fcaeb71361aa1db37a1366ff292f78d758ec08",
+        "bytes": 90745
+      },
+      "vaultcrate__pqprobe-static.json": {
+        "sha256": "13950522d1e7b63bcae3ec550ec550e7c27c37392faf7f1e549b8eb49760bace",
+        "bytes": 32667
+      }
+    }
+  }
+}
