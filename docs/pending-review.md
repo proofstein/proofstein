@@ -698,3 +698,66 @@ dependency knowledge base. Both were fixed in the scanner, not in the corpus.
 That is the intended direction of travel for this entry: the plants were written
 from library documentation before the rules existed, so what they measured was
 the tool's coverage rather than the author's memory of it.
+
+## 13. Activating sonar-cryptography's rules before scoring it (OPEN)
+
+### The decision
+
+The PQCA `sonar-cryptography` plugin is scored with its three Inventory rules
+switched on. That is a configuration change made by the party that also ships
+one of the scored tools, in favour of a competitor, and it is recorded here
+because a reader is entitled to check that it was not the reverse.
+
+### Why it is needed
+
+The plugin registers one rule per supported language:
+`sonar-java-crypto:Inventory`, `sonar-python-crypto:Inventory` and
+`sonar-go-crypto:Inventory`. All three ship inactive. They are in no quality
+profile, including Sonar way, and SonarQube only runs checks that are active in
+the profile applied to the project.
+
+On a stock server the consequence is not an error. The crypto sensor loads and
+logs `Sonar Cryptography initialized in context (SONARQUBE)`, the analysis runs,
+the post-job runs, and the scan ends:
+
+```
+INFO  Executing post-job 'Output generation'
+INFO  No cryptography assets were detected. CBOM will not be generated.
+INFO  EXECUTION SUCCESS
+```
+
+No file is written and the run reports success. Scored as-is, the tool takes a
+zero on every language, and nothing in its output distinguishes that zero from a
+tool that genuinely found nothing. It was reached first on this corpus, on Java
+and on Python, before the cause was found.
+
+`tools/sonar-cryptography-docker.sh` therefore creates a `proofstein-crypto`
+profile per language, activates the Inventory rule in it, sets it as the default,
+and then reads the rule back to confirm activation. A scan against a server
+whose rules are off is refused rather than run, because that scan would succeed
+and report nothing.
+
+Only `Inventory` is activated. The plugin also ships `JavaNoMD5use` and
+`PythonNoMD5use`, which raise issues rather than contributing to the CBOM.
+
+### Java bytecode
+
+Java is scanned without `sonar.java.binaries`, which makes the analyser warn
+about less precise results. The warning was tested rather than assumed:
+`ledger-svc` was compiled in a container, and rescanned with `sonar.java.binaries`
+pointing at `target/classes` and `sonar.java.libraries` at the resolved
+BouncyCastle 1.79 jar.
+
+The result was identical: 27 components and the same 15 distinct
+(algorithm, file) pairs, with no name appearing in one run and not the other. The
+corpus is therefore scanned unbuilt, as the other two generators scan it.
+
+That is a measurement on this corpus, not a general claim about the plugin. A
+project whose cryptography is reached through deeper type inference could well
+differ, and anyone rerunning this should re-measure rather than inherit the
+conclusion.
+
+### What would change the entry
+
+Upstream putting Inventory into Sonar way, or shipping a profile that contains
+it, would make the activation step redundant and this entry historical.

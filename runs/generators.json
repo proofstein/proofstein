@@ -20,7 +20,12 @@
   "",
   "cdxgen is deliberately pinned at 12.8.2 across every run: it is the control,",
   "and holding it still is what makes a score change attributable to the tool",
-  "that moved."
+  "that moved.",
+  "",
+  "sonar-cryptography is a SonarQube plugin, not a binary, so a scan needs a",
+  "server. Boot it once with 'tools/sonar-cryptography-docker.sh up' before a",
+  "run and stop it with 'down' after; the collector does not manage it. See",
+  "docs/pending-review.md entry 13 for why booting also activates rules."
  ],
  "tools": [
   {
@@ -72,6 +77,26 @@
     1
    ],
    "notes": "Exit 1 means findings present, not failure. The binary path comes from PQPROBE_STATIC_BIN; the manifest records what it resolved to and that file's sha256. Maintained by the same party as Proofstein; see the governance section in README.md."
+  },
+  {
+   "name": "sonar-cryptography",
+   "binary": "tools/sonar-cryptography-docker.sh",
+   "package_version": "sonar-cryptography 1.6.1 on sonarqube 26.8.0.126808-community",
+   "version_command": [
+    "tools/sonar-cryptography-docker.sh",
+    "--version"
+   ],
+   "invocation": [
+    "tools/sonar-cryptography-docker.sh",
+    "-o",
+    "{out}",
+    "{project}"
+   ],
+   "output": "file",
+   "accept_exit": [
+    0
+   ],
+   "notes": "PQCA plugin, pinned at 1.6.1 by sha256 and run against a pinned SonarQube image. Reads Java, Python and Go only, so its ceiling on this corpus is the assets in those three languages, not all of them; the per-language table is the informative one. Records file and line in evidence.occurrences[]. Requires the server to be up: see _comment."
   }
  ]
 }
