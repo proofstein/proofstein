@@ -164,5 +164,42 @@ class TestManifestRecordsResolvedPaths(unittest.TestCase):
                 self.assertNotIn(leak, raw, f"{run.name} manifest carries {leak}")
 
 
+class TestRecordedVersionIsPlainText(unittest.TestCase):
+    """A version banner is provenance, so it must survive as readable text.
+
+    cdxgen bolds its banner. Left alone, the escape sequence travels from the
+    version command into the manifest and out into the published results table,
+    where it renders as literal noise wrapped around the version number.
+    """
+
+    def test_ansi_styling_is_stripped(self):
+        spec = {"version_command": [
+            sys.executable, "-c",
+            r"print('\x1b[1mCycloneDX Generator 12.8.2\x1b[0m')",
+        ]}
+        self.assertEqual(collector.tool_version(spec), "CycloneDX Generator 12.8.2")
+
+    def test_plain_output_is_untouched(self):
+        spec = {"version_command": [sys.executable, "-c", "print('PQProbe Static v3.6.0')"]}
+        self.assertEqual(collector.tool_version(spec), "PQProbe Static v3.6.0")
+
+    def test_shipped_manifests_carry_no_escapes(self):
+        """Checked against parsed values, not the file text.
+
+        json.dump writes the escape as the six characters \\u001b, so searching
+        the raw text for a real ESC byte passes on a manifest that carries one.
+        """
+        for run in sorted((REPO_ROOT / "runs").glob("*-*")):
+            manifest = run / "manifest.json"
+            if not manifest.is_file():
+                continue
+            tools = json.loads(manifest.read_text())["tools"]
+            for name, entry in tools.items():
+                self.assertNotIn(
+                    "\x1b", str(entry.get("version", "")),
+                    f"{run.name}: {name} version carries terminal styling",
+                )
+
+
 if __name__ == "__main__":
     unittest.main()

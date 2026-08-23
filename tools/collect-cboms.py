@@ -154,6 +154,13 @@ def load_projects(ground_truth_dir: Path) -> list[dict]:
     return documents
 
 
+#: Terminal styling in a version banner. A generator that colours its output
+#: writes these whether or not anything is attached to read them, and the escape
+#: sequence then travels through the manifest into the published results table,
+#: where it renders as literal noise around the version.
+ANSI_ESCAPE = re.compile(r"\x1b\[[0-9;]*[A-Za-z]")
+
+
 def tool_version(spec: dict) -> str:
     command = spec.get("version_command")
     if not command:
@@ -162,7 +169,7 @@ def tool_version(spec: dict) -> str:
         result = subprocess.run(command, capture_output=True, text=True, timeout=120)
     except (OSError, subprocess.SubprocessError) as exc:
         return f"unavailable ({exc})"
-    text = (result.stdout or result.stderr or "").strip()
+    text = ANSI_ESCAPE.sub("", (result.stdout or result.stderr or "")).strip()
     return text.splitlines()[0] if text else "unknown"
 
 
