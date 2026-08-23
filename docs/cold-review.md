@@ -234,8 +234,8 @@ are not copyrightable expression; no implementation was copied.
 `deploy/jvm.options` has an extension that was not in the comment-style table,
 so the generator copied it through untouched, **including its `@PS`
 annotations**, which name the algorithm and layer of each planted asset. Two
-assets shipped with their answers inline. An LLM-based generator reads comments;
-this would have handed it the answer key for those assets.
+assets shipped with their answers inline. Any generator that reads comments
+would have been handed the answer key for those assets.
 
 **Fix:** two parts. The extension was added, and, more importantly,
 `build-corpus.py` now refuses to write any file where the marker survived

@@ -10,8 +10,8 @@ cryptographic asset planted on that line::
 Annotations are always trailing, never on their own line, so that stripping them
 cannot shift any line number.  The corpus that tools actually see is emitted by
 ``tools/build-corpus.py`` with every annotation removed, which keeps hints out of
-reach of tools that read comments (an LLM-based generator would otherwise be
-handed the answer key).
+reach of tools that read comments (any generator that reads prose in the file
+would otherwise be handed the answer key).
 
 Field order is ``id|algorithm|layer|asset_type[|note]``.
 

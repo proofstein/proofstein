@@ -80,7 +80,8 @@ def build_project(project_dir: Path, out_dir: Path) -> list[dict]:
 
         # Safety net. A template whose extension has no comment style mapped is
         # copied through untouched, which would ship the answer key inside the
-        # corpus -- an LLM-based generator reads comments. Fail loudly instead.
+        # corpus, in reach of any generator that reads comments. Fail loudly
+        # instead.
         if MARKER in clean:
             raise AnnotationError(
                 f"{rel.as_posix()}: {MARKER} survived into the emitted corpus. "

@@ -95,7 +95,7 @@ tools are measured against the same programs. The run's own README explains this
 at more length.
 
 The same three tools were also run over a scrambled copy of the six programs,
-to check they were finding cryptography rather than remembering these
+to check they were finding cryptography rather than being tuned to these
 particular files. Those results are in
 [`runs/2026-08-23T1519Z-holdout/`](runs/2026-08-23T1519Z-holdout/).
 
