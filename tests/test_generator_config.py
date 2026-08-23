@@ -13,6 +13,7 @@ from __future__ import annotations
 import importlib.util
 import json
 import os
+import re
 import subprocess
 import sys
 import unittest
@@ -155,13 +156,20 @@ class TestManifestRecordsResolvedPaths(unittest.TestCase):
         self.assertRegex(entry["binary_sha256"] or "", r"^[0-9a-f]{64}$")
 
     def test_manifest_carries_no_machine_paths(self):
+        """Any absolute path, not a list of prefixes seen before.
+
+        The prefix list this replaced named /home/, /mnt/ and /tmp/claude, and
+        so read clean on a manifest whose version label embedded a build root
+        under a fourth directory. A leak the check has not met yet is the only
+        kind worth writing the check for.
+        """
+        machine_path = re.compile(r"(?<![\w:/])/(?:[A-Za-z0-9_.+-]+/)+[A-Za-z0-9_.+-]+")
         for run in sorted((REPO_ROOT / "runs").glob("*-*")):
             manifest = run / "manifest.json"
             if not manifest.is_file():
                 continue
-            raw = manifest.read_text()
-            for leak in ("/home/", "/mnt/", "/tmp/claude"):
-                self.assertNotIn(leak, raw, f"{run.name} manifest carries {leak}")
+            found = sorted(set(machine_path.findall(manifest.read_text())))
+            self.assertEqual(found, [], f"{run.name} manifest carries machine paths: {found}")
 
 
 class TestRecordedVersionIsPlainText(unittest.TestCase):

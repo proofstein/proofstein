@@ -417,10 +417,23 @@ def resolve_repo_paths(specs):
 _SCRATCH = re.compile(r"^.*/(?=[^/]+$)")
 
 
+#: An absolute path sitting inside a longer string, such as the version label
+#: "pqprobe-static @ /build/root/bin/tool". Normalising only strings that *are*
+#: paths misses these, and they carry the scanning machine's directory layout
+#: into a published manifest just as effectively.
+#:
+#: The lookbehind keeps URLs intact: in "http://host:9000/api/x" the "/api"
+#: follows a word character, so it is not treated as a filesystem path. Only a
+#: slash at a word boundary starts a match.
+EMBEDDED_ABSOLUTE_PATH = re.compile(r"(?<![\w:/])/(?:[A-Za-z0-9_.+-]+/)+[A-Za-z0-9_.+-]+")
+
+
 def record_paths_deep(value):
     """Apply record_path through a whole manifest, argv included."""
     if isinstance(value, str):
-        return record_path(value) if value.startswith("/") else value
+        if value.startswith("/"):
+            return record_path(value)
+        return EMBEDDED_ABSOLUTE_PATH.sub(lambda m: record_path(m.group(0)), value)
     if isinstance(value, list):
         return [record_paths_deep(v) for v in value]
     if isinstance(value, dict):
