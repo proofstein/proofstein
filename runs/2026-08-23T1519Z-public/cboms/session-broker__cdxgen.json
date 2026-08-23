@@ -1,0 +1,764 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.7",
+  "serialNumber": "urn:uuid:70e6ca55-4f52-45e2-8a48-5beb236619cf",
+  "version": 2,
+  "metadata": {
+    "timestamp": "2026-08-23T15:20:33Z",
+    "tools": {
+      "components": [
+        {
+          "group": "@cyclonedx",
+          "name": "cdxgen",
+          "version": "12.8.2",
+          "purl": "pkg:npm/%40cyclonedx/cdxgen@12.8.2",
+          "type": "application",
+          "bom-ref": "pkg:npm/@cyclonedx/cdxgen@12.8.2",
+          "publisher": "OWASP Foundation",
+          "authors": [
+            {
+              "name": "OWASP Foundation"
+            }
+          ]
+        }
+      ]
+    },
+    "authors": [
+      {
+        "name": "OWASP Foundation"
+      }
+    ],
+    "lifecycles": [
+      {
+        "phase": "build"
+      }
+    ],
+    "component": {
+      "name": "session-broker",
+      "group": "",
+      "version": "3.1.0",
+      "description": "Issues sealed sessions and signs the tokens that reference them",
+      "purl": "pkg:npm/session-broker@3.1.0",
+      "bom-ref": "pkg:npm/session-broker@3.1.0",
+      "properties": [
+        {
+          "name": "cdx:npm:scripts",
+          "value": "build, start"
+        },
+        {
+          "name": "cdx:npm:buildScripts",
+          "value": "build"
+        },
+        {
+          "name": "cdx:license:category",
+          "value": "Permissive"
+        }
+      ],
+      "type": "application",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "url": "https://opensource.org/licenses/Apache-2.0",
+            "properties": [
+              {
+                "name": "cdx:license:category",
+                "value": "Permissive"
+              },
+              {
+                "name": "cdx:license:foss",
+                "value": "true"
+              },
+              {
+                "name": "cdx:license:osiApproved",
+                "value": "true"
+              },
+              {
+                "name": "cdx:license:fsfLibre",
+                "value": "true"
+              },
+              {
+                "name": "cdx:license:deprecated",
+                "value": "false"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "properties": [
+      {
+        "name": "cdx:bom:componentTypes",
+        "value": "npm"
+      },
+      {
+        "name": "cdx:bom:componentNamespaces",
+        "value": "@noble\\n@types"
+      },
+      {
+        "name": "cdx:bom:componentSrcFiles",
+        "value": "../src/keys/legacy-jwks-cert.pem\\n../src/keys/legacy-jwks-key.pem\\n../src/keys/token-signing-key.pem\\n../src/package-lock.json\\n../src/src/fingerprint.ts\\n../src/src/identity.ts"
+      }
+    ]
+  },
+  "components": [
+    {
+      "group": "@noble",
+      "name": "post-quantum",
+      "version": "0.6.1",
+      "scope": "required",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "fa9a2b9ab0d9c23470d3953c0032b82691de8e8f3bfa005dfa6b91041fe8cf3b47e728432cc0c5e231d058ddcd41002cbb5cc134f5931b4670548d02476f47d0"
+        }
+      ],
+      "purl": "pkg:npm/%40noble/post-quantum@0.6.1",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/@noble/post-quantum/-/post-quantum-0.6.1.tgz"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:npm/@noble/post-quantum@0.6.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "../src/package-lock.json"
+        },
+        {
+          "name": "ResolvedUrl",
+          "value": "https://registry.npmjs.org/@noble/post-quantum/-/post-quantum-0.6.1.tgz"
+        },
+        {
+          "name": "ImportedModules",
+          "value": "@noble/post-quantum/ml-kem.js,ml_kem768,@noble/post-quantum/ml-kem.js/ml_kem768"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "../src/package-lock.json"
+              }
+            ],
+            "concludedValue": "../src/package-lock.json"
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "src/kem.ts"
+          }
+        ]
+      }
+    },
+    {
+      "group": "@noble",
+      "name": "ciphers",
+      "version": "2.2.0",
+      "scope": "required",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "67aa63219ffc2097021b36f64bfd0fc7927cd728a3f39c404ae935b5e2cd7a0ef96df4f4ecc5776bf3b632d9f5236b1ee37937964544705691d7437872041c64"
+        }
+      ],
+      "purl": "pkg:npm/%40noble/ciphers@2.2.0",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/@noble/ciphers/-/ciphers-2.2.0.tgz"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:npm/@noble/ciphers@2.2.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "../src/package-lock.json"
+        },
+        {
+          "name": "ResolvedUrl",
+          "value": "https://registry.npmjs.org/@noble/ciphers/-/ciphers-2.2.0.tgz"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "../src/package-lock.json"
+              }
+            ],
+            "concludedValue": "../src/package-lock.json"
+          }
+        ]
+      }
+    },
+    {
+      "group": "@noble",
+      "name": "curves",
+      "version": "2.2.0",
+      "scope": "required",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "4ff0681e01578ab6f410d48f06abb35f4adc8d778ce8ba3cf766b68e560992a93cdcba99c7497539fec3ce5289ea3929bccae41d29c07206f925e80bf1278891"
+        }
+      ],
+      "purl": "pkg:npm/%40noble/curves@2.2.0",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/@noble/curves/-/curves-2.2.0.tgz"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:npm/@noble/curves@2.2.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "../src/package-lock.json"
+        },
+        {
+          "name": "ResolvedUrl",
+          "value": "https://registry.npmjs.org/@noble/curves/-/curves-2.2.0.tgz"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "../src/package-lock.json"
+              }
+            ],
+            "concludedValue": "../src/package-lock.json"
+          }
+        ]
+      }
+    },
+    {
+      "group": "@noble",
+      "name": "hashes",
+      "version": "2.2.0",
+      "scope": "required",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "218a831a24d769be859e20209d2759c2059ba26c69cbd16d62f2cab3bc0252cd9af119084c6f831463b50ccf5cafe137fd18000d1a458eb295689d73eac8ed12"
+        }
+      ],
+      "purl": "pkg:npm/%40noble/hashes@2.2.0",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/@noble/hashes/-/hashes-2.2.0.tgz"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:npm/@noble/hashes@2.2.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "../src/package-lock.json"
+        },
+        {
+          "name": "ResolvedUrl",
+          "value": "https://registry.npmjs.org/@noble/hashes/-/hashes-2.2.0.tgz"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "../src/package-lock.json"
+              }
+            ],
+            "concludedValue": "../src/package-lock.json"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "node-forge",
+      "version": "1.3.1",
+      "scope": "optional",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "74f12d39e32f17d54c71857fd566fc08fa15017b69e8c28c95c6c0b7875daa61aa509e9f41915790d64d90d95f7afb4d906b5a4a85dffef34d352be0add5f0b4"
+        }
+      ],
+      "purl": "pkg:npm/node-forge@1.3.1",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/node-forge/-/node-forge-1.3.1.tgz"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:npm/node-forge@1.3.1",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "../src/package-lock.json"
+        },
+        {
+          "name": "ResolvedUrl",
+          "value": "https://registry.npmjs.org/node-forge/-/node-forge-1.3.1.tgz"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "../src/package-lock.json"
+              }
+            ],
+            "concludedValue": "../src/package-lock.json"
+          }
+        ]
+      }
+    },
+    {
+      "group": "@types",
+      "name": "node",
+      "version": "22.10.2",
+      "scope": "excluded",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "5f1afa04144200e422c6fa273b27b5f709f3c83894b537aa95d38e9a3dc291e6e5a276dc700d763c5c25b9fbd176ba635f1aa799469e894e44380fbbb3976251"
+        }
+      ],
+      "purl": "pkg:npm/%40types/node@22.10.2",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/@types/node/-/node-22.10.2.tgz"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:npm/@types/node@22.10.2",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "../src/package-lock.json"
+        },
+        {
+          "name": "cdx:npm:package:development",
+          "value": "true"
+        },
+        {
+          "name": "ResolvedUrl",
+          "value": "https://registry.npmjs.org/@types/node/-/node-22.10.2.tgz"
+        },
+        {
+          "name": "LocalNodeModulesPath",
+          "value": "node_modules/@types/node"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "../src/package-lock.json"
+              }
+            ],
+            "concludedValue": "../src/package-lock.json"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "undici-types",
+      "version": "6.20.0",
+      "scope": "optional",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "372e90676363bb6d2fc354911dedddf6356eea027ee1edfe30ca6abbba6a1391d3e96b134a571efbe19098ae545d2f26cd5f034981eb407f97adfda355cb8a36"
+        }
+      ],
+      "purl": "pkg:npm/undici-types@6.20.0",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/undici-types/-/undici-types-6.20.0.tgz"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:npm/undici-types@6.20.0",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "../src/package-lock.json"
+        },
+        {
+          "name": "cdx:npm:package:development",
+          "value": "true"
+        },
+        {
+          "name": "ResolvedUrl",
+          "value": "https://registry.npmjs.org/undici-types/-/undici-types-6.20.0.tgz"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "../src/package-lock.json"
+              }
+            ],
+            "concludedValue": "../src/package-lock.json"
+          }
+        ]
+      }
+    },
+    {
+      "group": "",
+      "name": "typescript",
+      "version": "5.7.2",
+      "scope": "optional",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "8b9b7ae911f10ef54de341df0ddd4fb044e118d9e5302313de3314ba887dff44daa967af3689ed69cba75b2374d8b03dfdf21b11695c1d97204ca6fd42868b7e"
+        }
+      ],
+      "purl": "pkg:npm/typescript@5.7.2",
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://registry.npmjs.org/typescript/-/typescript-5.7.2.tgz"
+        }
+      ],
+      "type": "library",
+      "bom-ref": "pkg:npm/typescript@5.7.2",
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "../src/package-lock.json"
+        },
+        {
+          "name": "cdx:npm:package:development",
+          "value": "true"
+        },
+        {
+          "name": "ResolvedUrl",
+          "value": "https://registry.npmjs.org/typescript/-/typescript-5.7.2.tgz"
+        },
+        {
+          "name": "cdx:npm:binPaths",
+          "value": "/src/node_modules/.bin/tsc, /src/node_modules/.bin/tsserver"
+        },
+        {
+          "name": "cdx:npm:bin",
+          "value": "tsc, tsserver"
+        },
+        {
+          "name": "cdx:npm:has_binary",
+          "value": "true"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 1,
+                "value": "../src/package-lock.json"
+              }
+            ],
+            "concludedValue": "../src/package-lock.json"
+          }
+        ]
+      }
+    },
+    {
+      "name": "token-signing-key.pem",
+      "type": "cryptographic-asset",
+      "version": "9e7df09973476e6ae1c96e713cf258cbe8a779863f6e0ae11f463baf5561f086",
+      "bom-ref": "crypto/certificate/token-signing-key.pem@sha256:9e7df09973476e6ae1c96e713cf258cbe8a779863f6e0ae11f463baf5561f086",
+      "cryptoProperties": {
+        "assetType": "certificate",
+        "algorithmProperties": {
+          "executionEnvironment": "unknown",
+          "implementationPlatform": "unknown"
+        }
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "../src/keys/token-signing-key.pem"
+        }
+      ],
+      "tags": [
+        "cryptographic-asset"
+      ]
+    },
+    {
+      "name": "legacy-jwks-key.pem",
+      "type": "cryptographic-asset",
+      "version": "22248ac5ace495daaaf823c9a4a7e083b4f80fa3f14ff2291e3f88026cba09b9",
+      "bom-ref": "crypto/certificate/legacy-jwks-key.pem@sha256:22248ac5ace495daaaf823c9a4a7e083b4f80fa3f14ff2291e3f88026cba09b9",
+      "cryptoProperties": {
+        "assetType": "certificate",
+        "algorithmProperties": {
+          "executionEnvironment": "unknown",
+          "implementationPlatform": "unknown"
+        }
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "../src/keys/legacy-jwks-key.pem"
+        }
+      ],
+      "tags": [
+        "cryptographic-asset"
+      ]
+    },
+    {
+      "name": "legacy-jwks-cert.pem",
+      "type": "cryptographic-asset",
+      "version": "47d651ae2b0abd28befb5dcef048a8724c555855212aca457d7d4726a99c2e11",
+      "bom-ref": "crypto/certificate/legacy-jwks-cert.pem@sha256:47d651ae2b0abd28befb5dcef048a8724c555855212aca457d7d4726a99c2e11",
+      "cryptoProperties": {
+        "assetType": "certificate",
+        "algorithmProperties": {
+          "executionEnvironment": "unknown",
+          "implementationPlatform": "unknown"
+        }
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "../src/keys/legacy-jwks-cert.pem"
+        }
+      ],
+      "tags": [
+        "cryptographic-asset"
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "name": "ed25519",
+      "bom-ref": "crypto/algorithm/ed25519@1.3.101.112",
+      "description": "EdDSA 25519 signature algorithm",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "oid": "1.3.101.112"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "../src/src/identity.ts"
+        },
+        {
+          "name": "cdx:crypto:primitive",
+          "value": "key-generation"
+        },
+        {
+          "name": "cdx:crypto:sourceType",
+          "value": "js-ast:node:crypto.generateKeyPairSync"
+        },
+        {
+          "name": "cdx:crypto:sourceLocation",
+          "value": "src/identity.ts:19:23"
+        }
+      ],
+      "tags": [
+        "cryptographic-asset"
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "name": "rsa",
+      "bom-ref": "crypto/algorithm/rsa@2.5.8.1.1",
+      "description": "X.500 algorithms.  Ambiguous, since no padding rules specified",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "oid": "2.5.8.1.1"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "../src/src/identity.ts"
+        },
+        {
+          "name": "cdx:crypto:primitive",
+          "value": "key-generation"
+        },
+        {
+          "name": "cdx:crypto:sourceType",
+          "value": "js-ast:node:crypto.generateKeyPairSync"
+        },
+        {
+          "name": "cdx:crypto:sourceLocation",
+          "value": "src/identity.ts:20:21"
+        }
+      ],
+      "tags": [
+        "cryptographic-asset"
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "name": "sha-256",
+      "bom-ref": "crypto/algorithm/sha-256@2.16.840.1.101.3.4.2.1",
+      "description": "NIST Algorithm",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "oid": "2.16.840.1.101.3.4.2.1"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "../src/src/fingerprint.ts"
+        },
+        {
+          "name": "cdx:crypto:primitive",
+          "value": "hash"
+        },
+        {
+          "name": "cdx:crypto:sourceType",
+          "value": "js-ast:node:crypto.createHash"
+        },
+        {
+          "name": "cdx:crypto:sourceLocation",
+          "value": "src/fingerprint.ts:14:14"
+        },
+        {
+          "name": "SrcFile",
+          "value": "../src/src/identity.ts"
+        },
+        {
+          "name": "cdx:crypto:sourceLocation",
+          "value": "src/identity.ts:33:9"
+        }
+      ],
+      "tags": [
+        "cryptographic-asset"
+      ]
+    }
+  ],
+  "services": [],
+  "dependencies": [
+    {
+      "ref": "pkg:npm/@noble/ciphers@2.2.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/@noble/hashes@2.2.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/@noble/curves@2.2.0",
+      "dependsOn": [
+        "pkg:npm/@noble/hashes@2.2.0"
+      ]
+    },
+    {
+      "ref": "pkg:npm/@noble/post-quantum@0.6.1",
+      "dependsOn": [
+        "pkg:npm/@noble/ciphers@2.2.0",
+        "pkg:npm/@noble/curves@2.2.0",
+        "pkg:npm/@noble/hashes@2.2.0"
+      ]
+    },
+    {
+      "ref": "pkg:npm/node-forge@1.3.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/undici-types@6.20.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/@types/node@22.10.2",
+      "dependsOn": [
+        "pkg:npm/undici-types@6.20.0"
+      ]
+    },
+    {
+      "ref": "pkg:npm/typescript@5.7.2",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/session-broker@3.1.0",
+      "dependsOn": [
+        "pkg:npm/@noble/post-quantum@0.6.1",
+        "pkg:npm/@types/node@22.10.2",
+        "pkg:npm/node-forge@1.3.1",
+        "pkg:npm/typescript@5.7.2"
+      ]
+    }
+  ],
+  "annotations": [
+    {
+      "bom-ref": "metadata-annotations",
+      "subjects": [
+        "pkg:npm/session-broker@3.1.0"
+      ],
+      "annotator": {
+        "component": {
+          "group": "@cyclonedx",
+          "name": "cdxgen",
+          "version": "12.8.2",
+          "purl": "pkg:npm/%40cyclonedx/cdxgen@12.8.2",
+          "type": "application",
+          "bom-ref": "pkg:npm/@cyclonedx/cdxgen@12.8.2",
+          "publisher": "OWASP Foundation",
+          "authors": [
+            {
+              "name": "OWASP Foundation"
+            }
+          ]
+        }
+      },
+      "timestamp": "2026-08-23T15:20:33Z",
+      "text": "This Cryptography Bill-of-Materials (CBOM) document was created on Sunday, August 23, 2026 with cdxgen. The data was captured during the build lifecycle phase. The document describes an application named 'session-broker' with version '3.1.0'. There are 6 cryptographic assets listed under components in this CBOM. There are 14 components. The package type in this CBOM is npm with 2 purl namespaces described under components. The components were identified from 6 source files."
+    }
+  ]
+}
