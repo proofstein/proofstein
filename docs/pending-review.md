@@ -331,7 +331,7 @@ Three decisions. The third is open.
    project. That is still a real measurement of robustness to layout, naming and
    line-number changes, because the transforms were applied whether or not their
    derivation was later published. What it cannot support is the claim the
-   holdout exists to support (that the tool did not learn *this* corpus)
+   holdout exists to support (that the tool is not tuned to *this* corpus)
    because a tool author with the seed could regenerate the variants.
 
    The 2026-08-01 run's position is that the 2026-07-28 run's holdout is **excluded from cross-run

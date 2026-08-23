@@ -4,9 +4,9 @@
 """Generate holdout variants of the corpus from the same templates.
 
 The public corpus is, by construction, something a vendor can tune against: the
-files are published, so are the answers. A tool that improves on it may have
-learned to find cryptography, or may have learned to find *this* cryptography.
-The holdout separates those two.
+files are published, so are the answers. A tool that improves on it may have got
+better at finding cryptography, or may have been tuned to find *this*
+cryptography. The holdout separates those two.
 
 Variants are produced by transforms that change the surface a tool matches on
 while leaving the cryptography identical:

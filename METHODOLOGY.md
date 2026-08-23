@@ -306,8 +306,8 @@ approving everything.
 The public corpus is in the repository: the projects, the plants and the answers
 are all published. That is what makes it useful as a development target and what
 makes it, over time, a poor measure of generalisation. A tool that improves on
-it may have learned to find cryptography, or may have learned to find *this*
-cryptography.
+it may have got better at finding cryptography, or may have been tuned to find
+*this* cryptography.
 
 The holdout is generated from the same templates by transforms that change the
 surface a tool matches on while leaving the cryptography identical:
