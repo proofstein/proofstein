@@ -75,9 +75,10 @@ Evidence is read from a fixed set of shapes, applied to **every** tool:
 
 The second shape exists because cdxgen records the source file in
 `properties[].SrcFile` and emits no line number
-(observed in BF-CBOM's `tests/bisq_cdxgen.json`). Reading only the spec shape
-would score that generator at zero for a reason unrelated to whether it found
-the asset. Reading both, for everyone, measures the thing intended.
+(observed in BF-CBOM's own `tests/bisq_cdxgen.json`, not a fixture here).
+Reading only the spec shape would score that generator at zero for a reason
+unrelated to whether it found the asset. Reading both, for everyone, measures
+the thing intended.
 
 A generator supplying a file but no line still cannot be credited with a
 detection, because there is nothing to check. That outcome is visible in two
