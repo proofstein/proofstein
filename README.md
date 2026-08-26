@@ -22,8 +22,14 @@ compile.
 **1. Installation and Setup.**
 
 ```bash
-pip install -r requirements.txt
+python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 ```
+
+Most current Linux distributions refuse a plain `pip install` outside a
+virtual environment, so the two steps are given together. If you would rather
+activate the environment, `source .venv/bin/activate` and then `pip install -r
+requirements.txt` does the same thing, and every `.venv/bin/python` below
+becomes plain `python`.
 
 **2. Run your tool over each of the six programs**, saving one CycloneDX 1.6
 CBOM file per program:
@@ -43,7 +49,7 @@ two underscores in the middle. For example: `sealbox__mytool.json`.
 **3. Scoring.**
 
 ```bash
-./score.py --cboms my-cboms/ --out my-results/
+.venv/bin/python score.py --cboms my-cboms/ --out my-results/
 ```
 
 You get `my-results/results.md`. It shows four things:
@@ -83,7 +89,7 @@ sonar-cryptography 1.6.1, with their output files and their scores. You can
 re-score it yourself and check you get the same numbers:
 
 ```bash
-./score.py --cboms runs/2026-08-23T1519Z-public/cboms --out /tmp/proofstein
+.venv/bin/python score.py --cboms runs/2026-08-23T1519Z-public/cboms --out /tmp/proofstein
 diff <(grep -A5 'by language' /tmp/proofstein/results.md) <(grep -A5 'by language' runs/2026-08-23T1519Z-public/results/results.md)
 ```
 
@@ -99,7 +105,7 @@ to check they were finding cryptography rather than being tuned to these
 particular files. Those results are in
 [`runs/2026-08-23T1519Z-holdout/`](runs/2026-08-23T1519Z-holdout/).
 
-To run the tests: `python3 -m unittest discover -s tests`.
+To run the tests: `.venv/bin/python -m unittest discover -s tests`.
 
 ## More detail
 
