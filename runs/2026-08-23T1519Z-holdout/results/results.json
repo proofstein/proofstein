@@ -23,7 +23,7 @@
       "manifest": "runs/2026-08-23T1519Z-holdout/manifest.json",
       "started_utc": "2026-08-23T15:21:19Z",
       "corpus_commit": "49c979d3e8a3b0f7ef063ea89d61cea5c30ea889",
-      "corpus_tree_dirty": true,
+      "corpus_tree_dirty": false,
       "attempted": 12,
       "succeeded": 12,
       "tool_versions": {

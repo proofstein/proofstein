@@ -1,0 +1,230 @@
+{
+  "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:0b80d891-50db-44c9-a603-0b5435ff0695",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-10-07T21:23:52+02:00",
+    "tools": {
+      "services": [
+        {
+          "provider": {
+            "name": "PQCA"
+          },
+          "name": "cbomkit-theia",
+          "version": "edge",
+          "services": [
+            {
+              "name": "Certificate File Plugin"
+            },
+            {
+              "name": "Secret Detection Plugin"
+            },
+            {
+              "name": "OpenSSL Config Plugin"
+            },
+            {
+              "name": "Problematic CA Detection Plugin"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "bom-ref": "640f330d-bc23-4ea2-a178-bd6882a929a1",
+      "type": "cryptographic-asset",
+      "name": "RSA",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "keys/provisioning-cert.pem"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "cryptoFunctions": [
+            "sign"
+          ]
+        },
+        "oid": "1.2.840.113549.1.1.1"
+      }
+    },
+    {
+      "bom-ref": "1f97ce7d-1c0c-452c-938b-bf39b98f53d1",
+      "type": "cryptographic-asset",
+      "name": "SHA256",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "keys/provisioning-cert.pem"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash",
+          "parameterSetIdentifier": "256",
+          "cryptoFunctions": [
+            "digest"
+          ]
+        }
+      }
+    },
+    {
+      "bom-ref": "072d9dbd-1199-4fb6-a820-ba2b6dc66992",
+      "type": "cryptographic-asset",
+      "name": "SHA256-RSA",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "keys/provisioning-cert.pem"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "parameterSetIdentifier": "256",
+          "padding": "pkcs1v15",
+          "cryptoFunctions": [
+            "sign"
+          ]
+        },
+        "oid": "1.2.840.113549.1.1.11"
+      }
+    },
+    {
+      "bom-ref": "308dcd67-62b8-49b2-9707-69d801c445a9",
+      "type": "cryptographic-asset",
+      "name": "RSA",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "keys/provisioning-cert.pem"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "pke",
+          "cryptoFunctions": [
+            "encapsulate",
+            "decapsulate",
+            "sign"
+          ]
+        },
+        "oid": "1.2.840.113549.1.1.1"
+      }
+    },
+    {
+      "bom-ref": "6f066d7a-c0fe-461b-9580-df275adb1aa5",
+      "type": "cryptographic-asset",
+      "name": "RSA-2048",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "keys/provisioning-cert.pem"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "related-crypto-material",
+        "relatedCryptoMaterialProperties": {
+          "type": "public-key",
+          "algorithmRef": "308dcd67-62b8-49b2-9707-69d801c445a9",
+          "value": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmxAgjbrfSMDv0IFGOw5N/vDl5ro1pGQUIgEyToSrzDiGWGw6seDqjnxDc/HcDJyEEiUaTaHZCyi4T+WEWoELMNIWPvUlxnSsJv01NrkAQ64xjTClNmSxORQ7wvn6hglnuhYMbI2ZYA0IaHwxBSQ2ekf8RGqW2XNCEWpvkqk0gheAye3wJwiRCYChvzmU/f/3DtXfvcvq1lLmcbgnRvaLUZ3bdGs7I2FVXI3no9UbrrFev/3TzJk6hGuyIwHK8nZgF3cXleCU9UXNAS6xVHTjsNKsrwvIO27ft7ZOGPpcrzcTQaIQ6qn8Ke1uaPPAoWGsOtKMA/BtxFXvSq60QCnLhwIDAQAB",
+          "size": 2048,
+          "format": "PEM"
+        },
+        "oid": "1.2.840.113549.1.1.1"
+      }
+    },
+    {
+      "bom-ref": "8e8ac275-d53a-40c8-8d0c-d28c8e44a104",
+      "type": "cryptographic-asset",
+      "name": "field-0417",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "keys/provisioning-cert.pem"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "certificate",
+        "certificateProperties": {
+          "subjectName": "field-0417",
+          "issuerName": "field-0417",
+          "notValidBefore": "2026-07-27T14:51:21Z",
+          "notValidAfter": "2036-07-24T14:51:21Z",
+          "signatureAlgorithmRef": "072d9dbd-1199-4fb6-a820-ba2b6dc66992",
+          "subjectPublicKeyRef": "6f066d7a-c0fe-461b-9580-df275adb1aa5",
+          "certificateFormat": "X.509",
+          "certificateExtension": "pem"
+        }
+      }
+    },
+    {
+      "bom-ref": "a2259f04-09d2-4ae0-b540-6f64515a3ad1",
+      "type": "cryptographic-asset",
+      "name": "RSA-2048",
+      "description": "Identified a Private Key, which may compromise cryptographic security and sensitive data encryption.",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "keys/provisioning-key.pem",
+            "line": 0
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "related-crypto-material",
+        "relatedCryptoMaterialProperties": {
+          "type": "private-key",
+          "size": 2048,
+          "format": "PEM"
+        },
+        "oid": "1.2.840.113549.1.1.1"
+      }
+    },
+    {
+      "bom-ref": "4d522af3-f4b2-4d45-a586-2f8cef5f3fd0",
+      "type": "cryptographic-asset",
+      "name": "ED25519",
+      "description": "Identified a Private Key, which may compromise cryptographic security and sensitive data encryption.",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "keys/report-signing-key.pem",
+            "line": 0
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "related-crypto-material",
+        "relatedCryptoMaterialProperties": {
+          "type": "private-key",
+          "format": "PEM"
+        }
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "072d9dbd-1199-4fb6-a820-ba2b6dc66992",
+      "dependsOn": [
+        "640f330d-bc23-4ea2-a178-bd6882a929a1",
+        "1f97ce7d-1c0c-452c-938b-bf39b98f53d1"
+      ]
+    }
+  ]
+}

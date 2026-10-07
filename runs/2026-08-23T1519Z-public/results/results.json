@@ -48,6 +48,36 @@
           "sha256_16": "637f0e9d5f2cf137"
         },
         "family_markers": {
+          "entries": 43,
+          "sha256_16": "e4639e0dd1414815"
+        },
+        "whole_token_only": {
+          "entries": 7,
+          "sha256_16": "88a20cf6715e9c84"
+        },
+        "known_unplanted": {
+          "entries": 15,
+          "sha256_16": "3a7fca80174e0cdd"
+        }
+      },
+      "judgement_tables_collected": {
+        "oid_algorithms": {
+          "entries": 27,
+          "sha256_16": "031a3c27915e6dde"
+        },
+        "location_property_names": {
+          "entries": 8,
+          "sha256_16": "0b8c15cc33ce242a"
+        },
+        "line_property_names": {
+          "entries": 5,
+          "sha256_16": "ed438ed351a5b930"
+        },
+        "token_aliases": {
+          "entries": 32,
+          "sha256_16": "637f0e9d5f2cf137"
+        },
+        "family_markers": {
           "entries": 37,
           "sha256_16": "2aef68bf8064cccc"
         },
@@ -112,13 +142,13 @@
       "detected": 119,
       "total": 124,
       "detection_rate": 0.9597,
-      "precision": 0.7193,
-      "claim_precision": 0.6098,
-      "matched_components": 82,
+      "precision": 0.7281,
+      "claim_precision": 0.6146,
+      "matched_components": 83,
       "reported_components": 114,
-      "credited_claims": 125,
+      "credited_claims": 126,
       "total_claims": 205,
-      "false_positives": 0,
+      "false_positives": 1,
       "by_layer": {
         "1": {
           "detected": 44,
@@ -1107,10 +1137,10 @@
       "detected": 24,
       "total": 25,
       "detection_rate": 0.96,
-      "precision": 0.68,
-      "claim_precision": 0.5682,
-      "matched_components": 17,
-      "credited_claims": 25,
+      "precision": 0.72,
+      "claim_precision": 0.5909,
+      "matched_components": 18,
+      "credited_claims": 26,
       "by_layer": {
         "1": {
           "detected": 10,
@@ -2357,9 +2387,9 @@
           "total": 3
         }
       },
-      "false_positives": 0,
+      "false_positives": 1,
       "phantom_location": 0,
-      "phantom_algorithm": 0,
+      "phantom_algorithm": 1,
       "unmatched_reports": 0,
       "evidence": {
         "crypto_components": 16,

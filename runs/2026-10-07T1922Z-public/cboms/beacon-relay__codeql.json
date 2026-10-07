@@ -1,0 +1,17 @@
+{
+ "bomFormat": "CycloneDX",
+ "specVersion": "1.6",
+ "version": 1,
+ "metadata": {
+  "tools": {
+   "components": [
+    {
+     "type": "application",
+     "name": "codeql",
+     "version": "2.27.1"
+    }
+   ]
+  }
+ },
+ "components": []
+}
