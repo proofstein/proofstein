@@ -32,6 +32,10 @@ already taken and the evidence for it.
 | 10 | OPEN | XMSS and LMS plants: build route |
 | 11 | OPEN | LMS negative case: placement and instrument |
 | 12 | OPEN | ML-DSA, SLH-DSA and Falcon plants |
+| 13 | OPEN | Activating sonar-cryptography's rules before scoring it |
+| 14 | CLOSED | Post-quantum signature families |
+| 15 | CLOSED | Negative cases can charge |
+| 16 | CLOSED | A mode name alone does not credit a cipher |
 
 Entries 9 and 11 raise the same question and should be reviewed together.
 
@@ -761,3 +765,15 @@ conclusion.
 
 Upstream putting Inventory into Sonar way, or shipping a profile that contains
 it, would make the activation step redundant and this entry historical.
+
+## 14. Post-quantum signature families (CLOSED, 2026-10-07)
+
+SLH-DSA (markers `SLHDSA`, `SPHINCS`), Falcon (`FALCON`, `FNDSA`), LMS and XMSS are families of their own and DSA is claimed only by DSA itself, which on the 2026-08-23 public run leaves every tool's recall unchanged, charges `pqprobe-static` one false positive (`Falcon-512` at `session-broker/src/attest.ts:41`, a configuration value for a scheme the project does not implement) and credits it one more claim, and matches one more sonar-cryptography component.
+
+## 15. Negative cases can charge (CLOSED, 2026-10-07)
+
+A report naming a family that a project does not plant is a phantom algorithm wherever it appears, so the negative cases of entries 9 and 11 charge any generator that reports Falcon, FN-DSA or LMS in them; no published run reports anything in either file.
+
+## 16. A mode name alone does not credit a cipher (CLOSED, 2026-10-07)
+
+A report naming no family whose only overlap with a plant is a mode or construction qualifier (`GCM`, `CBC` and the rest of `_CIPHER_QUALIFIERS`) does not credit it, which changes no published run.

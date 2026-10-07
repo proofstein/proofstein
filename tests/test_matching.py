@@ -131,6 +131,47 @@ class TestFamilyMarkersAreAnchored(unittest.TestCase):
         self.assertIn("DSA", families(normalize_tokens("DSA")))
         self.assertFalse(algorithms_compatible("DSA-2048", "ECDSA-P256"))
 
+    def test_post_quantum_signature_families_are_distinct(self):
+        """ML-DSA, SLH-DSA, FN-DSA and DSA share a suffix, not a family (entry 14)."""
+        self.assertEqual(families(normalize_tokens("ML-DSA-65")), {"MLDSA"})
+        self.assertEqual(families(normalize_tokens("SLH-DSA")), {"SLHDSA"})
+        self.assertEqual(families(normalize_tokens("SPHINCS+")), {"SLHDSA"})
+        self.assertEqual(families(normalize_tokens("FN-DSA")), {"FALCON"})
+        self.assertEqual(families(normalize_tokens("Falcon-1024")), {"FALCON"})
+        self.assertEqual(families(normalize_tokens("DSA-2048")), {"DSA"})
+        for left, right in [
+            ("ML-DSA", "DSA"),
+            ("SLH-DSA", "DSA"),
+            ("ML-DSA", "SLH-DSA"),
+            ("ML-DSA", "FN-DSA"),
+            ("SLH-DSA", "FN-DSA"),
+            ("Falcon-1024", "DSA"),
+            ("Falcon-1024", "Falcon-512"),
+        ]:
+            with self.subTest(left=left, right=right):
+                self.assertFalse(algorithms_compatible(left, right))
+                self.assertFalse(algorithms_compatible(right, left))
+        self.assertTrue(algorithms_compatible("Falcon-1024", "FN-DSA"))
+        self.assertTrue(algorithms_compatible("Falcon-512", "falcon512"))
+
+    def test_stateful_hash_signatures_are_families(self):
+        """LMS and XMSS are families (entry 14)."""
+        for name in ("LMS", "lms_sha256_n32_h10", "LMSigParameters", "wc_LmsKey_SetLmsParm"):
+            with self.subTest(name=name):
+                self.assertIn("LMS", families(normalize_tokens(name)))
+        for name in ("XMSS", "XMSS-SHA2_10_256"):
+            with self.subTest(name=name):
+                self.assertIn("XMSS", families(normalize_tokens(name)))
+        self.assertNotIn("LMS", families(normalize_tokens("helms")))
+        self.assertFalse(algorithms_compatible("LMS", "XMSS"))
+
+    def test_a_mode_alone_does_not_identify_a_cipher(self):
+        """A report sharing only a mode with the plant does not find it (entry 16)."""
+        self.assertFalse(algorithms_compatible("AES-256-GCM", "gcm-detection"))
+        self.assertFalse(algorithms_compatible("AES-256-GCM", "GCM"))
+        self.assertTrue(algorithms_compatible("AES-256-GCM", "AES"))
+        self.assertTrue(algorithms_compatible("AES-256-GCM", "AES/GCM/NoPadding"))
+
     def test_dictionary_families_are_never_markers(self):
         """The whole-token-only families must have no substring path at all.
 

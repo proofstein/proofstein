@@ -113,6 +113,13 @@ _FAMILIES = (
     "X25519",
     "MLKEM",
     "MLDSA",
+    # The stateless and stateful post-quantum signature schemes are families of
+    # their own, distinct from one another and from DSA, which they share a
+    # suffix with. See docs/pending-review.md entry 14.
+    "SLHDSA",
+    "FALCON",
+    "LMS",
+    "XMSS",
     "SHA1",
     "SHA256",
     "SHA384",
@@ -186,6 +193,12 @@ _FAMILY_MARKERS: tuple[tuple[str, str], ...] = tuple(
             ("KYBER", "MLKEM"),
             ("MLDSA", "MLDSA"),
             ("DILITHIUM", "MLDSA"),
+            ("SLHDSA", "SLHDSA"),
+            ("SPHINCS", "SLHDSA"),
+            ("FNDSA", "FALCON"),
+            ("FALCON", "FALCON"),
+            ("XMSS", "XMSS"),
+            ("LMS", "LMS"),
             ("ED25519", "ED25519"),
             ("EDDSA", "ED25519"),
             ("X25519", "X25519"),
@@ -227,6 +240,11 @@ _FAMILY_MARKERS: tuple[tuple[str, str], ...] = tuple(
     )
 )
 
+#: Prefixes that make a DSA match part of a longer family name: ML-DSA, SLH-DSA
+#: and FN-DSA end in DSA but are not DSA. The DSA family is claimed only by DSA
+#: itself. See docs/pending-review.md entry 14.
+_DSA_PREFIXES = ("ML", "SLH", "FN")
+
 #: Curve names imply the ECDSA/EC family even when it is never spelled out.
 _CURVE_TOKENS = frozenset({"P256", "P384", "P521", "P256K1", "SECP256R1", "PRIME256V1"})
 
@@ -254,6 +272,8 @@ def _marker_matches(squashed: str, token_starts: frozenset[int], marker: str) ->
     index = squashed.find(marker)
     while index != -1:
         at_boundary = index in token_starts or squashed[index - 1].isdigit()
+        if marker == "DSA" and any(squashed[:index].endswith(prefix) for prefix in _DSA_PREFIXES):
+            at_boundary = False
         if at_boundary and marker[-1].isdigit():
             after = index + len(marker)
             if after < len(squashed) and squashed[after].isdigit():
@@ -315,8 +335,11 @@ def normalize_tokens(name: str) -> frozenset[str]:
         if part not in _STOPWORDS and not part.isdigit()
     }
 
-    for part in parts:
+    for position, part in enumerate(parts):
         if part in _STOPWORDS:
+            continue
+        if part == "DSA" and position and parts[position - 1] in _DSA_PREFIXES:
+            # The tail of ML-DSA, SLH-DSA or FN-DSA, not the DSA family.
             continue
         part = _TOKEN_ALIASES.get(part, part)
         if part in _STOPWORDS:
@@ -399,6 +422,11 @@ def algorithms_compatible(planted: str, reported: str) -> bool:
         if not (planted_families & reported_families):
             return False
     elif not (planted_tokens & reported_tokens):
+        return False
+    elif planted_families and not (planted_tokens & reported_tokens) - _CIPHER_QUALIFIERS:
+        # A report naming no family that shares only a mode with the plant does
+        # not identify the cipher: GCM is how AES-256-GCM is used, not which
+        # algorithm it is. See docs/pending-review.md entry 16.
         return False
 
     # Same family with different sizes is a contradiction, not a vaguer report:

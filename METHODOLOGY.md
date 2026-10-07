@@ -164,6 +164,9 @@ Then:
 * A **less specific** report is credited: a planted `AES-256-GCM` is found by a
   report of `AES`. The generator identified the right primitive.
 * A **different family** is never credited: `RSA` does not find `AES-256-GCM`.
+* A **mode alone** is not credited: a report naming no family whose only
+  overlap with the plant is a mode or construction qualifier (`GCM`, `CBC`) does
+  not find `AES-256-GCM`. Naming the mode does not identify the cipher.
 * A **contradictory parameter within the same family** is not credited:
   `AES-128-GCM` does not find `AES-256-GCM`, and `ML-KEM-512` does not find
   `ML-KEM-768`.

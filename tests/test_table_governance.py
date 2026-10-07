@@ -242,7 +242,10 @@ class TestAlgorithmAliasesAreToolNeutral(unittest.TestCase):
         This is the failure mode that would quietly inflate everyone's score,
         and the one most likely to slip in with a well-meaning addition.
         """
-        distinct = ["AES-256-GCM", "RSA-2048", "Ed25519", "SHA-256", "ML-KEM-768", "ChaCha20-Poly1305"]
+        distinct = [
+            "AES-256-GCM", "RSA-2048", "Ed25519", "SHA-256", "ML-KEM-768", "ChaCha20-Poly1305",
+            "ML-DSA-65", "SLH-DSA", "Falcon-512", "LMS", "XMSS", "DSA-2048",
+        ]
         for left in distinct:
             for right in distinct:
                 if left == right:

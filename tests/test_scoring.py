@@ -127,6 +127,14 @@ class TestUnplantedAllowanceIsScoped(unittest.TestCase):
         result = self.score([crypto("DES")])
         self.assertEqual(result.phantom_algorithm, 0)
 
+    def test_a_family_absent_from_the_project_is_charged_wherever_reported(self):
+        """Naming LMS or Falcon in a project that plants neither is a phantom
+        algorithm (entry 15)."""
+        for name in ("LMS", "FN-DSA", "Falcon"):
+            with self.subTest(name=name):
+                result = self.score([crypto(name, "README.md", 3)])
+                self.assertEqual(result.phantom_algorithm, 1)
+
     def test_a_bare_string_entry_stays_corpus_wide(self):
         """MD5, not CSPRNG: the name has to claim a family to reach this path."""
         components = [crypto("MD5", "src/seal.go", 3)]
