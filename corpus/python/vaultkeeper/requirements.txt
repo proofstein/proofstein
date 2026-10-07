@@ -3,4 +3,4 @@
 cryptography==49.0.0
 PyNaCl==1.6.2
 # Post-quantum signatures for vault attestations (src/vaultkeeper/attest.py).
-liboqs-python==0.14.0
+liboqs-python==0.16.0.1
