@@ -81,11 +81,15 @@ looser benchmark would have given away.
 
 The full rules are in [METHODOLOGY.md](METHODOLOGY.md), sections 3 and 3.3.
 
-## An example run
+## Example runs
 
-[`runs/2026-08-23T1519Z-public/`](runs/2026-08-23T1519Z-public/) has a complete scored
-run already done: three tools, cdxgen 12.8.2, pqprobe-static 3.6.0 and
-sonar-cryptography 1.6.1, with their output files and their scores. You can
+[`runs/2026-10-07T1922Z-public/`](runs/2026-10-07T1922Z-public/) is the latest
+complete scored run: cdxgen 12.8.2, pqprobe-static 3.8.1, cryptoscan 1.4.0 in two
+modes, cbomkit-theia v1.1.2, Opengrep 1.30.1 and CodeQL 2.27.1, with their output
+files, the wrappers for the tools that do not write CycloneDX, and their scores.
+
+[`runs/2026-08-23T1519Z-public/`](runs/2026-08-23T1519Z-public/) has three tools,
+cdxgen 12.8.2, pqprobe-static 3.6.0 and sonar-cryptography 1.6.1. You can
 re-score it yourself and check you get the same numbers:
 
 ```bash

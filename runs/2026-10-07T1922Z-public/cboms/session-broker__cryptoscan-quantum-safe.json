@@ -1,0 +1,407 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:10684a80-244c-4561-b0b5-f5b06f1e8b5f",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-10-07T19:23:52Z",
+    "tools": [
+      {
+        "vendor": "CSNP",
+        "name": "CryptoScan",
+        "version": "1.4.0"
+      }
+    ],
+    "component": {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-inventory-summary",
+      "name": "Cryptographic Inventory Summary",
+      "description": "Migration Readiness: 48.8% (CRITICAL)"
+    }
+  },
+  "components": [
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-private-key-header-0",
+      "name": "Private Key Header",
+      "description": "Private key found in source code. This is a critical security issue.",
+      "cryptoProperties": {
+        "assetType": "related-crypto-material",
+        "relatedCryptoMaterialProperties": {
+          "type": "private-key"
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "keys/legacy-jwks-key.pem",
+            "line": 1,
+            "symbol": "-----BEGIN PRIVATE KEY-----"
+          },
+          {
+            "location": "keys/token-signing-key.pem",
+            "line": 1,
+            "symbol": "-----BEGIN PRIVATE KEY-----"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-ecc-1",
+      "name": "ECC",
+      "description": "Elliptic curve cryptography detected. ECC is vulnerable to Shor's algorithm on quantum computers.",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "other"
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/identity.ts",
+            "line": 19,
+            "symbol": "ed25519"
+          },
+          {
+            "location": "src/identity.ts",
+            "line": 21,
+            "symbol": "prime256v1"
+          },
+          {
+            "location": "config/broker.yaml",
+            "line": 16,
+            "symbol": "Ed25519"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-rsa-2",
+      "name": "RSA",
+      "description": "RSA algorithm detected. RSA is vulnerable to Shor's algorithm and will be broken by cryptographically relevant quantum computers.",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "pke"
+        },
+        "oid": "1.2.840.113549.1.1.1"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/identity.ts",
+            "line": 20,
+            "symbol": "rsa"
+          },
+          {
+            "location": "src/identity.ts",
+            "line": 20,
+            "symbol": "modulusLength: 2048"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-rsa,-aes,-des,-sha,-md5-3",
+      "name": "RSA, AES, DES, SHA, MD5",
+      "description": "JavaScript implementation of TLS and crypto (Algorithms: RSA, AES, DES, SHA, MD5)",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash",
+          "classicalSecurityLevel": 256
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "package.json",
+            "line": 1,
+            "symbol": "node-forge"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-aes-4",
+      "name": "AES",
+      "description": "AES detected. AES-256 provides adequate quantum resistance. AES-128 security is reduced to 64-bit against Grover's algorithm.",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "block-cipher",
+          "classicalSecurityLevel": 256
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/envelope.ts",
+            "line": 31,
+            "symbol": "aes-256-gcm"
+          },
+          {
+            "location": "src/envelope.ts",
+            "line": 39,
+            "symbol": "aes-256-gcm"
+          },
+          {
+            "location": "config/broker.yaml",
+            "line": 15,
+            "symbol": "AES-256-GCM"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-sha-2-5",
+      "name": "SHA-2",
+      "description": "SHA-2 family hash detected. SHA-256 security is reduced to 128-bit against Grover's algorithm, which remains secure.",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash"
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/fingerprint.ts",
+            "line": 14,
+            "symbol": "sha256"
+          },
+          {
+            "location": "src/identity.ts",
+            "line": 33,
+            "symbol": "sha256"
+          },
+          {
+            "location": "config/broker.yaml",
+            "line": 23,
+            "symbol": "SHA-256"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-mutual-tls-(mtls)-6",
+      "name": "Mutual TLS (mTLS)",
+      "description": "Mutual TLS (mTLS) configuration detected. Good practice for service authentication.",
+      "cryptoProperties": {
+        "assetType": "certificate"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/identity.ts",
+            "line": 14,
+            "symbol": "Mtls"
+          },
+          {
+            "location": "src/identity.ts",
+            "line": 21,
+            "symbol": "Mtls"
+          },
+          {
+            "location": "src/identity.ts",
+            "line": 22,
+            "symbol": "Mtls"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-ml-dsa-7",
+      "name": "ML-DSA",
+      "description": "ML-DSA (FIPS 204) post-quantum digital signature detected. This is quantum-safe.",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "nistQuantumSecurityLevel": 1
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/attest.ts",
+            "line": 13,
+            "symbol": "ml_dsa65"
+          },
+          {
+            "location": "src/attest.ts",
+            "line": 27,
+            "symbol": "ml_dsa65"
+          },
+          {
+            "location": "config/broker.yaml",
+            "line": 17,
+            "symbol": "ML-DSA-65"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-ml-kem-8",
+      "name": "ML-KEM",
+      "description": "ML-KEM (FIPS 203) post-quantum key encapsulation detected. This is quantum-safe.",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "kem",
+          "nistQuantumSecurityLevel": 1
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/kem.ts",
+            "line": 9,
+            "symbol": "ml_kem768"
+          },
+          {
+            "location": "src/kem.ts",
+            "line": 18,
+            "symbol": "ml_kem768"
+          },
+          {
+            "location": "src/kem.ts",
+            "line": 24,
+            "symbol": "ml_kem768"
+          },
+          {
+            "location": "src/kem.ts",
+            "line": 29,
+            "symbol": "ml_kem768"
+          },
+          {
+            "location": "config/broker.yaml",
+            "line": 18,
+            "symbol": "ML-KEM-768"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-slh-dsa-9",
+      "name": "SLH-DSA",
+      "description": "SLH-DSA (FIPS 205) stateless hash-based signature detected. This is quantum-safe.",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "nistQuantumSecurityLevel": 1
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/attest.ts",
+            "line": 39,
+            "symbol": "SLH-DSA-"
+          },
+          {
+            "location": "src/attest.ts",
+            "line": 14,
+            "symbol": "slh-dsa"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-fn-dsa-10",
+      "name": "FN-DSA",
+      "description": "FN-DSA (Falcon) post-quantum signature detected. Expected in FIPS 206.",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "nistQuantumSecurityLevel": 1
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/attest.ts",
+            "line": 41,
+            "symbol": "Falcon-512"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-lms-11",
+      "name": "LMS",
+      "description": "LMS/HSS stateful hash-based signature detected (SP 800-208). Quantum-safe but requires careful state management.",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "nistQuantumSecurityLevel": 1
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/lms.ts",
+            "line": 49,
+            "symbol": "lms"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-certificate-key-usage-12",
+      "name": "Certificate Key Usage",
+      "description": "Certificate key usage extension detected. Defines permitted cryptographic operations.",
+      "cryptoProperties": {
+        "assetType": "certificate"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/settings.ts",
+            "line": 14,
+            "symbol": "KeyAgreement"
+          },
+          {
+            "location": "src/settings.ts",
+            "line": 53,
+            "symbol": "KeyAgreement"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-x.509-certificate-13",
+      "name": "X.509 Certificate",
+      "description": "X.509 certificate detected. Certificate algorithm and key size should be verified for quantum safety.",
+      "cryptoProperties": {
+        "assetType": "certificate"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "keys/legacy-jwks-cert.pem",
+            "line": 1,
+            "symbol": "-----BEGIN CERTIFICATE-----"
+          }
+        ]
+      }
+    }
+  ]
+}

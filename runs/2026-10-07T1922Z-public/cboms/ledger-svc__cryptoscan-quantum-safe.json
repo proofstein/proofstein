@@ -1,0 +1,593 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:815c0c71-94b5-4221-83b3-348a63a03e54",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-10-07T19:23:52Z",
+    "tools": [
+      {
+        "vendor": "CSNP",
+        "name": "CryptoScan",
+        "version": "1.4.0"
+      }
+    ],
+    "component": {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-inventory-summary",
+      "name": "Cryptographic Inventory Summary",
+      "description": "Migration Readiness: 52.7% (CRITICAL)"
+    }
+  },
+  "components": [
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-private-key-header-0",
+      "name": "Private Key Header",
+      "description": "Private key found in source code. This is a critical security issue.",
+      "cryptoProperties": {
+        "assetType": "related-crypto-material",
+        "relatedCryptoMaterialProperties": {
+          "type": "private-key"
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "keys/block-signing-key.pem",
+            "line": 1,
+            "symbol": "-----BEGIN PRIVATE KEY-----"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-rc4-1",
+      "name": "RC4",
+      "description": "RC4 detected. RC4 has multiple known vulnerabilities and is prohibited in TLS.",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "block-cipher"
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "deploy/jvm.options",
+            "line": 13,
+            "symbol": "RC4"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-weak-certificate-signature-(sha-1)-2",
+      "name": "Weak Certificate Signature (SHA-1)",
+      "description": "Weak certificate signature algorithm (SHA-1 or MD5) detected. These are deprecated and insecure.",
+      "cryptoProperties": {
+        "assetType": "certificate"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "deploy/jvm.options",
+            "line": 13,
+            "symbol": "MD5withRSA"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-ecc-3",
+      "name": "ECC",
+      "description": "Elliptic curve cryptography detected. ECC is vulnerable to Shor's algorithm on quantum computers.",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "other"
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
+            "line": 32,
+            "symbol": "Ed25519"
+          },
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
+            "line": 34,
+            "symbol": "secp256r1"
+          },
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
+            "line": 44,
+            "symbol": "Ed25519"
+          },
+          {
+            "location": "src/main/resources/application.properties",
+            "line": 12,
+            "symbol": "Ed25519"
+          },
+          {
+            "location": "deploy/jvm.options",
+            "line": 12,
+            "symbol": "secp256r1"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-rsa-4",
+      "name": "RSA",
+      "description": "RSA algorithm detected. RSA is vulnerable to Shor's algorithm and will be broken by cryptographically relevant quantum computers.",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "pke"
+        },
+        "oid": "1.2.840.113549.1.1.1"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
+            "line": 36,
+            "symbol": "RSA"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-tls-5",
+      "name": "TLS",
+      "description": "Deprecated TLS/SSL version detected. TLS 1.0, 1.1, and SSL 2/3 have known vulnerabilities.",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "other"
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "deploy/jvm.options",
+            "line": 13,
+            "symbol": "SSLv3"
+          },
+          {
+            "location": "deploy/jvm.options",
+            "line": 11,
+            "symbol": "TLSv1.3"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-certificate-signature-algorithm-6",
+      "name": "Certificate Signature Algorithm",
+      "description": "Certificate signature algorithm detected. RSA and ECDSA signatures are quantum-vulnerable.",
+      "cryptoProperties": {
+        "assetType": "certificate"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
+            "line": 52,
+            "symbol": "SHA256withRSA"
+          },
+          {
+            "location": "src/main/resources/application.properties",
+            "line": 14,
+            "symbol": "SHA256withRSA"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-mutual-tls-(mtls)-7",
+      "name": "Mutual TLS (mTLS)",
+      "description": "Mutual TLS (mTLS) configuration detected. Good practice for service authentication.",
+      "cryptoProperties": {
+        "assetType": "certificate"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
+            "line": 24,
+            "symbol": "Mtls"
+          },
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
+            "line": 21,
+            "symbol": "Mtls"
+          },
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
+            "line": 26,
+            "symbol": "Mtls"
+          },
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
+            "line": 61,
+            "symbol": "Mtls"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-sha-2-8",
+      "name": "SHA-2",
+      "description": "SHA-2 family hash detected. SHA-256 security is reduced to 128-bit against Grover's algorithm, which remains secure.",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash"
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/AuditSeal.java",
+            "line": 52,
+            "symbol": "SHA256"
+          },
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/Fingerprint.java",
+            "line": 24,
+            "symbol": "MessageDigest digest = getInstance(\"SHA-256"
+          },
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
+            "line": 60,
+            "symbol": "MessageDigest digest = MessageDigest.getInstance(\"SHA-256"
+          },
+          {
+            "location": "src/main/resources/application.properties",
+            "line": 18,
+            "symbol": "SHA-256"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-aes-9",
+      "name": "AES",
+      "description": "AES detected. AES-256 provides adequate quantum resistance. AES-128 security is reduced to 64-bit against Grover's algorithm.",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "block-cipher",
+          "classicalSecurityLevel": 256
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/Envelope.java",
+            "line": 31,
+            "symbol": "AES"
+          },
+          {
+            "location": "src/main/resources/application.properties",
+            "line": 11,
+            "symbol": "AES-256-GCM"
+          },
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/Envelope.java",
+            "line": 46,
+            "symbol": "AES"
+          },
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/Envelope.java",
+            "line": 65,
+            "symbol": "AES"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-certificate-key-usage-10",
+      "name": "Certificate Key Usage",
+      "description": "Certificate key usage extension detected. Defines permitted cryptographic operations.",
+      "cryptoProperties": {
+        "assetType": "certificate"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/main/java/io/proofstein/ledger/config/Settings.java",
+            "line": 48,
+            "symbol": "KeyAgreement"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-post-quantum-crypto-library-11",
+      "name": "Post-Quantum Crypto Library",
+      "description": "Post-quantum cryptography library detected. Good practice for quantum-safe migration.",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/AuditSeal.java",
+            "line": 3,
+            "symbol": "org.bouncycastle.pqc"
+          },
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/AuditSeal.java",
+            "line": 10,
+            "symbol": "org.bouncycastle.pqc"
+          },
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/AuditSeal.java",
+            "line": 11,
+            "symbol": "org.bouncycastle.pqc"
+          },
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/AuditSeal.java",
+            "line": 12,
+            "symbol": "org.bouncycastle.pqc"
+          },
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/BlockSeal.java",
+            "line": 4,
+            "symbol": "org.bouncycastle.pqc"
+          },
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/BlockSeal.java",
+            "line": 11,
+            "symbol": "org.bouncycastle.pqc"
+          },
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/BlockSeal.java",
+            "line": 12,
+            "symbol": "org.bouncycastle.pqc"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-lms-12",
+      "name": "LMS",
+      "description": "LMS/HSS stateful hash-based signature detected (SP 800-208). Quantum-safe but requires careful state management.",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "nistQuantumSecurityLevel": 1
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/AuditSeal.java",
+            "line": 3,
+            "symbol": "lms"
+          },
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/AuditSeal.java",
+            "line": 10,
+            "symbol": "lms"
+          },
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/AuditSeal.java",
+            "line": 54,
+            "symbol": "LMS"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-xmss-13",
+      "name": "XMSS",
+      "description": "XMSS stateful hash-based signature detected (SP 800-208). Quantum-safe but requires careful state management.",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "nistQuantumSecurityLevel": 1
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/AuditSeal.java",
+            "line": 51,
+            "symbol": "XMSS"
+          },
+          {
+            "location": "src/main/resources/application.properties",
+            "line": 15,
+            "symbol": "XMSS-"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-ml-dsa-14",
+      "name": "ML-DSA",
+      "description": "ML-DSA (FIPS 204) post-quantum digital signature detected. This is quantum-safe.",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "nistQuantumSecurityLevel": 1
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/BlockSeal.java",
+            "line": 37,
+            "symbol": "ML-DSA"
+          },
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/BlockSeal.java",
+            "line": 38,
+            "symbol": "ml_dsa_65"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-slh-dsa-15",
+      "name": "SLH-DSA",
+      "description": "SLH-DSA (FIPS 205) stateless hash-based signature detected. This is quantum-safe.",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "nistQuantumSecurityLevel": 1
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/BlockSeal.java",
+            "line": 44,
+            "symbol": "SLH-DSA"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-fn-dsa-16",
+      "name": "FN-DSA",
+      "description": "FN-DSA (Falcon) post-quantum signature detected. Expected in FIPS 206.",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "nistQuantumSecurityLevel": 1
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/BlockSeal.java",
+            "line": 51,
+            "symbol": "Falcon"
+          },
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/BlockSeal.java",
+            "line": 52,
+            "symbol": "falcon_512"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-ml-kem-17",
+      "name": "ML-KEM",
+      "description": "ML-KEM (FIPS 203) post-quantum key encapsulation detected. This is quantum-safe.",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "kem",
+          "nistQuantumSecurityLevel": 1
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/Kem.java",
+            "line": 24,
+            "symbol": "ML-KEM"
+          },
+          {
+            "location": "src/main/resources/application.properties",
+            "line": 13,
+            "symbol": "ML-KEM-768"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-rsa,-ecc,-aes,-ml-kem,-ml-dsa-18",
+      "name": "RSA, ECC, AES, ML-KEM, ML-DSA",
+      "description": "Java crypto provider with PQC support in recent versions (Algorithms: RSA, ECC, AES, ML-KEM, ML-DSA)",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "kem",
+          "classicalSecurityLevel": 256,
+          "nistQuantumSecurityLevel": 1
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "pom.xml",
+            "line": 1,
+            "symbol": "org.bouncycastle"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-hybrid-kem-19",
+      "name": "Hybrid-KEM",
+      "description": "Hybrid key exchange detected (classical + PQC). Excellent transition strategy.",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "combiner",
+          "nistQuantumSecurityLevel": 1
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "deploy/jvm.options",
+            "line": 12,
+            "symbol": "x25519mlkem768"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-pkcs#12-certificate-container-20",
+      "name": "PKCS#12 Certificate Container",
+      "description": "PKCS#12/PFX certificate container detected. Contains private key and certificate chain.",
+      "cryptoProperties": {
+        "assetType": "certificate"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/main/resources/application.properties",
+            "line": 16,
+            "symbol": ".p12"
+          }
+        ]
+      }
+    }
+  ]
+}
