@@ -19,17 +19,24 @@ Holdout companion to `runs/2026-08-23T1519Z-public/`. **Fresh seed, not publishe
 | pqprobe-static 3.6.0 | 124 | 96% (119/124) |
 | sonar-cryptography 1.6.1 | 67 | 34% (23/67) |
 
-Identical to the public corpus for all three tools. The detection tables match
+Identical to the public corpus scored under the same tables, for all three
+tools. The detection tables match
 cell for cell, by language and by layer, as do sonar-cryptography's three false
 positives. Its 67-asset denominator has the same cause here as there, and the
 explanation in the public run's README applies unchanged.
 
 One figure did move. pqprobe-static made 204 evidence claims here against 205 on
-the public corpus, so its component precision reads 73% rather than 72%. Its
+the public corpus, so under the same tables its component precision reads 73%
+rather than 72%. Its
 recall, its per-layer rates and its claim precision are unchanged. One claim
 fewer on a relocated file is the size of difference the transforms produce; it is
 recorded here rather than rounded away, because a holdout that is only ever
 reported as "identical" is not being read closely enough to be worth running.
+
+
+These figures are scored under the judgement tables of 2026-08-23. The run's
+documents are withheld, so it has not been scored under entries 14 to 16, as
+its public companion has.
 
 ## Seed and CBOMs
 

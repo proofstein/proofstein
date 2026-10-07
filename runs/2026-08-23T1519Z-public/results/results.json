@@ -48,6 +48,36 @@
           "sha256_16": "637f0e9d5f2cf137"
         },
         "family_markers": {
+          "entries": 43,
+          "sha256_16": "e4639e0dd1414815"
+        },
+        "whole_token_only": {
+          "entries": 7,
+          "sha256_16": "88a20cf6715e9c84"
+        },
+        "known_unplanted": {
+          "entries": 15,
+          "sha256_16": "3a7fca80174e0cdd"
+        }
+      },
+      "judgement_tables_collected": {
+        "oid_algorithms": {
+          "entries": 27,
+          "sha256_16": "031a3c27915e6dde"
+        },
+        "location_property_names": {
+          "entries": 8,
+          "sha256_16": "0b8c15cc33ce242a"
+        },
+        "line_property_names": {
+          "entries": 5,
+          "sha256_16": "ed438ed351a5b930"
+        },
+        "token_aliases": {
+          "entries": 32,
+          "sha256_16": "637f0e9d5f2cf137"
+        },
+        "family_markers": {
           "entries": 37,
           "sha256_16": "2aef68bf8064cccc"
         },
@@ -112,13 +142,13 @@
       "detected": 119,
       "total": 124,
       "detection_rate": 0.9597,
-      "precision": 0.7193,
-      "claim_precision": 0.6098,
-      "matched_components": 82,
+      "precision": 0.7281,
+      "claim_precision": 0.6146,
+      "matched_components": 83,
       "reported_components": 114,
-      "credited_claims": 125,
+      "credited_claims": 126,
       "total_claims": 205,
-      "false_positives": 0,
+      "false_positives": 1,
       "by_layer": {
         "1": {
           "detected": 44,
@@ -149,6 +179,50 @@
           "detected": 17,
           "total": 17,
           "rate": 1.0
+        }
+      }
+    },
+    "sonar-cryptography": {
+      "detected": 23,
+      "total": 67,
+      "detection_rate": 0.3433,
+      "precision": 0.4524,
+      "claim_precision": 0.449,
+      "matched_components": 19,
+      "reported_components": 42,
+      "credited_claims": 22,
+      "total_claims": 49,
+      "false_positives": 3,
+      "by_layer": {
+        "1": {
+          "detected": 18,
+          "total": 24,
+          "rate": 0.75
+        },
+        "2": {
+          "detected": 4,
+          "total": 5,
+          "rate": 0.8
+        },
+        "3": {
+          "detected": 1,
+          "total": 3,
+          "rate": 0.3333
+        },
+        "4": {
+          "detected": 0,
+          "total": 23,
+          "rate": 0.0
+        },
+        "5": {
+          "detected": 0,
+          "total": 4,
+          "rate": 0.0
+        },
+        "6": {
+          "detected": 0,
+          "total": 8,
+          "rate": 0.0
         }
       }
     }
@@ -1107,10 +1181,10 @@
       "detected": 24,
       "total": 25,
       "detection_rate": 0.96,
-      "precision": 0.68,
-      "claim_precision": 0.5682,
-      "matched_components": 17,
-      "credited_claims": 25,
+      "precision": 0.72,
+      "claim_precision": 0.5909,
+      "matched_components": 18,
+      "credited_claims": 26,
       "by_layer": {
         "1": {
           "detected": 10,
@@ -1454,6 +1528,368 @@
           "detected": true,
           "located": true,
           "file_only": true,
+          "name_only": true
+        }
+      ]
+    },
+    {
+      "project": "ledger-svc",
+      "language": "java",
+      "tool": "sonar-cryptography",
+      "source": "ledger-svc__sonar-cryptography.json",
+      "schema_valid": true,
+      "schema_errors": [],
+      "parse_error": null,
+      "detected": 12,
+      "total": 25,
+      "detection_rate": 0.48,
+      "precision": 0.3704,
+      "claim_precision": 0.4062,
+      "matched_components": 10,
+      "credited_claims": 13,
+      "by_layer": {
+        "1": {
+          "detected": 9,
+          "total": 10
+        },
+        "2": {
+          "detected": 3,
+          "total": 3
+        },
+        "3": {
+          "detected": 0,
+          "total": 1
+        },
+        "4": {
+          "detected": 0,
+          "total": 8
+        },
+        "5": {
+          "detected": 0,
+          "total": 1
+        },
+        "6": {
+          "detected": 0,
+          "total": 2
+        }
+      },
+      "false_positives": 1,
+      "phantom_location": 0,
+      "phantom_algorithm": 1,
+      "unmatched_reports": 0,
+      "evidence": {
+        "crypto_components": 27,
+        "total_occurrences": 32,
+        "distinct_claims": 32,
+        "with_location": 27,
+        "with_location_pct": 1.0,
+        "with_line": 27,
+        "with_line_pct": 1.0,
+        "using_spec_evidence": 27,
+        "using_properties_only": 0,
+        "resolvable_locations": 32,
+        "unresolvable_locations": 0,
+        "occurrences_per_component": 1.185
+      },
+      "assets": [
+        {
+          "id": "java-l4-jvm-tls",
+          "file": "deploy/jvm.options",
+          "line": 11,
+          "algorithm": "TLSv1.3",
+          "layer": 4,
+          "cyclonedx_asset_type": "protocol",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "java-l4-jvm-groups",
+          "file": "deploy/jvm.options",
+          "line": 12,
+          "algorithm": "X25519MLKEM768",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": true
+        },
+        {
+          "id": "java-l6-block-key",
+          "file": "keys/block-signing-key.pem",
+          "line": 1,
+          "algorithm": "Ed25519",
+          "layer": 6,
+          "cyclonedx_asset_type": "related-crypto-material",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": true
+        },
+        {
+          "id": "java-l6-keystore",
+          "file": "keys/ledger-node.p12",
+          "line": 1,
+          "algorithm": "PKCS#12",
+          "layer": 6,
+          "cyclonedx_asset_type": "related-crypto-material",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "java-dep-bouncycastle",
+          "file": "pom.xml",
+          "line": 26,
+          "algorithm": "bcprov-jdk18on",
+          "layer": 5,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "java-l1-xmss",
+          "file": "src/main/java/io/proofstein/ledger/crypto/AuditSeal.java",
+          "line": 51,
+          "algorithm": "XMSS",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "java-l2-lms",
+          "file": "src/main/java/io/proofstein/ledger/crypto/AuditSeal.java",
+          "line": 56,
+          "algorithm": "LMS",
+          "layer": 2,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "java-l1-mldsa",
+          "file": "src/main/java/io/proofstein/ledger/crypto/BlockSeal.java",
+          "line": 37,
+          "algorithm": "ML-DSA",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "java-l2-slhdsa",
+          "file": "src/main/java/io/proofstein/ledger/crypto/BlockSeal.java",
+          "line": 44,
+          "algorithm": "SLH-DSA",
+          "layer": 2,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "java-l1-falcon",
+          "file": "src/main/java/io/proofstein/ledger/crypto/BlockSeal.java",
+          "line": 52,
+          "algorithm": "Falcon-512",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "java-l1-aesgcm",
+          "file": "src/main/java/io/proofstein/ledger/crypto/Envelope.java",
+          "line": 46,
+          "algorithm": "AES-256-GCM",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "java-l2-sha256",
+          "file": "src/main/java/io/proofstein/ledger/crypto/Fingerprint.java",
+          "line": 24,
+          "algorithm": "SHA-256",
+          "layer": 2,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "java-l1-ed25519",
+          "file": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
+          "line": 32,
+          "algorithm": "Ed25519",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "java-l1-ecdsa",
+          "file": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
+          "line": 33,
+          "algorithm": "ECDSA-P256",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "java-l1-rsa",
+          "file": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
+          "line": 36,
+          "algorithm": "RSA-2048",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "java-l1-sha256rsa",
+          "file": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
+          "line": 52,
+          "algorithm": "RSA-2048",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "java-l1-sha256",
+          "file": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
+          "line": 60,
+          "algorithm": "SHA-256",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "java-l1-mlkem",
+          "file": "src/main/java/io/proofstein/ledger/crypto/Kem.java",
+          "line": 24,
+          "algorithm": "ML-KEM",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "java-l3-wrapper",
+          "file": "src/main/java/io/proofstein/ledger/store/SegmentStore.java",
+          "line": 37,
+          "algorithm": "AES-256-GCM",
+          "layer": 3,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": true
+        },
+        {
+          "id": "java-l4-prop-cipher",
+          "file": "src/main/resources/application.properties",
+          "line": 11,
+          "algorithm": "AES-256-GCM",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": true
+        },
+        {
+          "id": "java-l4-prop-sig",
+          "file": "src/main/resources/application.properties",
+          "line": 12,
+          "algorithm": "Ed25519",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": true
+        },
+        {
+          "id": "java-l4-prop-kem",
+          "file": "src/main/resources/application.properties",
+          "line": 13,
+          "algorithm": "ML-KEM-768",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": true
+        },
+        {
+          "id": "java-l4-prop-settlement",
+          "file": "src/main/resources/application.properties",
+          "line": 14,
+          "algorithm": "RSA-2048",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": true
+        },
+        {
+          "id": "java-l4-prop-audit-seal",
+          "file": "src/main/resources/application.properties",
+          "line": 15,
+          "algorithm": "XMSS",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": true
+        },
+        {
+          "id": "java-l4-prop-hash",
+          "file": "src/main/resources/application.properties",
+          "line": 18,
+          "algorithm": "SHA-256",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
           "name_only": true
         }
       ]
@@ -2357,9 +2793,9 @@
           "total": 3
         }
       },
-      "false_positives": 0,
+      "false_positives": 1,
       "phantom_location": 0,
-      "phantom_algorithm": 0,
+      "phantom_algorithm": 1,
       "unmatched_reports": 0,
       "evidence": {
         "crypto_components": 16,

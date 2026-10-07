@@ -17,7 +17,8 @@
 | pqprobe-static 3.6.0 | 124 | 96% (119/124) |
 | sonar-cryptography 1.6.1 | 67 | 34% (23/67) |
 
-Full tables in `results/results.md`.
+Full tables in `results/results.md`, scored under the judgement tables of
+2026-10-07 (docs/pending-review.md entries 14 to 16).
 
 ## Read the sonar-cryptography number against 67, not 124
 
@@ -62,7 +63,11 @@ config, declared dependencies and key files.
 
 ## False positives
 
-cdxgen and pqprobe-static were charged none.
+cdxgen was charged none.
+
+pqprobe-static was charged one, a phantom algorithm: `Falcon-512` at
+`session-broker/src/attest.ts:41`, a configuration value naming a scheme the
+project does not implement. Falcon is not planted in `session-broker`.
 
 sonar-cryptography was charged three, all phantom algorithms: a family named in
 a project that does not contain it. Two are `NATIVEPRNG` in `beacon-relay`, at
