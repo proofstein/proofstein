@@ -242,7 +242,10 @@ class TestAlgorithmAliasesAreToolNeutral(unittest.TestCase):
         This is the failure mode that would quietly inflate everyone's score,
         and the one most likely to slip in with a well-meaning addition.
         """
-        distinct = ["AES-256-GCM", "RSA-2048", "Ed25519", "SHA-256", "ML-KEM-768", "ChaCha20-Poly1305"]
+        distinct = [
+            "AES-256-GCM", "RSA-2048", "Ed25519", "SHA-256", "ML-KEM-768", "ChaCha20-Poly1305",
+            "ML-DSA-65", "SLH-DSA", "Falcon-512", "LMS", "XMSS", "DSA-2048",
+        ]
         for left in distinct:
             for right in distinct:
                 if left == right:
@@ -320,6 +323,28 @@ class TestUnplantedAllowancesAreToolNeutralAndJustified(unittest.TestCase):
 
 class TestTablesAreDocumented(unittest.TestCase):
     """The governance rule is only real if the tables are findable."""
+
+    def test_collection_and_scoring_digest_the_tables_alike(self):
+        """The run manifest and the results carry digests from one function, so
+        a results file can say whether it was scored under the tables its run
+        was collected with."""
+        import importlib.util
+
+        from proofstein.tables import judgement_table_digest
+
+        spec = importlib.util.spec_from_file_location("collect_cboms", REPO_ROOT / "tools" / "collect-cboms.py")
+        collect = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(collect)
+        self.assertEqual(collect.judgement_table_digest(), judgement_table_digest(KNOWN_UNPLANTED))
+
+    def test_run_directories_do_not_dirty_the_corpus(self):
+        """An uncommitted run directory is outside the exported corpus."""
+        from score import corpus_dirty
+
+        self.assertFalse(corpus_dirty({"corpus_tree_dirty": True, "uncommitted_paths": ["runs/2026-08-23T1519Z-public/"]}))
+        self.assertTrue(corpus_dirty({"corpus_tree_dirty": True, "uncommitted_paths": ["runs/generators.json"]}))
+        self.assertTrue(corpus_dirty({"corpus_tree_dirty": True, "uncommitted_paths": ["corpus/go/x.go", "runs/a/"]}))
+        self.assertTrue(corpus_dirty({"corpus_tree_dirty": True}))
 
     def test_methodology_names_each_table(self):
         text = (REPO_ROOT / "METHODOLOGY.md").read_text(encoding="utf-8")

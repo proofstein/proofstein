@@ -32,6 +32,11 @@ already taken and the evidence for it.
 | 10 | OPEN | XMSS and LMS plants: build route |
 | 11 | OPEN | LMS negative case: placement and instrument |
 | 12 | OPEN | ML-DSA, SLH-DSA and Falcon plants |
+| 13 | OPEN | Activating sonar-cryptography's rules before scoring it |
+| 14 | CLOSED | Post-quantum signature families |
+| 15 | CLOSED | Negative cases can charge |
+| 16 | CLOSED | A mode name alone does not credit a cipher |
+| 17 | CLOSED | Falcon negative case moved |
 
 Entries 9 and 11 raise the same question and should be reviewed together.
 
@@ -436,22 +441,22 @@ holdout and diagnosed from the shape of the result. Not fixed here; it is a
 usability defect in the scorer's error handling, not a judgement call, and it
 belongs in a change of its own.
 
-## 9. Falcon negative case in `vaultkeeper` (OPEN)
+## 9. Falcon negative case in `beacon-relay` (OPEN)
 
 **Prompted by:** `pqprobe-static`, whose bare `falcon` token reported a
 post-quantum signature scheme for a Python web framework.
 
 ### What was added
 
-`corpus/python/vaultkeeper/src/vaultkeeper/api.py`, a Falcon health and
-readiness API for the daemon, and `falcon==4.3.1` in `requirements.txt`. The
-module performs, selects and configures no cryptography, and **carries no
+`corpus/go/beacon-relay/ops/health/api.py`, a Falcon health and readiness
+service run beside the relay, and `falcon==4.3.1` in `ops/health/requirements.txt`.
+The module performs, selects and configures no cryptography, and **carries no
 ground-truth entry by design**.
 
 No new mechanism was needed. Under METHODOLOGY §4 a component claiming an
 algorithm family that appears nowhere in the project's ground truth and holds no
 `KNOWN_UNPLANTED` allowance is charged as a **phantom algorithm**, regardless of
-location. Falcon appears nowhere in `vaultkeeper`'s ground truth. A generator
+location. Falcon appears nowhere in `beacon-relay`'s ground truth. A generator
 reporting an FN-DSA or Falcon asset in this file is therefore charged, and one
 that stays silent is not credited either: the file simply produces nothing.
 
@@ -473,9 +478,9 @@ and what will charge any generator that adopts the same shortcut.
 ### Direction
 
 This addition can only lower a score, never raise one: there is no plant to
-find, so no tool can gain from it. Like entry 8, it charges the maintainer's tool
-rather than crediting it: `pqprobe-static` would have taken a phantom-algorithm
-charge here in the state it was in when the case was written.
+find, so no tool can gain from it. It is aimed at a shortcut the maintainer's
+tool took: `pqprobe-static`'s withdrawn token reported the framework in its JSON
+output, though not in the CBOM it is scored on.
 
 That direction is why it was applied rather than queued. What remains for review
 is narrower than the usual §9.1 question, and is stated here rather than assumed:
@@ -761,3 +766,19 @@ conclusion.
 
 Upstream putting Inventory into Sonar way, or shipping a profile that contains
 it, would make the activation step redundant and this entry historical.
+
+## 14. Post-quantum signature families (CLOSED, 2026-10-07)
+
+SLH-DSA (markers `SLHDSA`, `SPHINCS`), Falcon (`FALCON`, `FNDSA`), LMS and XMSS are families of their own and DSA is claimed only by DSA itself, which on the 2026-08-23 public run leaves every tool's recall unchanged, charges `pqprobe-static` one false positive (`Falcon-512` at `session-broker/src/attest.ts:41`, a configuration value for a scheme the project does not implement) and credits it one more claim.
+
+## 15. Negative cases can charge (CLOSED, 2026-10-07)
+
+A report naming a family that a project does not plant is a phantom algorithm wherever it appears, so the negative cases of entries 9 and 11 charge any generator that reports Falcon, FN-DSA or LMS in them; no published run reports anything in either file.
+
+## 16. A mode name alone does not credit a cipher (CLOSED, 2026-10-07)
+
+A report naming no family whose only overlap with a plant is a mode or construction qualifier (`GCM`, `CBC` and the rest of `_CIPHER_QUALIFIERS`) does not credit it, which changes no published run.
+
+## 17. Falcon negative case moved (CLOSED, 2026-10-07)
+
+The Falcon web-framework negative case is `beacon-relay/ops/health/api.py`, in a project that plants no Falcon, so a Falcon or FN-DSA component there is charged.

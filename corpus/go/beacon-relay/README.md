@@ -23,6 +23,7 @@ terminated by the edge config in `deploy/nginx.conf`.
 | `internal/session`    | post-quantum key agreement for peer mirroring          |
 | `internal/digest`     | content addressing for the dedup cache                 |
 | `internal/config`     | the small YAML subset the relay reads                  |
+| `ops/health`          | health and readiness probes for the orchestrator (Python) |
 
 ## Peer links
 
