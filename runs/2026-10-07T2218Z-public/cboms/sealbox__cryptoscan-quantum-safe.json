@@ -1,0 +1,288 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:07f8f412-e828-4d76-aced-14a93d411060",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-10-07T22:19:54Z",
+    "tools": [
+      {
+        "vendor": "CSNP",
+        "name": "CryptoScan",
+        "version": "1.4.0"
+      }
+    ],
+    "component": {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-inventory-summary",
+      "name": "Cryptographic Inventory Summary",
+      "description": "Migration Readiness: 33.0% (CRITICAL)"
+    }
+  },
+  "components": [
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-private-key-header-0",
+      "name": "Private Key Header",
+      "description": "Private key found in source code. This is a critical security issue.",
+      "cryptoProperties": {
+        "assetType": "related-crypto-material",
+        "relatedCryptoMaterialProperties": {
+          "type": "private-key"
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "keys/archive-gateway-key.pem",
+            "line": 1,
+            "symbol": "-----BEGIN PRIVATE KEY-----"
+          },
+          {
+            "location": "keys/manifest-signing-key.pem",
+            "line": 1,
+            "symbol": "-----BEGIN PRIVATE KEY-----"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-ecc-1",
+      "name": "ECC",
+      "description": "Elliptic curve cryptography detected. ECC is vulnerable to Shor's algorithm on quantum computers.",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "other"
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/identity.rs",
+            "line": 9,
+            "symbol": "ecdsa"
+          },
+          {
+            "location": "config/sealbox.toml",
+            "line": 16,
+            "symbol": "Ed25519"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-rsa-2",
+      "name": "RSA",
+      "description": "RSA algorithm detected. RSA is vulnerable to Shor's algorithm and will be broken by cryptographically relevant quantum computers.",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "pke"
+        },
+        "oid": "1.2.840.113549.1.1.1"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/identity.rs",
+            "line": 10,
+            "symbol": "rsa"
+          },
+          {
+            "location": "src/identity.rs",
+            "line": 11,
+            "symbol": "rsa"
+          },
+          {
+            "location": "src/identity.rs",
+            "line": 25,
+            "symbol": "rsa"
+          },
+          {
+            "location": "config/sealbox.toml",
+            "line": 18,
+            "symbol": "RSA-"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-aes,-chacha20-3",
+      "name": "AES, ChaCha20",
+      "description": "Pure Rust implementation of crypto algorithms (Algorithms: AES, ChaCha20)",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "stream-cipher",
+          "classicalSecurityLevel": 256
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "Cargo.toml",
+            "line": 1,
+            "symbol": "aes"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-aes-4",
+      "name": "AES",
+      "description": "AES detected. AES-256 provides adequate quantum resistance. AES-128 security is reduced to 64-bit against Grover's algorithm.",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "block-cipher",
+          "classicalSecurityLevel": 256
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/envelope.rs",
+            "line": 6,
+            "symbol": "aes_gcm"
+          },
+          {
+            "location": "src/envelope.rs",
+            "line": 7,
+            "symbol": "aes_gcm"
+          },
+          {
+            "location": "src/identity.rs",
+            "line": 7,
+            "symbol": "aes_gcm"
+          },
+          {
+            "location": "src/envelope.rs",
+            "line": 62,
+            "symbol": "Aes256Gcm"
+          },
+          {
+            "location": "src/envelope.rs",
+            "line": 70,
+            "symbol": "Aes256Gcm"
+          },
+          {
+            "location": "src/envelope.rs",
+            "line": 71,
+            "symbol": "Aes256Gcm"
+          },
+          {
+            "location": "src/envelope.rs",
+            "line": 84,
+            "symbol": "Aes256Gcm"
+          },
+          {
+            "location": "config/sealbox.toml",
+            "line": 15,
+            "symbol": "AES-256-GCM"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-sha-2-5",
+      "name": "SHA-2",
+      "description": "SHA-2 family hash detected. SHA-256 security is reduced to 128-bit against Grover's algorithm, which remains secure.",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash"
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/fingerprint.rs",
+            "line": 7,
+            "symbol": "Sha256"
+          },
+          {
+            "location": "src/identity.rs",
+            "line": 12,
+            "symbol": "Sha256"
+          },
+          {
+            "location": "src/identity.rs",
+            "line": 44,
+            "symbol": "Sha256"
+          },
+          {
+            "location": "config/sealbox.toml",
+            "line": 22,
+            "symbol": "SHA-256"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-ml-kem-6",
+      "name": "ML-KEM",
+      "description": "ML-KEM (FIPS 203) post-quantum key encapsulation detected. This is quantum-safe.",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "kem",
+          "nistQuantumSecurityLevel": 1
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/kem.rs",
+            "line": 7,
+            "symbol": "ml_kem_768"
+          },
+          {
+            "location": "src/kem.rs",
+            "line": 12,
+            "symbol": "ml_kem_768"
+          },
+          {
+            "location": "src/kem.rs",
+            "line": 13,
+            "symbol": "ml_kem_768"
+          },
+          {
+            "location": "src/kem.rs",
+            "line": 19,
+            "symbol": "ml_kem_768"
+          },
+          {
+            "location": "config/sealbox.toml",
+            "line": 17,
+            "symbol": "ML-KEM-768"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-x.509-certificate-7",
+      "name": "X.509 Certificate",
+      "description": "X.509 certificate detected. Certificate algorithm and key size should be verified for quantum safety.",
+      "cryptoProperties": {
+        "assetType": "certificate"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "keys/archive-gateway-cert.pem",
+            "line": 1,
+            "symbol": "-----BEGIN CERTIFICATE-----"
+          }
+        ]
+      }
+    }
+  ]
+}

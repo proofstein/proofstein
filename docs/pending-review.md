@@ -37,6 +37,7 @@ already taken and the evidence for it.
 | 15 | CLOSED | Negative cases can charge |
 | 16 | CLOSED | A mode name alone does not credit a cipher |
 | 17 | CLOSED | Falcon negative case moved |
+| 18 | CLOSED | Bare case labels in `pqprobe-static` |
 
 Entries 9 and 11 raise the same question and should be reviewed together.
 
@@ -723,3 +724,7 @@ A report naming no family whose only overlap with a plant is a mode or construct
 ## 17. Falcon negative case moved (CLOSED, 2026-10-07)
 
 The Falcon web-framework negative case is `beacon-relay/ops/health/api.py`, in a project that plants no Falcon, so a Falcon or FN-DSA component there is charged.
+
+## 18. Bare case labels in `pqprobe-static` (CLOSED, 2026-10-08)
+
+`pqprobe-static` 3.8.2 reports no post-quantum algorithm from a case label alone on its line whose operands are string literals, which on the public corpus withholds `Falcon-512` and `SLH-DSA` at `session-broker/src/attest.ts:41` and `:39`, charges it no false positive and leaves every tool's recall unchanged.
