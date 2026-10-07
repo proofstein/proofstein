@@ -6,7 +6,7 @@ from __future__ import annotations
 
 from collections import defaultdict
 
-from .scoring import ScoreResult
+from .scoring import AssetVerdict, ScoreResult
 
 LAYER_TITLES = {
     1: "L1 direct call",
@@ -408,7 +408,33 @@ def render_markdown(results: list[ScoreResult], meta: dict) -> str:
     return "".join(out)
 
 
+def _asset_entry(verdict: AssetVerdict, holdout: bool) -> dict:
+    """One plant's verdicts. A holdout plant is named by its id alone.
+
+    A holdout's file paths and line numbers are what its unpublished seed
+    protects (METHODOLOGY.md §6), so the results name each plant without them,
+    as the withheld CBOMs would have.
+    """
+    entry = {"id": verdict.id}
+    if not holdout:
+        entry["file"] = verdict.file
+        entry["line"] = verdict.line
+    entry.update(
+        {
+            "algorithm": verdict.algorithm,
+            "layer": verdict.layer,
+            "cyclonedx_asset_type": verdict.asset_type,
+            "detected": verdict.detected,
+            "located": verdict.located,
+            "file_only": verdict.file_only,
+            "name_only": verdict.name_only,
+        }
+    )
+    return entry
+
+
 def render_json(results: list[ScoreResult], meta: dict) -> dict:
+    holdout = meta.get("corpus") == "holdout"
     per_tool: dict[str, dict] = defaultdict(
         lambda: {
             "detected": 0,
@@ -458,21 +484,7 @@ def render_json(results: list[ScoreResult], meta: dict) -> dict:
                 "phantom_algorithm": result.phantom_algorithm,
                 "unmatched_reports": result.unmatched_reports,
                 "evidence": result.evidence.as_dict(),
-                "assets": [
-                    {
-                        "id": v.id,
-                        "file": v.file,
-                        "line": v.line,
-                        "algorithm": v.algorithm,
-                        "layer": v.layer,
-                        "cyclonedx_asset_type": v.asset_type,
-                        "detected": v.detected,
-                        "located": v.located,
-                        "file_only": v.file_only,
-                        "name_only": v.name_only,
-                    }
-                    for v in result.verdicts
-                ],
+                "assets": [_asset_entry(v, holdout) for v in result.verdicts],
             }
         )
 
