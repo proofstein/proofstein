@@ -1,0 +1,169 @@
+{
+  "_comment": [
+    "Generator definitions for this run. Wrappers for tools without CycloneDX output are in harness/."
+  ],
+  "tools": [
+    {
+      "name": "cdxgen",
+      "binary": "tools/cdxgen-docker.sh",
+      "package_version": "@cyclonedx/cdxgen@12.8.2",
+      "version_command": [
+        "tools/cdxgen-docker.sh",
+        "--version"
+      ],
+      "invocation": [
+        "tools/cdxgen-docker.sh",
+        "--json-pretty",
+        "--include-crypto",
+        "-o",
+        "{out}",
+        "{project}"
+      ],
+      "output": "file",
+      "cwd": "project",
+      "accept_exit": [
+        0
+      ],
+      "env": {
+        "CDXGEN_DEBUG_MODE": "info",
+        "FETCH_LICENSE": "false"
+      },
+      "notes": "Arguments mirror BF-CBOM's cdxgen worker. Records source files in properties[].SrcFile without line numbers. Invoked through the pinned image ghcr.io/cyclonedx/cdxgen:12.8.2, so it needs no build root and runs the same on any host with Docker."
+    },
+    {
+      "name": "pqprobe-static",
+      "binary": "${PQPROBE_STATIC_BIN}",
+      "package_version": "pqprobe-static @ ${PQPROBE_STATIC_BIN}",
+      "version_command": [
+        "${PQPROBE_STATIC_BIN}",
+        "version"
+      ],
+      "invocation": [
+        "${PQPROBE_STATIC_BIN}",
+        "--output",
+        "cbom",
+        "scan",
+        "."
+      ],
+      "output": "stdout",
+      "cwd": "project",
+      "accept_exit": [
+        0,
+        1
+      ],
+      "notes": "Exit 1 means findings present, not failure. The binary path comes from PQPROBE_STATIC_BIN; the manifest records what it resolved to and that file's sha256. Maintained by the same party as Proofstein; see the governance section in README.md."
+    },
+    {
+      "name": "cryptoscan",
+      "binary": "${CRYPTOSCAN_BIN}",
+      "package_version": "cryptoscan 1.4.0 (release tarball, checksum verified)",
+      "version_command": [
+        "${CRYPTOSCAN_BIN}",
+        "version"
+      ],
+      "invocation": [
+        "${CRYPTOSCAN_BIN}",
+        "scan",
+        ".",
+        "--format",
+        "cbom",
+        "--no-color"
+      ],
+      "output": "stdout",
+      "cwd": "project",
+      "accept_exit": [
+        0,
+        1
+      ],
+      "notes": "Defaults. Withholds findings it classes as quantum-safe (AES, SHA-2). Exits 1 when a critical finding is present, after writing the full report (internal/cli/scan.go at v1.4.0)."
+    },
+    {
+      "name": "cryptoscan-quantum-safe",
+      "binary": "${CRYPTOSCAN_BIN}",
+      "package_version": "cryptoscan 1.4.0 (release tarball, checksum verified)",
+      "version_command": [
+        "${CRYPTOSCAN_BIN}",
+        "version"
+      ],
+      "invocation": [
+        "${CRYPTOSCAN_BIN}",
+        "scan",
+        ".",
+        "--format",
+        "cbom",
+        "--no-color",
+        "--include-quantum-safe"
+      ],
+      "output": "stdout",
+      "cwd": "project",
+      "accept_exit": [
+        0,
+        1
+      ],
+      "notes": "--include-quantum-safe: also reports AES and SHA-2. Exits 1 when a critical finding is present, after writing the full report (internal/cli/scan.go at v1.4.0)."
+    },
+    {
+      "name": "cbomkit-theia",
+      "binary": "${THEIA_BIN}",
+      "package_version": "cbomkit-theia v1.1.2 (dcd95ac), built from source",
+      "version_command": [
+        "/bin/echo",
+        "cbomkit-theia v1.1.2 (dcd95ac)"
+      ],
+      "invocation": [
+        "${THEIA_BIN}",
+        "dir",
+        "."
+      ],
+      "output": "stdout",
+      "cwd": "project",
+      "accept_exit": [
+        0
+      ],
+      "notes": "Default plugins. Reads certificates, keys, java.security and OpenSSL configuration; no source code."
+    },
+    {
+      "name": "opengrep",
+      "binary": "runs/2026-10-07T2012Z-public/harness/opengrep-cbom.sh",
+      "package_version": "opengrep 1.30.1 with the 100 cryptography rules (harness/select_rules.py, by CWE) of opengrep-rules at f1d2b562, rule content of 0f5a85ce (2024-12-13); rule set sha256/16 58291c511806239d",
+      "version_command": [
+        "runs/2026-10-07T2012Z-public/harness/opengrep-cbom.sh",
+        "--version"
+      ],
+      "invocation": [
+        "runs/2026-10-07T2012Z-public/harness/opengrep-cbom.sh"
+      ],
+      "output": "stdout",
+      "cwd": "project",
+      "accept_exit": [
+        0
+      ],
+      "env": {
+        "OPENGREP_BIN": "${OPENGREP_BIN}",
+        "OPENGREP_RULES": "${OPENGREP_RULES}"
+      },
+      "notes": "Each result is a component named by its rule id, at the reported file and line."
+    },
+    {
+      "name": "codeql",
+      "binary": "runs/2026-10-07T2012Z-public/harness/codeql-cbom.sh",
+      "package_version": "CodeQL bundle 2.27.1 (checksum verified), inventory queries only",
+      "version_command": [
+        "runs/2026-10-07T2012Z-public/harness/codeql-cbom.sh",
+        "--version"
+      ],
+      "invocation": [
+        "runs/2026-10-07T2012Z-public/harness/codeql-cbom.sh"
+      ],
+      "output": "stdout",
+      "cwd": "project",
+      "accept_exit": [
+        0
+      ],
+      "env": {
+        "CODEQL_BIN": "${CODEQL_BIN}"
+      },
+      "notes": "Inventory queries for C/C++, Python and Java, every one of those languages present in a project, build-mode none; a project with none of them gets no document."
+    }
+  ]
+}
