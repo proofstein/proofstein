@@ -1,6 +1,6 @@
 {
   "meta": {
-    "corpus_version": "49c979d",
+    "corpus_version": "57324cd",
     "line_tolerance": 2,
     "corpus": "holdout",
     "schema_validated": true,
@@ -20,15 +20,15 @@
     "unscored_pairs": 0,
     "problems": [],
     "run": {
-      "manifest": "runs/2026-08-23T1519Z-holdout/manifest.json",
-      "started_utc": "2026-08-23T15:21:19Z",
-      "corpus_commit": "49c979d3e8a3b0f7ef063ea89d61cea5c30ea889",
+      "manifest": "runs/2026-10-07T2249Z-holdout/manifest.json",
+      "started_utc": "2026-10-07T22:49:12Z",
+      "corpus_commit": "57324cd9fe0541090af6e335c83f8d0488a8b36f",
       "corpus_tree_dirty": false,
       "attempted": 12,
       "succeeded": 12,
       "tool_versions": {
         "cdxgen": "CycloneDX Generator 12.8.2",
-        "pqprobe-static": "PQProbe Static v3.6.0"
+        "pqprobe-static": "pqprobe-static 3.8.2 (commit 2cd11d900cf4b5ef51c661a013c6aab692acf020, built 2026-10-07T22:13:19Z, dirty false)"
       },
       "judgement_tables": {
         "oid_algorithms": {
@@ -48,8 +48,8 @@
           "sha256_16": "637f0e9d5f2cf137"
         },
         "family_markers": {
-          "entries": 37,
-          "sha256_16": "2aef68bf8064cccc"
+          "entries": 43,
+          "sha256_16": "e4639e0dd1414815"
         },
         "whole_token_only": {
           "entries": 7,
@@ -60,6 +60,7 @@
           "sha256_16": "3a7fca80174e0cdd"
         }
       },
+      "judgement_tables_collected": null,
       "failed_invocations": []
     }
   },
@@ -112,12 +113,12 @@
       "detected": 119,
       "total": 124,
       "detection_rate": 0.9597,
-      "precision": 0.7281,
-      "claim_precision": 0.6127,
-      "matched_components": 83,
+      "precision": 0.7368,
+      "claim_precision": 0.6207,
+      "matched_components": 84,
       "reported_components": 114,
-      "credited_claims": 125,
-      "total_claims": 204,
+      "credited_claims": 126,
+      "total_claims": 203,
       "false_positives": 0,
       "by_layer": {
         "1": {
@@ -215,16 +216,6 @@
       },
       "assets": [
         {
-          "id": "py-l4-yaml-attestation",
-          "algorithm": "SLH-DSA",
-          "layer": 4,
-          "cyclonedx_asset_type": "algorithm",
-          "detected": false,
-          "located": false,
-          "file_only": false,
-          "name_only": false
-        },
-        {
           "id": "py-l4-yaml-kem",
           "algorithm": "ML-KEM-768",
           "layer": 4,
@@ -235,8 +226,18 @@
           "name_only": false
         },
         {
-          "id": "py-l4-yaml-sig",
-          "algorithm": "Ed25519",
+          "id": "py-l4-yaml-audit",
+          "algorithm": "RSA-2048",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "py-l4-yaml-attestation",
+          "algorithm": "SLH-DSA",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
           "detected": false,
@@ -255,8 +256,8 @@
           "name_only": false
         },
         {
-          "id": "py-l4-yaml-audit",
-          "algorithm": "RSA-2048",
+          "id": "py-l4-yaml-sig",
+          "algorithm": "Ed25519",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
           "detected": false,
@@ -285,20 +286,20 @@
           "name_only": false
         },
         {
-          "id": "py-l4-helm-tls",
-          "algorithm": "TLSv1.3",
+          "id": "py-l4-helm-kem",
+          "algorithm": "ML-KEM-768",
           "layer": 4,
-          "cyclonedx_asset_type": "protocol",
+          "cyclonedx_asset_type": "algorithm",
           "detected": false,
           "located": false,
           "file_only": false,
           "name_only": false
         },
         {
-          "id": "py-l4-helm-kem",
-          "algorithm": "ML-KEM-768",
+          "id": "py-l4-helm-tls",
+          "algorithm": "TLSv1.3",
           "layer": 4,
-          "cyclonedx_asset_type": "algorithm",
+          "cyclonedx_asset_type": "protocol",
           "detected": false,
           "located": false,
           "file_only": false,
@@ -507,16 +508,6 @@
       },
       "assets": [
         {
-          "id": "py-l4-yaml-attestation",
-          "algorithm": "SLH-DSA",
-          "layer": 4,
-          "cyclonedx_asset_type": "algorithm",
-          "detected": true,
-          "located": true,
-          "file_only": true,
-          "name_only": true
-        },
-        {
           "id": "py-l4-yaml-kem",
           "algorithm": "ML-KEM-768",
           "layer": 4,
@@ -527,8 +518,18 @@
           "name_only": true
         },
         {
-          "id": "py-l4-yaml-sig",
-          "algorithm": "Ed25519",
+          "id": "py-l4-yaml-audit",
+          "algorithm": "RSA-2048",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "py-l4-yaml-attestation",
+          "algorithm": "SLH-DSA",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
           "detected": true,
@@ -547,8 +548,8 @@
           "name_only": true
         },
         {
-          "id": "py-l4-yaml-audit",
-          "algorithm": "RSA-2048",
+          "id": "py-l4-yaml-sig",
+          "algorithm": "Ed25519",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
           "detected": true,
@@ -577,20 +578,20 @@
           "name_only": true
         },
         {
-          "id": "py-l4-helm-tls",
-          "algorithm": "TLSv1.3",
+          "id": "py-l4-helm-kem",
+          "algorithm": "ML-KEM-768",
           "layer": 4,
-          "cyclonedx_asset_type": "protocol",
+          "cyclonedx_asset_type": "algorithm",
           "detected": true,
           "located": true,
           "file_only": true,
           "name_only": true
         },
         {
-          "id": "py-l4-helm-kem",
-          "algorithm": "ML-KEM-768",
+          "id": "py-l4-helm-tls",
+          "algorithm": "TLSv1.3",
           "layer": 4,
-          "cyclonedx_asset_type": "algorithm",
+          "cyclonedx_asset_type": "protocol",
           "detected": true,
           "located": true,
           "file_only": true,
@@ -999,6 +1000,16 @@
           "name_only": false
         },
         {
+          "id": "java-l4-prop-settlement",
+          "algorithm": "RSA-2048",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
           "id": "java-l4-prop-kem",
           "algorithm": "ML-KEM-768",
           "layer": 4,
@@ -1029,16 +1040,6 @@
           "name_only": true
         },
         {
-          "id": "java-l4-prop-settlement",
-          "algorithm": "RSA-2048",
-          "layer": 4,
-          "cyclonedx_asset_type": "algorithm",
-          "detected": false,
-          "located": false,
-          "file_only": false,
-          "name_only": false
-        },
-        {
           "id": "java-l4-prop-hash",
           "algorithm": "SHA-256",
           "layer": 4,
@@ -1061,10 +1062,10 @@
       "detected": 24,
       "total": 25,
       "detection_rate": 0.96,
-      "precision": 0.68,
-      "claim_precision": 0.5682,
-      "matched_components": 17,
-      "credited_claims": 25,
+      "precision": 0.72,
+      "claim_precision": 0.5909,
+      "matched_components": 18,
+      "credited_claims": 26,
       "by_layer": {
         "1": {
           "detected": 10,
@@ -1311,6 +1312,16 @@
           "name_only": true
         },
         {
+          "id": "java-l4-prop-settlement",
+          "algorithm": "RSA-2048",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
           "id": "java-l4-prop-kem",
           "algorithm": "ML-KEM-768",
           "layer": 4,
@@ -1333,16 +1344,6 @@
         {
           "id": "java-l4-prop-cipher",
           "algorithm": "AES-256-GCM",
-          "layer": 4,
-          "cyclonedx_asset_type": "algorithm",
-          "detected": true,
-          "located": true,
-          "file_only": true,
-          "name_only": true
-        },
-        {
-          "id": "java-l4-prop-settlement",
-          "algorithm": "RSA-2048",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
           "detected": true,
@@ -1433,18 +1434,8 @@
           "name_only": true
         },
         {
-          "id": "c-l4-conf-cipher",
-          "algorithm": "AES-256-GCM",
-          "layer": 4,
-          "cyclonedx_asset_type": "algorithm",
-          "detected": false,
-          "located": false,
-          "file_only": false,
-          "name_only": false
-        },
-        {
-          "id": "c-l4-conf-kem",
-          "algorithm": "ML-KEM-768",
+          "id": "c-l4-conf-sig",
+          "algorithm": "Ed25519",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
           "detected": false,
@@ -1463,8 +1454,18 @@
           "name_only": false
         },
         {
-          "id": "c-l4-conf-sig",
-          "algorithm": "Ed25519",
+          "id": "c-l4-conf-cipher",
+          "algorithm": "AES-256-GCM",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "c-l4-conf-kem",
+          "algorithm": "ML-KEM-768",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
           "detected": false,
@@ -1685,18 +1686,8 @@
           "name_only": true
         },
         {
-          "id": "c-l4-conf-cipher",
-          "algorithm": "AES-256-GCM",
-          "layer": 4,
-          "cyclonedx_asset_type": "algorithm",
-          "detected": true,
-          "located": true,
-          "file_only": true,
-          "name_only": true
-        },
-        {
-          "id": "c-l4-conf-kem",
-          "algorithm": "ML-KEM-768",
+          "id": "c-l4-conf-sig",
+          "algorithm": "Ed25519",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
           "detected": true,
@@ -1715,8 +1706,18 @@
           "name_only": true
         },
         {
-          "id": "c-l4-conf-sig",
-          "algorithm": "Ed25519",
+          "id": "c-l4-conf-cipher",
+          "algorithm": "AES-256-GCM",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "c-l4-conf-kem",
+          "algorithm": "ML-KEM-768",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
           "detected": true,
@@ -1927,8 +1928,8 @@
       },
       "assets": [
         {
-          "id": "go-l4-yaml-sig",
-          "algorithm": "Ed25519",
+          "id": "go-l4-yaml-suite",
+          "algorithm": "AES-256-GCM",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
           "detected": false,
@@ -1937,8 +1938,8 @@
           "name_only": false
         },
         {
-          "id": "go-l4-yaml-suite",
-          "algorithm": "AES-256-GCM",
+          "id": "go-l4-yaml-sig",
+          "algorithm": "Ed25519",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
           "detected": false,
@@ -2179,8 +2180,8 @@
       },
       "assets": [
         {
-          "id": "go-l4-yaml-sig",
-          "algorithm": "Ed25519",
+          "id": "go-l4-yaml-suite",
+          "algorithm": "AES-256-GCM",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
           "detected": true,
@@ -2189,8 +2190,8 @@
           "name_only": true
         },
         {
-          "id": "go-l4-yaml-suite",
-          "algorithm": "AES-256-GCM",
+          "id": "go-l4-yaml-sig",
+          "algorithm": "Ed25519",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
           "detected": true,
@@ -2451,6 +2452,16 @@
           "name_only": true
         },
         {
+          "id": "js-l4-yaml-cipher",
+          "algorithm": "AES-256-GCM",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
           "id": "js-l4-yaml-assertion",
           "algorithm": "ML-DSA-65",
           "layer": 4,
@@ -2463,16 +2474,6 @@
         {
           "id": "js-l4-yaml-kem",
           "algorithm": "ML-KEM-768",
-          "layer": 4,
-          "cyclonedx_asset_type": "algorithm",
-          "detected": false,
-          "located": false,
-          "file_only": false,
-          "name_only": false
-        },
-        {
-          "id": "js-l4-yaml-cipher",
-          "algorithm": "AES-256-GCM",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
           "detected": false,
@@ -2643,8 +2644,8 @@
       "detected": 19,
       "total": 20,
       "detection_rate": 0.95,
-      "precision": 0.8125,
-      "claim_precision": 0.6552,
+      "precision": 0.8667,
+      "claim_precision": 0.7037,
       "matched_components": 13,
       "credited_claims": 19,
       "by_layer": {
@@ -2678,18 +2679,18 @@
       "phantom_algorithm": 0,
       "unmatched_reports": 0,
       "evidence": {
-        "crypto_components": 16,
-        "total_occurrences": 29,
-        "distinct_claims": 29,
-        "with_location": 16,
+        "crypto_components": 15,
+        "total_occurrences": 27,
+        "distinct_claims": 27,
+        "with_location": 15,
         "with_location_pct": 1.0,
-        "with_line": 16,
+        "with_line": 15,
         "with_line_pct": 1.0,
-        "using_spec_evidence": 16,
+        "using_spec_evidence": 15,
         "using_properties_only": 0,
-        "resolvable_locations": 29,
+        "resolvable_locations": 27,
         "unresolvable_locations": 0,
-        "occurrences_per_component": 1.812
+        "occurrences_per_component": 1.8
       },
       "assets": [
         {
@@ -2713,6 +2714,16 @@
           "name_only": true
         },
         {
+          "id": "js-l4-yaml-cipher",
+          "algorithm": "AES-256-GCM",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
           "id": "js-l4-yaml-assertion",
           "algorithm": "ML-DSA-65",
           "layer": 4,
@@ -2725,16 +2736,6 @@
         {
           "id": "js-l4-yaml-kem",
           "algorithm": "ML-KEM-768",
-          "layer": 4,
-          "cyclonedx_asset_type": "algorithm",
-          "detected": true,
-          "located": true,
-          "file_only": true,
-          "name_only": true
-        },
-        {
-          "id": "js-l4-yaml-cipher",
-          "algorithm": "AES-256-GCM",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
           "detected": true,
@@ -3147,8 +3148,8 @@
       "detected": 17,
       "total": 18,
       "detection_rate": 0.9444,
-      "precision": 0.7333,
-      "claim_precision": 0.5517,
+      "precision": 0.6875,
+      "claim_precision": 0.5333,
       "matched_components": 11,
       "credited_claims": 16,
       "by_layer": {
@@ -3180,20 +3181,20 @@
       "false_positives": 0,
       "phantom_location": 0,
       "phantom_algorithm": 0,
-      "unmatched_reports": 0,
+      "unmatched_reports": 1,
       "evidence": {
-        "crypto_components": 15,
-        "total_occurrences": 29,
-        "distinct_claims": 29,
-        "with_location": 15,
+        "crypto_components": 16,
+        "total_occurrences": 30,
+        "distinct_claims": 30,
+        "with_location": 16,
         "with_location_pct": 1.0,
-        "with_line": 15,
+        "with_line": 16,
         "with_line_pct": 1.0,
-        "using_spec_evidence": 15,
+        "using_spec_evidence": 16,
         "using_properties_only": 0,
-        "resolvable_locations": 29,
+        "resolvable_locations": 30,
         "unresolvable_locations": 0,
-        "occurrences_per_component": 1.933
+        "occurrences_per_component": 1.875
       },
       "assets": [
         {
