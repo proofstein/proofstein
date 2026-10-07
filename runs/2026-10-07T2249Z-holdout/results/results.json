@@ -217,8 +217,6 @@
       "assets": [
         {
           "id": "py-l4-yaml-kem",
-          "file": "config/vaultkeeper.yaml",
-          "line": 21,
           "algorithm": "ML-KEM-768",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -229,8 +227,6 @@
         },
         {
           "id": "py-l4-yaml-audit",
-          "file": "config/vaultkeeper.yaml",
-          "line": 23,
           "algorithm": "RSA-2048",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -241,8 +237,6 @@
         },
         {
           "id": "py-l4-yaml-attestation",
-          "file": "config/vaultkeeper.yaml",
-          "line": 24,
           "algorithm": "SLH-DSA",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -253,8 +247,6 @@
         },
         {
           "id": "py-l4-yaml-cipher",
-          "file": "config/vaultkeeper.yaml",
-          "line": 25,
           "algorithm": "AES-128-GCM",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -265,8 +257,6 @@
         },
         {
           "id": "py-l4-yaml-sig",
-          "file": "config/vaultkeeper.yaml",
-          "line": 26,
           "algorithm": "Ed25519",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -277,8 +267,6 @@
         },
         {
           "id": "py-l4-yaml-hash",
-          "file": "config/vaultkeeper.yaml",
-          "line": 29,
           "algorithm": "SHA-256",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -289,8 +277,6 @@
         },
         {
           "id": "py-l4-helm-cipher",
-          "file": "deploy/values.yaml",
-          "line": 23,
           "algorithm": "AES-128-GCM",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -301,8 +287,6 @@
         },
         {
           "id": "py-l4-helm-kem",
-          "file": "deploy/values.yaml",
-          "line": 24,
           "algorithm": "ML-KEM-768",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -313,8 +297,6 @@
         },
         {
           "id": "py-l4-helm-tls",
-          "file": "deploy/values.yaml",
-          "line": 25,
           "algorithm": "TLSv1.3",
           "layer": 4,
           "cyclonedx_asset_type": "protocol",
@@ -325,8 +307,6 @@
         },
         {
           "id": "py-dep-pynacl",
-          "file": "pyproject.toml",
-          "line": 20,
           "algorithm": "PyNaCl",
           "layer": 5,
           "cyclonedx_asset_type": "algorithm",
@@ -337,8 +317,6 @@
         },
         {
           "id": "py-dep-pynacl-req",
-          "file": "requirements.txt",
-          "line": 4,
           "algorithm": "PyNaCl",
           "layer": 5,
           "cyclonedx_asset_type": "algorithm",
@@ -349,8 +327,6 @@
         },
         {
           "id": "py-l6-manifest-key",
-          "file": "secrets/node-manifest-key.pem",
-          "line": 1,
           "algorithm": "Ed25519",
           "layer": 6,
           "cyclonedx_asset_type": "related-crypto-material",
@@ -361,8 +337,6 @@
         },
         {
           "id": "py-l6-mesh-cert",
-          "file": "secrets/peer-mesh-cert.pem",
-          "line": 1,
           "algorithm": "ECDSA-P256",
           "layer": 6,
           "cyclonedx_asset_type": "certificate",
@@ -373,8 +347,6 @@
         },
         {
           "id": "py-l6-mesh-key",
-          "file": "secrets/peer-mesh-key.pem",
-          "line": 1,
           "algorithm": "ECDSA-P256",
           "layer": 6,
           "cyclonedx_asset_type": "related-crypto-material",
@@ -385,8 +357,6 @@
         },
         {
           "id": "py-l1-falcon",
-          "file": "src/vaultkeeper/attest.py",
-          "line": 39,
           "algorithm": "Falcon-1024",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -397,8 +367,6 @@
         },
         {
           "id": "py-l3-wrapper",
-          "file": "src/vaultkeeper/backend.py",
-          "line": 36,
           "algorithm": "AES-128-GCM",
           "layer": 3,
           "cyclonedx_asset_type": "algorithm",
@@ -409,8 +377,6 @@
         },
         {
           "id": "py-l1-aesgcm",
-          "file": "src/vaultkeeper/envelope.py",
-          "line": 49,
           "algorithm": "AES-128-GCM",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -421,8 +387,6 @@
         },
         {
           "id": "py-l2-sha256",
-          "file": "src/vaultkeeper/fingerprint.py",
-          "line": 21,
           "algorithm": "SHA-256",
           "layer": 2,
           "cyclonedx_asset_type": "algorithm",
@@ -433,8 +397,6 @@
         },
         {
           "id": "py-l1-rsa",
-          "file": "src/vaultkeeper/identity.py",
-          "line": 32,
           "algorithm": "RSA-2048",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -445,8 +407,6 @@
         },
         {
           "id": "py-l1-ecdsa",
-          "file": "src/vaultkeeper/identity.py",
-          "line": 33,
           "algorithm": "ECDSA-P256",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -457,8 +417,6 @@
         },
         {
           "id": "py-l1-ed25519",
-          "file": "src/vaultkeeper/identity.py",
-          "line": 34,
           "algorithm": "Ed25519",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -469,8 +427,6 @@
         },
         {
           "id": "py-l1-sha256",
-          "file": "src/vaultkeeper/identity.py",
-          "line": 46,
           "algorithm": "SHA-256",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -481,8 +437,6 @@
         },
         {
           "id": "py-l1-mlkem",
-          "file": "src/vaultkeeper/kem.py",
-          "line": 28,
           "algorithm": "ML-KEM-768",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -555,8 +509,6 @@
       "assets": [
         {
           "id": "py-l4-yaml-kem",
-          "file": "config/vaultkeeper.yaml",
-          "line": 21,
           "algorithm": "ML-KEM-768",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -567,8 +519,6 @@
         },
         {
           "id": "py-l4-yaml-audit",
-          "file": "config/vaultkeeper.yaml",
-          "line": 23,
           "algorithm": "RSA-2048",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -579,8 +529,6 @@
         },
         {
           "id": "py-l4-yaml-attestation",
-          "file": "config/vaultkeeper.yaml",
-          "line": 24,
           "algorithm": "SLH-DSA",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -591,8 +539,6 @@
         },
         {
           "id": "py-l4-yaml-cipher",
-          "file": "config/vaultkeeper.yaml",
-          "line": 25,
           "algorithm": "AES-128-GCM",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -603,8 +549,6 @@
         },
         {
           "id": "py-l4-yaml-sig",
-          "file": "config/vaultkeeper.yaml",
-          "line": 26,
           "algorithm": "Ed25519",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -615,8 +559,6 @@
         },
         {
           "id": "py-l4-yaml-hash",
-          "file": "config/vaultkeeper.yaml",
-          "line": 29,
           "algorithm": "SHA-256",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -627,8 +569,6 @@
         },
         {
           "id": "py-l4-helm-cipher",
-          "file": "deploy/values.yaml",
-          "line": 23,
           "algorithm": "AES-128-GCM",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -639,8 +579,6 @@
         },
         {
           "id": "py-l4-helm-kem",
-          "file": "deploy/values.yaml",
-          "line": 24,
           "algorithm": "ML-KEM-768",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -651,8 +589,6 @@
         },
         {
           "id": "py-l4-helm-tls",
-          "file": "deploy/values.yaml",
-          "line": 25,
           "algorithm": "TLSv1.3",
           "layer": 4,
           "cyclonedx_asset_type": "protocol",
@@ -663,8 +599,6 @@
         },
         {
           "id": "py-dep-pynacl",
-          "file": "pyproject.toml",
-          "line": 20,
           "algorithm": "PyNaCl",
           "layer": 5,
           "cyclonedx_asset_type": "algorithm",
@@ -675,8 +609,6 @@
         },
         {
           "id": "py-dep-pynacl-req",
-          "file": "requirements.txt",
-          "line": 4,
           "algorithm": "PyNaCl",
           "layer": 5,
           "cyclonedx_asset_type": "algorithm",
@@ -687,8 +619,6 @@
         },
         {
           "id": "py-l6-manifest-key",
-          "file": "secrets/node-manifest-key.pem",
-          "line": 1,
           "algorithm": "Ed25519",
           "layer": 6,
           "cyclonedx_asset_type": "related-crypto-material",
@@ -699,8 +629,6 @@
         },
         {
           "id": "py-l6-mesh-cert",
-          "file": "secrets/peer-mesh-cert.pem",
-          "line": 1,
           "algorithm": "ECDSA-P256",
           "layer": 6,
           "cyclonedx_asset_type": "certificate",
@@ -711,8 +639,6 @@
         },
         {
           "id": "py-l6-mesh-key",
-          "file": "secrets/peer-mesh-key.pem",
-          "line": 1,
           "algorithm": "ECDSA-P256",
           "layer": 6,
           "cyclonedx_asset_type": "related-crypto-material",
@@ -723,8 +649,6 @@
         },
         {
           "id": "py-l1-falcon",
-          "file": "src/vaultkeeper/attest.py",
-          "line": 39,
           "algorithm": "Falcon-1024",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -735,8 +659,6 @@
         },
         {
           "id": "py-l3-wrapper",
-          "file": "src/vaultkeeper/backend.py",
-          "line": 36,
           "algorithm": "AES-128-GCM",
           "layer": 3,
           "cyclonedx_asset_type": "algorithm",
@@ -747,8 +669,6 @@
         },
         {
           "id": "py-l1-aesgcm",
-          "file": "src/vaultkeeper/envelope.py",
-          "line": 49,
           "algorithm": "AES-128-GCM",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -759,8 +679,6 @@
         },
         {
           "id": "py-l2-sha256",
-          "file": "src/vaultkeeper/fingerprint.py",
-          "line": 21,
           "algorithm": "SHA-256",
           "layer": 2,
           "cyclonedx_asset_type": "algorithm",
@@ -771,8 +689,6 @@
         },
         {
           "id": "py-l1-rsa",
-          "file": "src/vaultkeeper/identity.py",
-          "line": 32,
           "algorithm": "RSA-2048",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -783,8 +699,6 @@
         },
         {
           "id": "py-l1-ecdsa",
-          "file": "src/vaultkeeper/identity.py",
-          "line": 33,
           "algorithm": "ECDSA-P256",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -795,8 +709,6 @@
         },
         {
           "id": "py-l1-ed25519",
-          "file": "src/vaultkeeper/identity.py",
-          "line": 34,
           "algorithm": "Ed25519",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -807,8 +719,6 @@
         },
         {
           "id": "py-l1-sha256",
-          "file": "src/vaultkeeper/identity.py",
-          "line": 46,
           "algorithm": "SHA-256",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -819,8 +729,6 @@
         },
         {
           "id": "py-l1-mlkem",
-          "file": "src/vaultkeeper/kem.py",
-          "line": 28,
           "algorithm": "ML-KEM-768",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -893,8 +801,6 @@
       "assets": [
         {
           "id": "java-l4-jvm-tls",
-          "file": "deploy/jvm.options",
-          "line": 16,
           "algorithm": "TLSv1.3",
           "layer": 4,
           "cyclonedx_asset_type": "protocol",
@@ -905,8 +811,6 @@
         },
         {
           "id": "java-l4-jvm-groups",
-          "file": "deploy/jvm.options",
-          "line": 17,
           "algorithm": "X25519MLKEM768",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -917,8 +821,6 @@
         },
         {
           "id": "java-l6-block-key",
-          "file": "keys/block-signing-key.pem",
-          "line": 1,
           "algorithm": "Ed25519",
           "layer": 6,
           "cyclonedx_asset_type": "related-crypto-material",
@@ -929,8 +831,6 @@
         },
         {
           "id": "java-l6-keystore",
-          "file": "keys/ledger-node.p12",
-          "line": 1,
           "algorithm": "PKCS#12",
           "layer": 6,
           "cyclonedx_asset_type": "related-crypto-material",
@@ -941,8 +841,6 @@
         },
         {
           "id": "java-dep-bouncycastle",
-          "file": "pom.xml",
-          "line": 26,
           "algorithm": "bcprov-jdk18on",
           "layer": 5,
           "cyclonedx_asset_type": "algorithm",
@@ -953,8 +851,6 @@
         },
         {
           "id": "java-l1-xmss",
-          "file": "src/main/java/io/proofstein/ledger/crypto/AuditSeal.java",
-          "line": 56,
           "algorithm": "XMSS",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -965,8 +861,6 @@
         },
         {
           "id": "java-l2-lms",
-          "file": "src/main/java/io/proofstein/ledger/crypto/AuditSeal.java",
-          "line": 61,
           "algorithm": "LMS",
           "layer": 2,
           "cyclonedx_asset_type": "algorithm",
@@ -977,8 +871,6 @@
         },
         {
           "id": "java-l1-mldsa",
-          "file": "src/main/java/io/proofstein/ledger/crypto/BlockSeal.java",
-          "line": 42,
           "algorithm": "ML-DSA",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -989,8 +881,6 @@
         },
         {
           "id": "java-l2-slhdsa",
-          "file": "src/main/java/io/proofstein/ledger/crypto/BlockSeal.java",
-          "line": 49,
           "algorithm": "SLH-DSA",
           "layer": 2,
           "cyclonedx_asset_type": "algorithm",
@@ -1001,8 +891,6 @@
         },
         {
           "id": "java-l1-falcon",
-          "file": "src/main/java/io/proofstein/ledger/crypto/BlockSeal.java",
-          "line": 57,
           "algorithm": "Falcon-512",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -1013,8 +901,6 @@
         },
         {
           "id": "java-l1-aesgcm",
-          "file": "src/main/java/io/proofstein/ledger/crypto/Envelope.java",
-          "line": 51,
           "algorithm": "AES-256-GCM",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -1025,8 +911,6 @@
         },
         {
           "id": "java-l2-sha256",
-          "file": "src/main/java/io/proofstein/ledger/crypto/Fingerprint.java",
-          "line": 29,
           "algorithm": "SHA-256",
           "layer": 2,
           "cyclonedx_asset_type": "algorithm",
@@ -1037,8 +921,6 @@
         },
         {
           "id": "java-l1-ed25519",
-          "file": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
-          "line": 37,
           "algorithm": "Ed25519",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -1049,8 +931,6 @@
         },
         {
           "id": "java-l1-ecdsa",
-          "file": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
-          "line": 38,
           "algorithm": "ECDSA-P256",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -1061,8 +941,6 @@
         },
         {
           "id": "java-l1-rsa",
-          "file": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
-          "line": 41,
           "algorithm": "RSA-2048",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -1073,8 +951,6 @@
         },
         {
           "id": "java-l1-sha256rsa",
-          "file": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
-          "line": 57,
           "algorithm": "RSA-2048",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -1085,8 +961,6 @@
         },
         {
           "id": "java-l1-sha256",
-          "file": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
-          "line": 65,
           "algorithm": "SHA-256",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -1097,8 +971,6 @@
         },
         {
           "id": "java-l1-mlkem",
-          "file": "src/main/java/io/proofstein/ledger/crypto/Kem.java",
-          "line": 29,
           "algorithm": "ML-KEM",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -1109,8 +981,6 @@
         },
         {
           "id": "java-l3-wrapper",
-          "file": "src/main/java/io/proofstein/ledger/store/PageStore.java",
-          "line": 42,
           "algorithm": "AES-256-GCM",
           "layer": 3,
           "cyclonedx_asset_type": "algorithm",
@@ -1121,8 +991,6 @@
         },
         {
           "id": "java-l4-prop-audit-seal",
-          "file": "src/main/resources/application.properties",
-          "line": 16,
           "algorithm": "XMSS",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -1133,8 +1001,6 @@
         },
         {
           "id": "java-l4-prop-settlement",
-          "file": "src/main/resources/application.properties",
-          "line": 17,
           "algorithm": "RSA-2048",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -1145,8 +1011,6 @@
         },
         {
           "id": "java-l4-prop-kem",
-          "file": "src/main/resources/application.properties",
-          "line": 18,
           "algorithm": "ML-KEM-768",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -1157,8 +1021,6 @@
         },
         {
           "id": "java-l4-prop-sig",
-          "file": "src/main/resources/application.properties",
-          "line": 19,
           "algorithm": "Ed25519",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -1169,8 +1031,6 @@
         },
         {
           "id": "java-l4-prop-cipher",
-          "file": "src/main/resources/application.properties",
-          "line": 20,
           "algorithm": "AES-256-GCM",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -1181,8 +1041,6 @@
         },
         {
           "id": "java-l4-prop-hash",
-          "file": "src/main/resources/application.properties",
-          "line": 24,
           "algorithm": "SHA-256",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -1255,8 +1113,6 @@
       "assets": [
         {
           "id": "java-l4-jvm-tls",
-          "file": "deploy/jvm.options",
-          "line": 16,
           "algorithm": "TLSv1.3",
           "layer": 4,
           "cyclonedx_asset_type": "protocol",
@@ -1267,8 +1123,6 @@
         },
         {
           "id": "java-l4-jvm-groups",
-          "file": "deploy/jvm.options",
-          "line": 17,
           "algorithm": "X25519MLKEM768",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -1279,8 +1133,6 @@
         },
         {
           "id": "java-l6-block-key",
-          "file": "keys/block-signing-key.pem",
-          "line": 1,
           "algorithm": "Ed25519",
           "layer": 6,
           "cyclonedx_asset_type": "related-crypto-material",
@@ -1291,8 +1143,6 @@
         },
         {
           "id": "java-l6-keystore",
-          "file": "keys/ledger-node.p12",
-          "line": 1,
           "algorithm": "PKCS#12",
           "layer": 6,
           "cyclonedx_asset_type": "related-crypto-material",
@@ -1303,8 +1153,6 @@
         },
         {
           "id": "java-dep-bouncycastle",
-          "file": "pom.xml",
-          "line": 26,
           "algorithm": "bcprov-jdk18on",
           "layer": 5,
           "cyclonedx_asset_type": "algorithm",
@@ -1315,8 +1163,6 @@
         },
         {
           "id": "java-l1-xmss",
-          "file": "src/main/java/io/proofstein/ledger/crypto/AuditSeal.java",
-          "line": 56,
           "algorithm": "XMSS",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -1327,8 +1173,6 @@
         },
         {
           "id": "java-l2-lms",
-          "file": "src/main/java/io/proofstein/ledger/crypto/AuditSeal.java",
-          "line": 61,
           "algorithm": "LMS",
           "layer": 2,
           "cyclonedx_asset_type": "algorithm",
@@ -1339,8 +1183,6 @@
         },
         {
           "id": "java-l1-mldsa",
-          "file": "src/main/java/io/proofstein/ledger/crypto/BlockSeal.java",
-          "line": 42,
           "algorithm": "ML-DSA",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -1351,8 +1193,6 @@
         },
         {
           "id": "java-l2-slhdsa",
-          "file": "src/main/java/io/proofstein/ledger/crypto/BlockSeal.java",
-          "line": 49,
           "algorithm": "SLH-DSA",
           "layer": 2,
           "cyclonedx_asset_type": "algorithm",
@@ -1363,8 +1203,6 @@
         },
         {
           "id": "java-l1-falcon",
-          "file": "src/main/java/io/proofstein/ledger/crypto/BlockSeal.java",
-          "line": 57,
           "algorithm": "Falcon-512",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -1375,8 +1213,6 @@
         },
         {
           "id": "java-l1-aesgcm",
-          "file": "src/main/java/io/proofstein/ledger/crypto/Envelope.java",
-          "line": 51,
           "algorithm": "AES-256-GCM",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -1387,8 +1223,6 @@
         },
         {
           "id": "java-l2-sha256",
-          "file": "src/main/java/io/proofstein/ledger/crypto/Fingerprint.java",
-          "line": 29,
           "algorithm": "SHA-256",
           "layer": 2,
           "cyclonedx_asset_type": "algorithm",
@@ -1399,8 +1233,6 @@
         },
         {
           "id": "java-l1-ed25519",
-          "file": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
-          "line": 37,
           "algorithm": "Ed25519",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -1411,8 +1243,6 @@
         },
         {
           "id": "java-l1-ecdsa",
-          "file": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
-          "line": 38,
           "algorithm": "ECDSA-P256",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -1423,8 +1253,6 @@
         },
         {
           "id": "java-l1-rsa",
-          "file": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
-          "line": 41,
           "algorithm": "RSA-2048",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -1435,8 +1263,6 @@
         },
         {
           "id": "java-l1-sha256rsa",
-          "file": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
-          "line": 57,
           "algorithm": "RSA-2048",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -1447,8 +1273,6 @@
         },
         {
           "id": "java-l1-sha256",
-          "file": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
-          "line": 65,
           "algorithm": "SHA-256",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -1459,8 +1283,6 @@
         },
         {
           "id": "java-l1-mlkem",
-          "file": "src/main/java/io/proofstein/ledger/crypto/Kem.java",
-          "line": 29,
           "algorithm": "ML-KEM",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -1471,8 +1293,6 @@
         },
         {
           "id": "java-l3-wrapper",
-          "file": "src/main/java/io/proofstein/ledger/store/PageStore.java",
-          "line": 42,
           "algorithm": "AES-256-GCM",
           "layer": 3,
           "cyclonedx_asset_type": "algorithm",
@@ -1483,8 +1303,6 @@
         },
         {
           "id": "java-l4-prop-audit-seal",
-          "file": "src/main/resources/application.properties",
-          "line": 16,
           "algorithm": "XMSS",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -1495,8 +1313,6 @@
         },
         {
           "id": "java-l4-prop-settlement",
-          "file": "src/main/resources/application.properties",
-          "line": 17,
           "algorithm": "RSA-2048",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -1507,8 +1323,6 @@
         },
         {
           "id": "java-l4-prop-kem",
-          "file": "src/main/resources/application.properties",
-          "line": 18,
           "algorithm": "ML-KEM-768",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -1519,8 +1333,6 @@
         },
         {
           "id": "java-l4-prop-sig",
-          "file": "src/main/resources/application.properties",
-          "line": 19,
           "algorithm": "Ed25519",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -1531,8 +1343,6 @@
         },
         {
           "id": "java-l4-prop-cipher",
-          "file": "src/main/resources/application.properties",
-          "line": 20,
           "algorithm": "AES-256-GCM",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -1543,8 +1353,6 @@
         },
         {
           "id": "java-l4-prop-hash",
-          "file": "src/main/resources/application.properties",
-          "line": 24,
           "algorithm": "SHA-256",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -1617,8 +1425,6 @@
       "assets": [
         {
           "id": "c-dep-libsodium",
-          "file": "conanfile.txt",
-          "line": 5,
           "algorithm": "libsodium",
           "layer": 5,
           "cyclonedx_asset_type": "algorithm",
@@ -1629,8 +1435,6 @@
         },
         {
           "id": "c-l4-conf-sig",
-          "file": "etc/tinyattest.conf",
-          "line": 14,
           "algorithm": "Ed25519",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -1641,8 +1445,6 @@
         },
         {
           "id": "c-l4-conf-digest",
-          "file": "etc/tinyattest.conf",
-          "line": 15,
           "algorithm": "SHA-256",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -1653,8 +1455,6 @@
         },
         {
           "id": "c-l4-conf-cipher",
-          "file": "etc/tinyattest.conf",
-          "line": 16,
           "algorithm": "AES-256-GCM",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -1665,8 +1465,6 @@
         },
         {
           "id": "c-l4-conf-kem",
-          "file": "etc/tinyattest.conf",
-          "line": 17,
           "algorithm": "ML-KEM-768",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -1677,8 +1475,6 @@
         },
         {
           "id": "c-l4-conf-archive-sig",
-          "file": "etc/tinyattest.conf",
-          "line": 18,
           "algorithm": "Falcon-512",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -1689,8 +1485,6 @@
         },
         {
           "id": "c-l4-conf-record-seal",
-          "file": "etc/tinyattest.conf",
-          "line": 19,
           "algorithm": "LMS",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -1701,8 +1495,6 @@
         },
         {
           "id": "c-l6-provisioning-cert",
-          "file": "keys/provisioning-cert.pem",
-          "line": 1,
           "algorithm": "RSA-2048",
           "layer": 6,
           "cyclonedx_asset_type": "certificate",
@@ -1713,8 +1505,6 @@
         },
         {
           "id": "c-l6-provisioning-key",
-          "file": "keys/provisioning-key.pem",
-          "line": 1,
           "algorithm": "RSA-2048",
           "layer": 6,
           "cyclonedx_asset_type": "related-crypto-material",
@@ -1725,8 +1515,6 @@
         },
         {
           "id": "c-l6-report-key",
-          "file": "keys/report-signing-key.pem",
-          "line": 1,
           "algorithm": "Ed25519",
           "layer": 6,
           "cyclonedx_asset_type": "related-crypto-material",
@@ -1737,8 +1525,6 @@
         },
         {
           "id": "c-l2-sha256",
-          "file": "src/digest.c",
-          "line": 35,
           "algorithm": "SHA-256",
           "layer": 2,
           "cyclonedx_asset_type": "algorithm",
@@ -1749,8 +1535,6 @@
         },
         {
           "id": "c-l1-ecdsa",
-          "file": "src/identity.c",
-          "line": 62,
           "algorithm": "ECDSA-P256",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -1761,8 +1545,6 @@
         },
         {
           "id": "c-l1-ed25519",
-          "file": "src/identity.c",
-          "line": 80,
           "algorithm": "Ed25519",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -1773,8 +1555,6 @@
         },
         {
           "id": "c-l1-rsa",
-          "file": "src/identity.c",
-          "line": 82,
           "algorithm": "RSA-2048",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -1785,8 +1565,6 @@
         },
         {
           "id": "c-l1-mlkem",
-          "file": "src/kem.c",
-          "line": 27,
           "algorithm": "ML-KEM-768",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -1797,8 +1575,6 @@
         },
         {
           "id": "c-l1-aesgcm",
-          "file": "src/seal.c",
-          "line": 37,
           "algorithm": "AES-256-GCM",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -1809,8 +1585,6 @@
         },
         {
           "id": "c-l1-xmss",
-          "file": "src/seal_longterm.c",
-          "line": 33,
           "algorithm": "XMSS",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -1821,8 +1595,6 @@
         },
         {
           "id": "c-l1-lms",
-          "file": "src/seal_longterm.c",
-          "line": 92,
           "algorithm": "LMS",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -1833,8 +1605,6 @@
         },
         {
           "id": "c-l3-wrapper",
-          "file": "src/transport.c",
-          "line": 44,
           "algorithm": "AES-256-GCM",
           "layer": 3,
           "cyclonedx_asset_type": "algorithm",
@@ -1907,8 +1677,6 @@
       "assets": [
         {
           "id": "c-dep-libsodium",
-          "file": "conanfile.txt",
-          "line": 5,
           "algorithm": "libsodium",
           "layer": 5,
           "cyclonedx_asset_type": "algorithm",
@@ -1919,8 +1687,6 @@
         },
         {
           "id": "c-l4-conf-sig",
-          "file": "etc/tinyattest.conf",
-          "line": 14,
           "algorithm": "Ed25519",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -1931,8 +1697,6 @@
         },
         {
           "id": "c-l4-conf-digest",
-          "file": "etc/tinyattest.conf",
-          "line": 15,
           "algorithm": "SHA-256",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -1943,8 +1707,6 @@
         },
         {
           "id": "c-l4-conf-cipher",
-          "file": "etc/tinyattest.conf",
-          "line": 16,
           "algorithm": "AES-256-GCM",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -1955,8 +1717,6 @@
         },
         {
           "id": "c-l4-conf-kem",
-          "file": "etc/tinyattest.conf",
-          "line": 17,
           "algorithm": "ML-KEM-768",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -1967,8 +1727,6 @@
         },
         {
           "id": "c-l4-conf-archive-sig",
-          "file": "etc/tinyattest.conf",
-          "line": 18,
           "algorithm": "Falcon-512",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -1979,8 +1737,6 @@
         },
         {
           "id": "c-l4-conf-record-seal",
-          "file": "etc/tinyattest.conf",
-          "line": 19,
           "algorithm": "LMS",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -1991,8 +1747,6 @@
         },
         {
           "id": "c-l6-provisioning-cert",
-          "file": "keys/provisioning-cert.pem",
-          "line": 1,
           "algorithm": "RSA-2048",
           "layer": 6,
           "cyclonedx_asset_type": "certificate",
@@ -2003,8 +1757,6 @@
         },
         {
           "id": "c-l6-provisioning-key",
-          "file": "keys/provisioning-key.pem",
-          "line": 1,
           "algorithm": "RSA-2048",
           "layer": 6,
           "cyclonedx_asset_type": "related-crypto-material",
@@ -2015,8 +1767,6 @@
         },
         {
           "id": "c-l6-report-key",
-          "file": "keys/report-signing-key.pem",
-          "line": 1,
           "algorithm": "Ed25519",
           "layer": 6,
           "cyclonedx_asset_type": "related-crypto-material",
@@ -2027,8 +1777,6 @@
         },
         {
           "id": "c-l2-sha256",
-          "file": "src/digest.c",
-          "line": 35,
           "algorithm": "SHA-256",
           "layer": 2,
           "cyclonedx_asset_type": "algorithm",
@@ -2039,8 +1787,6 @@
         },
         {
           "id": "c-l1-ecdsa",
-          "file": "src/identity.c",
-          "line": 62,
           "algorithm": "ECDSA-P256",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -2051,8 +1797,6 @@
         },
         {
           "id": "c-l1-ed25519",
-          "file": "src/identity.c",
-          "line": 80,
           "algorithm": "Ed25519",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -2063,8 +1807,6 @@
         },
         {
           "id": "c-l1-rsa",
-          "file": "src/identity.c",
-          "line": 82,
           "algorithm": "RSA-2048",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -2075,8 +1817,6 @@
         },
         {
           "id": "c-l1-mlkem",
-          "file": "src/kem.c",
-          "line": 27,
           "algorithm": "ML-KEM-768",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -2087,8 +1827,6 @@
         },
         {
           "id": "c-l1-aesgcm",
-          "file": "src/seal.c",
-          "line": 37,
           "algorithm": "AES-256-GCM",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -2099,8 +1837,6 @@
         },
         {
           "id": "c-l1-xmss",
-          "file": "src/seal_longterm.c",
-          "line": 33,
           "algorithm": "XMSS",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -2111,8 +1847,6 @@
         },
         {
           "id": "c-l1-lms",
-          "file": "src/seal_longterm.c",
-          "line": 92,
           "algorithm": "LMS",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -2123,8 +1857,6 @@
         },
         {
           "id": "c-l3-wrapper",
-          "file": "src/transport.c",
-          "line": 44,
           "algorithm": "AES-256-GCM",
           "layer": 3,
           "cyclonedx_asset_type": "algorithm",
@@ -2197,8 +1929,6 @@
       "assets": [
         {
           "id": "go-l4-yaml-suite",
-          "file": "configs/relay.yaml",
-          "line": 18,
           "algorithm": "AES-256-GCM",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -2209,8 +1939,6 @@
         },
         {
           "id": "go-l4-yaml-sig",
-          "file": "configs/relay.yaml",
-          "line": 19,
           "algorithm": "Ed25519",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -2221,8 +1949,6 @@
         },
         {
           "id": "go-l4-yaml-kex",
-          "file": "configs/relay.yaml",
-          "line": 21,
           "algorithm": "ML-KEM-1024",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -2233,8 +1959,6 @@
         },
         {
           "id": "go-l4-yaml-hash",
-          "file": "configs/relay.yaml",
-          "line": 25,
           "algorithm": "SHA-256",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -2245,8 +1969,6 @@
         },
         {
           "id": "go-l4-nginx-proto",
-          "file": "deploy/nginx.conf",
-          "line": 27,
           "algorithm": "TLSv1.3",
           "layer": 4,
           "cyclonedx_asset_type": "protocol",
@@ -2257,8 +1979,6 @@
         },
         {
           "id": "go-l4-nginx-ciphers",
-          "file": "deploy/nginx.conf",
-          "line": 28,
           "algorithm": "ECDHE-ECDSA-AES256-GCM-SHA384",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -2269,8 +1989,6 @@
         },
         {
           "id": "go-dep-xcrypto",
-          "file": "go.mod",
-          "line": 8,
           "algorithm": "golang.org/x/crypto",
           "layer": 5,
           "cyclonedx_asset_type": "algorithm",
@@ -2281,8 +1999,6 @@
         },
         {
           "id": "go-l2-sha256",
-          "file": "internal/digest/digest.go",
-          "line": 24,
           "algorithm": "SHA-256",
           "layer": 2,
           "cyclonedx_asset_type": "algorithm",
@@ -2293,8 +2009,6 @@
         },
         {
           "id": "go-l1-rsa",
-          "file": "internal/identity/identity.go",
-          "line": 33,
           "algorithm": "RSA-2048",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -2305,8 +2019,6 @@
         },
         {
           "id": "go-l1-ecdsa",
-          "file": "internal/identity/identity.go",
-          "line": 38,
           "algorithm": "ECDSA-P256",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -2317,8 +2029,6 @@
         },
         {
           "id": "go-l1-ed25519",
-          "file": "internal/identity/identity.go",
-          "line": 43,
           "algorithm": "Ed25519",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -2329,8 +2039,6 @@
         },
         {
           "id": "go-l1-sha256",
-          "file": "internal/identity/identity.go",
-          "line": 58,
           "algorithm": "SHA-256",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -2341,8 +2049,6 @@
         },
         {
           "id": "go-l1-aes-block",
-          "file": "internal/seal/seal.go",
-          "line": 40,
           "algorithm": "AES-256",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -2353,8 +2059,6 @@
         },
         {
           "id": "go-l1-aes-gcm",
-          "file": "internal/seal/seal.go",
-          "line": 44,
           "algorithm": "AES-256-GCM",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -2365,8 +2069,6 @@
         },
         {
           "id": "go-l3-wrapper",
-          "file": "internal/seal/seal.go",
-          "line": 59,
           "algorithm": "AES-256-GCM",
           "layer": 3,
           "cyclonedx_asset_type": "algorithm",
@@ -2377,8 +2079,6 @@
         },
         {
           "id": "go-l1-mlkem",
-          "file": "internal/session/session.go",
-          "line": 25,
           "algorithm": "ML-KEM-1024",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -2389,8 +2089,6 @@
         },
         {
           "id": "go-l6-peer-key",
-          "file": "testdata/peer-mtls-key.pem",
-          "line": 1,
           "algorithm": "ECDSA-P256",
           "layer": 6,
           "cyclonedx_asset_type": "related-crypto-material",
@@ -2401,8 +2099,6 @@
         },
         {
           "id": "go-l6-relay-cert",
-          "file": "testdata/relay-cert.pem",
-          "line": 1,
           "algorithm": "RSA-2048",
           "layer": 6,
           "cyclonedx_asset_type": "certificate",
@@ -2413,8 +2109,6 @@
         },
         {
           "id": "go-l6-relay-key",
-          "file": "testdata/relay-key.pem",
-          "line": 1,
           "algorithm": "RSA-2048",
           "layer": 6,
           "cyclonedx_asset_type": "related-crypto-material",
@@ -2487,8 +2181,6 @@
       "assets": [
         {
           "id": "go-l4-yaml-suite",
-          "file": "configs/relay.yaml",
-          "line": 18,
           "algorithm": "AES-256-GCM",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -2499,8 +2191,6 @@
         },
         {
           "id": "go-l4-yaml-sig",
-          "file": "configs/relay.yaml",
-          "line": 19,
           "algorithm": "Ed25519",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -2511,8 +2201,6 @@
         },
         {
           "id": "go-l4-yaml-kex",
-          "file": "configs/relay.yaml",
-          "line": 21,
           "algorithm": "ML-KEM-1024",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -2523,8 +2211,6 @@
         },
         {
           "id": "go-l4-yaml-hash",
-          "file": "configs/relay.yaml",
-          "line": 25,
           "algorithm": "SHA-256",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -2535,8 +2221,6 @@
         },
         {
           "id": "go-l4-nginx-proto",
-          "file": "deploy/nginx.conf",
-          "line": 27,
           "algorithm": "TLSv1.3",
           "layer": 4,
           "cyclonedx_asset_type": "protocol",
@@ -2547,8 +2231,6 @@
         },
         {
           "id": "go-l4-nginx-ciphers",
-          "file": "deploy/nginx.conf",
-          "line": 28,
           "algorithm": "ECDHE-ECDSA-AES256-GCM-SHA384",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -2559,8 +2241,6 @@
         },
         {
           "id": "go-dep-xcrypto",
-          "file": "go.mod",
-          "line": 8,
           "algorithm": "golang.org/x/crypto",
           "layer": 5,
           "cyclonedx_asset_type": "algorithm",
@@ -2571,8 +2251,6 @@
         },
         {
           "id": "go-l2-sha256",
-          "file": "internal/digest/digest.go",
-          "line": 24,
           "algorithm": "SHA-256",
           "layer": 2,
           "cyclonedx_asset_type": "algorithm",
@@ -2583,8 +2261,6 @@
         },
         {
           "id": "go-l1-rsa",
-          "file": "internal/identity/identity.go",
-          "line": 33,
           "algorithm": "RSA-2048",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -2595,8 +2271,6 @@
         },
         {
           "id": "go-l1-ecdsa",
-          "file": "internal/identity/identity.go",
-          "line": 38,
           "algorithm": "ECDSA-P256",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -2607,8 +2281,6 @@
         },
         {
           "id": "go-l1-ed25519",
-          "file": "internal/identity/identity.go",
-          "line": 43,
           "algorithm": "Ed25519",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -2619,8 +2291,6 @@
         },
         {
           "id": "go-l1-sha256",
-          "file": "internal/identity/identity.go",
-          "line": 58,
           "algorithm": "SHA-256",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -2631,8 +2301,6 @@
         },
         {
           "id": "go-l1-aes-block",
-          "file": "internal/seal/seal.go",
-          "line": 40,
           "algorithm": "AES-256",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -2643,8 +2311,6 @@
         },
         {
           "id": "go-l1-aes-gcm",
-          "file": "internal/seal/seal.go",
-          "line": 44,
           "algorithm": "AES-256-GCM",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -2655,8 +2321,6 @@
         },
         {
           "id": "go-l3-wrapper",
-          "file": "internal/seal/seal.go",
-          "line": 59,
           "algorithm": "AES-256-GCM",
           "layer": 3,
           "cyclonedx_asset_type": "algorithm",
@@ -2667,8 +2331,6 @@
         },
         {
           "id": "go-l1-mlkem",
-          "file": "internal/session/session.go",
-          "line": 25,
           "algorithm": "ML-KEM-1024",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -2679,8 +2341,6 @@
         },
         {
           "id": "go-l6-peer-key",
-          "file": "testdata/peer-mtls-key.pem",
-          "line": 1,
           "algorithm": "ECDSA-P256",
           "layer": 6,
           "cyclonedx_asset_type": "related-crypto-material",
@@ -2691,8 +2351,6 @@
         },
         {
           "id": "go-l6-relay-cert",
-          "file": "testdata/relay-cert.pem",
-          "line": 1,
           "algorithm": "RSA-2048",
           "layer": 6,
           "cyclonedx_asset_type": "certificate",
@@ -2703,8 +2361,6 @@
         },
         {
           "id": "go-l6-relay-key",
-          "file": "testdata/relay-key.pem",
-          "line": 1,
           "algorithm": "RSA-2048",
           "layer": 6,
           "cyclonedx_asset_type": "related-crypto-material",
@@ -2777,8 +2433,6 @@
       "assets": [
         {
           "id": "js-l4-yaml-jwks",
-          "file": "config/broker.yaml",
-          "line": 20,
           "algorithm": "RS256",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -2789,8 +2443,6 @@
         },
         {
           "id": "js-l4-yaml-sig",
-          "file": "config/broker.yaml",
-          "line": 21,
           "algorithm": "Ed25519",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -2801,8 +2453,6 @@
         },
         {
           "id": "js-l4-yaml-cipher",
-          "file": "config/broker.yaml",
-          "line": 22,
           "algorithm": "AES-256-GCM",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -2813,8 +2463,6 @@
         },
         {
           "id": "js-l4-yaml-assertion",
-          "file": "config/broker.yaml",
-          "line": 23,
           "algorithm": "ML-DSA-65",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -2825,8 +2473,6 @@
         },
         {
           "id": "js-l4-yaml-kem",
-          "file": "config/broker.yaml",
-          "line": 25,
           "algorithm": "ML-KEM-768",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -2837,8 +2483,6 @@
         },
         {
           "id": "js-l4-yaml-hash",
-          "file": "config/broker.yaml",
-          "line": 28,
           "algorithm": "SHA-256",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -2849,8 +2493,6 @@
         },
         {
           "id": "js-l6-jwks-cert",
-          "file": "keys/legacy-jwks-cert.pem",
-          "line": 1,
           "algorithm": "RSA-2048",
           "layer": 6,
           "cyclonedx_asset_type": "certificate",
@@ -2861,8 +2503,6 @@
         },
         {
           "id": "js-l6-jwks-key",
-          "file": "keys/legacy-jwks-key.pem",
-          "line": 1,
           "algorithm": "RSA-2048",
           "layer": 6,
           "cyclonedx_asset_type": "related-crypto-material",
@@ -2873,8 +2513,6 @@
         },
         {
           "id": "js-l6-token-key",
-          "file": "keys/token-signing-key.pem",
-          "line": 1,
           "algorithm": "Ed25519",
           "layer": 6,
           "cyclonedx_asset_type": "related-crypto-material",
@@ -2885,8 +2523,6 @@
         },
         {
           "id": "js-dep-forge",
-          "file": "package.json",
-          "line": 16,
           "algorithm": "node-forge",
           "layer": 5,
           "cyclonedx_asset_type": "algorithm",
@@ -2897,8 +2533,6 @@
         },
         {
           "id": "js-l1-mldsa",
-          "file": "src/attest.ts",
-          "line": 18,
           "algorithm": "ML-DSA-65",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -2909,8 +2543,6 @@
         },
         {
           "id": "js-l2-slhdsa",
-          "file": "src/attest.ts",
-          "line": 37,
           "algorithm": "SLH-DSA",
           "layer": 2,
           "cyclonedx_asset_type": "algorithm",
@@ -2921,8 +2553,6 @@
         },
         {
           "id": "js-l1-aesgcm",
-          "file": "src/envelope.ts",
-          "line": 36,
           "algorithm": "AES-256-GCM",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -2933,8 +2563,6 @@
         },
         {
           "id": "js-l2-sha256",
-          "file": "src/fingerprint.ts",
-          "line": 19,
           "algorithm": "SHA-256",
           "layer": 2,
           "cyclonedx_asset_type": "algorithm",
@@ -2945,8 +2573,6 @@
         },
         {
           "id": "js-l1-ed25519",
-          "file": "src/identity.ts",
-          "line": 24,
           "algorithm": "Ed25519",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -2957,8 +2583,6 @@
         },
         {
           "id": "js-l1-rsa",
-          "file": "src/identity.ts",
-          "line": 25,
           "algorithm": "RSA-2048",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -2969,8 +2593,6 @@
         },
         {
           "id": "js-l1-ecdsa",
-          "file": "src/identity.ts",
-          "line": 26,
           "algorithm": "ECDSA-P256",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -2981,8 +2603,6 @@
         },
         {
           "id": "js-l1-sha256",
-          "file": "src/identity.ts",
-          "line": 38,
           "algorithm": "SHA-256",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -2993,8 +2613,6 @@
         },
         {
           "id": "js-l1-mlkem",
-          "file": "src/kem.ts",
-          "line": 23,
           "algorithm": "ML-KEM-768",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -3005,8 +2623,6 @@
         },
         {
           "id": "js-l3-wrapper",
-          "file": "src/store.ts",
-          "line": 27,
           "algorithm": "AES-256-GCM",
           "layer": 3,
           "cyclonedx_asset_type": "algorithm",
@@ -3079,8 +2695,6 @@
       "assets": [
         {
           "id": "js-l4-yaml-jwks",
-          "file": "config/broker.yaml",
-          "line": 20,
           "algorithm": "RS256",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -3091,8 +2705,6 @@
         },
         {
           "id": "js-l4-yaml-sig",
-          "file": "config/broker.yaml",
-          "line": 21,
           "algorithm": "Ed25519",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -3103,8 +2715,6 @@
         },
         {
           "id": "js-l4-yaml-cipher",
-          "file": "config/broker.yaml",
-          "line": 22,
           "algorithm": "AES-256-GCM",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -3115,8 +2725,6 @@
         },
         {
           "id": "js-l4-yaml-assertion",
-          "file": "config/broker.yaml",
-          "line": 23,
           "algorithm": "ML-DSA-65",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -3127,8 +2735,6 @@
         },
         {
           "id": "js-l4-yaml-kem",
-          "file": "config/broker.yaml",
-          "line": 25,
           "algorithm": "ML-KEM-768",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -3139,8 +2745,6 @@
         },
         {
           "id": "js-l4-yaml-hash",
-          "file": "config/broker.yaml",
-          "line": 28,
           "algorithm": "SHA-256",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -3151,8 +2755,6 @@
         },
         {
           "id": "js-l6-jwks-cert",
-          "file": "keys/legacy-jwks-cert.pem",
-          "line": 1,
           "algorithm": "RSA-2048",
           "layer": 6,
           "cyclonedx_asset_type": "certificate",
@@ -3163,8 +2765,6 @@
         },
         {
           "id": "js-l6-jwks-key",
-          "file": "keys/legacy-jwks-key.pem",
-          "line": 1,
           "algorithm": "RSA-2048",
           "layer": 6,
           "cyclonedx_asset_type": "related-crypto-material",
@@ -3175,8 +2775,6 @@
         },
         {
           "id": "js-l6-token-key",
-          "file": "keys/token-signing-key.pem",
-          "line": 1,
           "algorithm": "Ed25519",
           "layer": 6,
           "cyclonedx_asset_type": "related-crypto-material",
@@ -3187,8 +2785,6 @@
         },
         {
           "id": "js-dep-forge",
-          "file": "package.json",
-          "line": 16,
           "algorithm": "node-forge",
           "layer": 5,
           "cyclonedx_asset_type": "algorithm",
@@ -3199,8 +2795,6 @@
         },
         {
           "id": "js-l1-mldsa",
-          "file": "src/attest.ts",
-          "line": 18,
           "algorithm": "ML-DSA-65",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -3211,8 +2805,6 @@
         },
         {
           "id": "js-l2-slhdsa",
-          "file": "src/attest.ts",
-          "line": 37,
           "algorithm": "SLH-DSA",
           "layer": 2,
           "cyclonedx_asset_type": "algorithm",
@@ -3223,8 +2815,6 @@
         },
         {
           "id": "js-l1-aesgcm",
-          "file": "src/envelope.ts",
-          "line": 36,
           "algorithm": "AES-256-GCM",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -3235,8 +2825,6 @@
         },
         {
           "id": "js-l2-sha256",
-          "file": "src/fingerprint.ts",
-          "line": 19,
           "algorithm": "SHA-256",
           "layer": 2,
           "cyclonedx_asset_type": "algorithm",
@@ -3247,8 +2835,6 @@
         },
         {
           "id": "js-l1-ed25519",
-          "file": "src/identity.ts",
-          "line": 24,
           "algorithm": "Ed25519",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -3259,8 +2845,6 @@
         },
         {
           "id": "js-l1-rsa",
-          "file": "src/identity.ts",
-          "line": 25,
           "algorithm": "RSA-2048",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -3271,8 +2855,6 @@
         },
         {
           "id": "js-l1-ecdsa",
-          "file": "src/identity.ts",
-          "line": 26,
           "algorithm": "ECDSA-P256",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -3283,8 +2865,6 @@
         },
         {
           "id": "js-l1-sha256",
-          "file": "src/identity.ts",
-          "line": 38,
           "algorithm": "SHA-256",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -3295,8 +2875,6 @@
         },
         {
           "id": "js-l1-mlkem",
-          "file": "src/kem.ts",
-          "line": 23,
           "algorithm": "ML-KEM-768",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -3307,8 +2885,6 @@
         },
         {
           "id": "js-l3-wrapper",
-          "file": "src/store.ts",
-          "line": 27,
           "algorithm": "AES-256-GCM",
           "layer": 3,
           "cyclonedx_asset_type": "algorithm",
@@ -3381,8 +2957,6 @@
       "assets": [
         {
           "id": "rust-dep-mldsa",
-          "file": "Cargo.toml",
-          "line": 24,
           "algorithm": "ML-DSA",
           "layer": 5,
           "cyclonedx_asset_type": "algorithm",
@@ -3393,8 +2967,6 @@
         },
         {
           "id": "rust-dep-chacha",
-          "file": "Cargo.toml",
-          "line": 28,
           "algorithm": "chacha20poly1305",
           "layer": 5,
           "cyclonedx_asset_type": "algorithm",
@@ -3405,8 +2977,6 @@
         },
         {
           "id": "rust-l4-toml-cipher",
-          "file": "config/sealbox.toml",
-          "line": 20,
           "algorithm": "AES-256-GCM",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -3417,8 +2987,6 @@
         },
         {
           "id": "rust-l4-toml-kem",
-          "file": "config/sealbox.toml",
-          "line": 22,
           "algorithm": "ML-KEM-768",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -3429,8 +2997,6 @@
         },
         {
           "id": "rust-l4-toml-archive",
-          "file": "config/sealbox.toml",
-          "line": 23,
           "algorithm": "RSA-2048",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -3441,8 +3007,6 @@
         },
         {
           "id": "rust-l4-toml-sig",
-          "file": "config/sealbox.toml",
-          "line": 24,
           "algorithm": "Ed25519",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -3453,8 +3017,6 @@
         },
         {
           "id": "rust-l4-toml-hash",
-          "file": "config/sealbox.toml",
-          "line": 28,
           "algorithm": "SHA-256",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -3465,8 +3027,6 @@
         },
         {
           "id": "rust-l6-archive-cert",
-          "file": "keys/archive-gateway-cert.pem",
-          "line": 1,
           "algorithm": "RSA-2048",
           "layer": 6,
           "cyclonedx_asset_type": "certificate",
@@ -3477,8 +3037,6 @@
         },
         {
           "id": "rust-l6-archive-key",
-          "file": "keys/archive-gateway-key.pem",
-          "line": 1,
           "algorithm": "RSA-2048",
           "layer": 6,
           "cyclonedx_asset_type": "related-crypto-material",
@@ -3489,8 +3047,6 @@
         },
         {
           "id": "rust-l6-manifest-key",
-          "file": "keys/manifest-signing-key.pem",
-          "line": 1,
           "algorithm": "Ed25519",
           "layer": 6,
           "cyclonedx_asset_type": "related-crypto-material",
@@ -3501,8 +3057,6 @@
         },
         {
           "id": "rust-l1-aesgcm",
-          "file": "src/envelope.rs",
-          "line": 75,
           "algorithm": "AES-256-GCM",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -3513,8 +3067,6 @@
         },
         {
           "id": "rust-l2-sha256",
-          "file": "src/fingerprint.rs",
-          "line": 18,
           "algorithm": "SHA-256",
           "layer": 2,
           "cyclonedx_asset_type": "algorithm",
@@ -3525,8 +3077,6 @@
         },
         {
           "id": "rust-l1-ed25519",
-          "file": "src/identity.rs",
-          "line": 31,
           "algorithm": "Ed25519",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -3537,8 +3087,6 @@
         },
         {
           "id": "rust-l1-ecdsa",
-          "file": "src/identity.rs",
-          "line": 32,
           "algorithm": "ECDSA-P256",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -3549,8 +3097,6 @@
         },
         {
           "id": "rust-l1-rsa",
-          "file": "src/identity.rs",
-          "line": 33,
           "algorithm": "RSA-2048",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -3561,8 +3107,6 @@
         },
         {
           "id": "rust-l1-sha256",
-          "file": "src/identity.rs",
-          "line": 49,
           "algorithm": "SHA-256",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -3573,8 +3117,6 @@
         },
         {
           "id": "rust-l1-mlkem",
-          "file": "src/kem.rs",
-          "line": 24,
           "algorithm": "ML-KEM-768",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -3585,8 +3127,6 @@
         },
         {
           "id": "rust-l3-wrapper",
-          "file": "src/store.rs",
-          "line": 38,
           "algorithm": "AES-256-GCM",
           "layer": 3,
           "cyclonedx_asset_type": "algorithm",
@@ -3659,8 +3199,6 @@
       "assets": [
         {
           "id": "rust-dep-mldsa",
-          "file": "Cargo.toml",
-          "line": 24,
           "algorithm": "ML-DSA",
           "layer": 5,
           "cyclonedx_asset_type": "algorithm",
@@ -3671,8 +3209,6 @@
         },
         {
           "id": "rust-dep-chacha",
-          "file": "Cargo.toml",
-          "line": 28,
           "algorithm": "chacha20poly1305",
           "layer": 5,
           "cyclonedx_asset_type": "algorithm",
@@ -3683,8 +3219,6 @@
         },
         {
           "id": "rust-l4-toml-cipher",
-          "file": "config/sealbox.toml",
-          "line": 20,
           "algorithm": "AES-256-GCM",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -3695,8 +3229,6 @@
         },
         {
           "id": "rust-l4-toml-kem",
-          "file": "config/sealbox.toml",
-          "line": 22,
           "algorithm": "ML-KEM-768",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -3707,8 +3239,6 @@
         },
         {
           "id": "rust-l4-toml-archive",
-          "file": "config/sealbox.toml",
-          "line": 23,
           "algorithm": "RSA-2048",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -3719,8 +3249,6 @@
         },
         {
           "id": "rust-l4-toml-sig",
-          "file": "config/sealbox.toml",
-          "line": 24,
           "algorithm": "Ed25519",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -3731,8 +3259,6 @@
         },
         {
           "id": "rust-l4-toml-hash",
-          "file": "config/sealbox.toml",
-          "line": 28,
           "algorithm": "SHA-256",
           "layer": 4,
           "cyclonedx_asset_type": "algorithm",
@@ -3743,8 +3269,6 @@
         },
         {
           "id": "rust-l6-archive-cert",
-          "file": "keys/archive-gateway-cert.pem",
-          "line": 1,
           "algorithm": "RSA-2048",
           "layer": 6,
           "cyclonedx_asset_type": "certificate",
@@ -3755,8 +3279,6 @@
         },
         {
           "id": "rust-l6-archive-key",
-          "file": "keys/archive-gateway-key.pem",
-          "line": 1,
           "algorithm": "RSA-2048",
           "layer": 6,
           "cyclonedx_asset_type": "related-crypto-material",
@@ -3767,8 +3289,6 @@
         },
         {
           "id": "rust-l6-manifest-key",
-          "file": "keys/manifest-signing-key.pem",
-          "line": 1,
           "algorithm": "Ed25519",
           "layer": 6,
           "cyclonedx_asset_type": "related-crypto-material",
@@ -3779,8 +3299,6 @@
         },
         {
           "id": "rust-l1-aesgcm",
-          "file": "src/envelope.rs",
-          "line": 75,
           "algorithm": "AES-256-GCM",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -3791,8 +3309,6 @@
         },
         {
           "id": "rust-l2-sha256",
-          "file": "src/fingerprint.rs",
-          "line": 18,
           "algorithm": "SHA-256",
           "layer": 2,
           "cyclonedx_asset_type": "algorithm",
@@ -3803,8 +3319,6 @@
         },
         {
           "id": "rust-l1-ed25519",
-          "file": "src/identity.rs",
-          "line": 31,
           "algorithm": "Ed25519",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -3815,8 +3329,6 @@
         },
         {
           "id": "rust-l1-ecdsa",
-          "file": "src/identity.rs",
-          "line": 32,
           "algorithm": "ECDSA-P256",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -3827,8 +3339,6 @@
         },
         {
           "id": "rust-l1-rsa",
-          "file": "src/identity.rs",
-          "line": 33,
           "algorithm": "RSA-2048",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -3839,8 +3349,6 @@
         },
         {
           "id": "rust-l1-sha256",
-          "file": "src/identity.rs",
-          "line": 49,
           "algorithm": "SHA-256",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -3851,8 +3359,6 @@
         },
         {
           "id": "rust-l1-mlkem",
-          "file": "src/kem.rs",
-          "line": 24,
           "algorithm": "ML-KEM-768",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
@@ -3863,8 +3369,6 @@
         },
         {
           "id": "rust-l3-wrapper",
-          "file": "src/store.rs",
-          "line": 38,
           "algorithm": "AES-256-GCM",
           "layer": 3,
           "cyclonedx_asset_type": "algorithm",
