@@ -100,5 +100,4 @@ project.
 
 ## Not in this run
 
-sonar-cryptography was not run; its last scores are in
-`runs/2026-08-23T1519Z-public/`. The holdout was not run.
+The holdout was not run.

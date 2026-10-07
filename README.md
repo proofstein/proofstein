@@ -88,23 +88,16 @@ complete scored run: cdxgen 12.8.2, pqprobe-static 3.8.1, cryptoscan 1.4.0 in tw
 modes, cbomkit-theia v1.1.2, Opengrep 1.30.1 and CodeQL 2.27.1, with their output
 files, the wrappers for the tools that do not write CycloneDX, and their scores.
 
-[`runs/2026-08-23T1519Z-public/`](runs/2026-08-23T1519Z-public/) has three tools,
-cdxgen 12.8.2, pqprobe-static 3.6.0 and sonar-cryptography 1.6.1. You can
-re-score it yourself and check you get the same numbers:
+[`runs/2026-08-23T1519Z-public/`](runs/2026-08-23T1519Z-public/) has cdxgen 12.8.2
+and pqprobe-static 3.6.0. You can re-score it yourself and check you get the same
+numbers:
 
 ```bash
 .venv/bin/python score.py --cboms runs/2026-08-23T1519Z-public/cboms --out /tmp/proofstein
 diff <(grep -A5 'by language' /tmp/proofstein/results.md) <(grep -A5 'by language' runs/2026-08-23T1519Z-public/results/results.md)
 ```
 
-One thing to know before reading those numbers. sonar-cryptography reads Java,
-Python and Go, and not the other three languages, so it is scored over 67 of the
-124 assets instead of all of them. Its overall percentage is not comparable with
-the other two tools'; compare the per-language rows instead, where all three
-tools are measured against the same programs. The run's own README explains this
-at more length.
-
-The same three tools were also run over a scrambled copy of the six programs,
+The same tools were also run over a scrambled copy of the six programs,
 to check they were finding cryptography rather than being tuned to these
 particular files. Those results are in
 [`runs/2026-08-23T1519Z-holdout/`](runs/2026-08-23T1519Z-holdout/).

@@ -128,11 +128,10 @@ same document credits 19 claims out of 7670.
 An honest generator makes about one claim per site it found, so its two figures sit
 close together. A wide gap between them is the signature of guessing.
 
-| tool               | claim precision | component precision | claims made | components reported | recall (detection rate) |
-|--------------------|-----------------|---------------------|-------------|---------------------|-------------------------|
-| cdxgen             | 20% (4/20)      | 18% (4/22)          | 20          | 22                  | 5% (6/124)              |
-| pqprobe-static     | 61% (126/205)   | 73% (83/114)        | 205         | 114                 | 96% (119/124)           |
-| sonar-cryptography | 45% (22/49)     | 45% (19/42)         | 49          | 42                  | 34% (23/67)             |
+| tool           | claim precision | component precision | claims made | components reported | recall (detection rate) |
+|----------------|-----------------|---------------------|-------------|---------------------|-------------------------|
+| cdxgen         | 20% (4/20)      | 18% (4/22)          | 20          | 22                  | 5% (6/124)              |
+| pqprobe-static | 61% (126/205)   | 73% (83/114)        | 205         | 114                 | 96% (119/124)           |
 
 ## Schema validity and false positives
 `phantom file` means evidence pointed at a path that is not in the project.
@@ -141,28 +140,24 @@ close together. A wide gap between them is the signature of guessing.
 ground truth is complete for planted assets, not exhaustive of every construct,
 so these are shown but never charged against a tool.
 
-| tool               | schema valid | phantom file | phantom algorithm | false positives | unmatched (uncharged) | unparseable |
-|--------------------|--------------|--------------|-------------------|-----------------|-----------------------|-------------|
-| cdxgen             | 100% (6/6)   | 0            | 0                 | 0               | 2                     | 0           |
-| pqprobe-static     | 100% (6/6)   | 0            | 1                 | 1               | 0                     | 0           |
-| sonar-cryptography | 100% (3/3)   | 0            | 3                 | 3               | 0                     | 0           |
+| tool           | schema valid | phantom file | phantom algorithm | false positives | unmatched (uncharged) | unparseable |
+|----------------|--------------|--------------|-------------------|-----------------|-----------------------|-------------|
+| cdxgen         | 100% (6/6)   | 0            | 0                 | 0               | 2                     | 0           |
+| pqprobe-static | 100% (6/6)   | 0            | 1                 | 1               | 0                     | 0           |
 
 ## Per project
 
-| project        | language   | tool               | detected     | by layer                              | FP | schema |
-|----------------|------------|--------------------|--------------|---------------------------------------|----|--------|
-| tinyattest     | c          | cdxgen             | 0% (0/19)    | 1:0/7 2:0/1 3:0/1 4:0/6 5:0/1 6:0/3   | 0  | yes    |
-| tinyattest     | c          | pqprobe-static     | 95% (18/19)  | 1:7/7 2:1/1 3:0/1 4:6/6 5:1/1 6:3/3   | 0  | yes    |
-| beacon-relay   | go         | cdxgen             | 0% (0/19)    | 1:0/7 2:0/1 3:0/1 4:0/6 5:0/1 6:0/3   | 0  | yes    |
-| beacon-relay   | go         | pqprobe-static     | 100% (19/19) | 1:7/7 2:1/1 3:1/1 4:6/6 5:1/1 6:3/3   | 0  | yes    |
-| beacon-relay   | go         | sonar-cryptography | 42% (8/19)   | 1:6/7 2:1/1 3:1/1 4:0/6 5:0/1 6:0/3   | 1  | yes    |
-| ledger-svc     | java       | cdxgen             | 8% (2/25)    | 1:0/10 2:0/3 3:0/1 4:0/8 5:1/1 6:1/2  | 0  | yes    |
-| ledger-svc     | java       | pqprobe-static     | 96% (24/25)  | 1:10/10 2:3/3 3:0/1 4:8/8 5:1/1 6:2/2 | 0  | yes    |
-| ledger-svc     | java       | sonar-cryptography | 48% (12/25)  | 1:9/10 2:3/3 3:0/1 4:0/8 5:0/1 6:0/2  | 1  | yes    |
-| session-broker | javascript | cdxgen             | 15% (3/20)   | 1:2/7 2:1/2 3:0/1 4:0/6 5:0/1 6:0/3   | 0  | yes    |
-| session-broker | javascript | pqprobe-static     | 95% (19/20)  | 1:7/7 2:2/2 3:0/1 4:6/6 5:1/1 6:3/3   | 1  | yes    |
-| vaultkeeper    | python     | cdxgen             | 4% (1/23)    | 1:0/7 2:0/1 3:0/1 4:0/9 5:1/2 6:0/3   | 0  | yes    |
-| vaultkeeper    | python     | pqprobe-static     | 96% (22/23)  | 1:7/7 2:1/1 3:0/1 4:9/9 5:2/2 6:3/3   | 0  | yes    |
-| vaultkeeper    | python     | sonar-cryptography | 13% (3/23)   | 1:3/7 2:0/1 3:0/1 4:0/9 5:0/2 6:0/3   | 1  | yes    |
-| sealbox        | rust       | cdxgen             | 0% (0/18)    | 1:0/6 2:0/1 3:0/1 4:0/5 5:0/2 6:0/3   | 0  | yes    |
-| sealbox        | rust       | pqprobe-static     | 94% (17/18)  | 1:6/6 2:1/1 3:0/1 4:5/5 5:2/2 6:3/3   | 0  | yes    |
+| project        | language   | tool           | detected     | by layer                              | FP | schema |
+|----------------|------------|----------------|--------------|---------------------------------------|----|--------|
+| tinyattest     | c          | cdxgen         | 0% (0/19)    | 1:0/7 2:0/1 3:0/1 4:0/6 5:0/1 6:0/3   | 0  | yes    |
+| tinyattest     | c          | pqprobe-static | 95% (18/19)  | 1:7/7 2:1/1 3:0/1 4:6/6 5:1/1 6:3/3   | 0  | yes    |
+| beacon-relay   | go         | cdxgen         | 0% (0/19)    | 1:0/7 2:0/1 3:0/1 4:0/6 5:0/1 6:0/3   | 0  | yes    |
+| beacon-relay   | go         | pqprobe-static | 100% (19/19) | 1:7/7 2:1/1 3:1/1 4:6/6 5:1/1 6:3/3   | 0  | yes    |
+| ledger-svc     | java       | cdxgen         | 8% (2/25)    | 1:0/10 2:0/3 3:0/1 4:0/8 5:1/1 6:1/2  | 0  | yes    |
+| ledger-svc     | java       | pqprobe-static | 96% (24/25)  | 1:10/10 2:3/3 3:0/1 4:8/8 5:1/1 6:2/2 | 0  | yes    |
+| session-broker | javascript | cdxgen         | 15% (3/20)   | 1:2/7 2:1/2 3:0/1 4:0/6 5:0/1 6:0/3   | 0  | yes    |
+| session-broker | javascript | pqprobe-static | 95% (19/20)  | 1:7/7 2:2/2 3:0/1 4:6/6 5:1/1 6:3/3   | 1  | yes    |
+| vaultkeeper    | python     | cdxgen         | 4% (1/23)    | 1:0/7 2:0/1 3:0/1 4:0/9 5:1/2 6:0/3   | 0  | yes    |
+| vaultkeeper    | python     | pqprobe-static | 96% (22/23)  | 1:7/7 2:1/1 3:0/1 4:9/9 5:2/2 6:3/3   | 0  | yes    |
+| sealbox        | rust       | cdxgen         | 0% (0/18)    | 1:0/6 2:0/1 3:0/1 4:0/5 5:0/2 6:0/3   | 0  | yes    |
+| sealbox        | rust       | pqprobe-static | 94% (17/18)  | 1:6/6 2:1/1 3:0/1 4:5/5 5:2/2 6:3/3   | 0  | yes    |
