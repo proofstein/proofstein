@@ -12,11 +12,9 @@ Every judgement call that could move a score, recorded so a reviewer can read th
 decisions without reading the diffs. Proofstein is maintained by a party that
 also ships a scored tool; this file is where that conflict is made legible.
 
-**Review model.** External review is invited. The Software Engineering Group at
-the University of Bern may be the right place to start, though no approach has
-been made yet. Entries marked OPEN are
-what a reviewer is asked to decide; entries marked CLOSED record a decision
-already taken and the evidence for it.
+**Review model.** External review is invited. Entries marked OPEN are what a
+reviewer is asked to decide; entries marked CLOSED record a decision already
+taken and the evidence for it.
 
 | # | Status | Subject |
 | --- | --- | --- |
