@@ -324,6 +324,19 @@ class TestUnplantedAllowancesAreToolNeutralAndJustified(unittest.TestCase):
 class TestTablesAreDocumented(unittest.TestCase):
     """The governance rule is only real if the tables are findable."""
 
+    def test_collection_and_scoring_digest_the_tables_alike(self):
+        """The run manifest and the results carry digests from one function, so
+        a results file can say whether it was scored under the tables its run
+        was collected with."""
+        import importlib.util
+
+        from proofstein.tables import judgement_table_digest
+
+        spec = importlib.util.spec_from_file_location("collect_cboms", REPO_ROOT / "tools" / "collect-cboms.py")
+        collect = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(collect)
+        self.assertEqual(collect.judgement_table_digest(), judgement_table_digest(KNOWN_UNPLANTED))
+
     def test_methodology_names_each_table(self):
         text = (REPO_ROOT / "METHODOLOGY.md").read_text(encoding="utf-8")
         for needle in (

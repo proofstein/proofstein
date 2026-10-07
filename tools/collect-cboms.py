@@ -58,50 +58,12 @@ def sha256_file(path: Path) -> str | None:
 
 
 def judgement_table_digest() -> dict:
-    """Digest the tables that encode judgement rather than fact.
-
-    METHODOLOGY.md §9.1 requires table changes to be attributable. Recording a
-    digest per table means a reader can tell whether a score moved because a
-    generator changed or because we did.
-    """
-    from proofstein.cbom import LINE_PROPERTY_NAMES, LOCATION_PROPERTY_NAMES, OID_ALGORITHMS
-    from proofstein.matching import _FAMILY_MARKERS, _TOKEN_ALIASES, _WHOLE_TOKEN_ONLY
-
+    """Digest the judgement tables as they stand (proofstein/tables.py)."""
     sys.path.insert(0, str(REPO_ROOT))
+    from proofstein.tables import judgement_table_digest as digest  # noqa: PLC0415
     from score import KNOWN_UNPLANTED  # noqa: PLC0415
 
-    def digest(value) -> str:
-        return hashlib.sha256(
-            json.dumps(value, sort_keys=True, default=list).encode("utf-8")
-        ).hexdigest()[:16]
-
-    return {
-        "oid_algorithms": {"entries": len(OID_ALGORITHMS), "sha256_16": digest(OID_ALGORITHMS)},
-        "location_property_names": {
-            "entries": len(LOCATION_PROPERTY_NAMES),
-            "sha256_16": digest(sorted(LOCATION_PROPERTY_NAMES)),
-        },
-        "line_property_names": {
-            "entries": len(LINE_PROPERTY_NAMES),
-            "sha256_16": digest(sorted(LINE_PROPERTY_NAMES)),
-        },
-        "token_aliases": {"entries": len(_TOKEN_ALIASES), "sha256_16": digest(_TOKEN_ALIASES)},
-        "family_markers": {
-            "entries": len(_FAMILY_MARKERS),
-            "sha256_16": digest([list(pair) for pair in _FAMILY_MARKERS]),
-        },
-        "whole_token_only": {
-            "entries": len(_WHOLE_TOKEN_ONLY),
-            "sha256_16": digest(sorted(_WHOLE_TOKEN_ONLY)),
-        },
-        # Which fabricated algorithm names are forgiven, and where. Moving an
-        # entry from a scoped to a corpus-wide form silently lowers every tool's
-        # false-positive count, so the digest travels with the run.
-        "known_unplanted": {
-            "entries": len(KNOWN_UNPLANTED),
-            "sha256_16": digest(sorted(str(tuple(entry)) if isinstance(entry, tuple) else str(entry) for entry in KNOWN_UNPLANTED)),
-        },
-    }
+    return digest(KNOWN_UNPLANTED)
 
 
 def git(*args: str) -> str:

@@ -24,6 +24,7 @@ sys.path.insert(0, str(REPO_ROOT))
 
 from proofstein import schema as schema_module  # noqa: E402
 from proofstein.cbom import parse_cbom  # noqa: E402
+from proofstein.tables import judgement_table_digest  # noqa: E402
 from proofstein.inputs import discover_bundle, discover_raw_directory  # noqa: E402
 from proofstein.matching import DEFAULT_LINE_TOLERANCE  # noqa: E402
 from proofstein.report import render_json, render_markdown  # noqa: E402
@@ -333,7 +334,14 @@ def main() -> int:
             "tool_versions": {
                 name: spec.get("version") for name, spec in run_manifest.get("tools", {}).items()
             },
-            "judgement_tables": run_manifest.get("judgement_tables"),
+            # The tables this scoring used. A run scored again under changed
+            # tables also carries the ones it was collected under.
+            "judgement_tables": judgement_table_digest(KNOWN_UNPLANTED),
+            "judgement_tables_collected": (
+                run_manifest.get("judgement_tables")
+                if run_manifest.get("judgement_tables") != judgement_table_digest(KNOWN_UNPLANTED)
+                else None
+            ),
             # Invocations that produced nothing. These are why a (project, tool)
             # pair is absent from the tables, and stating them is the difference
             # between "not run" and "found nothing".

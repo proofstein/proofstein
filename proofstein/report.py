@@ -74,22 +74,31 @@ def _render_provenance(meta: dict) -> str:
         out.append(_table(["tool", "self-reported version"], [[k, v or "--"] for k, v in sorted(versions.items())]))
 
     tables = run.get("judgement_tables") or {}
+    collected = run.get("judgement_tables_collected") or {}
     if tables:
         out.append("\n### Judgement tables\n\n")
         out.append(
             "Digests of the tables that encode judgement rather than fact "
-            "(METHODOLOGY.md §9.1). A score that moves because one of these moved is "
-            "attributable rather than invisible.\n\n"
+            "(METHODOLOGY.md §9.1), as this scoring used them. A score that moves because "
+            "one of these moved is attributable rather than invisible.\n\n"
         )
-        out.append(
-            _table(
-                ["table", "entries", "sha256/16"],
-                [
-                    [name, str(spec.get("entries", "?")), spec.get("sha256_16", "?")]
-                    for name, spec in sorted(tables.items())
-                ],
+        headers = ["table", "entries", "sha256/16"]
+        if collected:
+            out.append(
+                "The run was collected under different tables; their digests at collection "
+                "are shown beside them.\n\n"
             )
-        )
+            headers += ["at collection"]
+
+        def row(name, spec):
+            cells = [name, str(spec.get("entries", "?")), spec.get("sha256_16", "?")]
+            if collected:
+                then = collected.get(name) or {}
+                same = then.get("sha256_16") == spec.get("sha256_16")
+                cells.append("same" if same else f"{then.get('entries', '?')} entries, {then.get('sha256_16', '?')}")
+            return cells
+
+        out.append(_table(headers, [row(name, spec) for name, spec in sorted(tables.items())]))
 
     failures = run.get("failed_invocations") or []
     if failures:
