@@ -97,10 +97,13 @@ numbers:
 diff <(grep -A5 'by language' /tmp/proofstein/results.md) <(grep -A5 'by language' runs/2026-08-23T1519Z-public/results/results.md)
 ```
 
-The same tools were also run over a scrambled copy of the six programs,
-to check they were finding cryptography rather than being tuned to these
-particular files. Those results are in
-[`runs/2026-08-23T1519Z-holdout/`](runs/2026-08-23T1519Z-holdout/).
+The same programs, scrambled, are the holdout: names, file locations, line
+numbers and configuration change and the cryptography does not, to check a tool
+finds cryptography rather than being tuned to these particular files.
+[`runs/2026-10-07T2249Z-holdout/`](runs/2026-10-07T2249Z-holdout/) scores cdxgen
+12.8.2 and pqprobe-static 3.8.2 on it;
+[`runs/2026-08-23T1519Z-holdout/`](runs/2026-08-23T1519Z-holdout/) scored cdxgen
+12.8.2 and pqprobe-static 3.6.0 on an earlier one.
 
 To run the tests: `.venv/bin/python -m unittest discover -s tests`.
 
