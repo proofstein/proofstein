@@ -1,0 +1,25 @@
+{
+  "_comment": [
+    "Generator definition for this run only. ecdsa-scan is scored here for the",
+    "record and is not part of runs/generators.json or the comparison table; see",
+    "README.md in this directory."
+  ],
+  "tools": [
+    {
+      "name": "ecdsa-scan",
+      "binary": "runs/2026-10-07T2016Z-ecdsa-scan/converter/ecdsa-scan-cbom.sh",
+      "package_version": "ecdsa-scan@0.1.1 (npm tarball sha512-g2CwpG1YMSXtVfvg0W8D9WW3wnrkYeDTsnuxpYxGvGWFFF3Rj/ca9WsQ06lIglKiZDPn/Wd9v1h4133tx4ua6Q==), Node ${NODE_VERSION}",
+      "version_command": ["runs/2026-10-07T2016Z-ecdsa-scan/converter/ecdsa-scan-cbom.sh", "--version"],
+      "invocation": ["runs/2026-10-07T2016Z-ecdsa-scan/converter/ecdsa-scan-cbom.sh"],
+      "output": "stdout",
+      "cwd": "project",
+      "accept_exit": [0],
+      "env": {
+        "NODE_BIN": "${NODE_BIN}",
+        "ECDSA_SCAN_JS": "${ECDSA_SCAN_JS}",
+        "ECDSA_RAW_DIR": "${ECDSA_RAW_DIR}"
+      },
+      "notes": "Self-reports 0.1.0; the package is 0.1.1. MIT. Defect scanner for signature code with an inventory collector; the wrapper converts its --json inventory to CycloneDX, files only, no lines. Reads JS, TS, Python and Go source and key files."
+    }
+  ]
+}

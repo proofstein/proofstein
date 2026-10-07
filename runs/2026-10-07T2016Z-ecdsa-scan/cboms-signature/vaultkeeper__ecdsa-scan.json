@@ -1,0 +1,63 @@
+{
+ "bomFormat": "CycloneDX",
+ "specVersion": "1.6",
+ "version": 1,
+ "metadata": {
+  "tools": {
+   "components": [
+    {
+     "type": "application",
+     "name": "ecdsa-scan",
+     "version": "0.1.0"
+    }
+   ]
+  }
+ },
+ "components": [
+  {
+   "type": "cryptographic-asset",
+   "bom-ref": "algorithm-b38ab6780e120a0e",
+   "name": "EdDSA",
+   "evidence": {
+    "occurrences": [
+     {
+      "location": "src/vaultkeeper/identity.py"
+     }
+    ]
+   },
+   "cryptoProperties": {
+    "assetType": "algorithm"
+   }
+  },
+  {
+   "type": "cryptographic-asset",
+   "bom-ref": "algorithm-b3f98a2e50a6377c",
+   "name": "RSA-PSS",
+   "evidence": {
+    "occurrences": [
+     {
+      "location": "src/vaultkeeper/identity.py"
+     }
+    ]
+   },
+   "cryptoProperties": {
+    "assetType": "algorithm"
+   }
+  },
+  {
+   "type": "cryptographic-asset",
+   "bom-ref": "curve-e70631d6fa27276c",
+   "name": "P-256",
+   "evidence": {
+    "occurrences": [
+     {
+      "location": "src/vaultkeeper/identity.py"
+     }
+    ]
+   },
+   "cryptoProperties": {
+    "assetType": "algorithm"
+   }
+  }
+ ]
+}

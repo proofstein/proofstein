@@ -1,0 +1,127 @@
+{
+ "tool": {
+  "name": "ecdsa-scan",
+  "version": "0.1.0",
+  "informationUri": "https://ecdsa.com/scanner"
+ },
+ "scannedAt": "2026-10-07T20:16:56.982Z",
+ "summary": {
+  "filesScanned": 10,
+  "filesSkipped": 0,
+  "findings": 2,
+  "byConfidence": {
+   "advisory": 2
+  },
+  "bySeverity": {
+   "high": 2
+  },
+  "byRule": {
+   "hardcoded-private-key": 2
+  }
+ },
+ "rules": {
+  "hardcoded-private-key": {
+   "title": "Private key material embedded in source",
+   "severity": "high",
+   "defaultConfidence": "confirmed",
+   "why": "A private key checked into a repository is compromised the moment anyone clones, forks or mirrors it, and rotating it means re-issuing every signature, certificate or account that depends on it. Git keeps the value in history even after the line is deleted, so removal is never enough on its own. Keys belong in a KMS, an HSM or (at minimum) an environment variable injected at deploy time.",
+   "fix": "// read the key at run time; keep the value out of the repository\nconst privateKey = process.env.SIGNING_PRIVATE_KEY;\n// better: never hold the key at all \u2014 sign through KMS/HSM\nconst signature = await kms.sign({ KeyId, Message, SigningAlgorithm: 'ECDSA_SHA_256' });",
+   "docs": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html"
+  }
+ },
+ "findings": [
+  {
+   "ruleId": "hardcoded-private-key",
+   "title": "Private key material embedded in source",
+   "severity": "high",
+   "confidence": "advisory",
+   "message": "A private key block (`-----BEGIN EC PRIVATE KEY-----`) with real key material is embedded here. The path looks like test/fixture material, so this is probably intentional \u2014 make sure the key is disposable and never used outside tests.",
+   "path": "testdata/peer-mtls-key.pem",
+   "line": 1,
+   "column": 1,
+   "snippet": "-----BEGIN EC PRIVATE KEY-----",
+   "docs": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html"
+  },
+  {
+   "ruleId": "hardcoded-private-key",
+   "title": "Private key material embedded in source",
+   "severity": "high",
+   "confidence": "advisory",
+   "message": "A private key block (`-----BEGIN PRIVATE KEY-----`) with real key material is embedded here. The path looks like test/fixture material, so this is probably intentional \u2014 make sure the key is disposable and never used outside tests.",
+   "path": "testdata/relay-key.pem",
+   "line": 1,
+   "column": 1,
+   "snippet": "-----BEGIN PRIVATE KEY-----",
+   "docs": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html"
+  }
+ ],
+ "inventory": {
+  "libraries": [
+   {
+    "name": "crypto/ecdsa",
+    "detail": "go",
+    "files": [
+     "internal/identity/identity.go"
+    ]
+   },
+   {
+    "name": "crypto/elliptic",
+    "detail": "go",
+    "files": [
+     "internal/identity/identity.go"
+    ]
+   },
+   {
+    "name": "crypto/rsa",
+    "detail": "go",
+    "files": [
+     "internal/identity/identity.go"
+    ]
+   }
+  ],
+  "algorithms": [
+   {
+    "name": "ECDSA",
+    "files": [
+     "internal/identity/identity.go"
+    ]
+   },
+   {
+    "name": "EdDSA",
+    "files": [
+     "internal/identity/identity.go"
+    ]
+   },
+   {
+    "name": "SHA-256",
+    "files": [
+     "internal/digest/digest.go",
+     "internal/identity/identity.go"
+    ]
+   }
+  ],
+  "curves": [
+   {
+    "name": "P-256",
+    "files": [
+     "internal/identity/identity.go"
+    ]
+   }
+  ],
+  "operations": [
+   {
+    "name": "keygen",
+    "files": [
+     "internal/identity/identity.go"
+    ]
+   },
+   {
+    "name": "sign",
+    "files": [
+     "internal/identity/identity.go"
+    ]
+   }
+  ]
+ },
+ "errors": []
+}

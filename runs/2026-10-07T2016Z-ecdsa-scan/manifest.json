@@ -1,0 +1,177 @@
+{
+  "run": {
+    "started_utc": "2026-10-07T20:16:56Z",
+    "scan_tree": "git archive HEAD",
+    "ground_truth": "ground-truth",
+    "holdout": false,
+    "corpus_commit": "fd134c7fd0ccfc9096842fac46db78e7fc7fd76b",
+    "corpus_commit_short": "fd134c7",
+    "corpus_tree_dirty": false,
+    "uncommitted_paths": [],
+    "host_platform": "linux",
+    "python": "3.12.3",
+    "finished_utc": "2026-10-07T20:16:57Z",
+    "succeeded": 6,
+    "attempted": 6
+  },
+  "judgement_tables": {
+    "oid_algorithms": {
+      "entries": 27,
+      "sha256_16": "031a3c27915e6dde"
+    },
+    "location_property_names": {
+      "entries": 8,
+      "sha256_16": "0b8c15cc33ce242a"
+    },
+    "line_property_names": {
+      "entries": 5,
+      "sha256_16": "ed438ed351a5b930"
+    },
+    "token_aliases": {
+      "entries": 32,
+      "sha256_16": "637f0e9d5f2cf137"
+    },
+    "family_markers": {
+      "entries": 43,
+      "sha256_16": "e4639e0dd1414815"
+    },
+    "whole_token_only": {
+      "entries": 7,
+      "sha256_16": "88a20cf6715e9c84"
+    },
+    "known_unplanted": {
+      "entries": 15,
+      "sha256_16": "3a7fca80174e0cdd"
+    }
+  },
+  "tools": {
+    "ecdsa-scan": {
+      "version": "0.1.0",
+      "binary": "runs/2026-10-07T2016Z-ecdsa-scan/converter/ecdsa-scan-cbom.sh",
+      "binary_sha256": "95ebf7ddcf8bdfbb6c22fdaf3339e673be30faef1f95756d443af6db5b0a73ad",
+      "package_version": "ecdsa-scan@0.1.1 (npm tarball sha512-g2CwpG1YMSXtVfvg0W8D9WW3wnrkYeDTsnuxpYxGvGWFFF3Rj/ca9WsQ06lIglKiZDPn/Wd9v1h4133tx4ua6Q==), Node v22.23.3",
+      "accept_exit": [
+        0
+      ],
+      "notes": "Self-reports 0.1.0; the package is 0.1.1. MIT. Defect scanner for signature code with an inventory collector; the wrapper converts its --json inventory to CycloneDX, files only, no lines. Reads JS, TS, Python and Go source and key files."
+    }
+  },
+  "projects": {
+    "beacon-relay": {
+      "language": "go",
+      "assets": 19
+    },
+    "ledger-svc": {
+      "language": "java",
+      "assets": 25
+    },
+    "sealbox": {
+      "language": "rust",
+      "assets": 18
+    },
+    "session-broker": {
+      "language": "javascript",
+      "assets": 20
+    },
+    "tinyattest": {
+      "language": "c",
+      "assets": 19
+    },
+    "vaultkeeper": {
+      "language": "python",
+      "assets": 23
+    }
+  },
+  "invocations": [
+    {
+      "argv": [
+        "runs/2026-10-07T2016Z-ecdsa-scan/converter/ecdsa-scan-cbom.sh"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 0.07,
+      "bytes": 2057,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "beacon-relay__ecdsa-scan.json",
+      "tool": "ecdsa-scan",
+      "project": "beacon-relay",
+      "language": "go"
+    },
+    {
+      "argv": [
+        "runs/2026-10-07T2016Z-ecdsa-scan/converter/ecdsa-scan-cbom.sh"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 0.07,
+      "bytes": 237,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "ledger-svc__ecdsa-scan.json",
+      "tool": "ecdsa-scan",
+      "project": "ledger-svc",
+      "language": "java"
+    },
+    {
+      "argv": [
+        "runs/2026-10-07T2016Z-ecdsa-scan/converter/ecdsa-scan-cbom.sh"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 0.07,
+      "bytes": 237,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "sealbox__ecdsa-scan.json",
+      "tool": "ecdsa-scan",
+      "project": "sealbox",
+      "language": "rust"
+    },
+    {
+      "argv": [
+        "runs/2026-10-07T2016Z-ecdsa-scan/converter/ecdsa-scan-cbom.sh"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 0.07,
+      "bytes": 1391,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "session-broker__ecdsa-scan.json",
+      "tool": "ecdsa-scan",
+      "project": "session-broker",
+      "language": "javascript"
+    },
+    {
+      "argv": [
+        "runs/2026-10-07T2016Z-ecdsa-scan/converter/ecdsa-scan-cbom.sh"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 0.08,
+      "bytes": 237,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "tinyattest__ecdsa-scan.json",
+      "tool": "ecdsa-scan",
+      "project": "tinyattest",
+      "language": "c"
+    },
+    {
+      "argv": [
+        "runs/2026-10-07T2016Z-ecdsa-scan/converter/ecdsa-scan-cbom.sh"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 0.09,
+      "bytes": 1748,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "vaultkeeper__ecdsa-scan.json",
+      "tool": "ecdsa-scan",
+      "project": "vaultkeeper",
+      "language": "python"
+    }
+  ]
+}
