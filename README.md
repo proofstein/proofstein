@@ -124,8 +124,7 @@ recording every decision that could move a score, in the
 you have a better idea, submit it to the repository. Feedback wanted.
 The safeguards are described in
 [METHODOLOGY.md §9.1](METHODOLOGY.md#91-governance-of-the-judgement-tables).
-Outside review is welcome; the Software Engineering Group at the University
-of Bern may be the right place to start.
+Outside review is welcome.
 
 ## Licence
 
