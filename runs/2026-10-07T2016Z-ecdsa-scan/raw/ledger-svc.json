@@ -1,0 +1,87 @@
+{
+ "tool": {
+  "name": "ecdsa-scan",
+  "version": "0.1.0",
+  "informationUri": "https://ecdsa.com/scanner"
+ },
+ "scannedAt": "2026-10-07T20:16:57.061Z",
+ "summary": {
+  "filesScanned": 2,
+  "filesSkipped": 0,
+  "findings": 3,
+  "byConfidence": {
+   "confirmed": 1,
+   "suspected": 2
+  },
+  "bySeverity": {
+   "high": 3
+  },
+  "byRule": {
+   "hardcoded-private-key": 1,
+   "key-file-outside-tests": 2
+  }
+ },
+ "rules": {
+  "hardcoded-private-key": {
+   "title": "Private key material embedded in source",
+   "severity": "high",
+   "defaultConfidence": "confirmed",
+   "why": "A private key checked into a repository is compromised the moment anyone clones, forks or mirrors it, and rotating it means re-issuing every signature, certificate or account that depends on it. Git keeps the value in history even after the line is deleted, so removal is never enough on its own. Keys belong in a KMS, an HSM or (at minimum) an environment variable injected at deploy time.",
+   "fix": "// read the key at run time; keep the value out of the repository\nconst privateKey = process.env.SIGNING_PRIVATE_KEY;\n// better: never hold the key at all \u2014 sign through KMS/HSM\nconst signature = await kms.sign({ KeyId, Message, SigningAlgorithm: 'ECDSA_SHA_256' });",
+   "docs": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html"
+  },
+  "key-file-outside-tests": {
+   "title": "Key file stored outside test/fixture directories",
+   "severity": "high",
+   "defaultConfidence": "suspected",
+   "why": "A `.pem`, `.key`, `id_ecdsa` or `.p12` file that sits next to application code is almost always a real key that was committed by accident \u2014 throwaway keys normally live under `test/`, `fixtures/` or `examples/`. Anyone with read access to the repository, including CI logs and forks, gets the key. If the file really is a disposable fixture, move it into a test directory so the intent is obvious to both humans and scanners.",
+   "fix": "# keep keys out of the tree\ngit rm --cached path/to/private.key\necho '*.key' >> .gitignore\n# then rotate the key \u2014 a committed key must be considered public",
+   "docs": "https://docs.github.com/en/code-security/secret-scanning/about-secret-scanning"
+  }
+ },
+ "findings": [
+  {
+   "ruleId": "hardcoded-private-key",
+   "title": "Private key material embedded in source",
+   "severity": "high",
+   "confidence": "confirmed",
+   "message": "A private key block (`-----BEGIN PRIVATE KEY-----`) is embedded in source. Treat this key as compromised: rotate it, then remove the value from git history.",
+   "path": "keys/block-signing-key.pem",
+   "line": 1,
+   "column": 1,
+   "snippet": "-----BEGIN PRIVATE KEY-----",
+   "docs": "https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html"
+  },
+  {
+   "ruleId": "key-file-outside-tests",
+   "title": "Key file stored outside test/fixture directories",
+   "severity": "high",
+   "confidence": "suspected",
+   "message": "`block-signing-key.pem` contains a PEM private key and is stored outside any test/fixture directory. Rotate the key, then remove the file from git history.",
+   "path": "keys/block-signing-key.pem",
+   "line": 1,
+   "column": 1,
+   "snippet": "-----BEGIN PRIVATE KEY-----",
+   "docs": "https://docs.github.com/en/code-security/secret-scanning/about-secret-scanning"
+  },
+  {
+   "ruleId": "key-file-outside-tests",
+   "title": "Key file stored outside test/fixture directories",
+   "severity": "high",
+   "confidence": "suspected",
+   "message": "`ledger-node.p12` is a key store (.p12) checked in outside any test directory. Confirm what it holds; if it contains a private key or a certificate chain with a key, rotate it and remove the file from git history.",
+   "path": "keys/ledger-node.p12",
+   "line": 1,
+   "column": 1,
+   "snippet": "ledger-node.p12",
+   "docs": "https://docs.github.com/en/code-security/secret-scanning/about-secret-scanning"
+  }
+ ],
+ "inventory": {
+  "libraries": [],
+  "algorithms": [],
+  "curves": [],
+  "operations": []
+ },
+ "errors": []
+}

@@ -1,0 +1,117 @@
+{
+ "bomFormat": "CycloneDX",
+ "specVersion": "1.6",
+ "version": 1,
+ "metadata": {
+  "tools": {
+   "components": [
+    {
+     "type": "application",
+     "name": "ecdsa-scan",
+     "version": "0.1.0"
+    }
+   ]
+  }
+ },
+ "components": [
+  {
+   "type": "cryptographic-asset",
+   "bom-ref": "algorithm-f23f7c97b03e23b0",
+   "name": "ECDSA",
+   "evidence": {
+    "occurrences": [
+     {
+      "location": "internal/identity/identity.go"
+     }
+    ]
+   },
+   "cryptoProperties": {
+    "assetType": "algorithm"
+   }
+  },
+  {
+   "type": "cryptographic-asset",
+   "bom-ref": "algorithm-b38ab6780e120a0e",
+   "name": "EdDSA",
+   "evidence": {
+    "occurrences": [
+     {
+      "location": "internal/identity/identity.go"
+     }
+    ]
+   },
+   "cryptoProperties": {
+    "assetType": "algorithm"
+   }
+  },
+  {
+   "type": "cryptographic-asset",
+   "bom-ref": "algorithm-e71baf34656ec7af",
+   "name": "SHA-256",
+   "evidence": {
+    "occurrences": [
+     {
+      "location": "internal/digest/digest.go"
+     },
+     {
+      "location": "internal/identity/identity.go"
+     }
+    ]
+   },
+   "cryptoProperties": {
+    "assetType": "algorithm"
+   }
+  },
+  {
+   "type": "cryptographic-asset",
+   "bom-ref": "curve-e70631d6fa27276c",
+   "name": "P-256",
+   "evidence": {
+    "occurrences": [
+     {
+      "location": "internal/identity/identity.go"
+     }
+    ]
+   },
+   "cryptoProperties": {
+    "assetType": "algorithm"
+   }
+  },
+  {
+   "type": "library",
+   "bom-ref": "library-e77034c10351fa4b",
+   "name": "crypto/ecdsa",
+   "evidence": {
+    "occurrences": [
+     {
+      "location": "internal/identity/identity.go"
+     }
+    ]
+   }
+  },
+  {
+   "type": "library",
+   "bom-ref": "library-40c092b2ea6eb0e1",
+   "name": "crypto/elliptic",
+   "evidence": {
+    "occurrences": [
+     {
+      "location": "internal/identity/identity.go"
+     }
+    ]
+   }
+  },
+  {
+   "type": "library",
+   "bom-ref": "library-df18121caa6ecf64",
+   "name": "crypto/rsa",
+   "evidence": {
+    "occurrences": [
+     {
+      "location": "internal/identity/identity.go"
+     }
+    ]
+   }
+  }
+ ]
+}
