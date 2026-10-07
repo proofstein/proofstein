@@ -341,7 +341,8 @@ committing one republishes much of what the seed protects. The documents are
 archived privately and their SHA-256 digests are recorded in the run manifest by
 `tools/withhold-cboms.py`, which also verifies an archive against them. A
 reviewer can confirm the scores against unaltered documents without receiving
-the seed.
+the seed. For the same reason, `score.py` names each holdout plant in
+`results.json` by its id, without its file and line.
 
 This rule postdates the 2026-07-28 run, whose holdout published both its seed and its
 CBOMs. That run is marked as exposed in its own README and is excluded from
