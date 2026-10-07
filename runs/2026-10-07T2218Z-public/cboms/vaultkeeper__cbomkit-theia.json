@@ -1,0 +1,243 @@
+{
+  "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:5bea2ef4-0633-4528-9a58-2b215cfe9bdd",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-10-08T00:19:54+02:00",
+    "tools": {
+      "services": [
+        {
+          "provider": {
+            "name": "PQCA"
+          },
+          "name": "cbomkit-theia",
+          "version": "edge",
+          "services": [
+            {
+              "name": "Certificate File Plugin"
+            },
+            {
+              "name": "Secret Detection Plugin"
+            },
+            {
+              "name": "OpenSSL Config Plugin"
+            },
+            {
+              "name": "Problematic CA Detection Plugin"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "bom-ref": "5501ade4-a744-4b40-ad67-521b8c0c83de",
+      "type": "cryptographic-asset",
+      "name": "ECDSA",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "secrets/peer-mesh-cert.pem"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "cryptoFunctions": [
+            "sign"
+          ]
+        },
+        "oid": "1.2.840.10045.2.1"
+      }
+    },
+    {
+      "bom-ref": "c2f253b7-8d00-43e6-a6ae-5285533c8c7b",
+      "type": "cryptographic-asset",
+      "name": "SHA256",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "secrets/peer-mesh-cert.pem"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash",
+          "parameterSetIdentifier": "256",
+          "cryptoFunctions": [
+            "digest"
+          ]
+        }
+      }
+    },
+    {
+      "bom-ref": "3148c727-c242-48f7-b480-262501482851",
+      "type": "cryptographic-asset",
+      "name": "ECDSA-SHA256",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "secrets/peer-mesh-cert.pem"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "parameterSetIdentifier": "256",
+          "cryptoFunctions": [
+            "sign"
+          ]
+        },
+        "oid": "1.2.840.10045.4.3.2"
+      }
+    },
+    {
+      "bom-ref": "db5cb7e2-c0b3-4816-9eb6-cf49692b0829",
+      "type": "cryptographic-asset",
+      "name": "ECDSA",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "secrets/peer-mesh-cert.pem"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "cryptoFunctions": [
+            "sign"
+          ]
+        },
+        "oid": "1.2.840.10045.2.1"
+      }
+    },
+    {
+      "bom-ref": "c5949439-a04a-4200-b967-afd9860d5660",
+      "type": "cryptographic-asset",
+      "name": "ECDSA",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "secrets/peer-mesh-cert.pem"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "related-crypto-material",
+        "relatedCryptoMaterialProperties": {
+          "type": "public-key",
+          "algorithmRef": "db5cb7e2-c0b3-4816-9eb6-cf49692b0829",
+          "value": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE6awdFZxE3yE3JG17YXgqUGtnAtVKJFh2Qa2zxJQ+iPPfPaCI+wamtzB9kMrBLZ6EdESXTt4jiMZ8MBsSXBt86g==",
+          "format": "PEM"
+        },
+        "oid": "1.2.840.10045.2.1"
+      }
+    },
+    {
+      "bom-ref": "515571e8-04d0-422f-b849-0e9ff6a831bf",
+      "type": "cryptographic-asset",
+      "name": "vk-eu-central-1",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "secrets/peer-mesh-cert.pem"
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "certificate",
+        "certificateProperties": {
+          "subjectName": "vk-eu-central-1",
+          "issuerName": "vk-eu-central-1",
+          "notValidBefore": "2026-07-27T14:42:49Z",
+          "notValidAfter": "2036-07-24T14:42:49Z",
+          "signatureAlgorithmRef": "3148c727-c242-48f7-b480-262501482851",
+          "subjectPublicKeyRef": "c5949439-a04a-4200-b967-afd9860d5660",
+          "certificateFormat": "X.509",
+          "certificateExtension": "pem"
+        }
+      }
+    },
+    {
+      "bom-ref": "311d1758-ea81-4323-ad68-f661e631c2e3",
+      "type": "cryptographic-asset",
+      "name": "ED25519",
+      "description": "Identified a Private Key, which may compromise cryptographic security and sensitive data encryption.",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "secrets/node-manifest-key.pem",
+            "line": 0
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "related-crypto-material",
+        "relatedCryptoMaterialProperties": {
+          "type": "private-key",
+          "format": "PEM"
+        }
+      }
+    },
+    {
+      "bom-ref": "9ca5bdc2-201b-4c82-b67f-13c381a977a1",
+      "type": "cryptographic-asset",
+      "name": "ECDSA",
+      "description": "Curve: P-256;Identified a Private Key, which may compromise cryptographic security and sensitive data encryption.",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "secrets/peer-mesh-key.pem",
+            "line": 0
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "related-crypto-material",
+        "relatedCryptoMaterialProperties": {
+          "type": "private-key",
+          "format": "PEM"
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "name": "generic-api-key",
+      "description": "Detected a Generic API Key, potentially exposing access to various services and sensitive operations.",
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/vaultkeeper/kem.py",
+            "line": 18
+          }
+        ]
+      },
+      "cryptoProperties": {
+        "assetType": "related-crypto-material",
+        "relatedCryptoMaterialProperties": {
+          "type": "key"
+        }
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "3148c727-c242-48f7-b480-262501482851",
+      "dependsOn": [
+        "5501ade4-a744-4b40-ad67-521b8c0c83de",
+        "c2f253b7-8d00-43e6-a6ae-5285533c8c7b"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,414 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:4ff6c3f2-cf9a-48fe-b7c8-a2173ca7b69a",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-10-07T22:19:54Z",
+    "tools": [
+      {
+        "vendor": "CSNP",
+        "name": "CryptoScan",
+        "version": "1.4.0"
+      }
+    ],
+    "component": {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-inventory-summary",
+      "name": "Cryptographic Inventory Summary",
+      "description": "Migration Readiness: 42.2% (CRITICAL)"
+    }
+  },
+  "components": [
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-private-key-header-0",
+      "name": "Private Key Header",
+      "description": "Private key found in source code. This is a critical security issue.",
+      "cryptoProperties": {
+        "assetType": "related-crypto-material",
+        "relatedCryptoMaterialProperties": {
+          "type": "private-key"
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "secrets/node-manifest-key.pem",
+            "line": 1,
+            "symbol": "-----BEGIN PRIVATE KEY-----"
+          },
+          {
+            "location": "secrets/peer-mesh-key.pem",
+            "line": 1,
+            "symbol": "-----BEGIN PRIVATE KEY-----"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-rsa-1",
+      "name": "RSA",
+      "description": "RSA algorithm detected. RSA is vulnerable to Shor's algorithm and will be broken by cryptographically relevant quantum computers.",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "pke"
+        },
+        "oid": "1.2.840.113549.1.1.1"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/vaultkeeper/identity.py",
+            "line": 12,
+            "symbol": "rsa"
+          },
+          {
+            "location": "src/vaultkeeper/identity.py",
+            "line": 3,
+            "symbol": "RSA"
+          },
+          {
+            "location": "src/vaultkeeper/identity.py",
+            "line": 21,
+            "symbol": "rsa"
+          },
+          {
+            "location": "src/vaultkeeper/identity.py",
+            "line": 27,
+            "symbol": "rsa"
+          },
+          {
+            "location": "config/vaultkeeper.yaml",
+            "line": 18,
+            "symbol": "RSA-"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-ecc-2",
+      "name": "ECC",
+      "description": "Elliptic curve cryptography detected. ECC is vulnerable to Shor's algorithm on quantum computers.",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "other"
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/vaultkeeper/identity.py",
+            "line": 23,
+            "symbol": "ed25519"
+          },
+          {
+            "location": "src/vaultkeeper/identity.py",
+            "line": 28,
+            "symbol": "SECP256R1"
+          },
+          {
+            "location": "src/vaultkeeper/identity.py",
+            "line": 29,
+            "symbol": "ed25519"
+          },
+          {
+            "location": "config/vaultkeeper.yaml",
+            "line": 16,
+            "symbol": "Ed25519"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-rsa,-ecc,-aes,-chacha20-3",
+      "name": "RSA, ECC, AES, ChaCha20",
+      "description": "Python cryptographic recipes and primitives (Algorithms: RSA, ECC, AES, ChaCha20)",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "stream-cipher",
+          "classicalSecurityLevel": 256
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "pyproject.toml",
+            "line": 1,
+            "symbol": "cryptography"
+          },
+          {
+            "location": "requirements.txt",
+            "line": 1,
+            "symbol": "cryptography"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-aes-4",
+      "name": "AES",
+      "description": "AES detected. AES-256 provides adequate quantum resistance. AES-128 security is reduced to 64-bit against Grover's algorithm.",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "block-cipher",
+          "classicalSecurityLevel": 256
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/vaultkeeper/envelope.py",
+            "line": 12,
+            "symbol": "AESGCM"
+          },
+          {
+            "location": "src/vaultkeeper/envelope.py",
+            "line": 44,
+            "symbol": "AESGCM"
+          },
+          {
+            "location": "src/vaultkeeper/envelope.py",
+            "line": 51,
+            "symbol": "AESGCM"
+          },
+          {
+            "location": "config/vaultkeeper.yaml",
+            "line": 15,
+            "symbol": "AES-256-GCM"
+          },
+          {
+            "location": "deploy/values.yaml",
+            "line": 18,
+            "symbol": "AES-256-GCM"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-sha-2-5",
+      "name": "SHA-2",
+      "description": "SHA-2 family hash detected. SHA-256 security is reduced to 128-bit against Grover's algorithm, which remains secure.",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash"
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/vaultkeeper/fingerprint.py",
+            "line": 16,
+            "symbol": "sha256"
+          },
+          {
+            "location": "src/vaultkeeper/identity.py",
+            "line": 40,
+            "symbol": "SHA256"
+          },
+          {
+            "location": "src/vaultkeeper/identity.py",
+            "line": 41,
+            "symbol": "SHA256"
+          },
+          {
+            "location": "config/vaultkeeper.yaml",
+            "line": 24,
+            "symbol": "SHA-256"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-ml-kem-6",
+      "name": "ML-KEM",
+      "description": "ML-KEM (FIPS 203) post-quantum key encapsulation detected. This is quantum-safe.",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "kem",
+          "nistQuantumSecurityLevel": 1
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/vaultkeeper/kem.py",
+            "line": 12,
+            "symbol": "mlkem"
+          },
+          {
+            "location": "src/vaultkeeper/kem.py",
+            "line": 19,
+            "symbol": "mlkem"
+          },
+          {
+            "location": "src/vaultkeeper/kem.py",
+            "line": 23,
+            "symbol": "mlkem"
+          },
+          {
+            "location": "src/vaultkeeper/kem.py",
+            "line": 39,
+            "symbol": "mlkem"
+          },
+          {
+            "location": "config/vaultkeeper.yaml",
+            "line": 17,
+            "symbol": "ML-KEM-768"
+          },
+          {
+            "location": "deploy/values.yaml",
+            "line": 19,
+            "symbol": "ML-KEM-768"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-fn-dsa-7",
+      "name": "FN-DSA",
+      "description": "FN-DSA (Falcon) post-quantum signature detected. Expected in FIPS 206.",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "nistQuantumSecurityLevel": 1
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/vaultkeeper/attest.py",
+            "line": 21,
+            "symbol": "Falcon-1024"
+          },
+          {
+            "location": "src/vaultkeeper/attest.py",
+            "line": 30,
+            "symbol": "Falcon-1024"
+          },
+          {
+            "location": "src/vaultkeeper/attest.py",
+            "line": 34,
+            "symbol": "oqs.Signature(\"Falcon"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-slh-dsa-8",
+      "name": "SLH-DSA",
+      "description": "SLH-DSA (FIPS 205) stateless hash-based signature detected. This is quantum-safe.",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "nistQuantumSecurityLevel": 1
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/vaultkeeper/attest.py",
+            "line": 22,
+            "symbol": "SPHINCS+-"
+          },
+          {
+            "location": "config/vaultkeeper.yaml",
+            "line": 19,
+            "symbol": "SLH-DSA-"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-post-quantum-crypto-library-9",
+      "name": "Post-Quantum Crypto Library",
+      "description": "Post-quantum cryptography library detected. Good practice for quantum-safe migration.",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/vaultkeeper/attest.py",
+            "line": 34,
+            "symbol": "oqs.Signature"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-certificate-key-usage-10",
+      "name": "Certificate Key Usage",
+      "description": "Certificate key usage extension detected. Defines permitted cryptographic operations.",
+      "cryptoProperties": {
+        "assetType": "certificate"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "deploy/values.yaml",
+            "line": 19,
+            "symbol": "KeyAgreement"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-tls-11",
+      "name": "TLS",
+      "description": "TLS 1.2/1.3 detected. TLS 1.3 cipher suites using ECDHE are quantum-vulnerable for key exchange.",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "other"
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "deploy/values.yaml",
+            "line": 20,
+            "symbol": "TLSv1.3"
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto-x.509-certificate-12",
+      "name": "X.509 Certificate",
+      "description": "X.509 certificate detected. Certificate algorithm and key size should be verified for quantum safety.",
+      "cryptoProperties": {
+        "assetType": "certificate"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "secrets/peer-mesh-cert.pem",
+            "line": 1,
+            "symbol": "-----BEGIN CERTIFICATE-----"
+          }
+        ]
+      }
+    }
+  ]
+}

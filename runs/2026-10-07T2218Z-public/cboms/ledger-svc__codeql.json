@@ -1,0 +1,170 @@
+{
+ "bomFormat": "CycloneDX",
+ "specVersion": "1.6",
+ "version": 1,
+ "metadata": {
+  "tools": {
+   "components": [
+    {
+     "type": "application",
+     "name": "codeql",
+     "version": "2.27.1"
+    }
+   ]
+  }
+ },
+ "components": [
+  {
+   "type": "cryptographic-asset",
+   "bom-ref": "alg-7299453b621d99c8",
+   "name": "AES",
+   "cryptoProperties": {
+    "assetType": "algorithm"
+   },
+   "evidence": {
+    "occurrences": [
+     {
+      "location": "src/main/java/io/proofstein/ledger/crypto/Envelope.java",
+      "line": 46
+     },
+     {
+      "location": "src/main/java/io/proofstein/ledger/crypto/Envelope.java",
+      "line": 65
+     }
+    ]
+   }
+  },
+  {
+   "type": "cryptographic-asset",
+   "bom-ref": "alg-6c83d4be33d150b7",
+   "name": "DSA",
+   "cryptoProperties": {
+    "assetType": "algorithm"
+   },
+   "evidence": {
+    "occurrences": [
+     {
+      "location": "src/main/java/io/proofstein/ledger/crypto/BlockSeal.java",
+      "line": 39
+     }
+    ]
+   }
+  },
+  {
+   "type": "cryptographic-asset",
+   "bom-ref": "alg-554103e67b1ef5cd",
+   "name": "EDSA",
+   "cryptoProperties": {
+    "assetType": "algorithm"
+   },
+   "evidence": {
+    "occurrences": [
+     {
+      "location": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
+      "line": 39
+     },
+     {
+      "location": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
+      "line": 47
+     }
+    ]
+   }
+  },
+  {
+   "type": "cryptographic-asset",
+   "bom-ref": "alg-a2c7035336d75538",
+   "name": "ML-KEM",
+   "cryptoProperties": {
+    "assetType": "algorithm"
+   },
+   "evidence": {
+    "occurrences": [
+     {
+      "location": "src/main/java/io/proofstein/ledger/crypto/Kem.java",
+      "line": 25
+     }
+    ]
+   }
+  },
+  {
+   "type": "cryptographic-asset",
+   "bom-ref": "alg-87a10fd1d9e3a305",
+   "name": "RSA",
+   "cryptoProperties": {
+    "assetType": "algorithm"
+   },
+   "evidence": {
+    "occurrences": [
+     {
+      "location": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
+      "line": 36
+     },
+     {
+      "location": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
+      "line": 39
+     },
+     {
+      "location": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
+      "line": 52
+     },
+     {
+      "location": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
+      "line": 55
+     }
+    ]
+   }
+  },
+  {
+   "type": "cryptographic-asset",
+   "bom-ref": "alg-a446ffb10eac3778",
+   "name": "SHA2",
+   "cryptoProperties": {
+    "assetType": "algorithm"
+   },
+   "evidence": {
+    "occurrences": [
+     {
+      "location": "src/main/java/io/proofstein/ledger/crypto/Fingerprint.java",
+      "line": 24
+     },
+     {
+      "location": "src/main/java/io/proofstein/ledger/crypto/Fingerprint.java",
+      "line": 25
+     },
+     {
+      "location": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
+      "line": 52
+     },
+     {
+      "location": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
+      "line": 60
+     },
+     {
+      "location": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
+      "line": 61
+     }
+    ]
+   }
+  },
+  {
+   "type": "cryptographic-asset",
+   "bom-ref": "alg-eabd2839f9e57cf2",
+   "name": "secp256r1",
+   "cryptoProperties": {
+    "assetType": "algorithm"
+   },
+   "evidence": {
+    "occurrences": [
+     {
+      "location": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
+      "line": 34
+     },
+     {
+      "location": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
+      "line": 39
+     }
+    ]
+   }
+  }
+ ]
+}
