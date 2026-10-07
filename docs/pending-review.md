@@ -769,7 +769,7 @@ it, would make the activation step redundant and this entry historical.
 
 ## 14. Post-quantum signature families (CLOSED, 2026-10-07)
 
-SLH-DSA (markers `SLHDSA`, `SPHINCS`), Falcon (`FALCON`, `FNDSA`), LMS and XMSS are families of their own and DSA is claimed only by DSA itself, which on the 2026-08-23 public run leaves every tool's recall unchanged, charges `pqprobe-static` one false positive (`Falcon-512` at `session-broker/src/attest.ts:41`, a configuration value for a scheme the project does not implement) and credits it one more claim, and matches one more sonar-cryptography component.
+SLH-DSA (markers `SLHDSA`, `SPHINCS`), Falcon (`FALCON`, `FNDSA`), LMS and XMSS are families of their own and DSA is claimed only by DSA itself, which on the 2026-08-23 public run leaves every tool's recall unchanged, charges `pqprobe-static` one false positive (`Falcon-512` at `session-broker/src/attest.ts:41`, a configuration value for a scheme the project does not implement) and credits it one more claim.
 
 ## 15. Negative cases can charge (CLOSED, 2026-10-07)
 
