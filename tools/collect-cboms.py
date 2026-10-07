@@ -458,15 +458,20 @@ def main() -> int:
         print("nothing to run", file=sys.stderr)
         return 1
 
-    # Determine publishability BEFORE creating anything. The run directory is
-    # itself untracked until the results are committed, so checking afterwards
-    # would let this tool's own output mark every run unpublishable.
+    # Determine publishability BEFORE creating anything. Run directories, this
+    # run's and any other uncommitted one, are outside the exported corpus the
+    # generators scan, so they do not make it dirty (score.RUN_DIRECTORY).
+    sys.path.insert(0, str(REPO_ROOT))
+    from score import RUN_DIRECTORY  # noqa: PLC0415
+
     try:
         out_relative = args.out.relative_to(REPO_ROOT).as_posix()
     except ValueError:
         out_relative = None
 
     def _is_run_output(path: str) -> bool:
+        if RUN_DIRECTORY.match(path):
+            return True
         if out_relative is None:
             return False
         return path == out_relative or path.startswith(out_relative + "/")

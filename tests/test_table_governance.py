@@ -337,6 +337,15 @@ class TestTablesAreDocumented(unittest.TestCase):
         spec.loader.exec_module(collect)
         self.assertEqual(collect.judgement_table_digest(), judgement_table_digest(KNOWN_UNPLANTED))
 
+    def test_run_directories_do_not_dirty_the_corpus(self):
+        """An uncommitted run directory is outside the exported corpus."""
+        from score import corpus_dirty
+
+        self.assertFalse(corpus_dirty({"corpus_tree_dirty": True, "uncommitted_paths": ["runs/2026-08-23T1519Z-public/"]}))
+        self.assertTrue(corpus_dirty({"corpus_tree_dirty": True, "uncommitted_paths": ["runs/generators.json"]}))
+        self.assertTrue(corpus_dirty({"corpus_tree_dirty": True, "uncommitted_paths": ["corpus/go/x.go", "runs/a/"]}))
+        self.assertTrue(corpus_dirty({"corpus_tree_dirty": True}))
+
     def test_methodology_names_each_table(self):
         text = (REPO_ROOT / "METHODOLOGY.md").read_text(encoding="utf-8")
         for needle in (
