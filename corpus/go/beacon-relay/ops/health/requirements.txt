@@ -1,0 +1,2 @@
+# Health and readiness probes served beside the relay (see api.py).
+falcon==4.3.1
