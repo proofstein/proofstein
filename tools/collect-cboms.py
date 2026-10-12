@@ -16,6 +16,8 @@ regenerated from its manifest did not happen. The manifest therefore records:
 * the corpus commit, and whether the tree was dirty when the run started;
 * every tool's self-reported version, the sha256 of the binary or package that
   produced it, and the exact argument vector used;
+* for a tool run from a container image, the image the config pins and the
+  digest of the image docker actually ran;
 * a digest of the three judgement tables (METHODOLOGY.md §9.1), so a score that
   moves because a table moved is attributable rather than invisible;
 * per-invocation exit status, duration, output size and stderr tail, including
@@ -123,16 +125,84 @@ def load_projects(ground_truth_dir: Path) -> list[dict]:
 ANSI_ESCAPE = re.compile(r"\x1b\[[0-9;]*[A-Za-z]")
 
 
+#: How a config's ``image`` reaches the tool. The wrapper runs the image it is
+#: handed rather than naming one of its own, so the config holds the only pin
+#: and the manifest records the image that pin names.
+TOOL_IMAGE = "TOOL_IMAGE"
+
+
+def tool_env(spec: dict) -> dict:
+    """The environment a tool's commands run in: ours, the spec's, and its image."""
+    env = os.environ.copy()
+    env.update(spec.get("env", {}))
+    if spec.get("image"):
+        env[TOOL_IMAGE] = spec["image"]
+    return env
+
+
 def tool_version(spec: dict) -> str:
     command = spec.get("version_command")
     if not command:
         return "unknown"
     try:
-        result = subprocess.run(command, capture_output=True, text=True, timeout=120)
+        result = subprocess.run(command, capture_output=True, text=True, timeout=120, env=tool_env(spec))
     except (OSError, subprocess.SubprocessError) as exc:
         return f"unavailable ({exc})"
     text = ANSI_ESCAPE.sub("", (result.stdout or result.stderr or "")).strip()
     return text.splitlines()[0] if text else "unknown"
+
+
+def image_repository(image: str) -> str:
+    """The repository part of an image reference, without tag or digest.
+
+    A colon after the last slash starts a tag; one before it is a registry
+    port, as in localhost:5000/tool.
+    """
+    name = image.split("@", 1)[0]
+    head, sep, tail = name.rpartition(":")
+    return head if sep and "/" not in tail else name
+
+
+def image_record(spec: dict, run=subprocess.run) -> dict:
+    """The image a tool ran from: as the config pins it, and as docker ran it.
+
+    The pin says what was asked for. ``image_digest`` says what ran: the
+    registry digest docker holds for the local image the pin resolved to, read
+    after the version command has run the image. For a pin by digest the two
+    agree; a manifest in which they differ records a run that did not use the
+    pinned image. A tool with no image records nothing here.
+    """
+    image = spec.get("image")
+    if not image:
+        return {}
+    record = {"image": image, "image_digest": None, "image_id": None}
+    try:
+        result = run(["docker", "image", "inspect", image], capture_output=True, text=True, timeout=60)
+    except (OSError, subprocess.SubprocessError) as exc:
+        record["image_error"] = str(exc)
+        return record
+    if result.returncode != 0:
+        record["image_error"] = (result.stderr or "").strip() or f"docker image inspect exited {result.returncode}"
+        return record
+    try:
+        info = json.loads(result.stdout)[0]
+    except (ValueError, IndexError, TypeError) as exc:
+        record["image_error"] = f"unreadable docker image inspect output: {exc}"
+        return record
+
+    repository = image_repository(image)
+    digests = [
+        ref.split("@", 1)[1]
+        for ref in info.get("RepoDigests") or []
+        if "@" in ref and ref.split("@", 1)[0] == repository
+    ]
+    pinned = image.split("@", 1)[1] if "@" in image else None
+    if pinned in digests:
+        record["image_digest"] = pinned
+    elif digests:
+        record["image_digest"] = digests[0]
+    record["image_id"] = info.get("Id")
+    return record
 
 
 #: Never copied into a scan tree. A generator pointed at build output reports
@@ -234,8 +304,7 @@ def run_one(spec: dict, project: Path, workdir: Path, timeout: int) -> dict:
         for part in spec["invocation"]
     ]
 
-    env = os.environ.copy()
-    env.update(spec.get("env", {}))
+    env = tool_env(spec)
 
     started = time.monotonic()
     try:
@@ -513,7 +582,7 @@ def main() -> int:
 
     for spec in specs:
         binary = spec.get("binary")
-        manifest["tools"][spec["name"]] = {
+        entry = {
             "version": tool_version(spec),
             "binary": record_path(binary),
             "binary_sha256": sha256_file(Path(binary)) if binary and Path(binary).exists() else None,
@@ -521,6 +590,10 @@ def main() -> int:
             "accept_exit": spec.get("accept_exit", [0]),
             "notes": spec.get("notes", ""),
         }
+        # After the version command, which is the first to run the image, so
+        # docker has resolved and pulled it by now.
+        entry.update(image_record(spec))
+        manifest["tools"][spec["name"]] = entry
 
     total = len(specs) * len(projects)
     done = 0

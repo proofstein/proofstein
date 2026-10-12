@@ -124,6 +124,76 @@ class TestShippedConfig(unittest.TestCase):
         entry = next(t for t in config["tools"] if t["name"] == "cdxgen")
         self.assertNotIn("${", entry["binary"])
 
+    def test_cdxgen_image_is_pinned_by_digest(self):
+        """A tag can be moved to another image; a digest cannot."""
+        config = json.loads((REPO_ROOT / "runs" / "generators.json").read_text())
+        entry = next(t for t in config["tools"] if t["name"] == "cdxgen")
+        self.assertRegex(entry["image"], r"^ghcr\.io/cyclonedx/cdxgen@sha256:[0-9a-f]{64}$")
+
+
+PINNED = "ghcr.io/cyclonedx/cdxgen@sha256:" + "d" * 64
+
+
+def _inspect(stdout="", returncode=0, stderr=""):
+    """A stand-in for subprocess.run answering `docker image inspect`."""
+    def run(argv, **_):
+        return subprocess.CompletedProcess(argv, returncode, stdout=stdout, stderr=stderr)
+    return run
+
+
+class TestImageReachesTheTool(unittest.TestCase):
+    """The config holds the one pin; the wrapper runs what it is handed."""
+
+    def test_version_command_sees_the_pinned_image(self):
+        spec = {
+            "image": PINNED,
+            "version_command": [sys.executable, "-c", "import os; print(os.environ['TOOL_IMAGE'])"],
+        }
+        self.assertEqual(collector.tool_version(spec), PINNED)
+
+    def test_wrapper_refuses_to_run_without_an_image(self):
+        """No fallback image: an unset pin fails before docker is called."""
+        env = {k: v for k, v in os.environ.items() if k != "TOOL_IMAGE"}
+        result = subprocess.run(
+            ["bash", str(REPO_ROOT / "tools" / "cdxgen-docker.sh"), "--version"],
+            capture_output=True, text=True, env=env, timeout=30,
+        )
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("TOOL_IMAGE", result.stderr)
+
+
+class TestManifestRecordsTheImageThatRan(unittest.TestCase):
+    def test_records_the_pinned_digest_docker_holds(self):
+        inspect = json.dumps([{
+            "Id": "sha256:" + "a" * 64,
+            "RepoDigests": ["other/repo@sha256:" + "e" * 64, PINNED],
+        }])
+        record = collector.image_record({"image": PINNED}, run=_inspect(inspect))
+        self.assertEqual(record["image"], PINNED)
+        self.assertEqual(record["image_digest"], "sha256:" + "d" * 64)
+        self.assertEqual(record["image_id"], "sha256:" + "a" * 64)
+
+    def test_a_tag_records_the_digest_it_resolved_to(self):
+        resolved = "ghcr.io/cyclonedx/cdxgen@sha256:" + "f" * 64
+        inspect = json.dumps([{"Id": "sha256:" + "a" * 64, "RepoDigests": [resolved]}])
+        record = collector.image_record({"image": "ghcr.io/cyclonedx/cdxgen:12.8.2"}, run=_inspect(inspect))
+        self.assertEqual(record["image_digest"], "sha256:" + "f" * 64)
+
+    def test_an_image_docker_cannot_inspect_is_recorded_not_guessed(self):
+        record = collector.image_record(
+            {"image": PINNED}, run=_inspect(returncode=1, stderr="Error: No such image")
+        )
+        self.assertIsNone(record["image_digest"])
+        self.assertIn("No such image", record["image_error"])
+
+    def test_a_tool_without_an_image_records_nothing(self):
+        self.assertEqual(collector.image_record({"name": "pqprobe-static"}), {})
+
+    def test_repository_keeps_a_registry_port(self):
+        self.assertEqual(collector.image_repository("localhost:5000/tool"), "localhost:5000/tool")
+        self.assertEqual(collector.image_repository("localhost:5000/tool:1.0"), "localhost:5000/tool")
+        self.assertEqual(collector.image_repository(PINNED), "ghcr.io/cyclonedx/cdxgen")
+
 
 def _public_run() -> Path:
     """The public run in the tree. Discovered, never named.
