@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 # Run the pinned cdxgen image with the argument list the native binary takes.
 #
+# The image is the one runs/generators.json pins by digest, handed over by
+# tools/collect-cboms.py in TOOL_IMAGE, so there is one pin and the manifest
+# records the image it names. Run by hand, set TOOL_IMAGE to that value.
+#
 # the 2026-07-27, 2026-07-28 and 2026-08-01 runs invoked cdxgen from a node_modules install. That build root
 # no longer exists and this host has no Node toolchain, so the 2026-08-23 run invokes the
 # official image at the same pinned version instead. The arguments are unchanged,
@@ -12,7 +16,7 @@
 # (METHODOLOGY.md 3.2), so this changes nothing about matching.
 set -euo pipefail
 
-IMAGE="ghcr.io/cyclonedx/cdxgen:12.8.2"
+IMAGE="${TOOL_IMAGE:?TOOL_IMAGE is not set: give it the image runs/generators.json pins}"
 
 out=""
 proj=""

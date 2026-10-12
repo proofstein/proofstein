@@ -403,6 +403,7 @@ scores over the same documents.
 2. **Pin the tools.** Record each generator's exact version and image digest.
    For BF-CBOM-orchestrated runs, record the BF-CBOM version (`VERSION`) and the
    inspection id. For standalone runs, record the CLI invocation verbatim.
+   Runs up to 2026-10-07 pinned cdxgen by its 12.8.2 tag only and cannot be tied to an image digest.
 
 3. **Regenerate the holdout** with a new seed:
    `tools/generate-holdout.py --seed <n>`. Record the seed privately; do not

@@ -27,6 +27,7 @@
    "name": "cdxgen",
    "binary": "tools/cdxgen-docker.sh",
    "package_version": "@cyclonedx/cdxgen@12.8.2",
+   "image": "ghcr.io/cyclonedx/cdxgen@sha256:d2a9f784c6d3d71a9d143dd69e6ca43fdb340282b1e43d1b99ad07e9321a4783",
    "version_command": [
     "tools/cdxgen-docker.sh",
     "--version"
@@ -48,7 +49,7 @@
     "CDXGEN_DEBUG_MODE": "info",
     "FETCH_LICENSE": "false"
    },
-   "notes": "Arguments mirror BF-CBOM's cdxgen worker. Records source files in properties[].SrcFile without line numbers. Invoked through the pinned image ghcr.io/cyclonedx/cdxgen:12.8.2, so it needs no build root and runs the same on any host with Docker."
+   "notes": "Arguments mirror BF-CBOM's cdxgen worker. Records source files in properties[].SrcFile without line numbers. Invoked through the image in `image`, the 12.8.2 tag pinned by digest, so it needs no build root and runs the same on any host with Docker."
   },
   {
    "name": "pqprobe-static",
