@@ -83,8 +83,12 @@ The full rules are in [METHODOLOGY.md](METHODOLOGY.md), sections 3 and 3.3.
 
 ## Example runs
 
+[`runs/2026-10-22T1005Z-public/`](runs/2026-10-22T1005Z-public/) scores
+pqprobe-static 4.0.2 against the cdxgen control, with
+[`runs/2026-10-22T1007Z-holdout/`](runs/2026-10-22T1007Z-holdout/) as its
+holdout companion on a fresh seed.
 [`runs/2026-10-07T2218Z-public/`](runs/2026-10-07T2218Z-public/) is the latest
-complete scored run: cdxgen 12.8.2, pqprobe-static 3.8.2, cryptoscan 1.4.0 in two
+complete multi-tool run: cdxgen 12.8.2, pqprobe-static 3.8.2, cryptoscan 1.4.0 in two
 modes, cbomkit-theia v1.1.2, Opengrep 1.30.1 and CodeQL 2.27.1, with their output
 files, the wrappers for the tools that do not write CycloneDX, and their scores.
 

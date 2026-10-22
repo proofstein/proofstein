@@ -1,0 +1,391 @@
+{
+  "run": {
+    "started_utc": "2026-10-22T10:07:36Z",
+    "scan_tree": "git archive HEAD",
+    "ground_truth": "ground-truth-holdout",
+    "holdout": true,
+    "corpus_commit": "c071f75abc53bb411948c13d32972a507300a2e4",
+    "corpus_commit_short": "c071f75",
+    "corpus_tree_dirty": false,
+    "uncommitted_paths": [],
+    "host_platform": "linux",
+    "python": "3.12.3",
+    "finished_utc": "2026-10-22T10:08:55Z",
+    "succeeded": 12,
+    "attempted": 12
+  },
+  "judgement_tables": {
+    "oid_algorithms": {
+      "entries": 27,
+      "sha256_16": "031a3c27915e6dde"
+    },
+    "location_property_names": {
+      "entries": 8,
+      "sha256_16": "0b8c15cc33ce242a"
+    },
+    "line_property_names": {
+      "entries": 5,
+      "sha256_16": "ed438ed351a5b930"
+    },
+    "token_aliases": {
+      "entries": 32,
+      "sha256_16": "637f0e9d5f2cf137"
+    },
+    "family_markers": {
+      "entries": 43,
+      "sha256_16": "e4639e0dd1414815"
+    },
+    "whole_token_only": {
+      "entries": 7,
+      "sha256_16": "88a20cf6715e9c84"
+    },
+    "known_unplanted": {
+      "entries": 15,
+      "sha256_16": "3a7fca80174e0cdd"
+    }
+  },
+  "tools": {
+    "cdxgen": {
+      "version": "CycloneDX Generator 12.8.2",
+      "binary": "tools/cdxgen-docker.sh",
+      "binary_sha256": "094fe605461f54fccf5f920dd96eabf8098d92cff93d2731af229af63a669f51",
+      "package_version": "@cyclonedx/cdxgen@12.8.2",
+      "accept_exit": [
+        0
+      ],
+      "notes": "Arguments mirror BF-CBOM's cdxgen worker. Records source files in properties[].SrcFile without line numbers. Invoked through the image in `image`, the 12.8.2 tag pinned by digest, so it needs no build root and runs the same on any host with Docker.",
+      "image": "ghcr.io/cyclonedx/cdxgen@sha256:d2a9f784c6d3d71a9d143dd69e6ca43fdb340282b1e43d1b99ad07e9321a4783",
+      "image_digest": "sha256:d2a9f784c6d3d71a9d143dd69e6ca43fdb340282b1e43d1b99ad07e9321a4783",
+      "image_id": "sha256:d2a9f784c6d3d71a9d143dd69e6ca43fdb340282b1e43d1b99ad07e9321a4783"
+    },
+    "pqprobe-static": {
+      "version": "pqprobe-static 4.0.2 (commit 51119c42947adb022103d288bdf0d2e1cac6f33e, built 2026-10-22T09:50:51Z, dirty false)",
+      "binary": "<external>/pqprobe-static-4.0.2-linux-amd64",
+      "binary_sha256": "760cf2f1460a652fa95a1e89fa1a76e9935fa5393bce9bf25bbcb6fec28afc1a",
+      "package_version": "pqprobe-static @ <external>/pqprobe-static-4.0.2-linux-amd64",
+      "accept_exit": [
+        0,
+        1
+      ],
+      "notes": "Exit 1 means findings present, not failure. The binary path comes from PQPROBE_STATIC_BIN; the manifest records what it resolved to and that file's sha256. Maintained by the same party as Proofstein; see the governance section in README.md."
+    }
+  },
+  "projects": {
+    "cachekeeper": {
+      "language": "python",
+      "assets": 23
+    },
+    "journal-svc": {
+      "language": "java",
+      "assets": 25
+    },
+    "microquote": {
+      "language": "c",
+      "assets": 19
+    },
+    "signal-bridge": {
+      "language": "go",
+      "assets": 19
+    },
+    "ticket-gateway": {
+      "language": "javascript",
+      "assets": 20
+    },
+    "vaultcrate": {
+      "language": "rust",
+      "assets": 18
+    }
+  },
+  "invocations": [
+    {
+      "argv": [
+        "tools/cdxgen-docker.sh",
+        "--json-pretty",
+        "--include-crypto",
+        "-o",
+        "runs/2026-10-22T1007Z-holdout/.work/bom.json",
+        "runs/2026-10-22T1007Z-holdout/.work/scan/cachekeeper"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 15.99,
+      "bytes": 7039,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "cachekeeper__cdxgen.json",
+      "tool": "cdxgen",
+      "project": "cachekeeper",
+      "language": "python"
+    },
+    {
+      "argv": [
+        "tools/cdxgen-docker.sh",
+        "--json-pretty",
+        "--include-crypto",
+        "-o",
+        "runs/2026-10-22T1007Z-holdout/.work/bom.json",
+        "runs/2026-10-22T1007Z-holdout/.work/scan/journal-svc"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 36.66,
+      "bytes": 7966,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "journal-svc__cdxgen.json",
+      "tool": "cdxgen",
+      "project": "journal-svc",
+      "language": "java"
+    },
+    {
+      "argv": [
+        "tools/cdxgen-docker.sh",
+        "--json-pretty",
+        "--include-crypto",
+        "-o",
+        "runs/2026-10-22T1007Z-holdout/.work/bom.json",
+        "runs/2026-10-22T1007Z-holdout/.work/scan/microquote"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 6.07,
+      "bytes": 4569,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "microquote__cdxgen.json",
+      "tool": "cdxgen",
+      "project": "microquote",
+      "language": "c"
+    },
+    {
+      "argv": [
+        "tools/cdxgen-docker.sh",
+        "--json-pretty",
+        "--include-crypto",
+        "-o",
+        "runs/2026-10-22T1007Z-holdout/.work/bom.json",
+        "runs/2026-10-22T1007Z-holdout/.work/scan/signal-bridge"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 8.61,
+      "bytes": 6994,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "signal-bridge__cdxgen.json",
+      "tool": "cdxgen",
+      "project": "signal-bridge",
+      "language": "go"
+    },
+    {
+      "argv": [
+        "tools/cdxgen-docker.sh",
+        "--json-pretty",
+        "--include-crypto",
+        "-o",
+        "runs/2026-10-22T1007Z-holdout/.work/bom.json",
+        "runs/2026-10-22T1007Z-holdout/.work/scan/ticket-gateway"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 4.09,
+      "bytes": 21104,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "ticket-gateway__cdxgen.json",
+      "tool": "cdxgen",
+      "project": "ticket-gateway",
+      "language": "javascript"
+    },
+    {
+      "argv": [
+        "tools/cdxgen-docker.sh",
+        "--json-pretty",
+        "--include-crypto",
+        "-o",
+        "runs/2026-10-22T1007Z-holdout/.work/bom.json",
+        "runs/2026-10-22T1007Z-holdout/.work/scan/vaultcrate"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 4.36,
+      "bytes": 92995,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "vaultcrate__cdxgen.json",
+      "tool": "cdxgen",
+      "project": "vaultcrate",
+      "language": "rust"
+    },
+    {
+      "argv": [
+        "<external>/pqprobe-static-4.0.2-linux-amd64",
+        "--output",
+        "cbom",
+        "scan",
+        "."
+      ],
+      "exit_code": 1,
+      "exit_accepted": true,
+      "duration_sec": 0.03,
+      "bytes": 37640,
+      "stderr_tail": "cbom: no CycloneDX representation for doc_claim finding \"Documentation: ML-KEM claim \u2014 verify actual implementation exists\" (README.md:31) | cbom: \"SPHINCS+\" mapped with loss: the parameter set is not named, so no OID or NIST security category is asserted | cbom: \"AES-GCM\" mapped with loss: the call names a mode without a key size | cbom: \"SHA-2\" mapped with loss: the call site names the SHA-2 family without a determinable digest length | cbom: \"Public key (runtime)\" mapped with loss: the key is loaded or serialized at runtime; its algorithm is decided by the data | cbom: \"ML-KEM\" mapped with loss: the parameter set is not named, so no OID or NIST security category is asserted",
+      "status": "ok",
+      "written": "cachekeeper__pqprobe-static.json",
+      "tool": "pqprobe-static",
+      "project": "cachekeeper",
+      "language": "python"
+    },
+    {
+      "argv": [
+        "<external>/pqprobe-static-4.0.2-linux-amd64",
+        "--output",
+        "cbom",
+        "scan",
+        "."
+      ],
+      "exit_code": 1,
+      "exit_accepted": true,
+      "duration_sec": 0.03,
+      "bytes": 44851,
+      "stderr_tail": "cbom: \"SLH-DSA\" mapped with loss: the parameter set is not named, so no OID or NIST security category is asserted | cbom: \"AES-GCM\" mapped with loss: the call site does not reveal the AES key size | cbom: \"AES\" mapped with loss: the call names AES without a key size or mode | cbom: \"AES-GCM\" mapped with loss: the call names a mode without a key size | cbom: \"ML-KEM\" mapped with loss: the parameter set is not named, so no OID or NIST security category is asserted | cbom: configuration value \"keys/ledger-node.p12\" is not an algorithm, curve, protocol, cipher suite or cipher string; counted under pqprobe:unrecognised:config-value, not inventoried (src/main/resources/application.properties:21)",
+      "status": "ok",
+      "written": "journal-svc__pqprobe-static.json",
+      "tool": "pqprobe-static",
+      "project": "journal-svc",
+      "language": "java"
+    },
+    {
+      "argv": [
+        "<external>/pqprobe-static-4.0.2-linux-amd64",
+        "--output",
+        "cbom",
+        "scan",
+        "."
+      ],
+      "exit_code": 1,
+      "exit_accepted": true,
+      "duration_sec": 0.04,
+      "bytes": 30902,
+      "stderr_tail": "cbom: no CycloneDX representation for doc_claim finding \"Documentation: ML-KEM claim \u2014 verify actual implementation exists\" (README.md:13) | cbom: \"SHA-2\" mapped with loss: the call site names the SHA-2 family without a determinable digest length | cbom: \"AES-GCM\" mapped with loss: the call site does not reveal the AES key size | cbom: \"XMSS\" mapped with loss: the parameter set is not named, so the signature capacity of the key is unknown | cbom: \"LMS\" mapped with loss: the parameter set is not named, so the signature capacity of the key is unknown",
+      "status": "ok",
+      "written": "microquote__pqprobe-static.json",
+      "tool": "pqprobe-static",
+      "project": "microquote",
+      "language": "c"
+    },
+    {
+      "argv": [
+        "<external>/pqprobe-static-4.0.2-linux-amd64",
+        "--output",
+        "cbom",
+        "scan",
+        "."
+      ],
+      "exit_code": 1,
+      "exit_accepted": true,
+      "duration_sec": 0.03,
+      "bytes": 33883,
+      "stderr_tail": "cbom: no CycloneDX representation for doc_claim finding \"Documentation: Post-quantum cryptography claim \u2014 verify against actual implementation\" (README.md:23) | cbom: no CycloneDX representation for doc_claim finding \"Documentation: ML-KEM claim \u2014 verify actual implementation exists\" (README.md:31) | cbom: \"SHA-2\" mapped with loss: the call site names the SHA-2 family without a determinable digest length | cbom: \"AES-GCM\" mapped with loss: the call site does not reveal the AES key size | cbom: \"AES\" mapped with loss: the call names AES without a key size or mode | cbom: \"ML-KEM\" mapped with loss: the parameter set is not named, so no OID or NIST security category is asserted",
+      "status": "ok",
+      "written": "signal-bridge__pqprobe-static.json",
+      "tool": "pqprobe-static",
+      "project": "signal-bridge",
+      "language": "go"
+    },
+    {
+      "argv": [
+        "<external>/pqprobe-static-4.0.2-linux-amd64",
+        "--output",
+        "cbom",
+        "scan",
+        "."
+      ],
+      "exit_code": 1,
+      "exit_accepted": true,
+      "duration_sec": 0.03,
+      "bytes": 30658,
+      "stderr_tail": "cbom: 1 case label(s) name \"Falcon-512\" and no code or configuration in this scan does; counted under pqprobe:uncorroborated:case-label, not a component | cbom: no CycloneDX representation for doc_claim finding \"Documentation: Post-quantum cryptography claim \u2014 verify against actual implementation\" (README.md:25) | cbom: no CycloneDX representation for doc_claim finding \"Documentation: ML-KEM claim \u2014 verify actual implementation exists\" (README.md:27) | cbom: \"SLH-DSA\" mapped with loss: the parameter set is not named, so no OID or NIST security category is asserted | cbom: \"AES-GCM\" mapped with loss: the call site does not reveal the AES key size | cbom: \"SHA-2\" mapped with loss: the call site names the SHA-2 family without a determinable digest length",
+      "status": "ok",
+      "written": "ticket-gateway__pqprobe-static.json",
+      "tool": "pqprobe-static",
+      "project": "ticket-gateway",
+      "language": "javascript"
+    },
+    {
+      "argv": [
+        "<external>/pqprobe-static-4.0.2-linux-amd64",
+        "--output",
+        "cbom",
+        "scan",
+        "."
+      ],
+      "exit_code": 1,
+      "exit_accepted": true,
+      "duration_sec": 0.03,
+      "bytes": 34655,
+      "stderr_tail": "cbom: no CycloneDX representation for doc_claim finding \"Documentation: ML-KEM claim \u2014 verify actual implementation exists\" (README.md:29) | cbom: no CycloneDX representation for doc_claim finding \"Documentation: Post-quantum cryptography claim \u2014 verify against actual implementation\" (README.md:36) | cbom: \"AES-GCM\" mapped with loss: the call site does not reveal the AES key size | cbom: \"SHA-2\" mapped with loss: the call site names the SHA-2 family without a determinable digest length",
+      "status": "ok",
+      "written": "vaultcrate__pqprobe-static.json",
+      "tool": "pqprobe-static",
+      "project": "vaultcrate",
+      "language": "rust"
+    }
+  ],
+  "withheld_cboms": {
+    "reason": "Holdout CBOMs carry the variants' file paths, line numbers and matched source lines. Publishing them would republish most of what the unpublished seed protects (METHODOLOGY.md \u00a76), so they are archived privately and committed here only as digests.",
+    "count": 12,
+    "algorithm": "sha256",
+    "verify_with": "tools/withhold-cboms.py --run <run> --archive <path> --verify",
+    "files": {
+      "cachekeeper__cdxgen.json": {
+        "sha256": "99bd8df244cac2f63e2ed6231ac30f7a0628fa8563d99ac7b7ac531e820f1cb8",
+        "bytes": 7039
+      },
+      "cachekeeper__pqprobe-static.json": {
+        "sha256": "72b5148e95d54b83c7cb1787f324f6bda4c210e516dae2a4d05bc56c2e960d81",
+        "bytes": 37640
+      },
+      "journal-svc__cdxgen.json": {
+        "sha256": "3e17ba02d3f382e77c4e2b073d146158091e9a9bd163dcd5bda5c3d3f631f8a8",
+        "bytes": 7966
+      },
+      "journal-svc__pqprobe-static.json": {
+        "sha256": "3325117029d1271f75828d7f70b243fba3086a76dab4a0232ae12f7fea7aa7be",
+        "bytes": 44851
+      },
+      "microquote__cdxgen.json": {
+        "sha256": "9d2049958cba57bef1fa45c3c6cfe2a73bf799c75af327e39d002ae13492ba3a",
+        "bytes": 4569
+      },
+      "microquote__pqprobe-static.json": {
+        "sha256": "50da7821a801a5d497c4cf9b55430b9465c04973d3da2e2f1e7a79e0f529c9e3",
+        "bytes": 30902
+      },
+      "signal-bridge__cdxgen.json": {
+        "sha256": "04c1c353d7c191dbfde0a9a615ff220f92bddb6417af45260f323808b419e384",
+        "bytes": 6994
+      },
+      "signal-bridge__pqprobe-static.json": {
+        "sha256": "22035188fa907d885b1843e487c7bf8270ac578eb40194f1e4f41e311ffc2e07",
+        "bytes": 33883
+      },
+      "ticket-gateway__cdxgen.json": {
+        "sha256": "15524f59e60cb5fbc4f510c2464c63201909bc4c68c5e42e4bddfd034a03ee97",
+        "bytes": 21104
+      },
+      "ticket-gateway__pqprobe-static.json": {
+        "sha256": "e2d0649b39349d2837bcf4ac8cee6bd3de496c3fb8a68689531f5a8d34da4dc8",
+        "bytes": 30658
+      },
+      "vaultcrate__cdxgen.json": {
+        "sha256": "1fc7db62e4f3f5a8a4fe95045f594f0473aec13c670d7999986aa528e3e0f48f",
+        "bytes": 92995
+      },
+      "vaultcrate__pqprobe-static.json": {
+        "sha256": "abef99aa2d62beb52604be44e65042123d9f6eff6d8b044726872fc34a84e983",
+        "bytes": 34655
+      }
+    }
+  }
+}
