@@ -15,21 +15,11 @@ and see what the tool found and what it didn't, by language and method hidden.
 
 ## Check a tool
 
-Everything you need is meant to be here. The six programs and answers are in 
-the repository, with the scorer as a single script. There is nothing to
-compile.
-
-**1. Installation and Setup.**
+**1. Set up.**
 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 ```
-
-Most current Linux distributions refuse a plain `pip install` outside a
-virtual environment, so the two steps are given together. If you would rather
-activate the environment, `source .venv/bin/activate` and then `pip install -r
-requirements.txt` does the same thing, and every `.venv/bin/python` below
-becomes plain `python`.
 
 **2. Run your tool over each of the six programs**, saving one CycloneDX 1.6
 CBOM file per program:
@@ -46,91 +36,60 @@ CBOM file per program:
 Put all six files in one folder and name them `<program>__<tool>.json`, with
 two underscores in the middle. For example: `sealbox__mytool.json`.
 
-**3. Scoring.**
+**3. Score.**
 
 ```bash
 .venv/bin/python score.py --cboms my-cboms/ --out my-results/
 ```
 
-You get `my-results/results.md`. It shows four things:
+`my-results/results.md` shows:
 
 - how much the tool found in each language
 - how much it found at each kind of hiding place
-- how much of what it reported was actually correct
+- how much of what it reported was credited
 - how often it reported something that isn't there
 
-The scorer needs no network, no Docker and nothing running in the
-background.
+The scorer needs no network, no Docker and nothing running in the background.
 
-### What counts as finding something
-
-A tool has to say **where** it found the cryptography, not just that it is
-somewhere in the project. Knowing that a codebase uses RSA does not help you
-replace it; you need to know which file to open. So a report that names an
-algorithm but no file is not counted.
-
-A report counts when it names the right algorithm in the right file. It does
-not have to name the right line. Tools disagree about that: some point at
-the import, some at the call a few lines below. Both are telling you the
-same useful thing. The line each tool reported is still shown, just not
-scored.
-
-`results.md` also has a column showing what the score would have been if
-naming the algorithm alone were enough. The gap between the two is what a
-looser benchmark would have given away.
-
-The full rules are in [METHODOLOGY.md](METHODOLOGY.md), sections 3 and 3.3.
-
-## Example runs
-
-[`runs/2026-10-22T1005Z-public/`](runs/2026-10-22T1005Z-public/) scores
-pqprobe-static 4.0.2 against the cdxgen control, with
-[`runs/2026-10-22T1007Z-holdout/`](runs/2026-10-22T1007Z-holdout/) as its
-holdout companion on a fresh seed.
-[`runs/2026-10-07T2218Z-public/`](runs/2026-10-07T2218Z-public/) is the latest
-complete multi-tool run: cdxgen 12.8.2, pqprobe-static 3.8.2, cryptoscan 1.4.0 in two
-modes, cbomkit-theia v1.1.2, Opengrep 1.30.1 and CodeQL 2.27.1, with their output
-files, the wrappers for the tools that do not write CycloneDX, and their scores.
-
-[`runs/2026-08-23T1519Z-public/`](runs/2026-08-23T1519Z-public/) has cdxgen 12.8.2
-and pqprobe-static 3.6.0. You can re-score it yourself and check you get the same
-numbers:
-
-```bash
-.venv/bin/python score.py --cboms runs/2026-08-23T1519Z-public/cboms --out /tmp/proofstein
-diff <(grep -A5 'by language' /tmp/proofstein/results.md) <(grep -A5 'by language' runs/2026-08-23T1519Z-public/results/results.md)
-```
-
-The same programs, scrambled, are the holdout: names, file locations, line
-numbers and configuration change and the cryptography does not, to check a tool
-finds cryptography rather than being tuned to these particular files.
-[`runs/2026-10-07T2249Z-holdout/`](runs/2026-10-07T2249Z-holdout/) scores cdxgen
-12.8.2 and pqprobe-static 3.8.2 on it;
-[`runs/2026-08-23T1519Z-holdout/`](runs/2026-08-23T1519Z-holdout/) scored cdxgen
-12.8.2 and pqprobe-static 3.6.0 on an earlier one.
+A report finds a planted asset when it names a compatible algorithm in the file
+where the asset is planted. The line it reports is shown and not scored. The
+rules are in [METHODOLOGY.md](METHODOLOGY.md), §1 to §4.
 
 To run the tests: `.venv/bin/python -m unittest discover -s tests`.
 
-## More detail
+## Runs
 
-- [METHODOLOGY.md](METHODOLOGY.md): the scoring rules in full, what each
-  kind of hiding place means, and every case where a tool is given the
-  benefit of the doubt.
-- [docs/pending-review.md](docs/pending-review.md): a log of every
-  judgement call that could have changed somebody's score.
+Each run directory holds its README, manifest and results; a public run also
+holds the CBOMs the tools wrote. Public and holdout results are reported
+separately (METHODOLOGY.md §6).
 
-## Who maintains this
+| run | date | kind | assets | tool | detection rate |
+|---|---|---|---|---|---|
+| [2026-10-22T1007Z-holdout](runs/2026-10-22T1007Z-holdout/) | 2026-10-22 | holdout | 124 | cdxgen 12.8.2 | 5% (6/124) |
+|  |  |  |  | pqprobe 4.0.2 | 96% (119/124) |
+| [2026-10-22T1005Z-public](runs/2026-10-22T1005Z-public/) | 2026-10-22 | public | 124 | cdxgen 12.8.2 | 5% (6/124) |
+|  |  |  |  | pqprobe 4.0.2 | 96% (119/124) |
+| [2026-10-07T2249Z-holdout](runs/2026-10-07T2249Z-holdout/) | 2026-10-07 | holdout | 124 | cdxgen 12.8.2 | 5% (6/124) |
+|  |  |  |  | pqprobe 3.8.2 | 96% (119/124) |
+| [2026-10-07T2218Z-public](runs/2026-10-07T2218Z-public/) | 2026-10-07 | public | 124 | cdxgen 12.8.2 | 5% (6/124) |
+|  |  |  |  | pqprobe 3.8.2 | 96% (119/124) |
+|  |  |  |  | cryptoscan 1.4.0, `--include-quantum-safe` | 57% (71/124) |
+|  |  |  |  | cryptoscan 1.4.0 | 41% (51/124) |
+|  |  |  |  | CodeQL 2.27.1 | 14% (12/86) |
+|  |  |  |  | cbomkit-theia 1.1.2 | 14% (17/124) |
+|  |  |  |  | Opengrep 1.30.1 | 0% (0/124) |
+| [2026-10-07T2016Z-ecdsa-scan](runs/2026-10-07T2016Z-ecdsa-scan/) | 2026-10-07 | ecdsa-scan, outside the main table | 124 | ecdsa-scan 0.1.1 | 10% (13/124) |
+| [2026-08-23T1519Z-public](runs/2026-08-23T1519Z-public/) | 2026-08-23 | public | 124 | cdxgen 12.8.2 | 5% (6/124) |
+|  |  |  |  | pqprobe 3.6.0 | 96% (119/124) |
+| [2026-08-23T1519Z-holdout](runs/2026-08-23T1519Z-holdout/) | 2026-08-23 | holdout | 124 | cdxgen 12.8.2 | 5% (6/124) |
+|  |  |  |  | pqprobe 3.6.0 | 96% (119/124) |
 
-Proofstein is maintained by Ottenheimer GmbH, who also makes one of the tools it
-scores. That is a conflict of interest, which is addressed by openly
-recording every decision that could move a score, in the
-[docs/pending-review.md](docs/pending-review.md) file, so anyone can check. If 
-you have a better idea, submit it to the repository. Feedback wanted.
-The safeguards are described in
-[METHODOLOGY.md §9.1](METHODOLOGY.md#91-governance-of-the-judgement-tables).
-Outside review is welcome.
+## Maintainer
+
+Proofstein is maintained by Ottenheimer GmbH, which also makes pqprobe,
+one of the scored tools. The tests and rules that apply to every tool are in
+[METHODOLOGY.md §9](METHODOLOGY.md#9-maintenance).
 
 ## Licence
 
-Apache 2.0. You may benchmark whatever you like, publish the results, and
-name the tools you measured.
+Apache 2.0, in [LICENSE](LICENSE).

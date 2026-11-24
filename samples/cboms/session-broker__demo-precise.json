@@ -48,6 +48,22 @@
     },
     {
       "type": "cryptographic-asset",
+      "bom-ref": "crypto/js-l4-yaml-assertion",
+      "name": "ML-DSA-65",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "config/broker.yaml",
+            "line": 17
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
       "bom-ref": "crypto/js-l4-yaml-kem",
       "name": "ML-KEM-768",
       "cryptoProperties": {
@@ -57,7 +73,7 @@
         "occurrences": [
           {
             "location": "config/broker.yaml",
-            "line": 17
+            "line": 18
           }
         ]
       }
@@ -73,7 +89,7 @@
         "occurrences": [
           {
             "location": "config/broker.yaml",
-            "line": 18
+            "line": 19
           }
         ]
       }
@@ -89,7 +105,7 @@
         "occurrences": [
           {
             "location": "config/broker.yaml",
-            "line": 22
+            "line": 23
           }
         ]
       }
@@ -138,6 +154,38 @@
           {
             "location": "keys/token-signing-key.pem",
             "line": 1
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/js-l1-mldsa",
+      "name": "ML-DSA-65",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/attest.ts",
+            "line": 13
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/js-l2-slhdsa",
+      "name": "SLH-DSA",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/attest.ts",
+            "line": 32
           }
         ]
       }
@@ -234,6 +282,54 @@
           {
             "location": "src/identity.ts",
             "line": 33
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/js-l1-jose-es256",
+      "name": "ECDSA-P256",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/jose.ts",
+            "line": 22
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/js-l1-jose-oaep",
+      "name": "RSAES-OAEP",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/jose.ts",
+            "line": 26
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/js-l1-jose-ps256",
+      "name": "RSASSA-PSS",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/jws-pss.ts",
+            "line": 11
           }
         ]
       }

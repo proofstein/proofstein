@@ -4,23 +4,25 @@
   "corpus_path": "corpus/c/tinyattest",
   "build": [
     "make",
-    "make check"
+    "make check",
+    "make windows-check"
   ],
   "description": "Attestation helper: seals device reports, signs them, agrees a post-quantum verifier session key.",
   "toolchain": {
     "cc": "any C11 compiler",
     "openssl": ">=3.5",
-    "notes": "ML-KEM-512 is reached through EVP_PKEY_CTX_new_from_name, which needs OpenSSL 3.5 or newer."
+    "wincc": "x86_64-w64-mingw32-gcc (mingw-w64), for make windows-check",
+    "notes": "ML-KEM-512 is reached through EVP_PKEY_CTX_new_from_name and the X25519MLKEM768 group through SSL_CTX_set1_groups_list, both of which need OpenSSL 3.5 or newer. src/win_cng.c is compiled only for Windows, by make windows-check against the mingw-w64 bcrypt import library."
   },
   "layer_counts": {
-    "1": 7,
+    "1": 11,
     "2": 1,
     "3": 1,
     "4": 6,
     "5": 1,
     "6": 3
   },
-  "asset_count": 19,
+  "asset_count": 23,
   "assets": [
     {
       "id": "c-dep-libsodium",
@@ -191,7 +193,7 @@
     {
       "id": "c-l1-xmss",
       "file": "src/seal_longterm.c",
-      "line": 28,
+      "line": 30,
       "algorithm": "XMSS",
       "layer": 1,
       "layer_name": "direct crypto API call site",
@@ -201,12 +203,42 @@
     {
       "id": "c-l1-lms",
       "file": "src/seal_longterm.c",
-      "line": 87,
+      "line": 89,
       "algorithm": "LMS",
       "layer": 1,
       "layer_name": "direct crypto API call site",
       "cyclonedx_asset_type": "algorithm",
       "note": "wolfSSL wc_LmsKey_SetLmsParm selecting the two-level H10/W8 parameter set"
+    },
+    {
+      "id": "c-l1-tls-ciphers",
+      "file": "src/tls.c",
+      "line": 52,
+      "algorithm": "ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "TLS 1.2 cipher list of the local attestation listener"
+    },
+    {
+      "id": "c-l1-tls-dh",
+      "file": "src/tls.c",
+      "line": 55,
+      "algorithm": "ffdhe3072",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "DH parameters for the DHE suite, by RFC 7919 group name"
+    },
+    {
+      "id": "c-l1-tls-groups",
+      "file": "src/tls.c",
+      "line": 61,
+      "algorithm": "X25519MLKEM768",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "TLS 1.3 key exchange groups, hybrid first"
     },
     {
       "id": "c-l3-wrapper",
@@ -223,6 +255,16 @@
         }
       ],
       "note": "AEAD reached only through the transport table"
+    },
+    {
+      "id": "c-l1-cng-ecdh",
+      "file": "src/win_cng.c",
+      "line": 33,
+      "algorithm": "ECDH-P256",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "Windows CNG ECDH on P-256 for the verifier pre-key"
     }
   ]
 }

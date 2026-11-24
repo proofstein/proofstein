@@ -2,24 +2,16 @@
 # Copyright 2026 Ottenheimer GmbH
 """Deciding whether a reported asset is the planted one.
 
-The rule the benchmark is built around: **a detection requires agreement on
-file and line. An algorithm name alone is never a detection.** A generator that
-emits ``{"name": "AES-256-GCM"}`` with no evidence has said nothing that can be
-checked, and a corpus that rewarded it would reward guessing -- every project
-here contains AES-GCM, so "AES-GCM is present" is free.
-
-Two normalisations are deliberately generous, because the alternative is
-measuring a generator's naming and path conventions rather than its detection:
+A detection is agreement on file, algorithm and layer. An algorithm name
+alone is never a detection.
 
 * **Algorithm names** are compared as token sets, and a less specific report
   matches a more specific plant (``AES`` matches a planted ``AES-256-GCM``).
   The reverse does not hold, and a different family never matches.
 * **File paths** are resolved by longest matching suffix against the real file
-  list of the project, so a generator that reports absolute paths from a
-  temporary clone directory is not punished for it.
+  list of the project.
 
-Both are applied to every tool identically and both are recorded in the output
-so a reader can see how much work they are doing.
+Both are applied to every tool identically.
 """
 
 from __future__ import annotations
@@ -27,8 +19,7 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass, field
 
-#: Lines may differ by this much and still match. Generators disagree about
-#: whether a multi-line statement is reported at its first or last line.
+#: Lines may differ by this much and still count as located.
 DEFAULT_LINE_TOLERANCE = 2
 
 # Token aliases folded together before comparison. Purely notational: each entry
@@ -45,21 +36,22 @@ _TOKEN_ALIASES: dict[str, str] = {
     "NISTP256": "P256",
     "SECP256K1": "P256K1",
     "SECP384R1": "P384",
+    "SECP521R1": "P521",
+    "CURVE448": "X448",
+    "FFDHE": "DH",
     "MLKEM": "MLKEM",
     "KYBER": "MLKEM",
     "MLDSA": "MLDSA",
     "DILITHIUM": "MLDSA",
     "SHA2": "SHA256",
-    "SHA256WITHRSA": "RSA",
     "RSASSA": "RSA",
     "RSAPSS": "RSA",
     "PSS": "RSA",
     "PKCS1": "RSA",
     "OAEP": "RSA",
-    "RS256": "RSA",
-    "ES256": "ECDSA",
-    "EC": "ECDSA",
-    "ECDH": "ECDSA",
+    "EC": "EC",
+    "ECDH": "ECDH",
+    "ECDHE": "ECDH",
     "TLSV1": "TLS",
     "TLS1": "TLS",
     "XSALSA20": "SALSA20",
@@ -87,8 +79,7 @@ _STOPWORDS = frozenset(
         "UNKNOWN",
         "GENERIC",
         "UNSPECIFIED",
-        # Narration. Generators describe a finding as well as naming it, and
-        # "AES block cipher in use" is the same claim as "AES".
+        # Descriptive words: "AES block cipher in use" reads as "AES".
         "IN",
         "USE",
         "BLOCK",
@@ -102,20 +93,24 @@ _CIPHER_QUALIFIERS = frozenset(
     {"CBC", "ECB", "CFB", "OFB", "CTR", "GCM", "CCM", "XTS", "EDE", "EDE2", "EDE3", "PKCS5", "PKCS7"}
 )
 
-#: Family token -> the tokens that may only ever match inside that family. Two
-#: names sharing no family never match, which is what stops "RSA" from being
-#: credited against a planted "AES-256-GCM".
+#: Algorithm family tokens. Two names sharing no family never match.
 _FAMILIES = (
     "AES",
     "RSA",
     "ECDSA",
+    # Elliptic-curve key agreement, a family distinct from ECDSA.
+    "ECDH",
+    # An elliptic-curve key whose use is not stated: a bare curve name or "EC".
+    # It credits an ECDSA or an ECDH plant on that curve; see _settle_ec.
+    "EC",
     "ED25519",
+    "ED448",
     "X25519",
+    "X448",
     "MLKEM",
     "MLDSA",
-    # The stateless and stateful post-quantum signature schemes are families of
-    # their own, distinct from one another and from DSA, which they share a
-    # suffix with. See docs/pending-review.md entry 14.
+    # Post-quantum signature schemes, each a family distinct from the others
+    # and from DSA.
     "SLHDSA",
     "FALCON",
     "LMS",
@@ -127,11 +122,7 @@ _FAMILIES = (
     "SHA3",
     "MD5",
     "TLS",
-    # A distinct family from TLS, not an older spelling of it. Without it a
-    # report of SSLv3 carries no family at all, which has two consequences:
-    # claiming SSLv3 in a project that has none cannot be charged, and the
-    # compatibility check falls through to bare token overlap, where SSLv3 and
-    # a planted TLSv1.3 match on the shared "3".
+    # A family distinct from TLS.
     "SSL",
     "CHACHA20",
     "SALSA20",
@@ -142,12 +133,11 @@ _FAMILIES = (
     "PBKDF2",
     "SCRYPT",
     "ARGON2",
+    "BCRYPT",
     "DSA",
     "DH",
     "MGF1",
-    # Recognised as families so that reporting one where none exists can be
-    # charged. Every name here is absent from _FAMILY_MARKERS on purpose: see
-    # _WHOLE_TOKEN_ONLY below.
+    # Matched as whole tokens only; see _WHOLE_TOKEN_ONLY below.
     "RC2",
     "RC4",
     "SEED",
@@ -156,27 +146,96 @@ _FAMILIES = (
     "CAMELLIA",
 )
 
-#: Families whose names are ordinary English words, or fall inside them.
-#:
-#: A family is normally found by looking for its marker inside the
-#: separator-stripped name, which is what makes ``ML-KEM-768`` and ``MLKEM768``
-#: the same thing. That search cannot be allowed anywhere near these: "seed"
-#: appears in every CSPRNG identifier in the corpus, "idea" and "des" fall inside
-#: ordinary prose, and a scorer that read them as algorithm claims would invent
-#: findings no generator made.
-#:
-#: They are therefore matched only as a complete token, never inside one, which
-#: is why none of them appears in _FAMILY_MARKERS. A whole token is still not
-#: enough on its own -- ``seed_material`` splits into two tokens, one of which is
-#: ``SEED`` -- so the rest of the name must read as an algorithm name too: every
-#: other token must be a size, a mode qualifier, or narration. ``SEED``,
-#: ``SEED-CBC`` and ``SEED-128-CBC`` claim the family; ``seedRandom``,
-#: ``seed_material`` and ``random seed`` do not.
-#:
-#: The cost is that an unusual descriptive spelling would be missed, which is the
-#: right way round: missing a weak-cipher report understates a tool, inventing
-#: one accuses it.
-_WHOLE_TOKEN_ONLY = frozenset({"DES", "RC2", "RC4", "SEED", "IDEA", "CAST5", "CAMELLIA"})
+#: Families matched only as a complete token, never inside one, and only when
+#: every other token of the name is a size, a mode qualifier or a descriptive
+#: word. None of them appears in _FAMILY_MARKERS. ``SEED``, ``SEED-CBC`` and
+#: ``SEED-128-CBC`` claim the family; ``seedRandom``, ``seed_material`` and
+#: ``random seed`` do not. ``BCRYPT`` alone claims the password hash;
+#: ``BCryptOpenAlgorithmProvider`` and ``BCRYPT_ECDH_P256_ALGORITHM`` do not.
+_WHOLE_TOKEN_ONLY = frozenset({"DES", "RC2", "RC4", "SEED", "IDEA", "CAST5", "CAMELLIA", "BCRYPT"})
+
+#: Token a curve name contributes in place of a family. A name that gives only
+#: a curve, or only "EC", says which curve and not what the key does, so it
+#: claims the EC family, which credits an ECDSA or an ECDH plant on that curve.
+#: A name that says ECDSA or ECDH (``ECDH-P256``, ``BCRYPT_ECDH_P256_ALGORITHM``)
+#: claims only that family.
+_CURVE = "ECCURVE"
+_EC_USES = frozenset({"ECDSA", "ECDH"})
+
+#: JOSE algorithm names (RFC 7518) -> what they are. The number in a JOSE name
+#: is a digest length, never a key size: RS256 is RSA with SHA-256 at whatever
+#: modulus the key has, so it must neither contradict RSA-2048 nor be read as
+#: 256-bit RSA. ES256, ES384 and ES512 do fix their curve. A hyphen in a key
+#: matches any one separator or none.
+_JOSE_NAMES: dict[str, str] = {
+    "RS256": "RSA",
+    "RS384": "RSA",
+    "RS512": "RSA",
+    "PS256": "RSA-PSS",
+    "PS384": "RSA-PSS",
+    "PS512": "RSA-PSS",
+    "ES256": "ECDSA-P256",
+    "ES384": "ECDSA-P384",
+    "ES512": "ECDSA-P521",
+    "RSA-OAEP-256": "RSA-OAEP",
+}
+
+#: Hybrid key-exchange groups -> (classical half, post-quantum half). A hybrid
+#: is credited by a report naming the hybrid, or naming both halves in the
+#: plant's file; a report of either half alone does not credit it. The classical
+#: half of a SecP hybrid is ECDH on that curve. A hyphen in a key matches any
+#: one separator or none; ``+`` and a space may join the halves, a list
+#: separator may not, since ``X25519:MLKEM768`` lists two groups.
+_HYBRID_GROUPS: dict[str, tuple[str, str]] = {
+    "X25519-ML-KEM-768": ("X25519", "ML-KEM-768"),
+    "X448-ML-KEM-1024": ("X448", "ML-KEM-1024"),
+    "SECP256R1-ML-KEM-768": ("ECDH-P256", "ML-KEM-768"),
+    "SECP384R1-ML-KEM-1024": ("ECDH-P384", "ML-KEM-1024"),
+}
+
+
+def _spelling_pattern(key: str, joiner: str = r"[-_ ]?") -> str:
+    return joiner.join(re.escape(part) for part in key.split("-"))
+
+
+_JOSE_PATTERN = re.compile(
+    r"(?<![A-Z0-9])("
+    + "|".join(_spelling_pattern(key) for key in sorted(_JOSE_NAMES, key=len, reverse=True))
+    + r")(?![A-Z0-9])"
+)
+_JOSE_LOOKUP = {re.sub(r"[^A-Z0-9]", "", key): value for key, value in _JOSE_NAMES.items()}
+
+_HYBRID_PATTERN = re.compile(
+    r"(?<![A-Z0-9])("
+    + "|".join(_spelling_pattern(key, r"[-_ +]*") for key in _HYBRID_GROUPS)
+    + r")(?![0-9])"
+)
+_HYBRID_LOOKUP = {re.sub(r"[^A-Z0-9]", "", key): halves for key, halves in _HYBRID_GROUPS.items()}
+
+#: ``P-384`` is the curve ``secp384r1`` names; written with a separator it would
+#: otherwise split into a bare letter and a number.
+_NIST_CURVE = re.compile(r"(?<![A-Z0-9])P[-_ ]?(192|224|256|384|521)(?![0-9])")
+
+
+def hybrid_halves(name: str) -> tuple[str, str] | None:
+    """The (classical, post-quantum) halves of a hybrid group the name states."""
+    if not name:
+        return None
+    match = _HYBRID_PATTERN.search(name.upper().strip().split("@", 1)[0])
+    if not match:
+        return None
+    return _HYBRID_LOOKUP[re.sub(r"[^A-Z0-9]", "", match.group(1))]
+
+
+#: A combined signature name: a digest, "with", a signature scheme, as the JCA
+#: and X.509 spell them (SHA256withECDSA, SHA384withRSA, sha256WithRSAEncryption,
+#: SHA256withRSA/PSS, SHA256withRSAandMGF1). It names both algorithms, so it is
+#: rewritten to the two names before tokens are read.
+_COMBINED_SIGNATURE = re.compile(
+    r"(?<![A-Z0-9])(SHA-?(?:1|224|256|384|512)|SHA3-(?:224|256|384|512)|MD5|MD2|SM3)WITH"
+    r"(RSAANDMGF1|RSAENCRYPTION|RSA|PLAIN-ECDSA|CVC-ECDSA|ECDSA|DSA|ED25519|ED448|SM2)(?![A-Z0-9])"
+)
+_COMBINED_SCHEME = {"RSAANDMGF1": "RSA-PSS", "RSAENCRYPTION": "RSA", "PLAIN-ECDSA": "ECDSA", "CVC-ECDSA": "ECDSA"}
 
 _SPLIT = re.compile(r"[^A-Z0-9]+")
 _TRAILING_DIGITS = re.compile(r"^([A-Z]+)(\d+)$")
@@ -201,8 +260,12 @@ _FAMILY_MARKERS: tuple[tuple[str, str], ...] = tuple(
             ("LMS", "LMS"),
             ("ED25519", "ED25519"),
             ("EDDSA", "ED25519"),
+            ("ED448", "ED448"),
             ("X25519", "X25519"),
             ("CURVE25519", "X25519"),
+            ("X448", "X448"),
+            ("CURVE448", "X448"),
+            ("FFDHE", "DH"),
             ("CHACHA20", "CHACHA20"),
             ("POLY1305", "CHACHA20"),
             ("XSALSA20", "SALSA20"),
@@ -222,16 +285,17 @@ _FAMILY_MARKERS: tuple[tuple[str, str], ...] = tuple(
             ("3DES", "3DES"),
             ("TRIPLEDES", "3DES"),
             ("ECDSA", "ECDSA"),
-            ("ECDH", "ECDSA"),
-            ("SECP", "ECDSA"),
-            ("PRIME256V1", "ECDSA"),
-            ("NISTP", "ECDSA"),
+            ("ECDH", "ECDH"),
+            # A curve name says which curve, not what the key does. It implies
+            # ECDSA unless the name also says ECDH; see _CURVE.
+            ("SECP", _CURVE),
+            ("PRIME256V1", _CURVE),
+            ("NISTP", _CURVE),
             ("RSASSA", "RSA"),
             ("RSA", "RSA"),
             ("AES", "AES"),
             ("TLS", "TLS"),
-            # Anchoring is what makes this safe: "OpenSSL" is a library name
-            # that generators report routinely, and SSL sits in the middle of it.
+            # Anchored: "OpenSSL" does not claim SSL.
             ("SSL", "SSL"),
             ("DSA", "DSA"),
         ),
@@ -242,7 +306,7 @@ _FAMILY_MARKERS: tuple[tuple[str, str], ...] = tuple(
 
 #: Prefixes that make a DSA match part of a longer family name: ML-DSA, SLH-DSA
 #: and FN-DSA end in DSA but are not DSA. The DSA family is claimed only by DSA
-#: itself. See docs/pending-review.md entry 14.
+#: itself.
 _DSA_PREFIXES = ("ML", "SLH", "FN")
 
 #: Curve names imply the ECDSA/EC family even when it is never spelled out.
@@ -252,22 +316,15 @@ _CURVE_TOKENS = frozenset({"P256", "P384", "P521", "P256K1", "SECP256R1", "PRIME
 def _marker_matches(squashed: str, token_starts: frozenset[int], marker: str) -> bool:
     """Report whether ``marker`` occurs in ``squashed`` at a token boundary.
 
-    Separators are stripped before this runs, because hyphenation is a spelling
-    choice: ``ML-KEM-768``, ``MLKEM768`` and ``ml_kem_768`` must all find MLKEM.
-    Stripping them also removes the boundaries that tell an algorithm name from
-    an English word, so the boundaries are carried alongside in ``token_starts``
-    and re-imposed here.
+    ``squashed`` has its separators removed, so ``ML-KEM-768``, ``MLKEM768`` and
+    ``ml_kem_768`` all find MLKEM; the token boundaries are passed in
+    ``token_starts``. Two conditions apply:
 
-    Two conditions, each pinned by a case that was live on real generator output:
-
-    * The match must begin at a token start, or immediately after a digit.
-      Without it "universal-hash" contains RSA, "Caesar" contains AES and every
-      ECDSA report also claimed DSA. The digit exception is what keeps hybrid
-      names working: ``x25519mlkem768`` juxtaposes two complete algorithm names
-      with no separator between them.
-    * A marker ending in a digit may not be followed by another digit, so SHA3
-      is not found inside SHA-384. Markers not ending in a digit are exempt,
-      because a trailing parameter is normal: MLKEM is followed by 768.
+    * The match begins at a token start, or immediately after a digit
+      (``x25519mlkem768``). "universal-hash" does not contain RSA, "Caesar"
+      does not contain AES, and ECDSA does not contain DSA.
+    * A marker ending in a digit is not followed by another digit, so SHA3 is
+      not found inside SHA-384. MLKEM may be followed by 768.
     """
     index = squashed.find(marker)
     while index != -1:
@@ -285,14 +342,23 @@ def _marker_matches(squashed: str, token_starts: frozenset[int], marker: str) ->
 
 
 def _clean(name: str) -> str:
-    # "key@50ece37a-..." and "crypto/certificate/foo.gpg@sha256:..." carry an
-    # opaque generator identifier after the "@"; drop it so a hex digest cannot
-    # supply stray tokens.
+    # Text after "@" ("key@50ece37a-...", "foo.gpg@sha256:...") is dropped.
+    # "/" is an ordinary separator ("AES/GCM/NoPadding").
     #
-    # "/" is deliberately left alone and treated as an ordinary separator:
-    # "AES/GCM/NoPadding" is the exact string Java's Cipher.getInstance takes,
-    # and splitting on the last slash would reduce it to "NoPadding".
-    return name.upper().strip().split("@", 1)[0]
+    # Four spellings are then rewritten before any token is read: a combined
+    # signature name becomes its digest and its scheme, a JOSE name becomes its
+    # algorithm, a hybrid group becomes its two halves, and "P-384" becomes the
+    # curve token "P384".
+    cleaned = name.upper().strip().split("@", 1)[0]
+    cleaned = _COMBINED_SIGNATURE.sub(
+        lambda m: f"{m.group(1)} {_COMBINED_SCHEME.get(m.group(2), m.group(2))}", cleaned
+    )
+    cleaned = _JOSE_PATTERN.sub(lambda m: _JOSE_LOOKUP[re.sub(r"[^A-Z0-9]", "", m.group(1))], cleaned)
+    cleaned = _HYBRID_PATTERN.sub(
+        lambda m: " {} + {} ".format(*_HYBRID_LOOKUP[re.sub(r"[^A-Z0-9]", "", m.group(1))]).upper(),
+        cleaned,
+    )
+    return _NIST_CURVE.sub(lambda m: "P" + m.group(1), cleaned)
 
 
 def normalize_tokens(name: str) -> frozenset[str]:
@@ -310,9 +376,7 @@ def normalize_tokens(name: str) -> frozenset[str]:
     if not squashed:
         return frozenset()
 
-    # Where each token began once the separators were removed. Family markers
-    # are matched against the separator-stripped form so that hyphenation is
-    # irrelevant; these offsets are what keeps that from matching mid-word.
+    # Where each token begins in the separator-stripped name.
     token_starts: set[int] = set()
     offset = 0
     for part in parts:
@@ -326,9 +390,8 @@ def normalize_tokens(name: str) -> frozenset[str]:
         if _marker_matches(squashed, frozen_starts, marker):
             tokens.add(family)
 
-    # The tokens a reader would have to account for to call this an algorithm
-    # name: everything but stopwords and bare numbers. Used below to decide
-    # whether a dictionary-word family name is being used as an algorithm.
+    # Every token but stopwords and bare numbers. Used below for the
+    # _WHOLE_TOKEN_ONLY families.
     significant = {
         _TOKEN_ALIASES.get(part, part)
         for part in parts
@@ -347,8 +410,7 @@ def normalize_tokens(name: str) -> frozenset[str]:
         if part in _WHOLE_TOKEN_ONLY:
             remainder = significant - {part}
             if not remainder <= _CIPHER_QUALIFIERS:
-                # "seed_material", "random seed": the token is there, the name
-                # is not an algorithm name.
+                # "seed_material", "random seed": not an algorithm name.
                 continue
         tokens.add(part)
         match = _TRAILING_DIGITS.match(part)
@@ -359,8 +421,12 @@ def normalize_tokens(name: str) -> frozenset[str]:
                 tokens.add(stem)
             tokens.add(digits)
 
-    if tokens & _CURVE_TOKENS:
-        tokens.add("ECDSA")
+    names_a_curve = bool(tokens & _CURVE_TOKENS) or _CURVE in tokens
+    tokens.discard(_CURVE)
+    if tokens & _EC_USES:
+        tokens.discard("EC")
+    elif names_a_curve:
+        tokens.add("EC")
 
     return frozenset(tokens)
 
@@ -370,20 +436,14 @@ def families(tokens: frozenset[str]) -> frozenset[str]:
     return frozenset(token for token in tokens if token in _FAMILIES)
 
 
-#: Numbers that plausibly denote a key, curve or digest size. Only these are
-#: treated as parameters that can contradict one another.
-#:
-#: Without this restriction any digit in a name becomes a size claim, and
-#: standard encoding names collide with real key sizes: the 8 in ``PKCS#8`` and
-#: the 12 in ``PKCS#12`` are structure versions, not moduli. In scoring the 2026-07-28 run
-#: that read "RSA private key (PKCS#8)" as contradicting a planted RSA-2048,
-#: which both denied the generator a correct detection and charged it a false
-#: positive for the same component.
+#: Numbers treated as key, curve or digest sizes. Only these are parameters
+#: that can contradict one another; the 8 in ``PKCS#8`` and the 12 in
+#: ``PKCS#12`` are not.
 CRYPTO_SIZES = frozenset(
     {
         "112", "128", "160", "192", "224", "233", "256", "283", "320", "384",
         "409", "448", "512", "521", "571", "768", "1024", "1536", "2048",
-        "3072", "4096", "7680", "8192", "15360",
+        "3072", "4096", "6144", "7680", "8192", "15360",
         # ML-KEM / ML-DSA parameter set identifiers.
         "44", "65", "87",
     }
@@ -393,9 +453,7 @@ CRYPTO_SIZES = frozenset(
 def parameters(name: str) -> frozenset[str]:
     """Return the size-like numeric parameters in a name.
 
-    Digits that are not plausible cryptographic sizes are ignored, because they
-    are far more often part of a standard's name (PKCS#8, SEC1, X.509, SHA-3)
-    than a statement about key length.
+    Digits outside ``CRYPTO_SIZES`` are ignored.
     """
     found = _DIGITS.findall(_NON_ALNUM.sub("", _clean(name)))
     return frozenset(digit for digit in found if digit in CRYPTO_SIZES)
@@ -405,11 +463,42 @@ def algorithms_compatible(planted: str, reported: str) -> bool:
     """Report whether a reported algorithm name is credible for a planted one.
 
     Compatible when the two share a family and do not contradict each other on
-    a parameter. A less specific report is accepted -- ``AES`` is credited
-    against a planted ``AES-256-GCM``, because the generator did find the right
-    primitive. A different family is never accepted, and neither is the same
-    family carrying a conflicting size.
+    a parameter. A less specific report is accepted (``AES`` against a planted
+    ``AES-256-GCM``). A different family is never accepted, and neither is the
+    same family carrying a conflicting size.
+
+    A hybrid key-exchange plant is credited only by a report naming a hybrid
+    whose halves are each compatible with the plant's; one name stating a single
+    half is not a report of the hybrid (``score_cbom`` credits two halves
+    named in the plant's file). A hybrid report credits a plain plant matching
+    either of its halves.
     """
+    planted_halves = hybrid_halves(planted)
+    reported_halves = hybrid_halves(reported)
+    if planted_halves:
+        if not reported_halves:
+            return False
+        return all(
+            _single_compatible(left, right)
+            for left, right in zip(planted_halves, reported_halves, strict=True)
+        )
+    if reported_halves:
+        return any(_single_compatible(planted, half) for half in reported_halves)
+    return _single_compatible(planted, reported)
+
+
+def _settle_ec(own: frozenset[str], other: frozenset[str]) -> frozenset[str]:
+    """Read an unstated elliptic-curve use as the use the other name states.
+
+    A bare curve or "EC" takes the other side's use, so the parameter check
+    still compares curves. A name that states a use keeps it.
+    """
+    if "EC" not in own:
+        return own
+    return (own - {"EC"}) | (other & _EC_USES or {"EC"})
+
+
+def _single_compatible(planted: str, reported: str) -> bool:
     planted_tokens = normalize_tokens(planted)
     reported_tokens = normalize_tokens(reported)
     if not planted_tokens or not reported_tokens:
@@ -417,22 +506,32 @@ def algorithms_compatible(planted: str, reported: str) -> bool:
 
     planted_families = families(planted_tokens)
     reported_families = families(reported_tokens)
+    planted_families, reported_families = (
+        _settle_ec(planted_families, reported_families),
+        _settle_ec(reported_families, planted_families),
+    )
+
+    # Where either name states a family, a bare number belongs to that family and
+    # identifies nothing on its own: a familyless name is not credited by another
+    # family sharing its number, nor credits one. Between two familyless names a
+    # shared number may be all there is (``PKCS#12`` and ``node.p12``).
+    shared = planted_tokens & reported_tokens
+    if planted_families or reported_families:
+        shared = {token for token in shared if not token.isdigit()}
 
     if planted_families and reported_families:
         if not (planted_families & reported_families):
             return False
-    elif not (planted_tokens & reported_tokens):
+    elif not shared:
         return False
-    elif planted_families and not (planted_tokens & reported_tokens) - _CIPHER_QUALIFIERS:
-        # A report naming no family that shares only a mode with the plant does
-        # not identify the cipher: GCM is how AES-256-GCM is used, not which
-        # algorithm it is. See docs/pending-review.md entry 16.
+    elif planted_families and not shared - _CIPHER_QUALIFIERS:
+        # A report naming no family that shares only a mode with the plant
+        # (GCM against AES-256-GCM) is not compatible.
         return False
 
-    # Same family with different sizes is a contradiction, not a vaguer report:
-    # a planted AES-256-GCM is not found by a report of AES-128-GCM. Only
-    # applied when the family sets agree, so that a signature name such as
-    # SHA256withRSA is not read as contradicting a planted RSA-2048.
+    # Same family with different sizes is a contradiction: AES-128-GCM does
+    # not match a planted AES-256-GCM. Applied only when the family sets agree,
+    # so SHA256withRSA does not contradict a planted RSA-2048.
     if planted_families and planted_families == reported_families:
         planted_parameters = parameters(planted)
         reported_parameters = parameters(reported)
@@ -454,10 +553,9 @@ def normalize_path(path: str) -> str:
 class PathResolver:
     """Maps reported paths onto the project's real files.
 
-    Generators run against a clone in a temporary directory and may report an
-    absolute path, a path relative to the clone root, or a path relative to some
-    subdirectory. The longest matching suffix wins; unresolvable paths stay as
-    they are and are what the phantom-file check keys on.
+    A reported path may be absolute, relative to the project root, or relative
+    to a subdirectory. The longest matching suffix that names exactly one file
+    wins; an unresolvable path resolves to ``None``.
     """
 
     project_files: frozenset[str]
@@ -500,7 +598,7 @@ def location_matches(
     *,
     line_tolerance: int,
 ) -> bool:
-    """File and line agreement, the primary detection rule."""
+    """Same file, and lines within ``line_tolerance``. Reported, not scored."""
     if reported_file is None or reported_line is None:
         return False
     if reported_file != planted_file:

@@ -13,6 +13,8 @@
 
 #include "tinyattest.h"
 
+/* wolfSSL's build configuration, which every other wolfSSL header depends on. */
+#include <wolfssl/options.h>
 #include <wolfssl/wolfcrypt/lms.h>
 #include <wolfssl/wolfcrypt/random.h>
 #include <wolfssl/wolfcrypt/xmss.h>

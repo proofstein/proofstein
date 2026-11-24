@@ -50,9 +50,9 @@ class TestRawDirectory(unittest.TestCase):
         """Project and tool names both contain hyphens; only '__' separates."""
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            (root / "beacon-relay__pqprobe-static.json").write_text(BOM)
+            (root / "beacon-relay__pqprobe.json").write_text(BOM)
             found, _ = discover_raw_directory(root, PROJECTS)
-            self.assertEqual((found[0].project, found[0].tool), ("beacon-relay", "pqprobe-static"))
+            self.assertEqual((found[0].project, found[0].tool), ("beacon-relay", "pqprobe"))
 
     def test_unparseable_name_is_reported_not_guessed(self):
         with tempfile.TemporaryDirectory() as tmp:

@@ -2,6 +2,7 @@
   "meta": {
     "corpus_version": "92435d1",
     "line_tolerance": 2,
+    "scorer_commit": "6ada872",
     "corpus": "public",
     "schema_validated": true,
     "cboms_scored": 40,
@@ -20,7 +21,7 @@
       "cryptoscan",
       "cryptoscan-quantum-safe",
       "opengrep",
-      "pqprobe-static"
+      "pqprobe"
     ],
     "unscored_pairs": 2,
     "problems": [],
@@ -32,15 +33,53 @@
       "attempted": 42,
       "succeeded": 40,
       "tool_versions": {
-        "cdxgen": "CycloneDX Generator 12.8.2",
-        "pqprobe-static": "pqprobe-static 3.8.2 (commit 2cd11d900cf4b5ef51c661a013c6aab692acf020, built 2026-10-07T22:13:19Z, dirty false)",
+        "cdxgen": "cdxgen 12.8.2",
+        "pqprobe": "pqprobe 3.8.2",
         "cryptoscan": "cryptoscan 1.4.0",
         "cryptoscan-quantum-safe": "cryptoscan 1.4.0",
-        "cbomkit-theia": "cbomkit-theia v1.1.2 (dcd95ac)",
-        "opengrep": "opengrep 1.30.1 rules opengrep-rules@f1d2b562 (rule content of 0f5a85ce, 2024-12-13)",
-        "codeql": "2.27.1"
+        "cbomkit-theia": "cbomkit-theia 1.1.2",
+        "opengrep": "Opengrep 1.30.1",
+        "codeql": "CodeQL 2.27.1"
       },
       "judgement_tables": {
+        "oid_algorithms": {
+          "entries": 27,
+          "sha256_16": "f6fd6fa101db7a4d"
+        },
+        "location_property_names": {
+          "entries": 8,
+          "sha256_16": "0b8c15cc33ce242a"
+        },
+        "line_property_names": {
+          "entries": 5,
+          "sha256_16": "ed438ed351a5b930"
+        },
+        "token_aliases": {
+          "entries": 33,
+          "sha256_16": "c13677feee250d8b"
+        },
+        "family_markers": {
+          "entries": 47,
+          "sha256_16": "9db8169c695be2c5"
+        },
+        "jose_names": {
+          "entries": 10,
+          "sha256_16": "08d16fb9eb9aecef"
+        },
+        "hybrid_groups": {
+          "entries": 4,
+          "sha256_16": "ebb21ecb7cbea298"
+        },
+        "whole_token_only": {
+          "entries": 8,
+          "sha256_16": "b9a4a30aab68fec0"
+        },
+        "known_unplanted": {
+          "entries": 15,
+          "sha256_16": "3a7fca80174e0cdd"
+        }
+      },
+      "judgement_tables_collected": {
         "oid_algorithms": {
           "entries": 27,
           "sha256_16": "031a3c27915e6dde"
@@ -70,7 +109,6 @@
           "sha256_16": "3a7fca80174e0cdd"
         }
       },
-      "judgement_tables_collected": null,
       "failed_invocations": [
         {
           "tool": "codeql",
@@ -95,10 +133,10 @@
       "total": 124,
       "detection_rate": 0.1371,
       "precision": 0.3864,
-      "claim_precision": 0.7727,
+      "claim_precision": 0.75,
       "matched_components": 17,
       "reported_components": 44,
-      "credited_claims": 34,
+      "credited_claims": 33,
       "total_claims": 44,
       "false_positives": 0,
       "by_layer": {
@@ -354,15 +392,15 @@
         }
       }
     },
-    "pqprobe-static": {
+    "pqprobe": {
       "detected": 119,
       "total": 124,
       "detection_rate": 0.9597,
-      "precision": 0.7281,
-      "claim_precision": 0.6176,
-      "matched_components": 83,
+      "precision": 0.7368,
+      "claim_precision": 0.6127,
+      "matched_components": 84,
       "reported_components": 114,
-      "credited_claims": 126,
+      "credited_claims": 125,
       "total_claims": 204,
       "false_positives": 0,
       "by_layer": {
@@ -470,7 +508,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "go-l4-yaml-sig",
@@ -614,7 +652,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "go-l1-aes-gcm",
@@ -626,7 +664,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "go-l3-wrapper",
@@ -638,7 +676,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "go-l1-mlkem",
@@ -2143,8 +2181,8 @@
     {
       "project": "beacon-relay",
       "language": "go",
-      "tool": "pqprobe-static",
-      "source": "beacon-relay__pqprobe-static.json",
+      "tool": "pqprobe",
+      "source": "beacon-relay__pqprobe.json",
       "schema_valid": true,
       "schema_errors": [],
       "parse_error": null,
@@ -3236,7 +3274,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "java-l6-block-key",
@@ -3598,7 +3636,7 @@
           "detected": false,
           "located": true,
           "file_only": true,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "java-l6-block-key",
@@ -3960,7 +3998,7 @@
           "detected": false,
           "located": true,
           "file_only": true,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "java-l6-block-key",
@@ -4605,8 +4643,8 @@
     {
       "project": "ledger-svc",
       "language": "java",
-      "tool": "pqprobe-static",
-      "source": "ledger-svc__pqprobe-static.json",
+      "tool": "pqprobe",
+      "source": "ledger-svc__pqprobe.json",
       "schema_valid": true,
       "schema_errors": [],
       "parse_error": null,
@@ -4614,9 +4652,9 @@
       "total": 25,
       "detection_rate": 0.96,
       "precision": 0.72,
-      "claim_precision": 0.5909,
+      "claim_precision": 0.5682,
       "matched_components": 18,
-      "credited_claims": 26,
+      "credited_claims": 25,
       "by_layer": {
         "1": {
           "detected": 10,
@@ -5058,7 +5096,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "rust-l4-toml-sig",
@@ -5154,7 +5192,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "rust-l2-sha256",
@@ -5190,7 +5228,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "rust-l1-rsa",
@@ -5238,7 +5276,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         }
       ]
     },
@@ -6357,8 +6395,8 @@
     {
       "project": "sealbox",
       "language": "rust",
-      "tool": "pqprobe-static",
-      "source": "sealbox__pqprobe-static.json",
+      "tool": "pqprobe",
+      "source": "sealbox__pqprobe.json",
       "schema_valid": true,
       "schema_errors": [],
       "parse_error": null,
@@ -6702,7 +6740,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "js-l4-yaml-sig",
@@ -6846,7 +6884,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "js-l2-sha256",
@@ -6894,7 +6932,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "js-l1-sha256",
@@ -6930,7 +6968,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         }
       ]
     },
@@ -8145,8 +8183,8 @@
     {
       "project": "session-broker",
       "language": "javascript",
-      "tool": "pqprobe-static",
-      "source": "session-broker__pqprobe-static.json",
+      "tool": "pqprobe",
+      "source": "session-broker__pqprobe.json",
       "schema_valid": true,
       "schema_errors": [],
       "parse_error": null,
@@ -8526,7 +8564,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "c-l4-conf-sig",
@@ -8646,7 +8684,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "c-l1-ed25519",
@@ -8694,7 +8732,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "c-l1-xmss",
@@ -8730,7 +8768,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         }
       ]
     },
@@ -10187,17 +10225,17 @@
     {
       "project": "tinyattest",
       "language": "c",
-      "tool": "pqprobe-static",
-      "source": "tinyattest__pqprobe-static.json",
+      "tool": "pqprobe",
+      "source": "tinyattest__pqprobe.json",
       "schema_valid": true,
       "schema_errors": [],
       "parse_error": null,
       "detected": 18,
       "total": 19,
       "detection_rate": 0.9474,
-      "precision": 0.8125,
+      "precision": 0.875,
       "claim_precision": 0.5455,
-      "matched_components": 13,
+      "matched_components": 14,
       "credited_claims": 18,
       "by_layer": {
         "1": {
@@ -10486,9 +10524,9 @@
       "total": 23,
       "detection_rate": 0.1304,
       "precision": 0.3333,
-      "claim_precision": 0.7778,
+      "claim_precision": 0.6667,
       "matched_components": 3,
-      "credited_claims": 7,
+      "credited_claims": 6,
       "by_layer": {
         "1": {
           "detected": 0,
@@ -10544,7 +10582,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "py-l4-yaml-sig",
@@ -10616,7 +10654,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "py-l4-helm-kem",
@@ -10724,7 +10762,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "py-l1-aesgcm",
@@ -10736,7 +10774,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "py-l2-sha256",
@@ -12505,8 +12543,8 @@
     {
       "project": "vaultkeeper",
       "language": "python",
-      "tool": "pqprobe-static",
-      "source": "vaultkeeper__pqprobe-static.json",
+      "tool": "pqprobe",
+      "source": "vaultkeeper__pqprobe.json",
       "schema_valid": true,
       "schema_errors": [],
       "parse_error": null,

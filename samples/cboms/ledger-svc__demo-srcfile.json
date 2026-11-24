@@ -59,7 +59,7 @@
     {
       "type": "cryptographic-asset",
       "bom-ref": "crypto/java-l6-keystore",
-      "name": "ECDSA-P256",
+      "name": "PKCS#12",
       "cryptoProperties": {
         "assetType": "related-crypto-material"
       },
@@ -67,6 +67,76 @@
         {
           "name": "SrcFile",
           "value": "keys/ledger-node.p12"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/java-l1-xmss",
+      "name": "XMSS",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/main/java/io/proofstein/ledger/crypto/AuditSeal.java"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/java-l2-lms",
+      "name": "LMS",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/main/java/io/proofstein/ledger/crypto/AuditSeal.java"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/java-l1-mldsa",
+      "name": "ML-DSA",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/main/java/io/proofstein/ledger/crypto/BlockSeal.java"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/java-l2-slhdsa",
+      "name": "SLH-DSA",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/main/java/io/proofstein/ledger/crypto/BlockSeal.java"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/java-l1-falcon",
+      "name": "Falcon-512",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/main/java/io/proofstein/ledger/crypto/BlockSeal.java"
         }
       ]
     },
@@ -228,6 +298,20 @@
       "type": "cryptographic-asset",
       "bom-ref": "crypto/java-l4-prop-settlement",
       "name": "RSA-2048",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/main/resources/application.properties"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/java-l4-prop-audit-seal",
+      "name": "XMSS",
       "cryptoProperties": {
         "assetType": "algorithm"
       },

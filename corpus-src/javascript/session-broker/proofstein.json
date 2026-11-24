@@ -46,7 +46,12 @@
       "signToken": "signTicket",
       "jwksThumbprint": "keysetThumbprint",
       "sealed-memory": "wrapped-memory",
-      "BrokerIdentity": "GatewayIdentity"
+      "BrokerIdentity": "GatewayIdentity",
+      "signCompact": "signTicketJws",
+      "wrapContentKey": "wrapTicketKey",
+      "JWS_SIGNERS": "TICKET_SIGNERS",
+      "KEY_WRAPPERS": "TICKET_KEY_WRAPS",
+      "PSS_SIGNERS": "TICKET_PSS_SIGNERS"
     },
     "substitutions": []
   }

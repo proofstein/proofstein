@@ -6,10 +6,9 @@
 These exist so that a fresh clone can run the scorer end to end without having
 to stand up a runner first, and so the tests have fixtures with known answers.
 
-**They are not tool output.** The generator names are deliberately fictional
-(`demo-precise`, `demo-srcfile`, `demo-noisy`) because attaching a real
-vendor's name to numbers nobody measured would misrepresent that vendor. Each
-one models an *evidence style* observed in real CBOMs:
+**They are not tool output.** The generator names are fictional
+(`demo-precise`, `demo-srcfile`, `demo-noisy`). Each one models an *evidence
+style* observed in real CBOMs:
 
 * ``demo-precise``  -- spec-shaped ``evidence.occurrences`` with file and line.
 * ``demo-srcfile``  -- file path in ``properties[].SrcFile``, no line at all,

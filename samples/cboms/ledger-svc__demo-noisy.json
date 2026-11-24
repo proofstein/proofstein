@@ -16,8 +16,24 @@
   "components": [
     {
       "type": "cryptographic-asset",
-      "bom-ref": "crypto/java-l1-ecdsa",
-      "name": "ECDSA-P256",
+      "bom-ref": "crypto/java-l1-aesgcm",
+      "name": "AES-256-GCM",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/Envelope.java",
+            "line": 46
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/java-l1-ed25519",
+      "name": "Ed25519",
       "cryptoProperties": {
         "assetType": "algorithm"
       },
@@ -25,14 +41,14 @@
         "occurrences": [
           {
             "location": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
-            "line": 33
+            "line": 32
           }
         ]
       }
     },
     {
       "type": "cryptographic-asset",
-      "bom-ref": "crypto/java-l1-sha256rsa",
+      "bom-ref": "crypto/java-l1-rsa",
       "name": "RSA-2048",
       "cryptoProperties": {
         "assetType": "algorithm"
@@ -41,23 +57,39 @@
         "occurrences": [
           {
             "location": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
-            "line": 52
+            "line": 36
           }
         ]
       }
     },
     {
       "type": "cryptographic-asset",
-      "bom-ref": "crypto/java-l1-mlkem",
-      "name": "ML-KEM",
+      "bom-ref": "crypto/java-l1-sha256",
+      "name": "SHA-256",
       "cryptoProperties": {
         "assetType": "algorithm"
       },
       "evidence": {
         "occurrences": [
           {
-            "location": "src/main/java/io/proofstein/ledger/crypto/Kem.java",
-            "line": 24
+            "location": "src/main/java/io/proofstein/ledger/crypto/Identity.java",
+            "line": 60
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/java-l3-wrapper",
+      "name": "AES-256-GCM",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/main/java/io/proofstein/ledger/store/SegmentStore.java",
+            "line": 37
           }
         ]
       }

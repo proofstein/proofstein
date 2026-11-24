@@ -2,9 +2,7 @@
 # Copyright 2026 Ottenheimer GmbH
 """Tests that the scorer cannot be talked into inflating a rate.
 
-These are the executable form of the guarantee the README makes. Proofstein is
-maintained by a party that also ships a scored tool, so "trust us" is not an
-answer; these tests are.
+These are the executable form of the guarantee the README makes.
 """
 
 from __future__ import annotations
@@ -89,9 +87,8 @@ class TestUnplantedAllowanceIsScoped(unittest.TestCase):
     """An allowance reaches only as far as the thing that justifies it.
 
     ``DES`` is in the corpus once, named as a *disabled* algorithm in one
-    project's JVM options. Allowed corpus-wide, that one line forgives a DES
-    claim anywhere in any project -- which is what happened in scoring the 2026-07-28 run,
-    where five fabricated DES findings were reported as zero false positives.
+    project's JVM options. The allowance forgives a DES claim at that file in
+    that project only; anywhere else DES is a phantom algorithm.
     """
 
     ALLOWANCE = frozenset({Unplanted("DES", "p", "config/jvm.options")})
@@ -129,7 +126,7 @@ class TestUnplantedAllowanceIsScoped(unittest.TestCase):
 
     def test_a_family_absent_from_the_project_is_charged_wherever_reported(self):
         """Naming LMS or Falcon in a project that plants neither is a phantom
-        algorithm (entry 15)."""
+        algorithm."""
         for name in ("LMS", "FN-DSA", "Falcon"):
             with self.subTest(name=name):
                 result = self.score([crypto(name, "README.md", 3)])
@@ -178,10 +175,8 @@ class TestNoInflation(unittest.TestCase):
     def test_file_without_line_is_a_detection(self):
         """Detection is file + algorithm + layer; the line is not scored.
 
-        Rewritten when pending-review entry 2 was settled. It previously
-        asserted the opposite, which is what that entry was about: a generator
-        reporting the right algorithm in the right file has answered the
-        question the inventory asks, whether it names a line or not.
+        A generator reporting the right algorithm in the right file is credited
+        whether it names a line or not.
         """
         result = run(
             make_bom(
@@ -241,10 +236,6 @@ class TestNoInflation(unittest.TestCase):
         same exhaustive guessing into one component per algorithm keeps every
         component matching something, so component precision stays high and no
         false positive is charged. Claim precision is what prices it.
-
-        This is a regression test for a hole found in review, where exactly this
-        document scored full recall at 80% component precision with zero false
-        positives.
         """
         occurrences = [
             {"location": path, "line": line}
@@ -268,7 +259,7 @@ class TestNoInflation(unittest.TestCase):
             result.claim_precision, 0.05, "claim precision must expose the guessing"
         )
 
-    def test_honest_report_scores_well_on_both_precisions(self):
+    def test_precise_report_scores_well_on_both_precisions(self):
         """The counterpart: one claim per real site keeps both figures high."""
         result = run(
             make_bom(
@@ -308,25 +299,25 @@ class TestNoInflation(unittest.TestCase):
     def test_tool_name_does_not_affect_score(self):
         """No scoring path may branch on which tool produced a document."""
         raw = make_bom([crypto("AES-256-GCM", "src/seal.go", 10)])
-        names = ["pqprobe-static", "cdxgen", "cbomkit", "anything-at-all", ""]
+        names = ["pqprobe", "cdxgen", "cbomkit", "anything-at-all", ""]
         scores = {name: run(raw, tool=name).detected for name in names}
         self.assertEqual(len(set(scores.values())), 1, f"score varied by tool name: {scores}")
 
     def test_maintainers_own_quirk_gets_no_special_handling(self):
         """The conflict-of-interest case, stated concretely.
 
-        Proofstein's maintainer also ships pqprobe-static, whose known quirk is
+        Proofstein's maintainer also ships pqprobe, whose known quirk is
         emitting absolute paths from the clone directory. Absolute-path
         resolution is a documented, tool-neutral accommodation, so this asserts
         two things at once: that the accommodation works, and that it works
         exactly the same under every tool name -- including the maintainer's.
         """
         absolute = make_bom(
-            [crypto("AES-256-GCM", "/tmp/pqprobe-static-1737/repo/src/seal.go", 10)]
+            [crypto("AES-256-GCM", "/tmp/pqprobe-1737/repo/src/seal.go", 10)]
         )
         relative = make_bom([crypto("AES-256-GCM", "src/seal.go", 10)])
 
-        names = ["pqprobe-static", "cdxgen", "cbomkit", "some-other-tool"]
+        names = ["pqprobe", "cdxgen", "cbomkit", "some-other-tool"]
         absolute_scores = {n: run(absolute, tool=n).detected for n in names}
         relative_scores = {n: run(relative, tool=n).detected for n in names}
 
@@ -339,8 +330,8 @@ class TestNoInflation(unittest.TestCase):
             absolute_scores, relative_scores, "absolute paths scored differently from relative ones"
         )
 
-    def test_line_tolerance_no_longer_gates_detection(self):
-        """Tolerance still decides `located`, which is reported, not scored."""
+    def test_line_tolerance_does_not_gate_detection(self):
+        """Tolerance decides `located`, which is reported, not scored."""
         raw = make_bom([crypto("AES-256-GCM", "src/seal.go", 13)])
         for tolerance in (2, 3):
             result = run(raw, line_tolerance=tolerance)
@@ -359,14 +350,11 @@ class TestNoInflation(unittest.TestCase):
         self.assertEqual(result.false_positives, 1)
 
     def test_component_naming_a_file_is_not_a_phantom_algorithm(self):
-        """Found in scoring the 2026-07-27 run, against a real generator.
+        """A component named after a key file is not a phantom algorithm.
 
         cdxgen names a key-file component after the file -- ``relay-key.pem`` --
         and marks it ``assetType: certificate``. That is a correct finding of a
-        real layer-6 asset; the algorithm simply cannot be known without parsing
-        the key. Charging it as a phantom algorithm invented an error the
-        generator did not make, and did so in a published-facing false-positive
-        count against another vendor.
+        layer-6 asset whose algorithm cannot be known without parsing the key.
         """
         component = {
             "type": "cryptographic-asset",
@@ -395,7 +383,7 @@ class TestNoInflation(unittest.TestCase):
         self.assertEqual(result.false_positives, 0)
 
     def test_wrong_family_is_charged_even_on_a_planted_file(self):
-        """The location exemption must not become a shield for fabrication."""
+        """The location exemption does not cover a wrong algorithm family."""
         result = run(make_bom([crypto("Blowfish-448", "src/seal.go", 10)]))
         self.assertEqual(result.phantom_algorithm, 1)
 
@@ -477,3 +465,106 @@ class TestEvidenceShapesAreEqualCitizens(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestHybridPlant(unittest.TestCase):
+    """A hybrid group is found by naming it or both its halves in its file."""
+
+    GROUND_TRUTH = [
+        {
+            "id": "h",
+            "file": "src/tls.c",
+            "line": 30,
+            "algorithm": "X25519MLKEM768",
+            "layer": 1,
+            "cyclonedx_asset_type": "algorithm",
+        },
+        {
+            "id": "k",
+            "file": "src/kem.c",
+            "line": 5,
+            "algorithm": "ML-KEM-512",
+            "layer": 1,
+            "cyclonedx_asset_type": "algorithm",
+        },
+    ]
+    FILES = frozenset({"src/tls.c", "src/kem.c", "src/other.c"})
+
+    def score(self, components):
+        _, reported, _ = parse_cbom(make_bom(components))
+        result = score_cbom(
+            project="p",
+            language="c",
+            tool="t",
+            source="test",
+            ground_truth=self.GROUND_TRUTH,
+            reported=reported,
+            project_files=self.FILES,
+            known_unplanted=frozenset(),
+            line_tolerance=2,
+        )
+        return {v.id: v.detected for v in result.verdicts}, result
+
+    def test_the_hybrid_name_finds_it(self):
+        found, _ = self.score([crypto("X25519MLKEM768", "src/tls.c", 30)])
+        self.assertTrue(found["h"])
+
+    def test_both_halves_in_the_file_find_it(self):
+        found, result = self.score(
+            [crypto("X25519", "src/tls.c", 30), crypto("ML-KEM-768", "src/tls.c", 30)]
+        )
+        self.assertTrue(found["h"])
+        self.assertEqual(result.credited_claims, 2)
+        self.assertEqual(result.false_positives, 0)
+
+    def test_one_half_does_not_find_it_and_is_not_charged(self):
+        for name in ("X25519", "ML-KEM-768"):
+            with self.subTest(name=name):
+                found, result = self.score([crypto(name, "src/tls.c", 30)])
+                self.assertFalse(found["h"])
+                self.assertEqual(result.phantom_algorithm, 0)
+
+    def test_halves_in_different_files_do_not_find_it(self):
+        found, _ = self.score([crypto("X25519", "src/tls.c", 30), crypto("ML-KEM-768", "src/other.c", 1)])
+        self.assertFalse(found["h"])
+
+    def test_wrong_post_quantum_parameter_does_not_find_it(self):
+        found, _ = self.score([crypto("X25519", "src/tls.c", 30), crypto("ML-KEM-512", "src/tls.c", 30)])
+        self.assertFalse(found["h"])
+
+
+class TestBcryptIsCharged(unittest.TestCase):
+    def test_bcrypt_in_a_project_without_it_is_a_phantom_algorithm(self):
+        result = run(make_bom([crypto("bcrypt", "src/seal.go", 10)]))
+        self.assertEqual(result.phantom_algorithm, 1)
+
+    def test_a_cng_identifier_is_not_a_bcrypt_claim(self):
+        result = run(make_bom([crypto("BCryptOpenAlgorithmProvider", "src/seal.go", 10)]))
+        self.assertEqual(result.phantom_algorithm, 0)
+
+
+class TestCombinedSignatureOid(unittest.TestCase):
+    """The OID of ecdsa-with-SHA256 credits the ECDSA and the SHA-256 in its file."""
+
+    GROUND_TRUTH = [
+        {"id": "sig", "file": "src/sign.c", "line": 5, "algorithm": "ECDSA-P256", "layer": 1, "cyclonedx_asset_type": "algorithm"},
+        {"id": "dig", "file": "src/sign.c", "line": 7, "algorithm": "SHA-256", "layer": 1, "cyclonedx_asset_type": "algorithm"},
+        {"id": "kex", "file": "src/sign.c", "line": 9, "algorithm": "ECDH-P256", "layer": 1, "cyclonedx_asset_type": "algorithm"},
+        {"id": "big", "file": "src/sign.c", "line": 11, "algorithm": "SHA-384", "layer": 1, "cyclonedx_asset_type": "algorithm"},
+    ]
+
+    def test_the_oid_credits_signature_and_digest_only(self):
+        component = {
+            "type": "cryptographic-asset",
+            "name": "key@50ece37a-ae77-437c-a7e2-130a571b628b",
+            "cryptoProperties": {"assetType": "algorithm", "oid": "1.2.840.10045.4.3.2"},
+            "evidence": {"occurrences": [{"location": "src/sign.c", "line": 5}]},
+        }
+        _, reported, _ = parse_cbom(make_bom([component]))
+        result = score_cbom(
+            project="p", language="c", tool="t", source="test", ground_truth=self.GROUND_TRUTH,
+            reported=reported, project_files=frozenset({"src/sign.c"}), known_unplanted=frozenset(),
+            line_tolerance=2,
+        )
+        found = {v.id: v.detected for v in result.verdicts}
+        self.assertEqual(found, {"sig": True, "dig": True, "kex": False, "big": False})

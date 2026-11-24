@@ -16,6 +16,22 @@
   "components": [
     {
       "type": "cryptographic-asset",
+      "bom-ref": "crypto/py-l1-falcon",
+      "name": "Falcon-1024",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/vaultkeeper/attest.py",
+            "line": 34
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
       "bom-ref": "crypto/py-l1-aesgcm",
       "name": "AES-256-GCM",
       "cryptoProperties": {

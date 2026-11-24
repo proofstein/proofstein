@@ -72,6 +72,20 @@
     },
     {
       "type": "cryptographic-asset",
+      "bom-ref": "crypto/py-l4-yaml-attestation",
+      "name": "SLH-DSA",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "config/vaultkeeper.yaml"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
       "bom-ref": "crypto/py-l4-yaml-hash",
       "name": "SHA-256",
       "cryptoProperties": {
@@ -165,6 +179,20 @@
         {
           "name": "SrcFile",
           "value": "secrets/peer-mesh-key.pem"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/py-l1-falcon",
+      "name": "Falcon-1024",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/vaultkeeper/attest.py"
         }
       ]
     },

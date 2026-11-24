@@ -2,6 +2,7 @@
   "meta": {
     "corpus_version": "fd134c7",
     "line_tolerance": 2,
+    "scorer_commit": "6ada872",
     "corpus": "public",
     "schema_validated": true,
     "cboms_scored": 6,
@@ -26,9 +27,47 @@
       "attempted": 6,
       "succeeded": 6,
       "tool_versions": {
-        "ecdsa-scan": "0.1.0"
+        "ecdsa-scan": "ecdsa-scan 0.1.1"
       },
       "judgement_tables": {
+        "oid_algorithms": {
+          "entries": 27,
+          "sha256_16": "f6fd6fa101db7a4d"
+        },
+        "location_property_names": {
+          "entries": 8,
+          "sha256_16": "0b8c15cc33ce242a"
+        },
+        "line_property_names": {
+          "entries": 5,
+          "sha256_16": "ed438ed351a5b930"
+        },
+        "token_aliases": {
+          "entries": 33,
+          "sha256_16": "c13677feee250d8b"
+        },
+        "family_markers": {
+          "entries": 47,
+          "sha256_16": "9db8169c695be2c5"
+        },
+        "jose_names": {
+          "entries": 10,
+          "sha256_16": "08d16fb9eb9aecef"
+        },
+        "hybrid_groups": {
+          "entries": 4,
+          "sha256_16": "ebb21ecb7cbea298"
+        },
+        "whole_token_only": {
+          "entries": 8,
+          "sha256_16": "b9a4a30aab68fec0"
+        },
+        "known_unplanted": {
+          "entries": 15,
+          "sha256_16": "3a7fca80174e0cdd"
+        }
+      },
+      "judgement_tables_collected": {
         "oid_algorithms": {
           "entries": 27,
           "sha256_16": "031a3c27915e6dde"
@@ -58,15 +97,14 @@
           "sha256_16": "3a7fca80174e0cdd"
         }
       },
-      "judgement_tables_collected": null,
       "failed_invocations": []
     }
   },
   "tools": {
     "ecdsa-scan": {
-      "detected": 10,
+      "detected": 7,
       "total": 124,
-      "detection_rate": 0.0806,
+      "detection_rate": 0.0565,
       "precision": 0.875,
       "claim_precision": 1.0,
       "matched_components": 7,
@@ -76,9 +114,9 @@
       "false_positives": 0,
       "by_layer": {
         "1": {
-          "detected": 10,
+          "detected": 7,
           "total": 44,
-          "rate": 0.2273
+          "rate": 0.1591
         },
         "2": {
           "detected": 0,
@@ -117,16 +155,16 @@
       "schema_valid": true,
       "schema_errors": [],
       "parse_error": null,
-      "detected": 3,
+      "detected": 2,
       "total": 19,
-      "detection_rate": 0.1579,
+      "detection_rate": 0.1053,
       "precision": 0.6667,
       "claim_precision": 1.0,
       "matched_components": 2,
       "credited_claims": 3,
       "by_layer": {
         "1": {
-          "detected": 3,
+          "detected": 2,
           "total": 7
         },
         "2": {
@@ -179,7 +217,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "go-l4-yaml-sig",
@@ -215,7 +253,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "go-l4-nginx-proto",
@@ -263,7 +301,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "go-l1-rsa",
@@ -308,10 +346,10 @@
           "algorithm": "SHA-256",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
-          "detected": true,
+          "detected": false,
           "located": false,
           "file_only": true,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "go-l1-aes-block",
@@ -323,7 +361,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "go-l1-aes-gcm",
@@ -335,7 +373,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "go-l3-wrapper",
@@ -347,7 +385,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "go-l1-mlkem",
@@ -1047,16 +1085,16 @@
       "schema_valid": true,
       "schema_errors": [],
       "parse_error": null,
-      "detected": 3,
+      "detected": 2,
       "total": 20,
-      "detection_rate": 0.15,
+      "detection_rate": 0.1,
       "precision": 1.0,
       "claim_precision": 1.0,
       "matched_components": 2,
       "credited_claims": 2,
       "by_layer": {
         "1": {
-          "detected": 3,
+          "detected": 2,
           "total": 7
         },
         "2": {
@@ -1109,7 +1147,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "js-l4-yaml-sig",
@@ -1169,7 +1207,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "js-l6-jwks-cert",
@@ -1253,7 +1291,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "js-l2-sha256",
@@ -1265,7 +1303,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "js-l1-ed25519",
@@ -1310,10 +1348,10 @@
           "algorithm": "SHA-256",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
-          "detected": true,
+          "detected": false,
           "located": false,
           "file_only": true,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "js-l1-mlkem",
@@ -1337,7 +1375,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         }
       ]
     },
@@ -1639,16 +1677,16 @@
       "schema_valid": true,
       "schema_errors": [],
       "parse_error": null,
-      "detected": 4,
+      "detected": 3,
       "total": 23,
-      "detection_rate": 0.1739,
+      "detection_rate": 0.1304,
       "precision": 1.0,
       "claim_precision": 1.0,
       "matched_components": 3,
       "credited_claims": 3,
       "by_layer": {
         "1": {
-          "detected": 4,
+          "detected": 3,
           "total": 7
         },
         "2": {
@@ -1701,7 +1739,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "py-l4-yaml-sig",
@@ -1761,7 +1799,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "py-l4-helm-cipher",
@@ -1773,7 +1811,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "py-l4-helm-kem",
@@ -1881,7 +1919,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "py-l1-aesgcm",
@@ -1893,7 +1931,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "py-l2-sha256",
@@ -1905,7 +1943,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "py-l1-rsa",
@@ -1950,10 +1988,10 @@
           "algorithm": "SHA-256",
           "layer": 1,
           "cyclonedx_asset_type": "algorithm",
-          "detected": true,
+          "detected": false,
           "located": false,
           "file_only": true,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "py-l1-mlkem",

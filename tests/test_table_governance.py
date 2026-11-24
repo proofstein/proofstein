@@ -10,16 +10,12 @@ Three tables encode judgement calls rather than facts:
 * ``proofstein/matching.py::_TOKEN_ALIASES`` / ``_FAMILY_MARKERS`` -- which
   algorithm spellings mean the same thing.
 
-They are the residual conflict-of-interest risk: each is defensible, but each is
-a choice made by a maintainer who also ships a scored tool. METHODOLOGY.md §9
-freezes the governance rule -- entries change only by pull request, applied
-uniformly.
+METHODOLOGY.md §9.1 sets the governance rules for them: a table change is its
+own commit, separate from any run, and applies to every tool.
 
-This module is the mechanical half of that rule. Rather than testing a fixed
-list of cases, it **iterates over the tables themselves**, so an entry added
-tomorrow is covered by exactly the same assertions without anyone remembering to
-extend a test. A table entry that behaved differently depending on which tool
-emitted the document would fail here the moment it was added.
+This module **iterates over the tables themselves**, so every entry, including
+one added later, is covered by the same assertions. A table entry that behaves
+differently depending on which tool emitted the document fails here.
 """
 
 from __future__ import annotations
@@ -40,8 +36,11 @@ from proofstein.cbom import (  # noqa: E402
 )
 from proofstein.matching import (  # noqa: E402
     _FAMILY_MARKERS,
+    _HYBRID_GROUPS,
+    _JOSE_NAMES,
     _TOKEN_ALIASES,
     algorithms_compatible,
+    families,
     normalize_tokens,
 )
 from proofstein.scoring import _as_unplanted, score_cbom  # noqa: E402
@@ -49,7 +48,7 @@ from proofstein.scoring import _as_unplanted, score_cbom  # noqa: E402
 from score import KNOWN_UNPLANTED  # noqa: E402
 
 #: Names deliberately including the maintainer's own tool and its competitors.
-TOOL_NAMES = ["pqprobe-static", "cdxgen", "cbomkit", "cryptobom-forge", "an-unknown-tool", ""]
+TOOL_NAMES = ["pqprobe", "cdxgen", "cbomkit", "cryptobom-forge", "an-unknown-tool", ""]
 
 PROJECT_FILES = frozenset({"src/seal.go", "keys/node.pem"})
 
@@ -236,6 +235,33 @@ class TestAlgorithmAliasesAreToolNeutral(unittest.TestCase):
                     f"alias {spelling!r} normalises to an empty token set",
                 )
 
+    def test_every_jose_name_and_hybrid_group_scores_identically_under_every_tool_name(self):
+        """The rewrite tables are judgement too, and are covered the same way."""
+        spellings = list(_JOSE_NAMES) + list(_HYBRID_GROUPS)
+        self.assertGreater(len(spellings), 0)
+        for spelling in spellings:
+            component = {
+                "type": "cryptographic-asset",
+                "name": spelling,
+                "cryptoProperties": {"assetType": "algorithm"},
+                "evidence": {"occurrences": [{"location": "src/seal.go", "line": 10}]},
+            }
+            raw = bom([component])
+            with self.subTest(spelling=spelling):
+                results = {tool: score(raw, tool, spelling).detected for tool in TOOL_NAMES}
+                self.assertEqual(len(set(results.values())), 1, f"{spelling!r} scored differently by tool: {results}")
+                self.assertEqual(set(results.values()), {1}, f"{spelling!r} does not find itself")
+
+    def test_every_jose_name_and_hybrid_half_claims_a_family(self):
+        for spelling, meaning in _JOSE_NAMES.items():
+            with self.subTest(spelling=spelling):
+                self.assertTrue(families(normalize_tokens(spelling)))
+                self.assertEqual(families(normalize_tokens(spelling)), families(normalize_tokens(meaning)))
+        for spelling, halves in _HYBRID_GROUPS.items():
+            for half in halves:
+                with self.subTest(spelling=spelling, half=half):
+                    self.assertTrue(families(normalize_tokens(half)))
+
     def test_no_alias_collapses_distinct_families(self):
         """An alias must not make two different families match each other.
 
@@ -245,6 +271,7 @@ class TestAlgorithmAliasesAreToolNeutral(unittest.TestCase):
         distinct = [
             "AES-256-GCM", "RSA-2048", "Ed25519", "SHA-256", "ML-KEM-768", "ChaCha20-Poly1305",
             "ML-DSA-65", "SLH-DSA", "Falcon-512", "LMS", "XMSS", "DSA-2048",
+            "ECDSA-P256", "ECDH-P256", "X25519", "X448", "Ed448", "DH-2048", "bcrypt", "scrypt",
         ]
         for left in distinct:
             for right in distinct:
@@ -258,13 +285,11 @@ class TestAlgorithmAliasesAreToolNeutral(unittest.TestCase):
 
 
 class TestUnplantedAllowancesAreToolNeutralAndJustified(unittest.TestCase):
-    """``KNOWN_UNPLANTED`` decides which fabricated names go uncharged.
+    """``KNOWN_UNPLANTED`` decides which unplanted algorithm names go uncharged.
 
-    It belongs in this module because it is judgement, not fact: every entry
-    forgives an algorithm the ground truth does not contain, and a single
-    over-broad entry removes a false-positive charge from every tool at once.
-    The 2026-07-28 run is the worked example -- ``DES`` allowed corpus-wide reported five
-    fabricated findings as a clean sheet.
+    Every entry forgives an algorithm the ground truth does not contain, and a
+    single over-broad entry removes a false-positive charge from every tool at
+    once.
     """
 
     def test_every_entry_scores_identically_under_every_tool_name(self):
@@ -291,11 +316,7 @@ class TestUnplantedAllowancesAreToolNeutralAndJustified(unittest.TestCase):
                 )
 
     def test_a_scoped_entry_does_not_forgive_the_whole_corpus(self):
-        """The property that failed in the 2026-07-28 run, asserted directly.
-
-        Every scoped entry must be charged somewhere -- otherwise the scoping is
-        decorative and the entry is still a corpus-wide amnesty.
-        """
+        """Every scoped entry is charged in a project it does not name."""
         scoped = [_as_unplanted(e) for e in KNOWN_UNPLANTED if _as_unplanted(e).file is not None]
         self.assertGreater(len(scoped), 0, "no scoped allowances to check")
 
@@ -360,7 +381,7 @@ class TestTablesAreDocumented(unittest.TestCase):
 
     def test_methodology_states_the_change_rule(self):
         text = (REPO_ROOT / "METHODOLOGY.md").read_text(encoding="utf-8").lower()
-        self.assertIn("pull request", text)
+        self.assertIn("a judgement-table change is its own commit", text)
 
 
 if __name__ == "__main__":

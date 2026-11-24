@@ -2,6 +2,7 @@
   "meta": {
     "corpus_version": "49c979d",
     "line_tolerance": 2,
+    "scorer_commit": "6ada872",
     "corpus": "holdout",
     "schema_validated": true,
     "cboms_scored": 12,
@@ -15,7 +16,7 @@
     ],
     "tools": [
       "cdxgen",
-      "pqprobe-static"
+      "pqprobe"
     ],
     "unscored_pairs": 0,
     "problems": [],
@@ -27,10 +28,48 @@
       "attempted": 12,
       "succeeded": 12,
       "tool_versions": {
-        "cdxgen": "CycloneDX Generator 12.8.2",
-        "pqprobe-static": "PQProbe Static v3.6.0"
+        "cdxgen": "cdxgen 12.8.2",
+        "pqprobe": "pqprobe 3.6.0"
       },
       "judgement_tables": {
+        "oid_algorithms": {
+          "entries": 27,
+          "sha256_16": "f6fd6fa101db7a4d"
+        },
+        "location_property_names": {
+          "entries": 8,
+          "sha256_16": "0b8c15cc33ce242a"
+        },
+        "line_property_names": {
+          "entries": 5,
+          "sha256_16": "ed438ed351a5b930"
+        },
+        "token_aliases": {
+          "entries": 33,
+          "sha256_16": "c13677feee250d8b"
+        },
+        "family_markers": {
+          "entries": 47,
+          "sha256_16": "9db8169c695be2c5"
+        },
+        "jose_names": {
+          "entries": 10,
+          "sha256_16": "08d16fb9eb9aecef"
+        },
+        "hybrid_groups": {
+          "entries": 4,
+          "sha256_16": "ebb21ecb7cbea298"
+        },
+        "whole_token_only": {
+          "entries": 8,
+          "sha256_16": "b9a4a30aab68fec0"
+        },
+        "known_unplanted": {
+          "entries": 15,
+          "sha256_16": "3a7fca80174e0cdd"
+        }
+      },
+      "judgement_tables_collected": {
         "oid_algorithms": {
           "entries": 27,
           "sha256_16": "031a3c27915e6dde"
@@ -108,17 +147,17 @@
         }
       }
     },
-    "pqprobe-static": {
+    "pqprobe": {
       "detected": 119,
       "total": 124,
       "detection_rate": 0.9597,
-      "precision": 0.7281,
+      "precision": 0.7368,
       "claim_precision": 0.6127,
-      "matched_components": 83,
+      "matched_components": 84,
       "reported_components": 114,
       "credited_claims": 125,
       "total_claims": 204,
-      "false_positives": 0,
+      "false_positives": 1,
       "by_layer": {
         "1": {
           "detected": 44,
@@ -449,8 +488,8 @@
     {
       "project": "cachekeeper",
       "language": "python",
-      "tool": "pqprobe-static",
-      "source": "cachekeeper__pqprobe-static.json",
+      "tool": "pqprobe",
+      "source": "cachekeeper__pqprobe.json",
       "schema_valid": true,
       "schema_errors": [],
       "parse_error": null,
@@ -1053,17 +1092,17 @@
     {
       "project": "journal-svc",
       "language": "java",
-      "tool": "pqprobe-static",
-      "source": "journal-svc__pqprobe-static.json",
+      "tool": "pqprobe",
+      "source": "journal-svc__pqprobe.json",
       "schema_valid": true,
       "schema_errors": [],
       "parse_error": null,
       "detected": 24,
       "total": 25,
       "detection_rate": 0.96,
-      "precision": 0.68,
+      "precision": 0.72,
       "claim_precision": 0.5682,
-      "matched_components": 17,
+      "matched_components": 18,
       "credited_claims": 25,
       "by_layer": {
         "1": {
@@ -1617,8 +1656,8 @@
     {
       "project": "microquote",
       "language": "c",
-      "tool": "pqprobe-static",
-      "source": "microquote__pqprobe-static.json",
+      "tool": "pqprobe",
+      "source": "microquote__pqprobe.json",
       "schema_valid": true,
       "schema_errors": [],
       "parse_error": null,
@@ -2121,8 +2160,8 @@
     {
       "project": "signal-bridge",
       "language": "go",
-      "tool": "pqprobe-static",
-      "source": "signal-bridge__pqprobe-static.json",
+      "tool": "pqprobe",
+      "source": "signal-bridge__pqprobe.json",
       "schema_valid": true,
       "schema_errors": [],
       "parse_error": null,
@@ -2635,8 +2674,8 @@
     {
       "project": "ticket-gateway",
       "language": "javascript",
-      "tool": "pqprobe-static",
-      "source": "ticket-gateway__pqprobe-static.json",
+      "tool": "pqprobe",
+      "source": "ticket-gateway__pqprobe.json",
       "schema_valid": true,
       "schema_errors": [],
       "parse_error": null,
@@ -2673,9 +2712,9 @@
           "total": 3
         }
       },
-      "false_positives": 0,
+      "false_positives": 1,
       "phantom_location": 0,
-      "phantom_algorithm": 0,
+      "phantom_algorithm": 1,
       "unmatched_reports": 0,
       "evidence": {
         "crypto_components": 16,
@@ -3139,8 +3178,8 @@
     {
       "project": "vaultcrate",
       "language": "rust",
-      "tool": "pqprobe-static",
-      "source": "vaultcrate__pqprobe-static.json",
+      "tool": "pqprobe",
+      "source": "vaultcrate__pqprobe.json",
       "schema_valid": true,
       "schema_errors": [],
       "parse_error": null,

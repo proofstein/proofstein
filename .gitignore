@@ -1,10 +1,8 @@
-# Holdout material is generated per run and deliberately not published.
-# Publishing it would turn the holdout into a second public corpus.
+# Holdout material is generated per run and not committed.
 /holdout/
 /ground-truth-holdout/
 
 # Build artifacts produced by tools/build-all.sh inside the corpus projects.
-# The corpus itself is committed; what compiling it leaves behind is not.
 corpus/**/target/
 corpus/**/node_modules/
 corpus/**/dist/
@@ -13,6 +11,7 @@ corpus/**/.venv/
 corpus/**/*.o
 corpus/**/*.class
 corpus/c/tinyattest/tinyattest
+corpus/c/tinyattest/tinyattest-cng.dll
 corpus/go/beacon-relay/beacon-relay
 
 # Python
@@ -21,7 +20,7 @@ __pycache__/
 .venv/
 *.egg-info/
 
-# Scoring output for local runs. Published runs live under results/<date>-*/
+# Scoring output for local runs. Published runs are under runs/<run-id>/.
 /results/results.md
 /results/results.json
 
@@ -31,8 +30,7 @@ __pycache__/
 .idea/
 .vscode/
 
-# Run outputs are committed deliberately, per run, under runs/<date>/.
-# The scratch directory a run uses is not.
+# A run's scratch directory.
 runs/*/.work/
 
 # Editor/agent local state

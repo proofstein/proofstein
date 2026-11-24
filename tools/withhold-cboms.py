@@ -4,36 +4,22 @@
 """Withhold a run's CBOMs from the repository, under a published digest.
 
 METHODOLOGY.md §6 limits published holdout material to the scores and the
-transform description. A generator's CBOM is neither: it carries the holdout's
-file paths, its line numbers and, for tools that quote the matched line, its
-source text. Committing those republishes most of the answer key the unpublished
-seed exists to protect.
+transform description. A generator's CBOM carries the holdout's file paths, its
+line numbers and, for tools that quote the matched line, its source text.
 
-Withholding them costs something real, though. A run whose inputs are secret and
-whose outputs are absent is a run a reader must take on trust, and a benchmark
-maintained by a party with a tool in it is the last place trust should be the
-mechanism.
+The tool copies the CBOMs to a private archive, records each one's SHA-256
+digest and size in the committed manifest, and removes the run's cboms/
+directory unless --keep is given.
 
-So the CBOMs move to a private archive and their SHA-256 digests are recorded in
-the committed manifest. The public gets a commitment made *before* anyone could
-check it. A reviewer under NDA -- the external review offered in METHODOLOGY.md
-§9.1 -- gets the archive, re-scores it, and confirms both the published scores
-and that the documents are the ones the digests name. Neither party needs the
-seed.
+    tools/withhold-cboms.py --run runs/<run-id> --archive <archive-dir>
 
-    tools/withhold-cboms.py --run runs/2026-08-01-holdout \
-        --archive ~/proofstein-private/holdout-cboms
+    tools/withhold-cboms.py --run runs/<run-id> --archive <archive-dir> --verify
 
-    tools/withhold-cboms.py --run runs/2026-08-01-holdout \
-        --archive ~/proofstein-private/holdout-cboms --verify
+``--verify`` re-hashes the archive against the manifest and fails if any
+recorded document is missing or its digest differs. Documents in the archive
+that the manifest does not record are listed but do not fail verification.
 
-``--verify`` re-hashes the archive against the manifest and is the check a
-reviewer runs. It is also the check that catches an archive that has drifted,
-which is the failure mode that would make the digests worthless.
-
-The archive path is environment-specific and is deliberately not recorded in the
-manifest: it is a location, not evidence, and a path in a public file is an
-invitation. The manifest records what the documents *are*.
+The archive path is not recorded in the manifest.
 """
 
 from __future__ import annotations
@@ -59,9 +45,7 @@ def sha256_file(path: Path) -> str:
 def digest_directory(directory: Path) -> dict[str, dict[str, object]]:
     """Digest every CBOM in a directory, keyed by filename.
 
-    Sorted so the manifest is stable across runs and platforms: a digest block
-    that reorders itself would show up as a diff and teach a reader to ignore
-    diffs in it.
+    Sorted so the manifest is stable across runs and platforms.
     """
     return {
         path.name: {"sha256": sha256_file(path), "bytes": path.stat().st_size}
@@ -103,9 +87,8 @@ def verify(run: Path, archive: Path) -> int:
             print(f"  ok       {name}")
 
     for name in sorted(set(present) - set(recorded)):
-        # Not a failure: an archive may hold more than one run. But an unrecorded
-        # document sitting beside recorded ones is worth naming, because "the
-        # archive matches" should not be said about files nobody vouched for.
+        # Not a failure: an archive may hold more than one run. Listed so the
+        # unrecorded documents are visible.
         print(f"  extra    {name} (present in archive, not in manifest)")
 
     print()
@@ -144,10 +127,8 @@ def withhold(run: Path, archive: Path, keep: bool) -> int:
 
     manifest["withheld_cboms"] = {
         "reason": (
-            "Holdout CBOMs carry the variants' file paths, line numbers and matched "
-            "source lines. Publishing them would republish most of what the "
-            "unpublished seed protects (METHODOLOGY.md §6), so they are archived "
-            "privately and committed here only as digests."
+            "Holdout CBOMs are archived privately and recorded here as digests "
+            "(METHODOLOGY.md §6)."
         ),
         "count": len(files),
         "algorithm": "sha256",

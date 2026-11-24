@@ -50,22 +50,10 @@ GROUND_TRUTH_DIR = REPO_ROOT / "ground-truth"
 CORPUS_DIR = REPO_ROOT / "corpus"
 RESULTS_DIR = REPO_ROOT / "results"
 
-# Cryptographic constructs that genuinely exist in the corpus but carry no
-# ground-truth entry, because they are not among the planted assets. A tool
-# reporting one of these has not made an error, so they are excluded from the
-# phantom-algorithm check.
-#
-# Every entry is justified by something actually present in the shipped corpus,
-# and the list is deliberately short. Padding it with plausible-sounding
-# algorithms that are *not* in the corpus would quietly forgive real false
-# positives and make the false-positive column meaningless. Anything absent from
-# the corpus -- Blowfish, 3DES, PBKDF2, HMAC, SHA-512 -- is charged.
-#
-# An entry is scoped to where its justification holds. A bare string is
-# corpus-wide; ``Unplanted(name, project, file)`` reaches only that file. The
-# distinction is not cosmetic: the weak algorithms below exist in one file of
-# one project, and allowing them everywhere forgave five fabricated DES findings
-# in the 2026-07-28 run, in four projects that contain no DES at all.
+# Cryptographic constructs present in the corpus that carry no ground-truth
+# entry. They are excluded from the phantom-algorithm check. A bare string is
+# corpus-wide; ``Unplanted(name, project, file)`` applies only in that file.
+# Every entry names something present in the corpus.
 KNOWN_UNPLANTED: frozenset[str | Unplanted] = frozenset(
     {
         # CSPRNGs. Every project seeds nonces or keys from one:
@@ -82,23 +70,18 @@ KNOWN_UNPLANTED: frozenset[str | Unplanted] = frozenset(
         "hex",
         # A mode named on its own, where the planted asset is the full AEAD.
         "GCM",
-        # Named in ledger-svc/deploy/jvm.options as *disabled* algorithms
-        # (-Djdk.tls.disabledAlgorithms). A generator reporting them there has
-        # read the config correctly, even though nothing here uses them.
-        # Reported anywhere else they are fabrications, so the allowance stops
-        # at the file that justifies it.
+        # Named in ledger-svc/deploy/jvm.options as disabled algorithms
+        # (-Djdk.tls.disabledAlgorithms). Allowed in that file only.
         Unplanted("MD5", "ledger-svc", "deploy/jvm.options"),
         Unplanted("RC4", "ledger-svc", "deploy/jvm.options"),
         Unplanted("DES", "ledger-svc", "deploy/jvm.options"),
         Unplanted("SSLv3", "ledger-svc", "deploy/jvm.options"),
-        # Halves of planted composites a generator may reasonably split:
-        # SHA-384 from the nginx suite ECDHE-ECDSA-AES256-GCM-SHA384, and
-        # X25519 from the JVM group x25519mlkem768.
+        # Halves of planted composites: SHA-384 from the nginx suite
+        # ECDHE-ECDSA-AES256-GCM-SHA384, and X25519 from the JVM group
+        # x25519mlkem768.
         "SHA-384",
         "X25519",
-        # TLS versions appear in several configs; some are planted as protocol
-        # assets, and a generator may report neighbouring versions from the
-        # same line.
+        # TLS versions named in several configs.
         "TLS",
     }
 )
@@ -122,23 +105,14 @@ def _corpus_hint(corpus_path: str) -> str:
     """What to run to produce a corpus that is not there."""
     if corpus_path.split("/", 1)[0] == "corpus":
         return "run tools/build-corpus.py first"
-    # A holdout corpus is generated from a seed and deliberately not committed,
-    # so a fresh checkout never has one.
+    # A holdout corpus is generated from a seed and not committed.
     return "a holdout corpus is generated, not committed: regenerate it with tools/generate-holdout.py --seed <seed>"
 
 
 def project_file_index(project: dict) -> frozenset[str]:
     """Every file in a corpus project, as repo-relative POSIX paths.
 
-    Fails rather than returning an empty set, because an empty set is not a
-    usable input and does not look like an error. Path resolution needs the
-    project's real file list; given an empty one, every reported location fails
-    to resolve, every component is charged as a phantom location, and the run
-    reports 0/108 with a full sheet of false positives. That is indistinguishable
-    from a generator that found nothing while fabricating everything, and it is
-    what a missing holdout corpus produced while re-scoring the 2026-07-28 run --
-    diagnosed from the shape of the result rather than from any message. See
-    docs/pending-review.md entry 8.
+    Exits with an error when the project directory is missing or holds no files.
     """
     corpus_path = project["corpus_path"]
     root = REPO_ROOT / corpus_path
@@ -169,11 +143,7 @@ def project_file_index(project: dict) -> frozenset[str]:
 
 
 def _display(path: Path) -> str:
-    """Show a path relative to the repository when it is inside it.
-
-    ``--out`` may point anywhere, including another filesystem, so this must not
-    assume the output lives under the repository root.
-    """
+    """Show a path relative to the repository when it is inside it."""
     try:
         return str(path.relative_to(REPO_ROOT))
     except ValueError:
@@ -201,6 +171,33 @@ def corpus_version() -> str:
             )
             suffix = "-dirty" if dirty.stdout.strip() else ""
             return f"{head}{suffix}"
+    except (OSError, subprocess.SubprocessError):
+        pass
+    return "unknown"
+
+
+def scorer_commit() -> str:
+    """The last commit that changed score.py or proofstein/, with -dirty when
+    either has uncommitted changes."""
+    scorer = ["--", "score.py", "proofstein"]
+    try:
+        log = subprocess.run(
+            ["git", "-C", str(REPO_ROOT), "log", "-1", "--format=%h", *scorer],
+            capture_output=True,
+            text=True,
+            timeout=10,
+            check=False,
+        )
+        commit = log.stdout.strip()
+        if log.returncode == 0 and commit:
+            dirty = subprocess.run(
+                ["git", "-C", str(REPO_ROOT), "status", "--porcelain", "--untracked-files=no", *scorer],
+                capture_output=True,
+                text=True,
+                timeout=10,
+                check=False,
+            )
+            return commit + ("-dirty" if dirty.stdout.strip() else "")
     except (OSError, subprocess.SubprocessError):
         pass
     return "unknown"
@@ -241,10 +238,7 @@ def main() -> int:
     if args.line_tolerance < 0:
         raise SystemExit("--line-tolerance must not be negative")
     if args.line_tolerance > DEFAULT_LINE_TOLERANCE:
-        # A wide tolerance turns "file and line" back into "file", which is the
-        # rule this benchmark exists to avoid. It stays available for
-        # diagnostics, but never silently: it is announced here and recorded in
-        # the header of both output files.
+        # Announced here and recorded in the header of both output files.
         print(
             f"warning: line tolerance {args.line_tolerance} is wider than the default "
             f"{DEFAULT_LINE_TOLERANCE}; results are not comparable with published runs",
@@ -310,15 +304,13 @@ def main() -> int:
 
     scored_pairs = {(r.project, r.tool) for r in results}
     tools = sorted({r.tool for r in results})
-    # A pair absent from the input is not scored as zero -- a tool that was
-    # never run against a project must not be reported as having missed it.
+    # A pair absent from the input is excluded, not scored as zero.
     unscored = sum(
         1 for name in projects for tool in tools if (name, tool) not in scored_pairs
     )
 
-    # A results table that cannot be traced to what produced it is a claim, not
-    # a measurement. When a manifest is supplied its provenance wins over the
-    # working tree, because the run happened at that commit and not this one.
+    # When a manifest is supplied, its provenance is used instead of the
+    # working tree's.
     run_manifest = None
     if args.manifest:
         run_manifest = json.loads(args.manifest.read_text(encoding="utf-8"))
@@ -330,6 +322,7 @@ def main() -> int:
             else corpus_version()
         ),
         "line_tolerance": args.line_tolerance,
+        "scorer_commit": scorer_commit(),
         "corpus": "holdout" if args.ground_truth.resolve() != GROUND_TRUTH_DIR.resolve() else "public",
         "schema_validated": validate_schema,
         "cboms_scored": len(results),
@@ -350,17 +343,15 @@ def main() -> int:
             "tool_versions": {
                 name: spec.get("version") for name, spec in run_manifest.get("tools", {}).items()
             },
-            # The tables this scoring used. A run scored again under changed
-            # tables also carries the ones it was collected under.
+            # The tables this scoring used, and the ones the run was collected
+            # under when those differ.
             "judgement_tables": judgement_table_digest(KNOWN_UNPLANTED),
             "judgement_tables_collected": (
                 run_manifest.get("judgement_tables")
                 if run_manifest.get("judgement_tables") != judgement_table_digest(KNOWN_UNPLANTED)
                 else None
             ),
-            # Invocations that produced nothing. These are why a (project, tool)
-            # pair is absent from the tables, and stating them is the difference
-            # between "not run" and "found nothing".
+            # Invocations that produced no document.
             "failed_invocations": [
                 {
                     "tool": entry["tool"],

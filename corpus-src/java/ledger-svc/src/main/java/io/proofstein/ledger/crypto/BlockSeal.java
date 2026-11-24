@@ -1,7 +1,7 @@
 package io.proofstein.ledger.crypto;
 
 import static java.security.KeyPairGenerator.getInstance;
-import static org.bouncycastle.pqc.jcajce.spec.SPHINCSPlusParameterSpec.sha2_128s;
+import static org.bouncycastle.jcajce.spec.SLHDSAParameterSpec.slh_dsa_sha2_128s;
 
 import java.security.GeneralSecurityException;
 import java.security.KeyPair;
@@ -9,7 +9,6 @@ import java.security.KeyPairGenerator;
 import java.security.Security;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.pqc.jcajce.spec.FalconParameterSpec;
-import org.bouncycastle.pqc.jcajce.spec.SPHINCSPlusParameterSpec;
 
 /**
  * Post-quantum block signatures.
@@ -42,7 +41,7 @@ public final class BlockSeal {
     /** For deployments that decline the lattice assumption. */
     public static KeyPair hashBased() throws GeneralSecurityException {
         KeyPairGenerator generator = getInstance("SLH-DSA", "BC"); //@PS java-l2-slhdsa|SLH-DSA|2|algorithm|SLH-DSA reached through a static import of KeyPairGenerator.getInstance
-        generator.initialize(new SPHINCSPlusParameterSpec(sha2_128s.getName()));
+        generator.initialize(slh_dsa_sha2_128s);
         return generator.generateKeyPair();
     }
 

@@ -2,15 +2,10 @@
 # Copyright 2026 Ottenheimer GmbH
 """No scoring code may branch on which tool produced a document.
 
-Proofstein is maintained by a party that also ships a scored tool. The
-structural defence against that conflict of interest is that the scoring path
-contains no way to express "if this is my tool". This test enforces it.
-
-Vendor names are allowed -- encouraged, even -- in docstrings and comments,
-because the reason a particular evidence shape is supported is exactly that
-some real generator emits it, and that reasoning should be written down. What
-is forbidden is a vendor name reachable by executing code: an identifier, a
-dict key, a comparison, a lookup table entry.
+The scoring path contains no way to express "if this is my tool". Vendor names
+are allowed in docstrings and comments. A vendor name reachable by executing
+code -- an identifier, a dict key, a comparison, a lookup table entry -- fails
+this test.
 
 The runtime counterpart is ``test_tool_name_does_not_affect_score`` in
 test_scoring.py, which scores the same document under several tool names and

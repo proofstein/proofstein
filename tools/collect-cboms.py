@@ -10,23 +10,19 @@ Run ids are UTC to the minute: ``2026-08-23T1254Z-public``.
 Writes one CycloneDX document per (project, tool) under ``<out>/cboms/`` using
 the documented ``<project>__<tool>.json`` convention, plus ``<out>/manifest.json``.
 
-**The manifest is the artifact, not the matrix.** A results table that cannot be
-regenerated from its manifest did not happen. The manifest therefore records:
+The manifest records:
 
 * the corpus commit, and whether the tree was dirty when the run started;
 * every tool's self-reported version, the sha256 of the binary or package that
   produced it, and the exact argument vector used;
 * for a tool run from a container image, the image the config pins and the
   digest of the image docker actually ran;
-* a digest of the three judgement tables (METHODOLOGY.md §9.1), so a score that
-  moves because a table moved is attributable rather than invisible;
+* a digest of each judgement table (METHODOLOGY.md §9.1);
 * per-invocation exit status, duration, output size and stderr tail, including
   for invocations that failed.
 
-A tool that fails on a project is recorded as a failure. It is *not* written as
-an empty CBOM, because the scorer excludes absent (project, tool) pairs rather
-than scoring them as zero, and a fabricated empty document would turn "did not
-run" into "found nothing".
+A tool that fails on a project is recorded as a failure and no CBOM is written
+for it.
 """
 
 from __future__ import annotations
@@ -213,10 +209,8 @@ BUILD_ARTIFACTS = {".git", "node_modules", "target", "dist", "__pycache__", ".ve
 def copy_project(source: Path, destination: Path) -> str | None:
     """Copy a project that is not in git, excluding build artifacts.
 
-    Holdout variants are generated rather than committed -- publishing them would
-    turn the holdout into a second public corpus -- so they cannot be exported
-    from HEAD. They are copied instead, with the same exclusions git would have
-    given us for free.
+    Holdout variants are not committed, so they are copied rather than exported
+    from HEAD, excluding build artifacts.
     """
     if not source.is_dir():
         return f"no such project directory: {source}"
@@ -293,7 +287,7 @@ def project_snapshot(project: Path) -> set[str]:
 
 
 def run_one(spec: dict, project: Path, workdir: Path, timeout: int) -> dict:
-    """The 2026-07-27 run generator against one project. Never raises."""
+    """Run one generator against one project. Never raises."""
     output_mode = spec.get("output", "stdout")
     out_file = (workdir / "bom.json").resolve()
     if out_file.exists():
@@ -388,11 +382,7 @@ def expand_config_vars(value, env=None, _where="tools"):
     on whichever machine has the disk for it -- so the config carries a name and
     the environment supplies the path.
 
-    An unset variable raises. The alternatives are both worse than failing: an
-    empty expansion produces a path like "/scan/." that resolves somewhere real
-    and scans the wrong tree, and leaving the literal "${VAR}" unexpanded
-    produces a not-found error naming a file nobody can search for. Either way a
-    run would be attributed to a binary that did not produce it.
+    An unset variable raises.
     """
     env = os.environ if env is None else env
 
@@ -443,13 +433,12 @@ def resolve_repo_paths(specs):
 
 
 #: A path outside the repository, recorded by filename only. Its identity is
-#: fixed by the sha256 recorded beside it, which is what a reviewer checks; the
-#: absolute path of the machine that ran a scan is not a property of the run.
+#: fixed by the sha256 recorded beside it.
 _SCRATCH = re.compile(r"^.*/(?=[^/]+$)")
 
 
 #: An absolute path sitting inside a longer string, such as the version label
-#: "pqprobe-static @ /build/root/bin/tool". Normalising only strings that *are*
+#: "pqprobe @ /build/root/bin/tool". Normalising only strings that *are*
 #: paths misses these, and they carry the scanning machine's directory layout
 #: into a published manifest just as effectively.
 #:
@@ -623,15 +612,12 @@ def main() -> int:
             record = run_one(spec, path, workdir, args.timeout)
             payload = record.pop("payload", None)
 
-            # A generator that writes into the corpus is worth recording either
-            # way: it may be leaving a bom.json behind, or -- as happened once
-            # in development -- the harness may be handing it a relative output
-            # path that lands inside the tree under inspection, which reads back
-            # as "the generator found nothing".
+            # A generator that writes into the corpus is recorded: it may be
+            # leaving a bom.json behind, or the harness may be handing it a
+            # relative output path that lands inside the tree under inspection,
+            # which reads back as "the generator found nothing".
             written_into_project = sorted(project_snapshot(path) - before)
             if written_into_project:
-                # Recorded because it is a real property of the generator. The
-                # scan tree is a throwaway export, so nothing needs cleaning up.
                 record["wrote_into_scan_tree"] = written_into_project[:20]
                 print(
                     f"      note: wrote {len(written_into_project)} file(s) into the scan tree",

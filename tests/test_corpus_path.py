@@ -2,17 +2,10 @@
 # Copyright 2026 Ottenheimer GmbH
 """Scoring must not proceed against a corpus that is not there.
 
-``project_file_index`` used to return an empty set when a project's
-``corpus_path`` did not resolve, and scoring carried on. The result was not a
-visible error: an empty file list resolves no reported path, so every component
-becomes a phantom location and the run reports 0/108 with a full sheet of false
-positives. A missing corpus and a generator that found nothing while fabricating
-everything produced the same numbers.
-
-That is not hypothetical. Re-scoring the 2026-07-28 run's holdout against a ground truth
-whose corpus was not on disk produced exactly that, and it was diagnosed from the
-shape of the result rather than from any message
-(``docs/pending-review.md`` entry 8, residual).
+``project_file_index`` exits with an error naming the project and path when a
+project's ``corpus_path`` does not resolve or indexes no files. An empty file
+list would resolve no reported path, so every component would become a phantom
+location and a missing corpus would score like a run of false positives.
 
 Run with: python3 -m unittest discover -s tests
 """
@@ -163,7 +156,7 @@ class TestScoreExitsNonZero(unittest.TestCase):
             )
 
     def test_the_shipped_samples_still_score(self):
-        """The existing path must be untouched: same command, same success."""
+        """The shipped samples score successfully."""
         with tempfile.TemporaryDirectory() as temporary:
             out = Path(temporary) / "out"
             completed = self.run_score(REPO_ROOT / "samples" / "cboms", REPO_ROOT / "ground-truth", out)

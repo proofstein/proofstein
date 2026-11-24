@@ -17,8 +17,7 @@ from pathlib import Path
 SCHEMA_DIR = Path(__file__).resolve().parent.parent / "schemas"
 BOM_SCHEMA = SCHEMA_DIR / "bom-1.6.schema.json"
 
-#: Errors beyond this are truncated; a document that fails this hard is not
-#: made more informative by another thousand messages.
+#: Errors beyond this are truncated.
 MAX_REPORTED_ERRORS = 12
 
 

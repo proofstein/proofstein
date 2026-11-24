@@ -8,13 +8,7 @@ Two input shapes are supported:
 
     <project>__<tool>.json
 
-The separator is a *double* underscore on purpose. BF-CBOM's own convention is
-``<repo_full_name with "/" -> "_">_<worker>.json``
-(``coordinator/utils.py:551``), which cannot be split unambiguously: given
-``acme_beacon-relay_cdxgen.json`` there is no way to know where the repo name
-ends and the worker name begins without already knowing the worker list. In a
-bundle that ambiguity is harmless because the worker is also a directory level;
-for a flat directory Proofstein requires a separator that cannot collide.
+The separator is a double underscore.
 
 A ``<tool>/<project>.json`` subdirectory layout is accepted as well.
 

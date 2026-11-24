@@ -3,11 +3,6 @@
 # Copyright 2026 Ottenheimer GmbH
 """Generate holdout variants of the corpus from the same templates.
 
-The public corpus is, by construction, something a vendor can tune against: the
-files are published, so are the answers. A tool that improves on it may have got
-better at finding cryptography, or may have been tuned to find *this*
-cryptography. The holdout separates those two.
-
 Variants are produced by transforms that change the surface a tool matches on
 while leaving the cryptography identical:
 
@@ -17,8 +12,8 @@ while leaving the cryptography identical:
 * **reconfigure** -- config keys are reordered and, where declared, an
   algorithm is swapped for a different member of its family.
 
-Ground truth is recomputed from the transformed templates rather than adjusted,
-so it cannot drift: the same annotation parser produces both.
+Ground truth is recomputed from the transformed templates by the same
+annotation parser.
 
 Holdout output is written to ``holdout/`` and ``ground-truth-holdout/``, both of
 which are git-ignored. Per METHODOLOGY.md, holdout scores are reported

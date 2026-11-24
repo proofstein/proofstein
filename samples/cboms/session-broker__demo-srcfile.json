@@ -44,6 +44,20 @@
     },
     {
       "type": "cryptographic-asset",
+      "bom-ref": "crypto/js-l4-yaml-assertion",
+      "name": "ML-DSA-65",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "config/broker.yaml"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
       "bom-ref": "crypto/js-l4-yaml-kem",
       "name": "ML-KEM-768",
       "cryptoProperties": {
@@ -128,6 +142,34 @@
     },
     {
       "type": "cryptographic-asset",
+      "bom-ref": "crypto/js-l1-mldsa",
+      "name": "ML-DSA-65",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/attest.ts"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/js-l2-slhdsa",
+      "name": "SLH-DSA",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/attest.ts"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
       "bom-ref": "crypto/js-l1-aesgcm",
       "name": "AES-256-GCM",
       "cryptoProperties": {
@@ -207,6 +249,48 @@
         {
           "name": "SrcFile",
           "value": "src/identity.ts"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/js-l1-jose-es256",
+      "name": "ECDSA-P256",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/jose.ts"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/js-l1-jose-oaep",
+      "name": "RSAES-OAEP",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/jose.ts"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/js-l1-jose-ps256",
+      "name": "RSASSA-PSS",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "properties": [
+        {
+          "name": "SrcFile",
+          "value": "src/jws-pss.ts"
         }
       ]
     },

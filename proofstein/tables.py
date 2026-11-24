@@ -1,11 +1,8 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright 2026 Ottenheimer GmbH
-"""Digests of the tables that encode judgement rather than fact.
+"""Digests of the judgement tables (METHODOLOGY.md §9.1).
 
-METHODOLOGY.md §9.1 requires table changes to be attributable. A digest per
-table, recorded when a run is collected and again when it is scored, lets a
-reader tell whether a score moved because a generator changed or because the
-tables did.
+A digest per table is recorded when a run is collected and when it is scored.
 """
 
 from __future__ import annotations
@@ -14,7 +11,13 @@ import hashlib
 import json
 
 from proofstein.cbom import LINE_PROPERTY_NAMES, LOCATION_PROPERTY_NAMES, OID_ALGORITHMS
-from proofstein.matching import _FAMILY_MARKERS, _TOKEN_ALIASES, _WHOLE_TOKEN_ONLY
+from proofstein.matching import (
+    _FAMILY_MARKERS,
+    _HYBRID_GROUPS,
+    _JOSE_NAMES,
+    _TOKEN_ALIASES,
+    _WHOLE_TOKEN_ONLY,
+)
 
 
 def _digest(value) -> str:
@@ -38,13 +41,16 @@ def judgement_table_digest(known_unplanted) -> dict:
             "entries": len(_FAMILY_MARKERS),
             "sha256_16": _digest([list(pair) for pair in _FAMILY_MARKERS]),
         },
+        "jose_names": {"entries": len(_JOSE_NAMES), "sha256_16": _digest(_JOSE_NAMES)},
+        "hybrid_groups": {
+            "entries": len(_HYBRID_GROUPS),
+            "sha256_16": _digest({key: list(value) for key, value in _HYBRID_GROUPS.items()}),
+        },
         "whole_token_only": {
             "entries": len(_WHOLE_TOKEN_ONLY),
             "sha256_16": _digest(sorted(_WHOLE_TOKEN_ONLY)),
         },
-        # Which fabricated algorithm names are forgiven, and where. Moving an
-        # entry from a scoped to a corpus-wide form silently lowers every tool's
-        # false-positive count, so the digest travels with the run.
+        # Entries are digested with their project and file scope.
         "known_unplanted": {
             "entries": len(known_unplanted),
             "sha256_16": _digest(

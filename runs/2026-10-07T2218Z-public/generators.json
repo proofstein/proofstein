@@ -31,15 +31,15 @@
       "notes": "Arguments mirror BF-CBOM's cdxgen worker. Records source files in properties[].SrcFile without line numbers. Invoked through the pinned image ghcr.io/cyclonedx/cdxgen:12.8.2, so it needs no build root and runs the same on any host with Docker."
     },
     {
-      "name": "pqprobe-static",
-      "binary": "${PQPROBE_STATIC_BIN}",
-      "package_version": "pqprobe-static @ ${PQPROBE_STATIC_BIN}",
+      "name": "pqprobe",
+      "binary": "${PQPROBE_BIN}",
+      "package_version": "pqprobe 3.8.2",
       "version_command": [
-        "${PQPROBE_STATIC_BIN}",
+        "${PQPROBE_BIN}",
         "version"
       ],
       "invocation": [
-        "${PQPROBE_STATIC_BIN}",
+        "${PQPROBE_BIN}",
         "--output",
         "cbom",
         "scan",
@@ -51,7 +51,7 @@
         0,
         1
       ],
-      "notes": "Exit 1 means findings present, not failure. The binary path comes from PQPROBE_STATIC_BIN; the manifest records what it resolved to and that file's sha256. Maintained by the same party as Proofstein; see the governance section in README.md."
+      "notes": "Exit 1 means findings present, not failure. The binary path comes from PQPROBE_BIN; the manifest records what it resolved to and that file's sha256. Maintained by the maintainer of Proofstein (METHODOLOGY.md §9)."
     },
     {
       "name": "cryptoscan",

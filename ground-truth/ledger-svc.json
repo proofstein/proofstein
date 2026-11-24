@@ -61,7 +61,7 @@
       "layer": 6,
       "layer_name": "key, certificate or keystore file",
       "cyclonedx_asset_type": "related-crypto-material",
-      "note": "PKCS#12 keystore, throwaway test material. The askable asset is the container itself. It holds a P-256 key and certificate, but that is behind password-based encryption, so no static scanner can name the inner key algorithm without the password; expecting it was a ground-truth error. See docs/pending-review.md entry 4."
+      "note": "PKCS#12 keystore, throwaway test material. The planted asset is the container; the P-256 key and certificate it holds are under password-based encryption and are not planted assets."
     },
     {
       "id": "java-dep-bouncycastle",
@@ -96,7 +96,7 @@
     {
       "id": "java-l1-mldsa",
       "file": "src/main/java/io/proofstein/ledger/crypto/BlockSeal.java",
-      "line": 37,
+      "line": 36,
       "algorithm": "ML-DSA",
       "layer": 1,
       "layer_name": "direct crypto API call site",
@@ -106,7 +106,7 @@
     {
       "id": "java-l2-slhdsa",
       "file": "src/main/java/io/proofstein/ledger/crypto/BlockSeal.java",
-      "line": 44,
+      "line": 43,
       "algorithm": "SLH-DSA",
       "layer": 2,
       "layer_name": "aliased import",
@@ -116,7 +116,7 @@
     {
       "id": "java-l1-falcon",
       "file": "src/main/java/io/proofstein/ledger/crypto/BlockSeal.java",
-      "line": 52,
+      "line": 51,
       "algorithm": "Falcon-512",
       "layer": 1,
       "layer_name": "direct crypto API call site",

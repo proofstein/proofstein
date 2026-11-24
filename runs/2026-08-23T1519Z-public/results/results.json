@@ -2,6 +2,7 @@
   "meta": {
     "corpus_version": "49c979d",
     "line_tolerance": 2,
+    "scorer_commit": "6ada872",
     "corpus": "public",
     "schema_validated": true,
     "cboms_scored": 12,
@@ -15,7 +16,7 @@
     ],
     "tools": [
       "cdxgen",
-      "pqprobe-static"
+      "pqprobe"
     ],
     "unscored_pairs": 0,
     "problems": [],
@@ -27,13 +28,13 @@
       "attempted": 12,
       "succeeded": 12,
       "tool_versions": {
-        "cdxgen": "CycloneDX Generator 12.8.2",
-        "pqprobe-static": "PQProbe Static v3.6.0"
+        "cdxgen": "cdxgen 12.8.2",
+        "pqprobe": "pqprobe 3.6.0"
       },
       "judgement_tables": {
         "oid_algorithms": {
           "entries": 27,
-          "sha256_16": "031a3c27915e6dde"
+          "sha256_16": "f6fd6fa101db7a4d"
         },
         "location_property_names": {
           "entries": 8,
@@ -44,16 +45,24 @@
           "sha256_16": "ed438ed351a5b930"
         },
         "token_aliases": {
-          "entries": 32,
-          "sha256_16": "637f0e9d5f2cf137"
+          "entries": 33,
+          "sha256_16": "c13677feee250d8b"
         },
         "family_markers": {
-          "entries": 43,
-          "sha256_16": "e4639e0dd1414815"
+          "entries": 47,
+          "sha256_16": "9db8169c695be2c5"
+        },
+        "jose_names": {
+          "entries": 10,
+          "sha256_16": "08d16fb9eb9aecef"
+        },
+        "hybrid_groups": {
+          "entries": 4,
+          "sha256_16": "ebb21ecb7cbea298"
         },
         "whole_token_only": {
-          "entries": 7,
-          "sha256_16": "88a20cf6715e9c84"
+          "entries": 8,
+          "sha256_16": "b9a4a30aab68fec0"
         },
         "known_unplanted": {
           "entries": 15,
@@ -138,15 +147,15 @@
         }
       }
     },
-    "pqprobe-static": {
+    "pqprobe": {
       "detected": 119,
       "total": 124,
       "detection_rate": 0.9597,
-      "precision": 0.7281,
-      "claim_precision": 0.6146,
-      "matched_components": 83,
+      "precision": 0.7368,
+      "claim_precision": 0.6098,
+      "matched_components": 84,
       "reported_components": 114,
-      "credited_claims": 126,
+      "credited_claims": 125,
       "total_claims": 205,
       "false_positives": 1,
       "by_layer": {
@@ -477,8 +486,8 @@
     {
       "project": "beacon-relay",
       "language": "go",
-      "tool": "pqprobe-static",
-      "source": "beacon-relay__pqprobe-static.json",
+      "tool": "pqprobe",
+      "source": "beacon-relay__pqprobe.json",
       "schema_valid": true,
       "schema_errors": [],
       "parse_error": null,
@@ -1129,8 +1138,8 @@
     {
       "project": "ledger-svc",
       "language": "java",
-      "tool": "pqprobe-static",
-      "source": "ledger-svc__pqprobe-static.json",
+      "tool": "pqprobe",
+      "source": "ledger-svc__pqprobe.json",
       "schema_valid": true,
       "schema_errors": [],
       "parse_error": null,
@@ -1138,9 +1147,9 @@
       "total": 25,
       "detection_rate": 0.96,
       "precision": 0.72,
-      "claim_precision": 0.5909,
+      "claim_precision": 0.5682,
       "matched_components": 18,
-      "credited_claims": 26,
+      "credited_claims": 25,
       "by_layer": {
         "1": {
           "detected": 10,
@@ -1769,8 +1778,8 @@
     {
       "project": "sealbox",
       "language": "rust",
-      "tool": "pqprobe-static",
-      "source": "sealbox__pqprobe-static.json",
+      "tool": "pqprobe",
+      "source": "sealbox__pqprobe.json",
       "schema_valid": true,
       "schema_errors": [],
       "parse_error": null,
@@ -2349,8 +2358,8 @@
     {
       "project": "session-broker",
       "language": "javascript",
-      "tool": "pqprobe-static",
-      "source": "session-broker__pqprobe-static.json",
+      "tool": "pqprobe",
+      "source": "session-broker__pqprobe.json",
       "schema_valid": true,
       "schema_errors": [],
       "parse_error": null,
@@ -2941,17 +2950,17 @@
     {
       "project": "tinyattest",
       "language": "c",
-      "tool": "pqprobe-static",
-      "source": "tinyattest__pqprobe-static.json",
+      "tool": "pqprobe",
+      "source": "tinyattest__pqprobe.json",
       "schema_valid": true,
       "schema_errors": [],
       "parse_error": null,
       "detected": 18,
       "total": 19,
       "detection_rate": 0.9474,
-      "precision": 0.8125,
+      "precision": 0.875,
       "claim_precision": 0.5455,
-      "matched_components": 13,
+      "matched_components": 14,
       "credited_claims": 18,
       "by_layer": {
         "1": {
@@ -3569,8 +3578,8 @@
     {
       "project": "vaultkeeper",
       "language": "python",
-      "tool": "pqprobe-static",
-      "source": "vaultkeeper__pqprobe-static.json",
+      "tool": "pqprobe",
+      "source": "vaultkeeper__pqprobe.json",
       "schema_valid": true,
       "schema_errors": [],
       "parse_error": null,

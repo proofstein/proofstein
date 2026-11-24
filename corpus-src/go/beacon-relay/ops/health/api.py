@@ -6,11 +6,11 @@ module performs, selects or configures cryptography: it reads no key material
 and never opens the relay's sealed channels. It only checks that the relay's
 configuration file is present and that the relay accepts a connection.
 
-This module carries no ground-truth entry, deliberately. It is a negative case;
-what it tests, and why, is recorded in docs/pending-review.md entry 9. The
-explanation is kept there rather than here on purpose, so that no cryptographic
-name appears anywhere in this file. A negative case that names the algorithm it
-is testing for is not a negative case.
+This module carries no ground-truth entry. It is a negative case, and what it
+tests is stated in METHODOLOGY.md, section 4. No cryptographic name appears
+anywhere in this file, and no planted asset of this project is located in it.
+A component that a generator reports in this file and that names an algorithm
+family absent from the project is charged as a false positive.
 """
 
 from __future__ import annotations

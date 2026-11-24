@@ -2,24 +2,13 @@
 # Copyright 2026 Ottenheimer GmbH
 """Parsing CycloneDX CBOMs into a tool-neutral shape.
 
-Every rule in this module is applied to every tool identically. There is no
-branch anywhere on which tool produced a document, and adding one would defeat
-the point of the benchmark -- see ``tests/test_no_tool_specific_logic.py``,
-which fails the build if a vendor name appears in the scoring path.
+Every rule in this module is applied to every tool identically; no branch
+depends on which tool produced a document (``tests/test_no_tool_specific_logic.py``).
 
-Two observations from real generator output drive the design:
-
-* ``cdxgen`` records the source file in ``properties[]`` under the name
-  ``SrcFile`` and emits no line number at all.
-* ``cbomkit`` uses the spec-blessed ``evidence.occurrences[]`` with both
-  ``location`` and ``line``, but frequently leaves ``name`` as an opaque
-  ``key@<uuid>`` and identifies the algorithm only by ``cryptoProperties.oid``.
-
-Reading only ``evidence.occurrences`` would score the first tool at zero for a
-reason that has nothing to do with whether it found the asset, and reading only
-``name`` would score the second at zero for the same kind of reason. So the
-parser accepts a fixed, documented set of shapes for both location and
-identity, and applies the whole set to everyone.
+Locations are read from ``evidence.occurrences[]`` and from ``properties[]``
+entries named in ``LOCATION_PROPERTY_NAMES`` and ``LINE_PROPERTY_NAMES``.
+Algorithm identity is read from the component name, ``cryptoProperties.oid``
+through ``OID_ALGORITHMS``, and the fields listed in :func:`extract_names`.
 """
 
 from __future__ import annotations
@@ -53,9 +42,7 @@ LINE_PROPERTY_NAMES = frozenset({"line", "linenumber", "line_number", "startline
 # Algorithm identity
 # ---------------------------------------------------------------------------
 
-# OID -> canonical algorithm name. A generator that identifies an algorithm only
-# by OID (cbomkit does this routinely) is otherwise unidentifiable, so this
-# table is part of making the comparison fair rather than a courtesy to one tool.
+# OID -> canonical algorithm name, for components identified by OID.
 OID_ALGORITHMS: dict[str, str] = {
     "1.2.840.113549.1.1.1": "RSA",
     "1.2.840.113549.1.1.5": "SHA1withRSA",
@@ -64,11 +51,11 @@ OID_ALGORITHMS: dict[str, str] = {
     "1.2.840.113549.1.1.11": "SHA256withRSA",
     "1.2.840.113549.3.7": "3DES",
     "1.2.840.10045.2.1": "EC",
-    "1.2.840.10045.3.1.7": "ECDSA-P256",
+    "1.2.840.10045.3.1.7": "P-256",
     "1.2.840.10045.4.3.2": "SHA256withECDSA",
     "1.3.101.110": "X25519",
     "1.3.101.112": "Ed25519",
-    "1.3.132.0.34": "ECDSA-P384",
+    "1.3.132.0.34": "P-384",
     "2.16.840.1.101.3.4.1.2": "AES-128-CBC",
     "2.16.840.1.101.3.4.1.6": "AES-128-GCM",
     "2.16.840.1.101.3.4.1.22": "AES-192-CBC",
@@ -89,13 +76,9 @@ OID_ALGORITHMS: dict[str, str] = {
 CRYPTO_COMPONENT_TYPE = "cryptographic-asset"
 
 #: Component types that describe a dependency rather than a cryptographic
-#: construct. CycloneDX models a library a project depends on as a ``library``
-#: (or ``framework``) component with no ``cryptoProperties``, which is the
-#: correct answer for a layer-5 dependency asset and was previously discarded
-#: before matching. They are ingested as dependency-kind: eligible to satisfy a
+#: construct. They are ingested as dependency-kind: eligible to satisfy a
 #: layer-5 plant, and excluded from the crypto-claim accounting in both
-#: directions, so an SBOM listing eighty packages is neither credited with
-#: eighty crypto claims nor charged for them.
+#: directions.
 DEPENDENCY_COMPONENT_TYPES = frozenset({"library", "framework"})
 
 
@@ -123,8 +106,7 @@ class ReportedAsset:
     #: True for a component describing a dependency rather than a cryptographic
     #: construct. Such an asset may satisfy a layer-5 plant and takes no part in
     #: crypto-claim precision. A component carrying ``cryptoProperties`` is never
-    #: dependency-kind, whatever its declared type, so labelling a library as a
-    #: cryptographic asset cannot buy it out of this classification.
+    #: dependency-kind, whatever its declared type.
     is_dependency: bool = False
 
     @property
@@ -143,9 +125,7 @@ class ReportedAsset:
 def unwrap_bom(document: Any) -> dict:
     """Return the BOM object from the shapes generators and runners produce.
 
-    BF-CBOM's bundle writer strips a ``{"bom": {...}}`` wrapper before writing
-    (``coordinator/utils.py:545``), but a raw CBOM directory may still carry it,
-    and cbomkit's own output has been seen wrapped in a single-element list.
+    Accepts a bare BOM, a ``{"bom": {...}}`` wrapper, and a single-element list.
     """
     seen = 0
     while seen < 8:
@@ -245,9 +225,9 @@ def extract_occurrences(component: dict) -> list[Occurrence]:
 def extract_names(component: dict) -> list[str]:
     """Return every string that could identify the algorithm.
 
-    Includes the component name, the OID's canonical name, the parameter set
-    identifier, and the related-crypto-material type. Generators disagree about
-    where the algorithm name belongs, so all documented places are read.
+    Includes the component name, the OID's canonical name, the algorithm's
+    parameter set identifier, primitive and curve, the related-crypto-material
+    type, the protocol type and version, and a short component version.
     """
     names: list[str] = []
 
@@ -293,9 +273,8 @@ def extract_names(component: dict) -> list[str]:
 def is_crypto_component(component: dict) -> bool:
     """Report whether a component is a cryptographic asset.
 
-    ``type == "cryptographic-asset"`` is the spec answer; the presence of
-    ``cryptoProperties`` is accepted too, because a generator that populates
-    the crypto block but mislabels the component type has still found the asset.
+    ``type == "cryptographic-asset"``, or any component carrying
+    ``cryptoProperties``.
     """
     if component.get("type") == CRYPTO_COMPONENT_TYPE:
         return True
@@ -305,10 +284,7 @@ def is_crypto_component(component: dict) -> bool:
 def is_dependency_component(component: dict) -> bool:
     """Report whether a component describes a dependency.
 
-    A ``library`` or ``framework`` component with no ``cryptoProperties``. The
-    ``cryptoProperties`` exclusion matters: a generator that dresses a library up
-    as a cryptographic asset is treated as having made a crypto claim, and is
-    scored on it, rather than being quietly reclassified into the exempt bucket.
+    A ``library`` or ``framework`` component with no ``cryptoProperties``.
     """
     if isinstance(component.get("cryptoProperties"), dict):
         return False

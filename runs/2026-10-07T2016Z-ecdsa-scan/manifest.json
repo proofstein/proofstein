@@ -44,9 +44,30 @@
       "sha256_16": "3a7fca80174e0cdd"
     }
   },
+  "judgement_table_changes": {
+    "since_run": "2026-08-23T1519Z-public",
+    "changes": [
+      {
+        "table": "family_markers",
+        "before": {
+          "entries": 37,
+          "sha256_16": "2aef68bf8064cccc"
+        },
+        "after": {
+          "entries": 43,
+          "sha256_16": "e4639e0dd1414815"
+        }
+      }
+    ],
+    "prompted_by": [
+      "CodeQL 2.27.1",
+      "cryptoscan 1.4.0",
+      "Opengrep 1.30.1"
+    ]
+  },
   "tools": {
     "ecdsa-scan": {
-      "version": "0.1.0",
+      "version": "ecdsa-scan 0.1.1",
       "binary": "runs/2026-10-07T2016Z-ecdsa-scan/converter/ecdsa-scan-cbom.sh",
       "binary_sha256": "95ebf7ddcf8bdfbb6c22fdaf3339e673be30faef1f95756d443af6db5b0a73ad",
       "package_version": "ecdsa-scan@0.1.1 (npm tarball sha512-g2CwpG1YMSXtVfvg0W8D9WW3wnrkYeDTsnuxpYxGvGWFFF3Rj/ca9WsQ06lIglKiZDPn/Wd9v1h4133tx4ua6Q==), Node v22.23.3",

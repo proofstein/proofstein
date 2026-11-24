@@ -78,10 +78,7 @@ def build_project(project_dir: Path, out_dir: Path) -> list[dict]:
         raw = src.read_text(encoding="utf-8")
         clean, annotations, file_aliases = parse_text(raw, src.name, rel.as_posix())
 
-        # Safety net. A template whose extension has no comment style mapped is
-        # copied through untouched, which would ship the answer key inside the
-        # corpus, in reach of any generator that reads comments. Fail loudly
-        # instead.
+        # An annotation left in the emitted corpus is an error.
         if MARKER in clean:
             raise AnnotationError(
                 f"{rel.as_posix()}: {MARKER} survived into the emitted corpus. "

@@ -67,8 +67,8 @@ class TestExpansion(unittest.TestCase):
 class TestUnsetVariableFailsLoudly(unittest.TestCase):
     def test_unset_variable_raises_naming_the_variable(self):
         with self.assertRaises(collector.UnsetVariable) as caught:
-            collector.expand_config_vars({"binary": "${PQPROBE_STATIC_BIN}"}, {})
-        self.assertIn("PQPROBE_STATIC_BIN", str(caught.exception))
+            collector.expand_config_vars({"binary": "${PQPROBE_BIN}"}, {})
+        self.assertIn("PQPROBE_BIN", str(caught.exception))
 
     def test_every_missing_variable_is_named(self):
         with self.assertRaises(collector.UnsetVariable) as caught:
@@ -84,14 +84,14 @@ class TestUnsetVariableFailsLoudly(unittest.TestCase):
 
     def test_collector_exits_nonzero_rather_than_running(self):
         """End to end: the process must refuse, not scan with a broken path."""
-        env = {k: v for k, v in os.environ.items() if k != "PQPROBE_STATIC_BIN"}
+        env = {k: v for k, v in os.environ.items() if k != "PQPROBE_BIN"}
         result = subprocess.run(
             [
                 sys.executable,
                 str(REPO_ROOT / "tools" / "collect-cboms.py"),
                 "--config", str(REPO_ROOT / "runs" / "generators.json"),
                 "--out", "/tmp/proofstein-should-not-be-created",
-                "--tool", "pqprobe-static",
+                "--tool", "pqprobe",
             ],
             capture_output=True,
             text=True,
@@ -100,7 +100,7 @@ class TestUnsetVariableFailsLoudly(unittest.TestCase):
             timeout=120,
         )
         self.assertNotEqual(result.returncode, 0, "an unset variable must fail the run")
-        self.assertIn("PQPROBE_STATIC_BIN", result.stderr)
+        self.assertIn("PQPROBE_BIN", result.stderr)
         self.assertFalse(
             Path("/tmp/proofstein-should-not-be-created").exists(),
             "the run directory must not be created when the config cannot resolve",
@@ -110,13 +110,13 @@ class TestUnsetVariableFailsLoudly(unittest.TestCase):
 class TestShippedConfig(unittest.TestCase):
     def test_pqprobe_entry_uses_the_variable(self):
         config = json.loads((REPO_ROOT / "runs" / "generators.json").read_text())
-        entry = next(t for t in config["tools"] if t["name"] == "pqprobe-static")
-        self.assertIn("${PQPROBE_STATIC_BIN}", entry["binary"])
-        self.assertIn("${PQPROBE_STATIC_BIN}", entry["invocation"][0])
+        entry = next(t for t in config["tools"] if t["name"] == "pqprobe")
+        self.assertIn("${PQPROBE_BIN}", entry["binary"])
+        self.assertIn("${PQPROBE_BIN}", entry["invocation"][0])
 
     def test_the_variable_is_documented(self):
         config = json.loads((REPO_ROOT / "runs" / "generators.json").read_text())
-        self.assertIn("PQPROBE_STATIC_BIN", "\n".join(config["_comment"]))
+        self.assertIn("PQPROBE_BIN", "\n".join(config["_comment"]))
 
     def test_cdxgen_needs_no_variable(self):
         """It is invoked through a pinned image, so it is already portable."""
@@ -187,7 +187,7 @@ class TestManifestRecordsTheImageThatRan(unittest.TestCase):
         self.assertIn("No such image", record["image_error"])
 
     def test_a_tool_without_an_image_records_nothing(self):
-        self.assertEqual(collector.image_record({"name": "pqprobe-static"}), {})
+        self.assertEqual(collector.image_record({"name": "pqprobe"}), {})
 
     def test_repository_keeps_a_registry_port(self):
         self.assertEqual(collector.image_repository("localhost:5000/tool"), "localhost:5000/tool")
@@ -199,8 +199,7 @@ def _public_run() -> Path:
     """The public run in the tree. Discovered, never named.
 
     Run directories are named for the minute they started, so hard-coding one
-    breaks on the next run. That is the same brittleness the naming convention
-    itself had when it used the date alone.
+    breaks on the next run.
     """
     runs = sorted((REPO_ROOT / "runs").glob("*-public"))
     if not runs:
@@ -221,18 +220,12 @@ class TestManifestRecordsResolvedPaths(unittest.TestCase):
         is never rewritten.
         """
         manifest = json.loads((_public_run() / "manifest.json").read_text())
-        entry = manifest["tools"]["pqprobe-static"]
+        entry = manifest["tools"]["pqprobe"]
         self.assertNotIn("${", entry["binary"], "a manifest must not carry a placeholder")
         self.assertRegex(entry["binary_sha256"] or "", r"^[0-9a-f]{64}$")
 
     def test_manifest_carries_no_machine_paths(self):
-        """Any absolute path, not a list of prefixes seen before.
-
-        The prefix list this replaced named /home/, /mnt/ and /tmp/claude, and
-        so read clean on a manifest whose version label embedded a build root
-        under a fourth directory. A leak the check has not met yet is the only
-        kind worth writing the check for.
-        """
+        """No run manifest contains an absolute path under any prefix."""
         machine_path = re.compile(r"(?<![\w:/])/(?:[A-Za-z0-9_.+-]+/)+[A-Za-z0-9_.+-]+")
         for run in sorted((REPO_ROOT / "runs").glob("*-*")):
             manifest = run / "manifest.json"

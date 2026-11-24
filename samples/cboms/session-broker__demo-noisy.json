@@ -16,24 +16,40 @@
   "components": [
     {
       "type": "cryptographic-asset",
-      "bom-ref": "crypto/js-l1-rsa",
-      "name": "RSA-2048",
+      "bom-ref": "crypto/js-l1-mldsa",
+      "name": "ML-DSA-65",
       "cryptoProperties": {
         "assetType": "algorithm"
       },
       "evidence": {
         "occurrences": [
           {
-            "location": "src/identity.ts",
-            "line": 20
+            "location": "src/attest.ts",
+            "line": 13
           }
         ]
       }
     },
     {
       "type": "cryptographic-asset",
-      "bom-ref": "crypto/js-l1-sha256",
-      "name": "SHA-256",
+      "bom-ref": "crypto/js-l1-aesgcm",
+      "name": "AES-256-GCM",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/envelope.ts",
+            "line": 31
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/js-l1-ed25519",
+      "name": "Ed25519",
       "cryptoProperties": {
         "assetType": "algorithm"
       },
@@ -41,7 +57,55 @@
         "occurrences": [
           {
             "location": "src/identity.ts",
-            "line": 33
+            "line": 19
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/js-l1-ecdsa",
+      "name": "ECDSA-P256",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/identity.ts",
+            "line": 21
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/js-l1-jose-es256",
+      "name": "ECDSA-P256",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/jose.ts",
+            "line": 22
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/js-l1-jose-ps256",
+      "name": "RSASSA-PSS",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/jws-pss.ts",
+            "line": 11
           }
         ]
       }

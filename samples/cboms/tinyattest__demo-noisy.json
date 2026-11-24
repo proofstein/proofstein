@@ -48,16 +48,64 @@
     },
     {
       "type": "cryptographic-asset",
-      "bom-ref": "crypto/c-l3-wrapper",
-      "name": "AES-256-GCM",
+      "bom-ref": "crypto/c-l1-xmss",
+      "name": "XMSS",
       "cryptoProperties": {
         "assetType": "algorithm"
       },
       "evidence": {
         "occurrences": [
           {
-            "location": "src/transport.c",
-            "line": 39
+            "location": "src/seal_longterm.c",
+            "line": 30
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/c-l1-tls-ciphers",
+      "name": "ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/tls.c",
+            "line": 52
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/c-l1-tls-groups",
+      "name": "X25519MLKEM768",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/tls.c",
+            "line": 61
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/c-l1-cng-ecdh",
+      "name": "ECDH-P256",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/win_cng.c",
+            "line": 33
           }
         ]
       }

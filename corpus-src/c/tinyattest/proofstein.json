@@ -2,12 +2,14 @@
   "description": "Attestation helper: seals device reports, signs them, agrees a post-quantum verifier session key.",
   "build": [
     "make",
-    "make check"
+    "make check",
+    "make windows-check"
   ],
   "toolchain": {
     "cc": "any C11 compiler",
     "openssl": ">=3.5",
-    "notes": "ML-KEM-512 is reached through EVP_PKEY_CTX_new_from_name, which needs OpenSSL 3.5 or newer."
+    "wincc": "x86_64-w64-mingw32-gcc (mingw-w64), for make windows-check",
+    "notes": "ML-KEM-512 is reached through EVP_PKEY_CTX_new_from_name and the X25519MLKEM768 group through SSL_CTX_set1_groups_list, both of which need OpenSSL 3.5 or newer. src/win_cng.c is compiled only for Windows, by make windows-check against the mingw-w64 bcrypt import library."
   },
   "file_assets": [
     {
@@ -46,7 +48,10 @@
       "ta_md_ctx_new": "mq_md_new",
       "ta_md_ctx_free": "mq_md_free",
       "verifier-direct": "attestor-direct",
-      "ta_report_digest": "mq_report_digest"
+      "ta_report_digest": "mq_report_digest",
+      "ta_tls_listener_ctx": "mq_listener_tls",
+      "dh_params_by_group": "dh_group_params",
+      "ta_win_agree_prekey": "mq_win_prekey"
     },
     "substitutions": [
       {

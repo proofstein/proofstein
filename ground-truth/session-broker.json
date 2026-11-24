@@ -13,14 +13,14 @@
     "notes": "Node's crypto has no ML-KEM, so the PQC call site uses @noble/post-quantum (pure JS, no native build)."
   },
   "layer_counts": {
-    "1": 7,
+    "1": 10,
     "2": 2,
     "3": 1,
     "4": 6,
     "5": 1,
     "6": 3
   },
-  "asset_count": 20,
+  "asset_count": 23,
   "assets": [
     {
       "id": "js-l4-yaml-cipher",
@@ -207,6 +207,36 @@
       "layer_name": "direct crypto API call site",
       "cyclonedx_asset_type": "algorithm",
       "note": "JWKS thumbprint digest"
+    },
+    {
+      "id": "js-l1-jose-es256",
+      "file": "src/jose.ts",
+      "line": 22,
+      "algorithm": "ECDSA-P256",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "JWS ES256: ECDSA on P-256 with SHA-256, selected by its JOSE name"
+    },
+    {
+      "id": "js-l1-jose-oaep",
+      "file": "src/jose.ts",
+      "line": 26,
+      "algorithm": "RSAES-OAEP",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "JWE RSA-OAEP-256: RSAES-OAEP with SHA-256, selected by its JOSE name"
+    },
+    {
+      "id": "js-l1-jose-ps256",
+      "file": "src/jws-pss.ts",
+      "line": 11,
+      "algorithm": "RSASSA-PSS",
+      "layer": 1,
+      "layer_name": "direct crypto API call site",
+      "cyclonedx_asset_type": "algorithm",
+      "note": "JWS PS256: RSASSA-PSS with SHA-256, selected by its JOSE name"
     },
     {
       "id": "js-l1-mlkem",

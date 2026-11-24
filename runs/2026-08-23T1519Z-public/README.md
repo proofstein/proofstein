@@ -1,36 +1,41 @@
 # 2026-08-23T1519Z, public corpus
 
-| | |
+|  |  |
 |---|---|
-| corpus commit | `49c979d3e8a3b0f7ef063ea89d61cea5c30ea889` |
+| date | 2026-08-23T15:19:16Z |
+| corpus commit | `49c979d`, tree clean |
 | assets | 124 |
-| rule | detection is **file + algorithm + layer**; the line is recorded and reported, never scored (METHODOLOGY.md §3.3) |
-| cdxgen | 12.8.2, the control, held at the same version across every run |
-| pqprobe-static | 3.6.0 |
+
+## How each tool was run
+
+**cdxgen 12.8.2** writes CycloneDX itself. `tools/cdxgen-docker.sh --json-pretty --include-crypto -o <output> <project>` runs it in the image `ghcr.io/cyclonedx/cdxgen:12.8.2`. It records source files in `properties[].SrcFile`, without line numbers.
+
+**pqprobe 3.6.0** writes CycloneDX itself: `pqprobe --output cbom scan .` from the project root, exit 1 accepted. The manifest records the binary's sha256.
 
 ## Scores
 
-| tool | scored assets | all |
-|---|---|---|
-| cdxgen 12.8.2 | 124 | 5% (6/124) |
-| pqprobe-static 3.6.0 | 124 | 96% (119/124) |
+| tool | scored assets | detection rate | claim precision | false positives |
+|---|---|---|---|---|
+| cdxgen 12.8.2 | 124 | 5% (6/124) | 20% (4/20) | 0 |
+| pqprobe 3.6.0 | 124 | 96% (119/124) | 61% (125/205) | 1 |
 
-Full tables in `results/results.md`, scored under the judgement tables of
-2026-10-07 (docs/pending-review.md entries 14 to 16).
+Full tables in `results/results.md`.
+
+## By language
+
+| language | cdxgen 12.8.2 | pqprobe 3.6.0 |
+|---|---|---|
+| c | 0% (0/19) | 95% (18/19) |
+| go | 0% (0/19) | 100% (19/19) |
+| java | 8% (2/25) | 96% (24/25) |
+| javascript | 15% (3/20) | 95% (19/20) |
+| python | 4% (1/23) | 96% (22/23) |
+| rust | 0% (0/18) | 94% (17/18) |
 
 ## False positives
 
-cdxgen was charged none.
+cdxgen 12.8.2: none.
 
-pqprobe-static was charged one, a phantom algorithm: `Falcon-512` at
-`session-broker/src/attest.ts:41`, a configuration value naming a scheme the
-project does not implement. Falcon is not planted in `session-broker`.
+pqprobe 3.6.0: one phantom algorithm, `Falcon-512` at `session-broker/src/attest.ts:41`.
 
-Both tools' documents were schema-valid, and none pointed at a file that is not
-in the project.
-
-## Environment
-
-cdxgen is invoked through the pinned image `ghcr.io/cyclonedx/cdxgen:12.8.2` via
-`tools/cdxgen-docker.sh`. pqprobe-static comes from `${PQPROBE_STATIC_BIN}`; the
-manifest records the path it resolved to and that file's sha256.
+12 of 12 documents were schema-valid. No document pointed at a file outside its project.

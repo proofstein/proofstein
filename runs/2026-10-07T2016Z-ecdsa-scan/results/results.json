@@ -2,6 +2,7 @@
   "meta": {
     "corpus_version": "fd134c7",
     "line_tolerance": 2,
+    "scorer_commit": "6ada872",
     "corpus": "public",
     "schema_validated": true,
     "cboms_scored": 6,
@@ -26,9 +27,47 @@
       "attempted": 6,
       "succeeded": 6,
       "tool_versions": {
-        "ecdsa-scan": "0.1.0"
+        "ecdsa-scan": "ecdsa-scan 0.1.1"
       },
       "judgement_tables": {
+        "oid_algorithms": {
+          "entries": 27,
+          "sha256_16": "f6fd6fa101db7a4d"
+        },
+        "location_property_names": {
+          "entries": 8,
+          "sha256_16": "0b8c15cc33ce242a"
+        },
+        "line_property_names": {
+          "entries": 5,
+          "sha256_16": "ed438ed351a5b930"
+        },
+        "token_aliases": {
+          "entries": 33,
+          "sha256_16": "c13677feee250d8b"
+        },
+        "family_markers": {
+          "entries": 47,
+          "sha256_16": "9db8169c695be2c5"
+        },
+        "jose_names": {
+          "entries": 10,
+          "sha256_16": "08d16fb9eb9aecef"
+        },
+        "hybrid_groups": {
+          "entries": 4,
+          "sha256_16": "ebb21ecb7cbea298"
+        },
+        "whole_token_only": {
+          "entries": 8,
+          "sha256_16": "b9a4a30aab68fec0"
+        },
+        "known_unplanted": {
+          "entries": 15,
+          "sha256_16": "3a7fca80174e0cdd"
+        }
+      },
+      "judgement_tables_collected": {
         "oid_algorithms": {
           "entries": 27,
           "sha256_16": "031a3c27915e6dde"
@@ -58,7 +97,6 @@
           "sha256_16": "3a7fca80174e0cdd"
         }
       },
-      "judgement_tables_collected": null,
       "failed_invocations": []
     }
   },
@@ -179,7 +217,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "go-l4-yaml-sig",
@@ -323,7 +361,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "go-l1-aes-gcm",
@@ -335,7 +373,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "go-l3-wrapper",
@@ -347,7 +385,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "go-l1-mlkem",
@@ -1109,7 +1147,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "js-l4-yaml-sig",
@@ -1253,7 +1291,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "js-l2-sha256",
@@ -1337,7 +1375,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         }
       ]
     },
@@ -1701,7 +1739,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "py-l4-yaml-sig",
@@ -1773,7 +1811,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "py-l4-helm-kem",
@@ -1881,7 +1919,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "py-l1-aesgcm",
@@ -1893,7 +1931,7 @@
           "detected": false,
           "located": false,
           "file_only": false,
-          "name_only": true
+          "name_only": false
         },
         {
           "id": "py-l2-sha256",

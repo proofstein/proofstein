@@ -7,20 +7,15 @@ cryptographic asset planted on that line::
 
     block, err := aes.NewCipher(key) //@PS aes-gcm-seal|AES-256-GCM|1|algorithm
 
-Annotations are always trailing, never on their own line, so that stripping them
-cannot shift any line number.  The corpus that tools actually see is emitted by
-``tools/build-corpus.py`` with every annotation removed, which keeps hints out of
-reach of tools that read comments (any generator that reads prose in the file
-would otherwise be handed the answer key).
+Annotations are always trailing, never on their own line, so stripping them
+shifts no line number. ``tools/build-corpus.py`` emits the corpus with every
+annotation removed.
 
 Field order is ``id|algorithm|layer|asset_type[|note]``.
 
-A line may instead carry ``//@PS +<id>``, which registers an *additional*
-accepted evidence location for an asset declared elsewhere. Tools legitimately
-differ over which line they attribute an asset to -- the aliased import or the
-aliased call, the wrapper body or the wrapper's caller -- and scoring a tool
-down for a defensible choice would measure convention rather than detection.
-Every accepted location is applied identically to every tool.
+A line may instead carry ``//@PS +<id>``, which registers an additional
+accepted evidence location for an asset declared elsewhere. Every accepted
+location is applied identically to every tool.
 """
 
 from __future__ import annotations

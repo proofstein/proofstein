@@ -12,6 +12,7 @@ from .matching import (
     PathResolver,
     algorithms_compatible,
     families,
+    hybrid_halves,
     location_matches,
     normalize_tokens,
 )
@@ -20,16 +21,9 @@ from .matching import (
 class Unplanted(NamedTuple):
     """A cryptographic construct that exists in the corpus without being planted.
 
-    Reporting one is not an error, so it is excluded from the phantom-algorithm
-    check. The exclusion is only sound where the construct actually is, though:
-    ``DES`` appears in the corpus exactly once, in one project's JVM options,
-    named as a *disabled* algorithm. Allowed corpus-wide it forgives the same
-    name reported anywhere, which is what let five fabricated DES findings
-    through the 2026-07-28 run's precision column uncharged.
-
-    ``project`` and ``file`` narrow the allowance to where the justification
-    holds. Both ``None`` means corpus-wide, for constructs such as CSPRNGs that
-    every project really does contain.
+    Reporting one is excluded from the phantom-algorithm check. ``project`` and
+    ``file`` limit the allowance to where the construct is; both ``None`` means
+    corpus-wide.
     """
 
     algorithm: str
@@ -43,10 +37,7 @@ class Unplanted(NamedTuple):
             return True
         if self.file in resolved_files:
             return True
-        # A report with no resolvable location has not claimed to have read the
-        # wrong file; it has failed to say which file, which the evidence table
-        # already reports. Charging it here would price the same shortcoming
-        # twice, so a location-less report keeps the allowance.
+        # A report with no location keeps the allowance.
         return not has_location
 
 
@@ -65,16 +56,14 @@ class AssetVerdict:
     layer: int
     asset_type: str
 
-    #: The headline metric: file and line agree AND the algorithm is credible.
+    #: File, algorithm and layer agree. The headline metric.
     detected: bool = False
-    #: File and line agree, whatever the algorithm was called. Diagnostic only.
+    #: File agrees and the line is within the tolerance, whatever the algorithm
+    #: was called. Reported, not scored.
     located: bool = False
-    #: File agrees, line not required. Diagnostic only -- reported separately so
-    #: a generator that omits line numbers is visibly distinguished from one
-    #: that missed the asset entirely.
+    #: File agrees, whatever the algorithm was called. Reported, not scored.
     file_only: bool = False
-    #: The algorithm name appears somewhere in the document. NOT a detection:
-    #: reported only to show what an algorithm-name-only metric would claim.
+    #: The algorithm name appears somewhere in the document. Not a detection.
     name_only: bool = False
 
     matched_component: int | None = None
@@ -90,9 +79,8 @@ class EvidenceQuality:
     using_spec_evidence: int = 0
     using_properties_only: int = 0
     total_occurrences: int = 0
-    #: Occurrences deduplicated per component. Repeating one site three times is
-    #: redundancy, not three guesses, so this -- not the raw count -- is the
-    #: denominator for claim precision.
+    #: Distinct (component, file, line) claims: the denominator of claim
+    #: precision.
     distinct_claims: int = 0
     resolvable_locations: int = 0
     unresolvable_locations: int = 0
@@ -142,8 +130,8 @@ class ScoreResult:
     #: Algorithm family present nowhere in the project and not declared as an
     #: unplanted-but-real construct.
     phantom_algorithm: int = 0
-    #: Reported at a real location with no planted asset there. Counted and
-    #: shown, never charged against the tool -- see METHODOLOGY.md.
+    #: Reported at a real location with no planted asset there. Counted, not
+    #: charged.
     unmatched_reports: int = 0
 
     @property
@@ -174,7 +162,7 @@ class ScoreResult:
 
     #: Reported crypto components that were credited with a planted asset.
     matched_components: int = 0
-    #: Distinct evidence claims -- (component, file, line) -- that were credited.
+    #: Distinct (component, file) pairs that were credited.
     credited_claims: int = 0
 
     @property
@@ -185,21 +173,7 @@ class ScoreResult:
 
     @property
     def claim_precision(self) -> float:
-        """Credited evidence claims over all evidence claims made.
-
-        This, not :attr:`precision`, is the check on guessing.
-
-        Component-level precision can be defeated by putting the guesses inside
-        a small number of components: ten components, each carrying an
-        occurrence for every line of every file, reach full recall at 80%
-        component precision and zero false positives, because each of those ten
-        components does match something. Counting the individual claims instead
-        prices every guess -- that same document credits 19 claims out of 7670.
-
-        An honest generator makes roughly one claim per site it found, so its
-        two precision figures stay close together. A large gap between them is
-        the signature of the attack.
-        """
+        """Credited (component, file) pairs over distinct (component, file, line) claims."""
         claims = self.evidence.distinct_claims
         return round(self.credited_claims / claims, 4) if claims else 0.0
 
@@ -231,7 +205,10 @@ def score_cbom(
 
     _measure_evidence(result, resolved)
 
+    # The halves of a planted hybrid count as planted algorithms of the project.
     planted_algorithms = {entry["algorithm"] for entry in ground_truth}
+    for algorithm in list(planted_algorithms):
+        planted_algorithms.update(hybrid_halves(algorithm) or ())
     matched_components: set[int] = set()
     credited_claims: set[tuple[int, str, int]] = set()
 
@@ -252,9 +229,7 @@ def score_cbom(
             accepted.append((alternative["file"], int(alternative["line"])))
 
         for asset, locations in resolved:
-            # A dependency component answers a dependency question. It may
-            # satisfy a layer-5 plant and nothing else: a library named
-            # "openssl" is not a detection of an AES call site.
+            # A dependency component may satisfy a layer-5 plant and nothing else.
             if asset.is_dependency and verdict.layer != 5:
                 continue
 
@@ -271,36 +246,13 @@ def score_cbom(
                         continue
                     verdict.file_only = True
 
-                    # Detection is file + algorithm + layer. The line is
-                    # recorded and reported, never scored.
-                    #
-                    # An import and the call site it enables assert the same
-                    # inventory fact: this algorithm is used in this file. A
-                    # generator reporting the import has answered the question
-                    # the inventory asks. See docs/pending-review.md entry 2,
-                    # which this rule resolves.
-                    #
-                    # The layer half of the rule is the is_dependency gate
-                    # above: a dependency component may satisfy a layer-5 plant
-                    # and nothing else.
+                    # Detection is file + algorithm + layer; the line is not
+                    # scored. The layer condition is the is_dependency gate above.
                     if algorithm_ok and not asset.is_dependency:
-                        # Every claim that lands on a plant is credited, even
-                        # when the plant was already found by another claim --
-                        # otherwise duplicated evidence would look like wasted
-                        # guessing rather than repetition.
-                        #
-                        # Keyed on (component, file), not (component, file,
-                        # line), because the file is the unit of correctness
-                        # once the line is no longer scored. The denominator in
-                        # claim_precision stays line-granular, so a generator
-                        # naming one algorithm at forty lines of one file is
-                        # credited with the one claim it got right and charged
-                        # for the thirty-nine guesses. That is what keeps claim
-                        # precision able to price a shotgun after this change.
-                        #
-                        # Dependency components are excluded in both directions:
-                        # they are not counted in the claim denominator, so
-                        # crediting them here would inflate precision above 100%.
+                        # Every (component, file) pair that lands on a plant is
+                        # credited, including a plant already found by another
+                        # component. Dependency components are neither credited
+                        # nor counted in the claim denominator.
                         credited_claims.add((asset.index, resolved_file))
                     if algorithm_ok and not verdict.detected:
                         verdict.detected = True
@@ -308,7 +260,7 @@ def score_cbom(
                         if not asset.is_dependency:
                             matched_components.add(asset.index)
 
-                    # Reported, not scored: how close the claim landed.
+                    # Reported, not scored: whether the line is within the tolerance.
                     if location_matches(
                         accepted_file,
                         accepted_line,
@@ -317,6 +269,10 @@ def score_cbom(
                         line_tolerance=line_tolerance,
                     ):
                         verdict.located = True
+
+        halves = hybrid_halves(verdict.algorithm)
+        if halves and not verdict.detected:
+            _credit_hybrid_halves(verdict, halves, accepted, resolved, credited_claims, matched_components)
 
         result.verdicts.append(verdict)
 
@@ -335,14 +291,45 @@ def score_cbom(
     return result
 
 
+def _credit_hybrid_halves(
+    verdict: AssetVerdict,
+    halves: tuple[str, str],
+    accepted: list[tuple[str, int]],
+    resolved: list[tuple[ReportedAsset, list[tuple[str | None, int | None]]]],
+    credited_claims: set[tuple[int, str]],
+    matched_components: set[int],
+) -> None:
+    """Credit a hybrid plant whose two halves are named in its file.
+
+    Both halves must be named in the file, as one component or two, and each
+    half must agree on its own parameters. One half alone does not detect it.
+    """
+    for accepted_file, _ in accepted:
+        found: list[list[int]] = [[], []]
+        for asset, locations in resolved:
+            if asset.is_dependency:
+                continue
+            if not any(resolved_file == accepted_file for resolved_file, _ in locations):
+                continue
+            for side, half in enumerate(halves):
+                if any(algorithms_compatible(half, name) for name in asset.names):
+                    found[side].append(asset.index)
+        if found[0] and found[1]:
+            verdict.detected = True
+            verdict.name_only = True
+            verdict.matched_component = found[0][0]
+            for index in found[0] + found[1]:
+                credited_claims.add((index, accepted_file))
+                matched_components.add(index)
+            return
+
+
 def _measure_evidence(
     result: ScoreResult,
     resolved: list[tuple[ReportedAsset, list[tuple[str | None, int | None]]]],
 ) -> None:
     quality = result.evidence
-    # Dependency components are not crypto claims. Counting them here would put
-    # an SBOM's whole package list into the precision denominator, which is the
-    # punishment half of the exclusion.
+    # Dependency components are not counted as crypto claims.
     crypto_only = [(a, loc) for a, loc in resolved if not a.is_dependency]
     quality.crypto_components = len(crypto_only)
     seen_claims: set[tuple[int, str | None, int | None]] = set()
@@ -381,11 +368,7 @@ def _count_false_positives(
 ) -> None:
     """Classify reported assets that matched no planted asset.
 
-    The corpus ground truth is complete for *planted* assets, not exhaustive of
-    every cryptographic construct in the tree -- a CSPRNG call or an encoding
-    helper is real crypto that carries no ground-truth entry. Charging those as
-    false positives would penalise a correct finding, so only two categories are
-    charged, and both are unambiguous:
+    Two categories are charged as false positives:
 
     * **phantom location** -- evidence points at a file that is not in the
       project at all.
@@ -411,22 +394,12 @@ def _count_false_positives(
         if asset.index in matched_components:
             continue
 
-        # A dependency component makes no cryptographic claim, so it cannot make
-        # a false one. This is the other half of the exclusion: an SBOM listing
-        # eighty ordinary packages would otherwise be charged eighty phantom
-        # algorithms for naming things like "lodash" that appear in no ground
-        # truth. No credit, no punishment.
+        # A dependency component is never charged.
         if asset.is_dependency:
             continue
 
-        # Only a component that actually names an algorithm family can be
-        # charged with naming the wrong one. A name carrying no family token --
-        # "relay-key.pem", "key@<uuid>" -- makes no algorithm claim at all. It
-        # is uninformative, which the evidence-quality table already reports,
-        # not false. cdxgen names key-file components after the file, which is
-        # a reasonable thing to report for key material whose algorithm cannot
-        # be known without parsing it; charging that would invent an error the
-        # generator did not make.
+        # Only a component whose name carries an algorithm family token can be
+        # charged a phantom algorithm.
         claims_a_family = any(families(normalize_tokens(name)) for name in asset.names)
 
         if claims_a_family:
@@ -444,15 +417,14 @@ def _count_false_positives(
                 for unplanted in allowances
                 for name in asset.names
             )
-            # A family that exists nowhere in the project is a fabrication
-            # wherever it is reported, so this is checked before location.
+            # Checked before location: a family that exists nowhere in the
+            # project is charged wherever it is reported.
             if not credible:
                 result.phantom_algorithm += 1
                 continue
 
-        # A component landing in a file that holds a planted asset is not a
-        # phantom location even if it named nothing useful: the generator found
-        # a real crypto-bearing file.
+        # A component in a file that holds a planted asset is not a phantom
+        # location.
         on_a_planted_file = any(
             resolved_file in planted_files for resolved_file, _ in locations if resolved_file
         )
@@ -464,11 +436,7 @@ def _count_false_positives(
             result.phantom_location += 1
             continue
 
-        # A report that lands on a file holding a planted asset is not a stray
-        # claim, even when it carries no line number: the generator found the
-        # right place and merely failed to say where in it. Those are already
-        # visible as a zero in the "with line" column of the evidence table, and
-        # counting them here too would report the same shortcoming twice.
+        # A report in a file holding a planted asset is not counted as unmatched.
         near_a_plant = any(
             resolved_file is not None
             and any(

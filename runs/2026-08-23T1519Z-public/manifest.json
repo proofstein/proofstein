@@ -44,9 +44,14 @@
       "sha256_16": "3a7fca80174e0cdd"
     }
   },
+  "judgement_table_changes": {
+    "since_run": null,
+    "changes": [],
+    "prompted_by": []
+  },
   "tools": {
     "cdxgen": {
-      "version": "CycloneDX Generator 12.8.2",
+      "version": "cdxgen 12.8.2",
       "binary": "tools/cdxgen-docker.sh",
       "binary_sha256": "a5301b3cef42cfa4e9af526208b614e2770fbe64e17df272996f078d1d048a49",
       "package_version": "@cyclonedx/cdxgen@12.8.2",
@@ -55,16 +60,16 @@
       ],
       "notes": "Arguments mirror BF-CBOM's cdxgen worker. Records source files in properties[].SrcFile without line numbers. Invoked through the pinned image ghcr.io/cyclonedx/cdxgen:12.8.2, so it needs no build root and runs the same on any host with Docker."
     },
-    "pqprobe-static": {
-      "version": "PQProbe Static v3.6.0",
-      "binary": "<external>/pqprobe-static-v3.6.0",
+    "pqprobe": {
+      "version": "pqprobe 3.6.0",
+      "binary": "<external>/pqprobe",
       "binary_sha256": "bbf5766feb32248e8e868cbd050a09c9c806c8f29e82c41183be791f5dce8803",
-      "package_version": "pqprobe-static @ <external>/pqprobe-static-v3.6.0",
+      "package_version": "pqprobe 3.6.0",
       "accept_exit": [
         0,
         1
       ],
-      "notes": "Exit 1 means findings present, not failure. The binary path comes from PQPROBE_STATIC_BIN; the manifest records what it resolved to and that file's sha256. Maintained by the same party as Proofstein; see the governance section in README.md."
+      "notes": "Exit 1 means findings present, not failure. The binary path comes from PQPROBE_BIN; the manifest records what it resolved to and that file's sha256. Maintained by the maintainer of Proofstein (METHODOLOGY.md \u00a79)."
     }
   },
   "projects": {
@@ -216,7 +221,7 @@
     },
     {
       "argv": [
-        "<external>/pqprobe-static-v3.6.0",
+        "<external>/pqprobe",
         "--output",
         "cbom",
         "scan",
@@ -228,14 +233,14 @@
       "bytes": 34342,
       "stderr_tail": "cbom: no CycloneDX representation for doc_claim finding \"Documentation: Post-quantum cryptography claim \u2014 verify against actual implementation\" (README.md:23) | cbom: no CycloneDX representation for doc_claim finding \"Documentation: ML-KEM claim \u2014 verify actual implementation exists\" (README.md:30) | cbom: \"SHA-2\" mapped with loss: the call site names the SHA-2 family without a determinable digest length | cbom: no CycloneDX representation for symmetric finding \"AES block cipher in use\" (internal/seal/seal.go:35) | cbom: \"AES-GCM\" mapped with loss: the call site does not reveal the AES key size | cbom: \"ML-KEM\" mapped with loss: the parameter set is not named, so no OID or NIST security category is asserted",
       "status": "ok",
-      "written": "beacon-relay__pqprobe-static.json",
-      "tool": "pqprobe-static",
+      "written": "beacon-relay__pqprobe.json",
+      "tool": "pqprobe",
       "project": "beacon-relay",
       "language": "go"
     },
     {
       "argv": [
-        "<external>/pqprobe-static-v3.6.0",
+        "<external>/pqprobe",
         "--output",
         "cbom",
         "scan",
@@ -247,14 +252,14 @@
       "bytes": 42727,
       "stderr_tail": "cbom: \"SPHINCS+\" mapped with loss: the parameter set is not named, so no OID or NIST security category is asserted | cbom: \"ML-DSA\" mapped with loss: the parameter set is not named, so no OID or NIST security category is asserted | cbom: \"SLH-DSA\" mapped with loss: the parameter set is not named, so no OID or NIST security category is asserted | cbom: \"AES-GCM\" mapped with loss: the call site does not reveal the AES key size | cbom: \"ML-KEM\" mapped with loss: the parameter set is not named, so no OID or NIST security category is asserted | cbom: \"TLS (src/main/resources/application.properties)\" mapped with loss: the directive selects a keystore container type, not an algorithm",
       "status": "ok",
-      "written": "ledger-svc__pqprobe-static.json",
-      "tool": "pqprobe-static",
+      "written": "ledger-svc__pqprobe.json",
+      "tool": "pqprobe",
       "project": "ledger-svc",
       "language": "java"
     },
     {
       "argv": [
-        "<external>/pqprobe-static-v3.6.0",
+        "<external>/pqprobe",
         "--output",
         "cbom",
         "scan",
@@ -266,14 +271,14 @@
       "bytes": 32662,
       "stderr_tail": "cbom: no CycloneDX representation for doc_claim finding \"Documentation: ML-KEM claim \u2014 verify actual implementation exists\" (README.md:29) | cbom: no CycloneDX representation for doc_claim finding \"Documentation: Post-quantum cryptography claim \u2014 verify against actual implementation\" (README.md:36) | cbom: \"AES-GCM\" mapped with loss: the call site does not reveal the AES key size | cbom: \"SHA-2\" mapped with loss: the call site names the SHA-2 family without a determinable digest length",
       "status": "ok",
-      "written": "sealbox__pqprobe-static.json",
-      "tool": "pqprobe-static",
+      "written": "sealbox__pqprobe.json",
+      "tool": "pqprobe",
       "project": "sealbox",
       "language": "rust"
     },
     {
       "argv": [
-        "<external>/pqprobe-static-v3.6.0",
+        "<external>/pqprobe",
         "--output",
         "cbom",
         "scan",
@@ -285,14 +290,14 @@
       "bytes": 27446,
       "stderr_tail": "cbom: no CycloneDX representation for doc_claim finding \"Documentation: Post-quantum cryptography claim \u2014 verify against actual implementation\" (README.md:25) | cbom: no CycloneDX representation for doc_claim finding \"Documentation: ML-KEM claim \u2014 verify actual implementation exists\" (README.md:27) | cbom: \"SLH-DSA\" mapped with loss: the parameter set is not named, so no OID or NIST security category is asserted | cbom: \"AES-GCM\" mapped with loss: the call site does not reveal the AES key size | cbom: \"SHA-2\" mapped with loss: the call site names the SHA-2 family without a determinable digest length",
       "status": "ok",
-      "written": "session-broker__pqprobe-static.json",
-      "tool": "pqprobe-static",
+      "written": "session-broker__pqprobe.json",
+      "tool": "pqprobe",
       "project": "session-broker",
       "language": "javascript"
     },
     {
       "argv": [
-        "<external>/pqprobe-static-v3.6.0",
+        "<external>/pqprobe",
         "--output",
         "cbom",
         "scan",
@@ -304,14 +309,14 @@
       "bytes": 31470,
       "stderr_tail": "cbom: no CycloneDX representation for doc_claim finding \"Documentation: ML-KEM claim \u2014 verify actual implementation exists\" (README.md:13) | cbom: \"SHA-2\" mapped with loss: the call site names the SHA-2 family without a determinable digest length | cbom: \"AES-GCM\" mapped with loss: the call site does not reveal the AES key size | cbom: \"XMSS\" mapped with loss: the parameter set is not named, so the signature capacity of the key is unknown | cbom: \"LMS\" mapped with loss: the parameter set is not named, so the signature capacity of the key is unknown",
       "status": "ok",
-      "written": "tinyattest__pqprobe-static.json",
-      "tool": "pqprobe-static",
+      "written": "tinyattest__pqprobe.json",
+      "tool": "pqprobe",
       "project": "tinyattest",
       "language": "c"
     },
     {
       "argv": [
-        "<external>/pqprobe-static-v3.6.0",
+        "<external>/pqprobe",
         "--output",
         "cbom",
         "scan",
@@ -323,8 +328,8 @@
       "bytes": 34984,
       "stderr_tail": "cbom: no CycloneDX representation for doc_claim finding \"Documentation: Post-quantum cryptography claim \u2014 verify against actual implementation\" (README.md:27) | cbom: no CycloneDX representation for doc_claim finding \"Documentation: ML-KEM claim \u2014 verify actual implementation exists\" (README.md:31) | cbom: \"SPHINCS+\" mapped with loss: the parameter set is not named, so no OID or NIST security category is asserted | cbom: \"AES-GCM\" mapped with loss: the call site does not reveal the AES key size | cbom: \"SHA-2\" mapped with loss: the call site names the SHA-2 family without a determinable digest length | cbom: \"ML-KEM\" mapped with loss: the parameter set is not named, so no OID or NIST security category is asserted",
       "status": "ok",
-      "written": "vaultkeeper__pqprobe-static.json",
-      "tool": "pqprobe-static",
+      "written": "vaultkeeper__pqprobe.json",
+      "tool": "pqprobe",
       "project": "vaultkeeper",
       "language": "python"
     }

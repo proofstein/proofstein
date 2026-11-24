@@ -1,16 +1,14 @@
 # BF-CBOM: worker protocol, targeting, and artifact format
 
-Everything here was established by reading BF-CBOM's source. Every claim cites
-a file and line so it can be checked and re-checked when upstream moves.
+Each statement cites a file and line of BF-CBOM's source.
 
 **Source examined:** [SEG-UNIBE/BF-CBOM](https://github.com/SEG-UNIBE/BF-CBOM)
 at commit `89a44b7`, `VERSION` = `1.0.3`, licence **GPL-3.0-only**
 (`LICENSE:1`).
 
 > BF-CBOM is GPL-3.0-only and Proofstein is Apache-2.0. **No BF-CBOM code is
-> reproduced in this repository.** This document describes an interface so that
-> Proofstein can consume its output and so a worker plugin can be contributed
-> upstream under BF-CBOM's own licence.
+> reproduced in this repository.** This document describes the interface
+> through which Proofstein reads BF-CBOM output.
 
 ---
 
@@ -58,9 +56,6 @@ worker        str | None
 error         str | None
 ```
 
-`json` carrying a serialised document rather than a nested object is the detail
-most likely to trip up a new worker.
-
 ### Status handling
 
 * The coordinator maps `ok` → `completed` and anything else → `failed`
@@ -97,7 +92,7 @@ git clone --progress --depth 1 -b <branch> <git_url> <target>
 
 falling back to the default branch if the requested one is missing.
 
-Three consequences for a corpus:
+For a corpus this means:
 
 1. **Public repositories only.** No credentials are injected, deliberately
    (`common/utils.py:174`).
@@ -106,8 +101,8 @@ Three consequences for a corpus:
 3. **Paths are temporary.** Each worker clones into its own scratch directory
    (e.g. `/tmp/cdxgen-<ms>/repo`, `workers/cdxgen/main.py:101-103`), so a
    generator reporting absolute paths reports paths that exist nowhere else.
-   This is why Proofstein resolves reported paths by longest matching suffix
-   against the project's real file list, for every tool alike.
+   Proofstein resolves reported paths by longest matching suffix against the
+   project's file list (METHODOLOGY.md §3.2).
 
 Branch, language, stars and size are resolved from the GitHub API when an
 inspection starts (`coordinator/redis_io.py:334-359`).
@@ -154,8 +149,7 @@ cannot collide.
 
 ## 4. Observed generator output shapes
 
-From the CBOMs checked into `tests/` upstream. These drove the design of
-Proofstein's parser, and they are the reason it accepts more than one shape.
+From the CBOMs checked into `tests/` upstream.
 
 **cdxgen** (`tests/bisq_cdxgen.json`) records the source file as a
 `properties[]` entry named `SrcFile` and emits **no line number**:
@@ -178,10 +172,8 @@ identifying the algorithm only by `cryptoProperties.oid`:
   "name": "key@02711205-48b8-44bb-8967-af53f999b178" }
 ```
 
-Reading only `evidence.occurrences` would score the first tool at zero. Reading
-only `name` would score the second at zero. Neither outcome would say anything
-about whether the generator found the asset, so Proofstein reads both shapes,
-and maps OIDs through a published table, for every tool.
+Proofstein reads both shapes, and maps OIDs through `OID_ALGORITHMS`, for every
+tool (METHODOLOGY.md §3.1 and §3.4).
 
 ---
 
@@ -203,8 +195,5 @@ return {
 plus execution time from `durations.json` (`src/cbom_analyzer.py:165-181`) and
 repository size.
 
-There is no ground truth anywhere in the project. The metrics measure how much
-a tool emitted and how long it took, not whether any of it was correct. A tool
-emitting a hundred fabricated components outscores one emitting ten correct
-ones. That is the gap Proofstein exists to close, and it is why its headline
-metric is anchored to file and line rather than to counts.
+The project has no ground truth. Its metrics are component counts, component
+types and execution time.

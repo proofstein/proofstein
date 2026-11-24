@@ -1,516 +1,342 @@
 # Methodology
 
-How Proofstein decides whether a CBOM generator found something, and how the
-quarterly runs are conducted.
-
-This document is the contract. If a rule here and the code disagree, that is a
-bug in one of them; the tests in `tests/` are what keep them together.
+How Proofstein scores a CBOM generator against the corpus, and how a run is
+collected. The tests in `tests/` check the scorer against these rules.
 
 ---
 
-## 1. What is being measured
+## 1. What is measured
 
-A cryptographic asset is **detected** when a generator's CBOM contains a
-component that
+A planted asset is **detected** when a generator's CBOM contains a component
+that
 
-1. carries evidence pointing at the **file** the asset was planted in, **and**
-2. carries a **line number** agreeing with the planted line within the
-   tolerance, **and**
-3. names an algorithm **compatible** with the planted one.
+1. carries evidence resolving to the **file** the asset is planted in, or to one
+   of its accepted locations (§3.5),
+2. names an algorithm **compatible** with the planted one (§3.4), and
+3. is of a kind the asset's **layer** accepts: a dependency component (§3.6)
+   satisfies a layer-5 asset and no other.
 
-All three are required. The rule exists because the alternative does not
-measure anything: every project in this corpus contains AES-GCM, RSA, SHA-256
-and Ed25519, so a generator that emits those four names unconditionally would
-score well on any name-matching benchmark while having read nothing.
+The line a generator reports is recorded and never scored (§3.3).
 
-`results.md` shows what the weaker rules would have claimed, in a table headed
-"What weaker matching rules would have claimed". The gap between the first and
-last column of that table is the amount of credit a name-only benchmark hands
-out for free.
+Detection rate is detected assets over planted assets, per tool, per language
+and per layer. For the same inputs each results page also reports the share of
+assets reached by a claim in the right file within the line tolerance, by a
+claim in the right file, and by the algorithm name anywhere in the document.
+None of these is a detection.
 
-### Not measured, deliberately
+### Not measured
 
 * **Whether the generator ran.** A (project, tool) pair absent from the input
-  is excluded from every table, not scored as zero. Reporting a tool that was
-  never run as having missed everything would be a fabrication.
-* **Speed, memory, image size.** BF-CBOM and CBOMbench already record runtime.
-* **Whether the *right* CycloneDX asset type was used.** Recorded in the JSON
-  output per asset, but not part of the detection rule.
+  is excluded from every table, not scored as zero.
+* **Speed, memory, image size.**
+* **The CycloneDX asset type.** It is recorded per asset in `results.json` and
+  is not part of the detection rule.
+* **Severity and operation labels.** The scorer reads neither a severity nor
+  `cryptoFunctions`.
 
 ---
 
 ## 2. The six layers
 
-Every corpus project plants assets in all six. The layers are the point of the
-corpus: they separate a generator that pattern-matches call sites from one that
-follows indirection.
+Every corpus project plants assets in all six layers.
 
-| Layer | What it plants | What it distinguishes |
-| ----- | -------------- | --------------------- |
-| 1 | Direct crypto API call sites | Baseline. A generator that misses these misses everything. |
-| 2 | Aliased imports (`import hashlib as digestlib`, `use sha2::Sha256 as ContentHash`, a static import, a `#define`) | Whether identification survives renaming. |
-| 3 | Wrapper functions reached through a constructor table | Whether the generator follows indirection or only matches library symbols at the call site. |
-| 4 | Config-driven selection (YAML, nginx, JVM properties, Helm values, TOML, `.conf`) | Whether anything outside source files is read at all. |
-| 5 | Crypto in a declared dependency that no shipped code calls | Whether the dependency surface is inventoried, and whether the generator can say so without claiming a call site. |
-| 6 | Key, certificate and keystore files | Whether non-source artifacts are inventoried. |
+| Layer | What it plants |
+| ----- | -------------- |
+| 1 | Direct crypto API call sites |
+| 2 | Aliased imports (`import hashlib as digestlib`, `use sha2::Sha256 as ContentHash`, a static import, a `#define`) |
+| 3 | Wrapper functions reached through a constructor table |
+| 4 | Config-driven selection (YAML, nginx, JVM properties, Helm values, TOML, `.conf`) |
+| 5 | Crypto in a declared dependency that no shipped code calls |
+| 6 | Key, certificate and keystore files |
 
-Layer 5 is the one to read carefully. The dependency is declared and never
-called, so a generator that reports it *with a call-site location* has
-hallucinated; one that reports it against the manifest line has it right.
+A layer-5 asset is planted at the line of the manifest that declares the
+dependency.
 
 ---
 
-## 3. Matching rules in detail
+## 3. Matching rules
 
 ### 3.1 Location
 
-Evidence is read from a fixed set of shapes, applied to **every** tool:
+Evidence is read from these shapes, for every tool:
 
-* `evidence.occurrences[].location` and `.line`: the shape the CycloneDX 1.6
-  schema defines (`location` is required, `line` is optional).
-* `properties[]` entries whose name, after stripping any namespace prefix, is
-  one of `SrcFile`, `sourceFile`, `source_file`, `location`, `filePath`,
-  `file_path`, `file`, `path`, with the line taken from `line`, `lineNumber`,
-  `line_number`, `startLine`, `start_line`.
-
-The second shape exists because cdxgen records the source file in
-`properties[].SrcFile` and emits no line number
-(observed in BF-CBOM's own `tests/bisq_cdxgen.json`, not a fixture here).
-Reading only the spec shape would score that generator at zero for a reason
-unrelated to whether it found the asset. Reading both, for everyone, measures
-the thing intended.
-
-A generator supplying a file but no line still cannot be credited with a
-detection, because there is nothing to check. That outcome is visible in two
-places: the `with line` column of the evidence-quality table, and the
-`file only` column of the weaker-rules table.
+* `evidence.occurrences[].location` and `.line`, as the CycloneDX 1.6 schema
+  defines them.
+* `properties[]` entries whose name, after any namespace prefix is stripped,
+  is one of `SrcFile`, `sourceFile`, `source_file`, `location`, `filePath`,
+  `file_path`, `file`, `path` (`LOCATION_PROPERTY_NAMES`), with the line taken
+  from `line`, `lineNumber`, `line_number`, `startLine`, `start_line`
+  (`LINE_PROPERTY_NAMES`). Names are compared case-insensitively.
 
 ### 3.2 Paths
 
-Reported paths are normalised (separators, leading `./`) and then resolved
-against the project's real file list by **longest matching suffix**. A suffix
-that matches more than one file is not a resolution.
+Reported paths are normalised (separators, leading `./`) and resolved against
+the project's file list by the longest matching suffix that names exactly one
+file. A path that resolves to no file is counted as unresolvable in the
+evidence table.
 
-This exists because BF-CBOM workers clone into a temporary directory
-(`common/utils.py:136`), so a generator reporting absolute paths is reporting
-paths that cannot match anything literally. The resolution is applied to every
-tool. It is a real generosity, and it is why the evidence table reports
-`unresolvable paths`: a path that still does not resolve is counted, and if it
-is a component's only evidence, it is charged as a phantom location.
+### 3.3 Lines
 
-### 3.3 Lines are reported, not scored
-
-**A detection is file + algorithm + layer.** The line a generator reports is
-recorded, shown in the `file+line, any name` column of the weaker-rules table,
-and never part of whether an asset counts as found.
-
-The reason is one sentence: an import and the call site it enables assert the
-same inventory fact. A generator that reports ML-KEM at the import statement
-eleven lines above the call has answered the question the inventory asks (which
-algorithms does this file use) and scoring it as a miss measured reporting
-granularity rather than detection. This resolves `docs/pending-review.md` entry 2,
-which held the strict reading pending review.
-
-`--line-tolerance` still exists and still defaults to **±2**. It decides the
-reported `located` figure, so a run can still show how precisely a generator
-places its evidence, and generators that disagree about whether a multi-line
-statement is reported at its first or last line are not distinguished by it.
-
-Claim precision is unaffected by the change, deliberately. A credited claim is
-one `(component, file)` pair, while the denominator counts every distinct
-`(component, file, line)` claim made. A generator naming one algorithm at forty
-lines of one file is credited with the one claim it got right and charged for the
-thirty-nine guesses, so the shotgun defence in §5 survives a rule that no longer
-scores lines.
-
-### 3.3a Accepted-location markers
-
-A plant may declare additional locations where its evidence is accepted, written
-`//@PS +<id>` in the template. Under file-level matching most of these no longer
-do anything: an alternative location in the same file as the plant is already
-covered, and ten of the twelve markers in the corpus are of that kind. They are
-kept as a record of where an asset can also be observed, not as active
-exemptions.
-
-**Two are still load-bearing, and both are layer-3 wrappers.** A wrapper's caller
-frequently sits in a *different file* from the wrapper body, and a marker is the
-only thing that makes evidence in that other file count. `beacon-relay`'s
-`go-l3-wrapper` and `tinyattest`'s `c-l3-wrapper` each accept a cross-file
-location. Widening which file counts is the sole remaining scoring function of
-this mechanism.
+The reported line is recorded and not scored. `--line-tolerance`, default
+**2**, decides only the `located` figure: a claim in the right file whose line
+is within the tolerance of the planted line. A tolerance wider than the default
+prints a warning and is recorded in the header of both output files. Published
+runs use the default.
 
 ### 3.4 Algorithms
 
-Names are reduced to token sets with separators removed, so `SHA-256`,
-`SHA256` and `sha_256` are the same thing, as are `ML-KEM-768` and `MLKEM768`.
+The names read from a component are its `name`, the canonical name of its
+`cryptoProperties.oid` (`OID_ALGORITHMS` in `proofstein/cbom.py`), its
+`algorithmProperties` `parameterSetIdentifier`, `primitive` and `curve`, its
+`relatedCryptoMaterialProperties.type`, its `protocolProperties` `type` and
+`version`, and a component `version` shorter than 24 characters.
 
-Removing separators is what makes hyphenation irrelevant, and it also removes the
-boundaries that distinguish an algorithm name from an ordinary word. Those
-boundaries are carried alongside and re-imposed: a family is found only where its
-marker begins at a token boundary, or immediately after a digit. The digit case
-is what keeps hybrid names such as `x25519mlkem768` working. A marker ending in a
-digit may not be followed by another digit, so `SHA-3` is not found inside
-`SHA-384`. Without these rules `universal-hash` contains RSA, `Caesar` contains
-AES, and every `ECDSA` report also claims DSA.
+Each name is reduced to a token set with separators removed, so `SHA-256`,
+`SHA256` and `sha_256` are the same, as are `ML-KEM-768` and `MLKEM768`
+(`_TOKEN_ALIASES` in `proofstein/matching.py` folds equivalent spellings). An
+algorithm family is found where its marker (`_FAMILY_MARKERS`) begins at a token
+boundary or immediately after a digit, and a marker ending in a digit is not
+followed by another digit. `DES`, `SEED`, `IDEA`, `RC2`, `RC4`, `CAST5`,
+`Camellia` and `bcrypt` (`_WHOLE_TOKEN_ONLY`) are matched only as complete
+tokens, and only where every other token in the name is a size, a mode
+qualifier or a descriptive word.
 
-Weak ciphers whose names are ordinary English words (`DES`, `SEED`, `IDEA`,
-`RC2`, `RC4`, `CAST5`, `Camellia`) are matched only as complete tokens, and only
-where every other token in the name is a size, a mode qualifier or narration.
-`SEED-128-CBC` claims the family; `seed_material` and `seedRandom` do not. The
-list is `_WHOLE_TOKEN_ONLY` in `proofstein/matching.py`.
+Before tokens are read:
 
-Then:
+* text after an `@` is dropped (`key@<uuid>`, `foo.gpg@sha256:...`);
+* a combined signature name (`SHA256withECDSA`, `SHA384withRSA`,
+  `sha256WithRSAEncryption`, `SHA256withRSA/PSS`) becomes its scheme and its
+  digest;
+* a JOSE algorithm name becomes its algorithm (`_JOSE_NAMES`): `RS256`, `RS384`
+  and `RS512` are RSA, `PS256`, `PS384` and `PS512` are RSA-PSS, `RSA-OAEP-256`
+  is RSA-OAEP, and `ES256`, `ES384` and `ES512` are ECDSA on P-256, P-384 and
+  P-521; the number in a JOSE name is never read as a key size;
+* a hybrid key-exchange group becomes its two halves (`_HYBRID_GROUPS`).
 
-* A **less specific** report is credited: a planted `AES-256-GCM` is found by a
-  report of `AES`. The generator identified the right primitive.
-* A **different family** is never credited: `RSA` does not find `AES-256-GCM`.
-* A **mode alone** is not credited: a report naming no family whose only
-  overlap with the plant is a mode or construction qualifier (`GCM`, `CBC`) does
-  not find `AES-256-GCM`. Naming the mode does not identify the cipher.
-* A **contradictory parameter within the same family** is not credited:
-  `AES-128-GCM` does not find `AES-256-GCM`, and `ML-KEM-512` does not find
-  `ML-KEM-768`.
-* Algorithms may be identified by OID. `cryptoProperties.oid` is mapped through
-  a published table (`proofstein/cbom.py`, `OID_ALGORITHMS`), because cbomkit
-  routinely leaves `name` as an opaque `key@<uuid>` and identifies the algorithm
-  only by OID.
-* Opaque identifiers (`key@<uuid>`, `crypto/certificate/foo.gpg@sha256:...`) and
-  placeholder values (`other`, `unknown`, `generic`, `unspecified`) never match
-  anything. `other` is a real cbomkit output value; treating it as a wildcard
-  would credit it against every plant.
+A reported name is compatible with a planted one when:
 
-### 3.5 Accepted alternative locations
+* they share a family and no parameter contradicts: a less specific report is
+  credited (`AES` for a planted `AES-256-GCM`), a different size in the same
+  family is not (`AES-128-GCM`, `ML-KEM-512` for `ML-KEM-768`);
+* a report naming only a curve (`P-256`, `secp256r1`, `prime256v1`) or only `EC`
+  credits an ECDSA or an ECDH plant on that curve; a report naming ECDSA or ECDH
+  credits only that family;
+* for a hybrid group plant (`X25519MLKEM768`, `X448MLKEM1024`,
+  `SecP256r1MLKEM768`, `SecP384r1MLKEM1024`), the report names the hybrid, or
+  reports in the plant's file name both halves, each at its own parameters.
 
-Some assets carry `accept_locations` in the ground truth: additional places a
-generator may legitimately attribute the asset to. An aliased import may be
-attributed to the import line or the call line; a wrapper-mediated algorithm may
-be attributed to the wrapper body or to the caller. Both are defensible, and
-scoring a tool down for picking the other one would measure convention rather
-than detection. Accepted locations are part of the published ground truth and
-apply to every tool.
+A report naming no family whose only overlap with the plant is a mode or
+construction qualifier (`GCM`, `CBC`) is not compatible. Where either name
+states a family, a bare number shared by the two is not compatible on its own.
+Placeholder values (`other`, `unknown`, `generic`, `unspecified`) match nothing.
+Only numbers in `CRYPTO_SIZES` are read as sizes, so the digits of `PKCS#8`,
+`PKCS#12`, `SEC1` and `X.509` are not.
+
+### 3.5 Accepted locations
+
+An asset may carry `accept_locations` in the ground truth: further places whose
+evidence counts for it, declared with a `//@PS +<id>` marker in the template.
+They are part of the published ground truth and apply to every tool.
+
+### 3.6 Dependency components
+
+A component of type `library` or `framework` without `cryptoProperties` is a
+dependency component. It may satisfy a layer-5 asset, is not counted among a
+tool's crypto components or claims, and is never charged as a false positive.
+A component carrying `cryptoProperties` is never a dependency component.
 
 ---
 
 ## 4. False positives
 
-Two categories are charged, and both are unambiguous:
+Two kinds of report are charged as false positives:
 
+* **Phantom algorithm**: the component claims an algorithm family that is not
+  among the project's planted algorithms (including the halves of a planted
+  hybrid group) and is not covered by a `KNOWN_UNPLANTED` entry in `score.py`
+  that reaches this project and file. It is charged wherever it is reported. A
+  component with no reported location keeps a file-scoped allowance.
 * **Phantom location**: every location the component reports fails to resolve
   to a file in the project.
-* **Phantom algorithm**: the component **claims an algorithm family**, and that
-  family appears nowhere in the project's ground truth and is not covered by a
-  `KNOWN_UNPLANTED` allowance in `score.py` that reaches this project and file.
-  Claiming an absent family is a fabrication wherever it is reported, so this is
-  charged regardless of location.
 
-  An allowance reaches only as far as what justifies it. `DES`, `RC4`, `MD5` and
-  `SSLv3` are allowed at `ledger-svc/deploy/jvm.options`, which names them as
-  disabled algorithms, and are charged everywhere else. A report carrying no
-  resolvable location keeps the allowance, because failing to say where is
-  already reported in the evidence table and is not charged twice. Until
-  2026-08-03 these four entries had no scope, which is recorded in
-  `docs/pending-review.md` entries 6 and 8.
+A component that names no algorithm family is never charged as a phantom
+algorithm. A component credited with a planted asset, and a dependency
+component, are never charged.
 
-A component that names no algorithm family at all is **never** charged as a
-phantom algorithm. cdxgen names key-file components after the file, as
-`relay-key.pem` with `assetType: certificate`, which is a correct report of a real
-layer-6 asset, since the algorithm cannot be known without parsing the key. In
-the 2026-07-27 run, ten of eighteen false positives charged against cdxgen were of
-exactly this kind: an error invented by the scorer, not made by the generator.
-Such a component is uninformative rather than false, and the evidence-quality
-table already reports that.
+Every other component that matches no planted asset is counted as
+**unmatched** and not charged, unless it is in a file that holds a planted
+asset, in which case it is not counted at all. The ground truth lists the
+planted assets; it does not enumerate every cryptographic construct in the
+corpus.
 
-Everything else that matched no plant is reported as **unmatched (uncharged)**
-and is not held against the tool.
+`KNOWN_UNPLANTED` holds constructs present in the corpus without a
+ground-truth entry:
 
-The reason for that restraint: **the corpus ground truth is complete for
-planted assets, but not exhaustive of every cryptographic construct in the
-tree.** A CSPRNG call, an HMAC, a base64 helper are real and carry no
-ground-truth entry. Charging a generator for finding one would penalise a
-correct result. `KNOWN_UNPLANTED` names the constructs that are present but
-unplanted, so that the phantom-algorithm check stays meaningful rather than
-forgiving everything.
+* in every project: `CSPRNG`, `DRBG`, `SecureRandom`, `OsRng`, `urandom`,
+  `base64`, `hex`, `GCM`, `SHA-384`, `X25519` and `TLS`;
+* in `ledger-svc/deploy/jvm.options` only, where they are named as disabled
+  algorithms: `MD5`, `RC4`, `DES` and `SSLv3`.
 
-This is a known limitation, stated rather than hidden: **Proofstein measures
-recall against a known set of plants and a narrow, high-confidence notion of
-false positive. It is not a precision benchmark against a fully enumerated
-corpus.**
+### Negative cases
+
+Two files plant no asset:
+
+* `corpus/go/beacon-relay/ops/health/api.py`, a health-probe module built on the
+  Falcon web framework. `beacon-relay` plants no Falcon (FN-DSA) signature, so a
+  report of Falcon or FN-DSA in this file is a phantom algorithm.
+* `corpus/javascript/session-broker/src/lms.ts`, a learning-management system client.
+  `session-broker` plants no LMS signature, so a report of LMS in this file is a
+  phantom algorithm.
 
 ### Precision
 
-Detection rate alone is gameable: a generator claiming every algorithm at every
-line of every file would be credited with finding everything. `results.md`
-therefore reports precision in two forms.
+**Component precision** is credited crypto components over reported crypto
+components.
 
-**Component precision**: components credited over components reported.
-
-**Claim precision**: distinct evidence claims credited over distinct evidence
-claims made, where a claim is one `(component, file, line)` triple.
-
-Claim precision is the real check, and component precision alone is not enough.
-That was found in review rather than by design: an attacker who packs the
-guessing into a *small number of components*, each carrying an occurrence for
-every line of every file, keeps every component matching something. Such a
-document scored **full recall at 80% component precision with zero false
-positives**. Pricing each claim instead drops it to **2.2%**, because it made
-7670 claims to earn 19.
-
-Duplicate evidence for one site is deduplicated before counting, so a generator
-reporting the same location three times is not treated as having made two wrong
-claims.
-
-An honest generator makes roughly one claim per site it found, so its two
-precision figures sit close together. A wide gap between them is the signature
-of guessing. Both attacks and the honest counterpart are pinned in
-`tests/test_scoring.py`:
-`test_shotgun_earns_recall_but_loses_precision`,
-`test_shotgun_packed_into_few_components_still_loses`,
-`test_honest_report_scores_well_on_both_precisions` and
-`test_repeated_evidence_for_one_plant_is_not_punished`.
-
-### The line tolerance is a diagnostic, not a dial
-
-`--line-tolerance` no longer affects any score, since §3.3 removed the line from
-what a detection requires. It sets the `located` column only. Any value wider
-than the default still prints a warning to stderr and is recorded in the header
-of both output files, so a run that widened it is identifiable; published runs
-use the default.
-
-What stops "file + algorithm" from degenerating into free recall is not the
-tolerance. It is claim precision, which prices every distinct
-`(component, file, line)` claim while crediting one per `(component, file)`.
+**Claim precision** is credited `(component, file)` pairs over distinct
+`(component, file, line)` claims. Repeated evidence for one location counts as
+one claim. Dependency components are in neither figure.
 
 ---
 
 ## 5. Schema validity
 
-Every CBOM is validated against the official CycloneDX 1.6 JSON schema,
-vendored unmodified under `schemas/` so scoring needs no network:
+Every CBOM is validated against the CycloneDX 1.6 JSON schema, vendored
+unmodified under `schemas/` (`bom-1.6.schema.json`, with `spdx.schema.json` and
+`jsf-0.82.schema.json`). Validity is reported per tool as a pass rate and does
+not affect detection.
 
-* `bom-1.6.schema.json`
-* `spdx.schema.json`, `jsf-0.82.schema.json` (its two `$ref` targets)
-
-Validation is reported per tool as a pass rate. It does not affect the detection
-rate: a generator that finds everything and emits a schema-invalid document has
-still found everything, and a reader should be able to see both facts
-separately.
-
-`samples/invalid/` holds three fixtures that must fail: a document missing
-`specVersion` with an invalid component type, a non-BOM JSON document, and a
-truncated file. `tests/test_schema.py` asserts they are rejected and that a
-valid document is accepted, so the validator cannot silently degrade into
-approving everything.
+`samples/invalid/` holds three documents that fail validation: a document
+missing `specVersion` with an invalid component type, a non-BOM JSON document,
+and a truncated file. `tests/test_schema.py` asserts that they are rejected and
+that a valid document is accepted.
 
 ---
 
 ## 6. Public corpus and holdout
 
-**The two are scored separately and never averaged.**
+**Public and holdout results are reported separately and never averaged.**
 
-The public corpus is in the repository: the projects, the plants and the answers
-are all published. That is what makes it useful as a development target and what
-makes it, over time, a poor measure of generalisation. A tool that improves on
-it may have got better at finding cryptography, or may have been tuned to find
-*this* cryptography.
+The public corpus, its ground truth and its runs' CBOMs are in the repository.
 
-The holdout is generated from the same templates by transforms that change the
-surface a tool matches on while leaving the cryptography identical:
+The holdout is generated from the same templates by `tools/generate-holdout.py
+--seed <n>`, with transforms that leave the cryptography unchanged:
 
-* a header block shifts every line number,
-* wrapper functions, types and import aliases are renamed,
-* files move within their package,
-* config keys are reordered and, where declared, an algorithm is swapped for a
-  different member of its family (`ML-KEM-768` → `ML-KEM-1024`).
+* a header block shifts every line number;
+* wrapper functions, types and import aliases are renamed;
+* files move within their package;
+* config keys are reordered and, where declared, an algorithm is swapped for
+  another member of its family (`ML-KEM-768` to `ML-KEM-1024`).
 
-Ground truth for a variant is **recomputed from the transformed templates by the
-same annotation parser**, never adjusted by hand, so it cannot drift.
-
-`tools/build-all.sh ground-truth-holdout` builds every variant. A variant that
-does not compile is not a valid case and is not published.
-
-**A large gap between public and holdout scores for the same tool is the finding
-the holdout exists to produce.** It should be reported, not smoothed over.
-
-Holdout inputs are regenerated with a fresh seed before each quarterly run and
-are not published with the results. Published holdout material is limited to the
-scores, the transform description, and a digest of the generators' output.
-
-**A holdout run's CBOMs are withheld, not committed.** A CBOM carries the file
-paths, line numbers and often the matched source lines of what it scanned, so
-committing one republishes much of what the seed protects. The documents are
-archived privately and their SHA-256 digests are recorded in the run manifest by
-`tools/withhold-cboms.py`, which also verifies an archive against them. A
-reviewer can confirm the scores against unaltered documents without receiving
-the seed. For the same reason, `score.py` names each holdout plant in
-`results.json` by its id, without its file and line.
-
-This rule postdates the 2026-07-28 run, whose holdout published both its seed and its
-CBOMs. That run is marked as exposed in its own README and is excluded from
-cross-run generalisation claims; see `docs/pending-review.md` entry 7.
+The holdout ground truth is computed from the transformed templates by the same
+annotation parser as the public ground truth. Each holdout run uses a new seed.
+The seed, the holdout ground truth and the run's CBOMs are archived privately.
+None of them, and no holdout corpus, is committed. The run manifest records the SHA-256 of each
+withheld CBOM (`tools/withhold-cboms.py`, which also verifies an archive against
+them), and `results.json` names each holdout plant by its id, without file or
+line.
 
 ---
 
-## 7. Corpus transport
+## 7. Corpus export
 
-BF-CBOM workers clone the repositories they inspect
-(`common/utils.py:136`, `--depth 1`, public URLs only), so orchestrating a run
-through it requires the six corpus projects to exist as reachable git URLs. Two
-ways work: `file://` remotes produced by `tools/publish-corpus.sh`, or private
-repositories under a `proofstein` organisation.
+`tools/collect-cboms.py` exports each public project with `git archive HEAD`
+and runs every generator against that export. Holdout projects are copied
+without build artifacts (`.git`, `node_modules`, `target`, `dist`,
+`__pycache__`, `.venv`).
 
-### Generators scan a pristine export, never the working tree
-
-`tools/collect-cboms.py` exports each project with `git archive HEAD` and runs
-the generator against that copy.
-
-This is not fastidiousness. Building the corpus leaves `dist/`, `node_modules/`,
-`target/` and object files behind, and a generator pointed at that tree reports
-cryptography inside compiled output, genuinely present but at paths the ground
-truth says nothing about. In the 2026-07-27 run this produced three false positives
-charged against cdxgen for correctly finding Ed25519, RSA and SHA-256 in
-`dist/identity.js`, the compiled form of a file whose sources are planted.
-
-Exporting from HEAD also matches the intended runner: BF-CBOM workers
-`git clone --depth 1` and therefore always see a clean tree
-(`common/utils.py:136`). A direct run that scanned a dirty tree would not be
-measuring the same thing as an orchestrated one.
-
-**The 2026-07-27 run uses the scorer's raw-directory path**, with each generator invoked
-directly against that export and its CycloneDX collected per the filename
-convention in the README. That is the lower-friction route and it removes the
-runner from the critical path of the first result: a transport problem cannot be
-mistaken for a detection problem, and the numbers do not depend on standing up
-Redis, Docker and six worker images first.
-
-**The BF-CBOM path is proven separately, once, as an integration test rather
-than as the scoring vehicle.** Publish the corpus, point an inspection at the
-`file://` URLs, export the bundle, and confirm `./score.py --bundle` produces
-the same per-asset verdicts as the raw-directory run over the same generators.
-That establishes the two input paths agree; after that, either can carry a
-quarterly run.
-
-Both paths are already exercised by tests over a bundle in BF-CBOM's exact
-layout (`tests/test_inputs.py`), and both were confirmed to produce identical
-scores over the same documents.
+The scorer also reads a BF-CBOM artifact bundle (`score.py --bundle`).
+`tools/publish-corpus.sh` produces each corpus project as a git repository that
+BF-CBOM can clone by `file://` URL.
 
 ---
 
-## 8. Quarterly run procedure
+## 8. How a run is collected
 
-1. **Pin the corpus.** Tag the repository. Every results file records the corpus
-   version in its header; a run whose header says `-dirty` is not publishable.
-
-2. **Pin the tools.** Record each generator's exact version and image digest.
-   For BF-CBOM-orchestrated runs, record the BF-CBOM version (`VERSION`) and the
-   inspection id. For standalone runs, record the CLI invocation verbatim.
-   Runs up to 2026-10-07 pinned cdxgen by its 12.8.2 tag only and cannot be tied to an image digest.
-
-3. **Regenerate the holdout** with a new seed:
-   `tools/generate-holdout.py --seed <n>`. Record the seed privately; do not
-   publish it with the results.
-
-4. **Verify both corpora build.** `tools/build-all.sh` and
-   `tools/build-all.sh ground-truth-holdout`. A project that does not build is
-   withdrawn from that run, and the withdrawal is recorded.
-
-5. **Run the generators** against both corpora. Either orchestrate through
-   BF-CBOM or run each tool directly and collect CycloneDX per the filename
-   convention in the README.
-
-6. **Score both, separately:**
+1. **Corpus.** The run manifest records the corpus commit and the uncommitted
+   paths of the tree. A run with an uncommitted path outside the run
+   directories under `runs/` is not published.
+2. **Holdout.** A holdout run generates a new holdout with a new seed (§6).
+3. **Build.** Both corpora are built in the image of `tools/build.Dockerfile`,
+   whose base is pinned by digest and whose JDK is pinned by release and
+   SHA-256:
    ```
-   ./score.py --cboms  runs/<date>/public/  --out results/<date>-public/
-   ./score.py --bundle runs/<date>/holdout-bundle.zip --out results/<date>-holdout/
+   docker build -t proofstein-build -f tools/build.Dockerfile tools
+   docker run --rm -u "$(id -u):$(id -g)" -v "$PWD":/work -v <build-root>:/build \
+       -e HOME=/build/home -e PROOFSTEIN_BUILD_ROOT=/build -w /work \
+       proofstein-build tools/build-all.sh [ground-truth-holdout]
    ```
+   A project that does not build is withdrawn from the run, and the manifest
+   records it.
+4. **Generators.** `tools/collect-cboms.py --config <generators.json> --out
+   runs/<run-id>` runs each generator over each project. The run's
+   `generators.json` and any wrapper scripts it calls (`harness/`) are kept in
+   the run directory. The manifest records, per tool, its name and released
+   version, the SHA-256 of the binary or package, the image and image digest where one is
+   used, and the argument vector; per invocation, the exit status, duration,
+   output size and stderr tail; and a digest of each judgement table (§9.1).
+5. **Scoring.**
+   ```
+   ./score.py --cboms runs/<run-id>/cboms --manifest runs/<run-id>/manifest.json \
+       --out runs/<run-id>/results [--ground-truth ground-truth-holdout]
+   ```
+6. **Holdout CBOMs.** `tools/withhold-cboms.py --run runs/<run-id> --archive
+   <archive-dir>` moves them to the private archive and records their digests
+   in the manifest.
+7. **Table changes.** The manifest lists under `judgement_table_changes` every
+   judgement table whose digest changed since the previous run of the same kind,
+   with its entries and digest before and after, and the generators that
+   prompted the change (§9.1, rules 2 and 6).
 
-7. **Publish** `results.md` and `results.json` for both, with a run manifest
-   recording corpus tag, tool versions and digests, line tolerance, and which
-   (project, tool) pairs were not run and why.
-
-8. **Notify scored vendors** before publication, with their own per-asset
-   results, and record any correction. A vendor disputing a result should be
-   able to reproduce it from the published artifacts; if they cannot, that is a
-   bug in Proofstein.
+Run ids are the UTC start time to the minute and the kind:
+`<YYYY-MM-DD>T<HHMM>Z-public`, `-holdout`, or the name of a tool scored outside
+the main table.
 
 ---
 
-## 9. Conflict of interest
+## 9. Maintenance
 
-Proofstein is maintained by Ottenheimer GmbH, which also maintains
-`pqprobe-static`, a tool in scope for scoring. The safeguards are structural
-rather than promissory:
+Proofstein is maintained by Ottenheimer GmbH. Ottenheimer GmbH also makes
+`pqprobe`, one of the scored generators.
 
-* **No tool-specific logic.** No module on the scoring path may contain a vendor
-  name in executable code.
-  `tests/test_no_tool_specific_logic.py` parses each of those modules and fails
-  the build if a vendor name appears in any identifier or non-docstring string
-  literal. Vendor names in docstrings and comments are allowed and encouraged:
-  the reason a given evidence shape is supported is exactly that some real
-  generator emits it, and that reasoning should be written down.
-* **Score is invariant under tool name.**
-  `tests/test_scoring.py::test_tool_name_does_not_affect_score` scores the same
-  document under several tool names, including `pqprobe-static`, and asserts the
-  result never moves.
-* **No normalisation privileges.** Every accommodation in §3 (the
-  `properties[]` location shape, absolute-path resolution, the OID table, the
-  line tolerance, less-specific algorithm names) is documented here, applied to
-  every tool, and covered by a test. `pqprobe-static` in particular receives no
-  format handling of its own: any conversion from its native output into
-  CycloneDX happens in the worker shim, outside this repository, exactly as
-  cryptobom-forge converts CodeQL SARIF inside its own worker.
-* **Scored, not exempt.** `pqprobe-static` appears in published results on the
-  same terms as every other tool, including where it does badly.
+These apply to every tool:
 
-A reader who does not trust the maintainer should be able to check every claim
-above by running `python3 -m unittest discover -s tests` and reading the
-diff-able ground truth. That is the intended posture.
+* **No tool-specific logic.** `tests/test_no_tool_specific_logic.py` parses each
+  module on the scoring path and fails if a tool name appears in an identifier
+  or a non-docstring string literal.
+* **Tool-name invariance.**
+  `tests/test_scoring.py::test_tool_name_does_not_affect_score` scores one
+  document under several tool names, `pqprobe` among them, and asserts
+  that the result is the same.
+* **One set of rules.** Every rule in §3 and §4 applies to every tool. The scorer
+  has no format handling for any single tool.
+* **The judgement tables** and their rules, §9.1.
 
 ### 9.1 Governance of the judgement tables
 
-Four tables encode judgement rather than fact, and are the residual risk the
-structural safeguards above do not remove:
+The tables in these three modules encode judgement rather than fact:
 
-| Table | Location | What it decides |
-| ----- | -------- | --------------- |
-| `OID_ALGORITHMS` | `proofstein/cbom.py` | which OID means which algorithm |
-| `LOCATION_PROPERTY_NAMES`, `LINE_PROPERTY_NAMES` | `proofstein/cbom.py` | which `properties[]` entries count as evidence |
-| `_TOKEN_ALIASES`, `_FAMILY_MARKERS`, `_WHOLE_TOKEN_ONLY` | `proofstein/matching.py` | which algorithm spellings mean the same thing, and which names are matched only as complete tokens |
-| `KNOWN_UNPLANTED` | `score.py` | which absent algorithms go uncharged, and where |
+| Location | Tables | What they decide |
+| -------- | ------ | ---------------- |
+| `proofstein/cbom.py` | `OID_ALGORITHMS`, `LOCATION_PROPERTY_NAMES`, `LINE_PROPERTY_NAMES` | which OID means which algorithm, and which `properties[]` entries count as evidence |
+| `proofstein/matching.py` | `_TOKEN_ALIASES`, `_FAMILY_MARKERS`, `_WHOLE_TOKEN_ONLY`, `_JOSE_NAMES`, `_HYBRID_GROUPS` | which algorithm spellings mean the same thing, which markers identify a family, which names are matched only as complete tokens, what a JOSE algorithm name means, and which hybrid groups are made of which two halves |
+| `score.py` | `KNOWN_UNPLANTED` | which algorithms absent from the ground truth go uncharged, and where |
 
-`KNOWN_UNPLANTED` was added to this list on 2026-08-03, after a corpus-wide
-entry was found to have absolved five fabricated findings in the 2026-07-28 run. It decides
-what is *not* charged, which makes an over-broad entry invisible in exactly the
-way a wrong entry in the other tables is not: nothing appears in any column.
-Entries are scoped to the project and file that justify them.
+Each run's manifest records a digest of every table at collection, and each
+results page gives the digests of the scorer commit that produced it.
 
-Each entry is defensible on its own. Collectively they are choices made by a
-party that also ships a scored tool, and a single well-chosen addition could
-favour one generator without any vendor name ever appearing in the code. The
-answer to that is procedural, not technical:
-
-**The rule, in force from the first published run:**
-
-1. **Changes only by pull request.** No entry is added, altered or removed
-   outside a reviewed PR against the public repository. This holds for the
-   maintainer as much as for anyone else.
-2. **A PR touching a table must say which generator prompted it**, and must not
-   be merged in the same PR as a scoring run.
-3. **Uniform application.** An entry admitted for one generator is admitted for
-   all. There is no mechanism to scope one to a tool, and
-   `tests/test_no_tool_specific_logic.py` fails the build if one is introduced.
-4. **Every entry is covered by the invariance test automatically.**
-   `tests/test_table_governance.py` iterates over the tables themselves rather
-   than over a fixed list of cases, scoring a document that exercises each entry
-   under six tool names, including `pqprobe-static`, and asserting the result
-   never moves. An entry added tomorrow is covered by the same assertions with
-   no test change required, and an entry that behaves differently per tool fails
-   the moment it is added.
-5. **No alias may collapse distinct families.** Enforced by
-   `test_no_alias_collapses_distinct_families`, which is the failure mode most
-   likely to arrive with a well-meaning addition and the one that would inflate
-   every tool's score at once.
-6. **Additions between quarterly runs are listed in the run manifest**, so a
-   score change caused by a table change is attributable rather than invisible.
+1. **A judgement-table change is its own commit**, separate from any run.
+2. **The run manifest names the generator that prompted each table change.**
+3. **Uniform application.** An entry applies to every tool. No entry can be
+   scoped to a tool; `tests/test_no_tool_specific_logic.py` fails if one is.
+4. **Every entry is covered by the invariance test.**
+   `tests/test_table_governance.py` iterates over the tables, scores a document
+   exercising each entry under six tool names, `pqprobe` among them, and
+   asserts that the result is the same.
+5. **No alias collapses distinct families.**
+   `test_no_alias_collapses_distinct_families` fails if one does.
+6. **Changes between runs are listed in the run manifest**, under
+   `judgement_table_changes` (§8, step 7).
 
 **Co-maintainership of these tables is offered to the SEG group at the
 University of Bern**, as maintainers of BF-CBOM and CBOMbench and as a party

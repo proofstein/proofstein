@@ -39,15 +39,8 @@ class TestFamilyMarkersAreAnchored(unittest.TestCase):
     """An algorithm name is matched as tokens, never as a substring.
 
     Every entry in NOT_ALGORITHM_NAMES is a string a generator has emitted or
-    plausibly could: a filename, an identifier, a word from a comment. Before
-    family markers were anchored, each of the first four produced a family and
-    could therefore be charged as a false positive, or worse, silently credited.
-
-    The DES row is the one with a run behind it. In scoring the 2026-07-28 run a generator
-    reported ``DES`` five times after matching the letters inside "decides" in a
-    config comment. The scorer did not catch it, and the reason it did not is
-    recorded in docs/pending-review.md entry 6. These cases exist so that the
-    scorer's own version of that bug cannot come back.
+    plausibly could: a filename, an identifier, a word from a comment. None
+    produces a family, so none is charged as a false positive or credited.
     """
 
     NOT_ALGORITHM_NAMES = [
@@ -132,7 +125,7 @@ class TestFamilyMarkersAreAnchored(unittest.TestCase):
         self.assertFalse(algorithms_compatible("DSA-2048", "ECDSA-P256"))
 
     def test_post_quantum_signature_families_are_distinct(self):
-        """ML-DSA, SLH-DSA, FN-DSA and DSA share a suffix, not a family (entry 14)."""
+        """ML-DSA, SLH-DSA, FN-DSA and DSA share a suffix, not a family."""
         self.assertEqual(families(normalize_tokens("ML-DSA-65")), {"MLDSA"})
         self.assertEqual(families(normalize_tokens("SLH-DSA")), {"SLHDSA"})
         self.assertEqual(families(normalize_tokens("SPHINCS+")), {"SLHDSA"})
@@ -155,7 +148,7 @@ class TestFamilyMarkersAreAnchored(unittest.TestCase):
         self.assertTrue(algorithms_compatible("Falcon-512", "falcon512"))
 
     def test_stateful_hash_signatures_are_families(self):
-        """LMS and XMSS are families (entry 14)."""
+        """LMS and XMSS are families."""
         for name in ("LMS", "lms_sha256_n32_h10", "LMSigParameters", "wc_LmsKey_SetLmsParm"):
             with self.subTest(name=name):
                 self.assertIn("LMS", families(normalize_tokens(name)))
@@ -166,7 +159,7 @@ class TestFamilyMarkersAreAnchored(unittest.TestCase):
         self.assertFalse(algorithms_compatible("LMS", "XMSS"))
 
     def test_a_mode_alone_does_not_identify_a_cipher(self):
-        """A report sharing only a mode with the plant does not find it (entry 16)."""
+        """A report sharing only a mode with the plant does not find it."""
         self.assertFalse(algorithms_compatible("AES-256-GCM", "gcm-detection"))
         self.assertFalse(algorithms_compatible("AES-256-GCM", "GCM"))
         self.assertTrue(algorithms_compatible("AES-256-GCM", "AES"))
@@ -175,8 +168,7 @@ class TestFamilyMarkersAreAnchored(unittest.TestCase):
     def test_dictionary_families_are_never_markers(self):
         """The whole-token-only families must have no substring path at all.
 
-        Adding one to _FAMILY_MARKERS would reintroduce exactly the bug this
-        module pins, so the invariant is asserted rather than trusted.
+        No family in _WHOLE_TOKEN_ONLY appears in _FAMILY_MARKERS.
         """
         overlap = sorted({marker for marker, _ in _FAMILY_MARKERS} & _WHOLE_TOKEN_ONLY)
         self.assertEqual(overlap, [], f"dictionary-word families used as markers: {overlap}")
@@ -265,15 +257,10 @@ class TestAlgorithmCompatibility(unittest.TestCase):
                 self.assertFalse(algorithms_compatible(planted, reported))
 
     def test_encoding_version_numbers_are_not_key_sizes(self):
-        """Found in scoring the 2026-07-28 run, against a real generator.
+        """``PKCS#8`` and ``PKCS#12`` digits are format versions, not key sizes.
 
-        ``PKCS#8`` and ``PKCS#12`` name key-material structures; their digits are
-        format versions. Reading them as key sizes made "RSA private key
-        (PKCS#8)" contradict a planted RSA-2048, which simultaneously denied a
-        correct detection and charged a false positive for the same component.
-
-        This fix raises the maintainer's own tool's score, which is why it is
-        pinned here and disclosed in the run notes.
+        They name key-material structures, so "RSA private key (PKCS#8)" is
+        compatible with a planted RSA-2048.
         """
         self.assertTrue(algorithms_compatible("RSA-2048", "RSA private key (PKCS#8)"))
         self.assertTrue(algorithms_compatible("ECDSA-P256", "EC private key (SEC1)"))
@@ -288,18 +275,122 @@ class TestAlgorithmCompatibility(unittest.TestCase):
         self.assertFalse(algorithms_compatible("SHA-256", "SHA-512"))
 
     def test_jws_algorithm_names_resolve_to_their_family(self):
-        """RS256 and ES256 name a family, and their digits are a digest size.
+        """A JOSE name is its algorithm, and its number is a digest length.
 
-        A config that says ``RS256`` is credited by a report of ``RSA``. It is
-        deliberately *not* credited by a report of ``RSA-2048``: the config does
-        not state a key size, so naming one is an over-claim, and the 256 in
-        RS256 refers to SHA-256 rather than to a modulus.
+        RS256 is RSA with SHA-256 at whatever modulus the key has, so it neither
+        contradicts nor states a key size: ``RSA-2048`` credits it like any more
+        specific report of the same family. ES256, ES384 and ES512 do fix their
+        curve, so ES384 is not ECDSA on P-256.
         """
-        self.assertTrue(algorithms_compatible("RS256", "RSA"))
+        for jose in ("RS256", "RS384", "RS512", "PS256", "RSA-OAEP-256"):
+            with self.subTest(jose=jose):
+                self.assertEqual(families(normalize_tokens(jose)), {"RSA"})
+                self.assertTrue(algorithms_compatible(jose, "RSA"))
+                self.assertTrue(algorithms_compatible(jose, "RSA-2048"))
+                self.assertTrue(algorithms_compatible("RSA-2048", jose))
+                self.assertFalse(algorithms_compatible(jose, "AES-256-GCM"))
+                self.assertFalse(algorithms_compatible(jose, "SHA-256"))
         self.assertTrue(algorithms_compatible("RS256", "RS256"))
-        self.assertFalse(algorithms_compatible("RS256", "RSA-2048"))
-        self.assertFalse(algorithms_compatible("RS256", "AES-256-GCM"))
+        self.assertTrue(algorithms_compatible("PS256", "RSASSA-PSS"))
+        self.assertTrue(algorithms_compatible("RSA-OAEP-256", "RSA-OAEP"))
         self.assertTrue(algorithms_compatible("ES256", "ECDSA"))
+        self.assertTrue(algorithms_compatible("ES256", "ECDSA-P256"))
+        self.assertTrue(algorithms_compatible("ES384", "secp384r1"))
+        self.assertFalse(algorithms_compatible("ES384", "ECDSA-P256"))
+        self.assertFalse(algorithms_compatible("ES256", "ECDH-P256"))
+
+    def test_ecdh_is_not_ecdsa(self):
+        """Key agreement and signature on one curve are different assets."""
+        self.assertEqual(families(normalize_tokens("ECDH-P256")), {"ECDH"})
+        self.assertEqual(families(normalize_tokens("BCRYPT_ECDH_P256_ALGORITHM")), {"ECDH"})
+        self.assertFalse(algorithms_compatible("ECDH-P256", "ECDSA-P256"))
+        self.assertFalse(algorithms_compatible("ECDSA-P256", "ECDH-P256"))
+        self.assertFalse(algorithms_compatible("ECDH-P256", "ECDSA"))
+        self.assertTrue(algorithms_compatible("ECDH-P256", "ECDH"))
+        self.assertTrue(algorithms_compatible("ECDH-P256", "BCRYPT_ECDH_P256_ALGORITHM"))
+        self.assertFalse(algorithms_compatible("ECDH-P256", "ECDH-P384"))
+        # A curve alone states no use; see test_a_bare_curve_credits_either_use.
+        self.assertTrue(algorithms_compatible("ECDSA-P256", "secp256r1"))
+        self.assertTrue(algorithms_compatible("ECDH-P256", "secp256r1"))
+        # A cipher suite carries both.
+        self.assertTrue(algorithms_compatible("ECDHE-ECDSA-AES256-GCM-SHA384", "ECDH"))
+        self.assertTrue(algorithms_compatible("ECDHE-ECDSA-AES256-GCM-SHA384", "ECDSA"))
+
+    def test_a_bare_curve_credits_either_use(self):
+        """A curve name, or EC alone, credits an ECDSA or an ECDH plant on that curve."""
+        for report in ("P-256", "secp256r1", "prime256v1", "NIST P-256", "EC"):
+            for planted in ("ECDSA-P256", "ECDH-P256"):
+                with self.subTest(report=report, planted=planted):
+                    self.assertTrue(algorithms_compatible(planted, report))
+        for planted in ("ECDSA-P256", "ECDH-P256"):
+            with self.subTest(planted=planted):
+                self.assertFalse(algorithms_compatible(planted, "P-384"))
+                self.assertFalse(algorithms_compatible(planted, "secp384r1"))
+        self.assertTrue(algorithms_compatible("ECDH-P384", "P-384"))
+
+    def test_a_named_use_credits_only_its_family(self):
+        """A report that says ECDSA or ECDH credits only that use, on any curve."""
+        for report in ("ECDSA", "ECDSA-P256", "ECDSA with P-256", "ECDSA-SHA256", "ES256"):
+            with self.subTest(report=report):
+                self.assertTrue(algorithms_compatible("ECDSA-P256", report))
+                self.assertFalse(algorithms_compatible("ECDH-P256", report))
+        for report in ("ECDH", "ECDH-P256", "ECDH on secp256r1", "BCRYPT_ECDH_P256_ALGORITHM"):
+            with self.subTest(report=report):
+                self.assertTrue(algorithms_compatible("ECDH-P256", report))
+                self.assertFalse(algorithms_compatible("ECDSA-P256", report))
+
+    def test_hybrid_group_needs_both_halves(self):
+        """A hybrid is found by naming it, not by naming one of its halves."""
+        for planted in ("X25519MLKEM768", "SecP256r1MLKEM768", "SecP384r1MLKEM1024"):
+            with self.subTest(planted=planted):
+                self.assertTrue(algorithms_compatible(planted, planted))
+                self.assertTrue(algorithms_compatible(planted, planted.lower()))
+                self.assertFalse(algorithms_compatible(planted, "ML-KEM"))
+        self.assertTrue(algorithms_compatible("X25519MLKEM768", "X25519 + ML-KEM-768"))
+        self.assertTrue(algorithms_compatible("X25519MLKEM768", "X25519-ML-KEM-768"))
+        self.assertFalse(algorithms_compatible("X25519MLKEM768", "X25519"))
+        self.assertFalse(algorithms_compatible("X25519MLKEM768", "ML-KEM-768"))
+        self.assertFalse(algorithms_compatible("X25519MLKEM768", "X25519MLKEM1024"))
+        self.assertFalse(algorithms_compatible("SecP256r1MLKEM768", "ECDSA-P256"))
+        self.assertFalse(algorithms_compatible("SecP256r1MLKEM768", "ECDH-P256"))
+        self.assertFalse(algorithms_compatible("SecP384r1MLKEM1024", "SecP256r1MLKEM768"))
+        # A list separator lists two groups; it does not compose them.
+        self.assertFalse(algorithms_compatible("X25519MLKEM768", "X25519:MLKEM768"))
+        # A hybrid report names each half, at its own parameters.
+        self.assertTrue(algorithms_compatible("ML-KEM-768", "X25519MLKEM768"))
+        self.assertTrue(algorithms_compatible("X25519", "X25519MLKEM768"))
+        self.assertFalse(algorithms_compatible("ML-KEM-512", "X25519MLKEM768"))
+        self.assertEqual(families(normalize_tokens("SecP256r1MLKEM768")), {"ECDH", "MLKEM"})
+
+    def test_curve_and_group_names_have_families(self):
+        self.assertEqual(families(normalize_tokens("P-384")), {"EC"})
+        self.assertEqual(families(normalize_tokens("P-521")), {"EC"})
+        self.assertTrue(algorithms_compatible("ECDSA-P384", "P-384"))
+        self.assertFalse(algorithms_compatible("ECDSA-P256", "P-384"))
+        self.assertTrue(algorithms_compatible("secp521r1", "P-521"))
+        self.assertEqual(families(normalize_tokens("X448")), {"X448"})
+        self.assertEqual(families(normalize_tokens("Ed448")), {"ED448"})
+        self.assertFalse(algorithms_compatible("X448", "X25519"))
+        self.assertFalse(algorithms_compatible("Ed448", "Ed25519"))
+        for name in ("ffdhe2048", "ffdhe3072", "FFDHE-4096", "ffdhe6144"):
+            with self.subTest(name=name):
+                self.assertEqual(families(normalize_tokens(name)), {"DH"})
+        self.assertTrue(algorithms_compatible("ffdhe3072", "DH"))
+        self.assertFalse(algorithms_compatible("ffdhe3072", "ffdhe2048"))
+
+    def test_a_shared_number_identifies_nothing(self):
+        """A name with no family is not credited by another family sharing its number."""
+        self.assertFalse(algorithms_compatible("Widget-2048", "RSA-2048"))
+        self.assertFalse(algorithms_compatible("ffdhe2048", "RSA-2048"))
+        self.assertFalse(algorithms_compatible("RSA-2048", "2048"))
+
+    def test_bcrypt_is_a_family_and_cng_is_not_bcrypt(self):
+        """The password hash is a family; the Windows CNG prefix is not that hash."""
+        self.assertEqual(families(normalize_tokens("bcrypt")), {"BCRYPT"})
+        self.assertEqual(families(normalize_tokens("BCryptOpenAlgorithmProvider")), set())
+        self.assertNotIn("BCRYPT", families(normalize_tokens("BCRYPT_ECDH_P256_ALGORITHM")))
+        self.assertNotIn("BCRYPT", families(normalize_tokens("BCRYPT_RSA_ALGORITHM")))
+        self.assertFalse(algorithms_compatible("bcrypt", "scrypt"))
 
     def test_placeholder_names_do_not_match_everything(self):
         """'other' and 'unknown' are real cbomkit values; they must stay inert."""
@@ -364,3 +455,43 @@ class TestLocationMatching(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestNumbersBetweenFamilylessNames(unittest.TestCase):
+    def test_a_keystore_file_still_names_its_container(self):
+        """Two familyless names may share only a number; that link is kept."""
+        self.assertTrue(algorithms_compatible("PKCS#12", "ledger-node.p12"))
+
+    def test_a_bare_parameter_does_not_credit_another_family(self):
+        """The 512 of an ML-KEM report is not a report of Falcon-512."""
+        self.assertFalse(algorithms_compatible("Falcon-512", "512"))
+        self.assertFalse(algorithms_compatible("AES-256-GCM", "256"))
+
+
+class TestCombinedSignatureNames(unittest.TestCase):
+    """SHA256withECDSA names the signature scheme and the digest."""
+
+    def test_a_combined_name_credits_both_halves(self):
+        for planted, reported in [
+            ("ECDSA-P256", "SHA256withECDSA"),
+            ("SHA-256", "SHA256withECDSA"),
+            ("ECDSA-P384", "SHA384withECDSA"),
+            ("SHA-384", "SHA384withECDSA"),
+            ("RSA-2048", "SHA384withRSA"),
+            ("SHA-384", "SHA384withRSA"),
+            ("RSA-2048", "SHA256withRSA/PSS"),
+            ("SHA-256", "sha256WithRSAEncryption"),
+        ]:
+            with self.subTest(planted=planted, reported=reported):
+                self.assertTrue(algorithms_compatible(planted, reported))
+
+    def test_a_combined_name_credits_nothing_else(self):
+        for planted, reported in [
+            ("ECDH-P256", "SHA256withECDSA"),
+            ("RSA-2048", "SHA256withECDSA"),
+            ("SHA-384", "SHA256withECDSA"),
+            ("SHA-256", "SHA384withRSA"),
+            ("ECDSA-P256", "SHA256withRSA"),
+        ]:
+            with self.subTest(planted=planted, reported=reported):
+                self.assertFalse(algorithms_compatible(planted, reported))

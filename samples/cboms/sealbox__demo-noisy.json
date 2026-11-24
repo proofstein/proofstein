@@ -16,39 +16,7 @@
   "components": [
     {
       "type": "cryptographic-asset",
-      "bom-ref": "crypto/rust-l1-ecdsa",
-      "name": "ECDSA-P256",
-      "cryptoProperties": {
-        "assetType": "algorithm"
-      },
-      "evidence": {
-        "occurrences": [
-          {
-            "location": "src/identity.rs",
-            "line": 27
-          }
-        ]
-      }
-    },
-    {
-      "type": "cryptographic-asset",
-      "bom-ref": "crypto/rust-l1-sha256",
-      "name": "SHA-256",
-      "cryptoProperties": {
-        "assetType": "algorithm"
-      },
-      "evidence": {
-        "occurrences": [
-          {
-            "location": "src/identity.rs",
-            "line": 44
-          }
-        ]
-      }
-    },
-    {
-      "type": "cryptographic-asset",
-      "bom-ref": "crypto/rust-l3-wrapper",
+      "bom-ref": "crypto/rust-l1-aesgcm",
       "name": "AES-256-GCM",
       "cryptoProperties": {
         "assetType": "algorithm"
@@ -56,8 +24,56 @@
       "evidence": {
         "occurrences": [
           {
-            "location": "src/store.rs",
-            "line": 33
+            "location": "src/envelope.rs",
+            "line": 70
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/rust-l1-ed25519",
+      "name": "Ed25519",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/identity.rs",
+            "line": 26
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/rust-l1-rsa",
+      "name": "RSA-2048",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/identity.rs",
+            "line": 28
+          }
+        ]
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/rust-l1-mlkem",
+      "name": "ML-KEM-768",
+      "cryptoProperties": {
+        "assetType": "algorithm"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "src/kem.rs",
+            "line": 19
           }
         ]
       }
@@ -89,7 +105,7 @@
         "occurrences": [
           {
             "location": "Cargo.toml",
-            "line": 20
+            "line": 15
           }
         ]
       }

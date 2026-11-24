@@ -7,13 +7,8 @@
 #   tools/build-all.sh                      # the public corpus
 #   tools/build-all.sh ground-truth-holdout # the generated holdout variants
 #
-# The corpus exists so that build-aware CBOM generators are not disadvantaged,
-# which only holds if the projects actually build. This is the check for that,
-# and for the holdout it is also the check that the rename and relocation
-# transforms produced a program that still compiles.
-#
-# Projects are discovered from the ground-truth documents rather than hardcoded,
-# so a holdout variant under a different name is picked up automatically.
+# Projects are discovered from the ground-truth documents, so holdout variants
+# are built under their own names.
 #
 # Build artifacts (cargo target dirs, the crate registry, node_modules, the
 # Maven repo) are large and disposable, so they are kept outside the repo and
@@ -53,10 +48,8 @@ export PATH="${CARGO_HOME}/bin:${PATH}"
 # route to a wolfSSL that can build this project, so the dependency is pinned
 # and built here instead.
 #
-# 5.9.1 rather than an earlier release: it ships LMS and XMSS as native
-# wolfCrypt implementations. Earlier versions integrated external reference code
-# and could not reliably enable both schemes in one build, which this project
-# needs.
+# 5.9.1 ships LMS and XMSS as native wolfCrypt implementations, and this
+# project needs both enabled in one build.
 WOLFSSL_VERSION="5.9.1"
 WOLFSSL_PREFIX="${BUILD_ROOT}/wolfssl-${WOLFSSL_VERSION}"
 
@@ -105,7 +98,7 @@ build_c() {
     export LDFLAGS="-L${WOLFSSL_PREFIX}/lib ${LDFLAGS:-}"
     export LD_LIBRARY_PATH="${WOLFSSL_PREFIX}/lib:${LD_LIBRARY_PATH:-}"
     make clean >/dev/null 2>&1
-    make && make check
+    make && make check && make windows-check
 }
 build_rust() { cargo build --locked && cargo run --locked --quiet; }
 build_java() { mvn "${MVN_FLAGS[@]}" package && mvn "${MVN_FLAGS[@]}" exec:java; }

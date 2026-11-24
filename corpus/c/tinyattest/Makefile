@@ -8,17 +8,22 @@
 # opt-in at configure time and no package manager we use exposes them, so
 # tools/build-all.sh builds wolfSSL from source and points CPPFLAGS and LDFLAGS
 # at it. To build by hand, install such a wolfSSL and set those the same way.
+#
+# src/tls.c links libssl. src/win_cng.c is the Windows pre-key path through CNG:
+# empty on every other platform, and compiled and linked against bcrypt by
+# `make windows-check` with a mingw-w64 cross compiler (WINCC).
 
 CC      ?= cc
 CFLAGS  ?= -O2 -g -std=c11 -Wall -Wextra -Wpedantic
 CPPFLAGS += -Iinclude
-LDLIBS  += -lcrypto -lwolfssl
+LDLIBS  += -lssl -lcrypto -lwolfssl
+WINCC   ?= x86_64-w64-mingw32-gcc
 
 BIN     := tinyattest
 SRCS    := $(wildcard src/*.c)
 OBJS    := $(SRCS:.c=.o)
 
-.PHONY: all clean check
+.PHONY: all clean check windows-check
 
 all: $(BIN)
 
@@ -31,5 +36,8 @@ src/%.o: src/%.c include/tinyattest.h
 check: $(BIN)
 	./$(BIN) etc/tinyattest.conf
 
+windows-check:
+	$(WINCC) -std=c11 -Wall -Wextra -Wpedantic -shared -o tinyattest-cng.dll src/win_cng.c -lbcrypt
+
 clean:
-	rm -f $(BIN) $(OBJS)
+	rm -f $(BIN) $(OBJS) tinyattest-cng.dll

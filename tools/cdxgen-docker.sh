@@ -5,15 +5,8 @@
 # tools/collect-cboms.py in TOOL_IMAGE, so there is one pin and the manifest
 # records the image it names. Run by hand, set TOOL_IMAGE to that value.
 #
-# the 2026-07-27, 2026-07-28 and 2026-08-01 runs invoked cdxgen from a node_modules install. That build root
-# no longer exists and this host has no Node toolchain, so the 2026-08-23 run invokes the
-# official image at the same pinned version instead. The arguments are unchanged,
-# which is what keeps cdxgen a control across runs.
-#
-# One observable difference, recorded because it is visible in the output: the
-# container sees the project at /src, so reported paths are /src/... rather than
-# an absolute host path. The scorer resolves paths by longest matching suffix
-# (METHODOLOGY.md 3.2), so this changes nothing about matching.
+# The container sees the project at /src, so reported paths begin with /src/.
+# The scorer resolves paths by longest matching suffix (METHODOLOGY.md 3.2).
 set -euo pipefail
 
 IMAGE="${TOOL_IMAGE:?TOOL_IMAGE is not set: give it the image runs/generators.json pins}"

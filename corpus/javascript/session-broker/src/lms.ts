@@ -7,10 +7,10 @@
  * transport the platform already established, and no key material reaches this
  * module.
  *
- * This file carries no ground-truth entry, deliberately. What it tests, and why,
- * is recorded in docs/pending-review.md entry 11. The explanation is kept there
- * rather than here on purpose, so that no cryptographic name appears anywhere in
- * this file.
+ * This file carries no ground-truth entry. It is a negative case, and what it
+ * tests is stated in METHODOLOGY.md, section 4. No cryptographic name appears
+ * anywhere in this file, and no planted asset of this project is located in
+ * it.
  */
 
 import { Settings } from "./settings.js";
