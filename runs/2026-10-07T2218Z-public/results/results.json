@@ -2,7 +2,7 @@
   "meta": {
     "corpus_version": "92435d1",
     "line_tolerance": 2,
-    "scorer_commit": "6ada872",
+    "scorer_commit": "f366ff5",
     "corpus": "public",
     "schema_validated": true,
     "cboms_scored": 40,

@@ -1,0 +1,455 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:38e0b47d-8cc0-4f61-b0ba-5521603909ea",
+  "version": 2,
+  "metadata": {
+    "timestamp": "2026-11-24T11:57:41Z",
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "name": "go"
+        },
+        {
+          "type": "application",
+          "name": "python"
+        },
+        {
+          "type": "application",
+          "name": "python3"
+        },
+        {
+          "name": "trustinspector",
+          "version": "4.3.1",
+          "description": "cdxgen trust-material inspection helper for repository keys, certificate stores, macOS code-signing, notarization, and Windows trust policy inventory.",
+          "purl": "pkg:generic/github.com/cdxgen/cdxgen-plugins-bin/trustinspector-cdxgen@4.3.1",
+          "bom-ref": "pkg:generic/github.com/cdxgen/cdxgen-plugins-bin/trustinspector-cdxgen@4.3.1",
+          "type": "application",
+          "hashes": [
+            {
+              "alg": "SHA-256",
+              "content": "714dad5fdd6b2be8f52cec750b812187a55e5a9ee7707ea9764b969fd732b8d5"
+            }
+          ],
+          "externalReferences": [
+            {
+              "type": "vcs",
+              "url": "https://github.com/cdxgen/cdxgen-plugins-bin/tree/main/thirdparty/trustinspector"
+            },
+            {
+              "type": "issue-tracker",
+              "url": "https://github.com/cdxgen/cdxgen/issues"
+            }
+          ],
+          "properties": [
+            {
+              "name": "cdx:plugin:manifest:name",
+              "value": "trustinspector"
+            },
+            {
+              "name": "internal:binary_path",
+              "value": "plugins/trustinspector/trustinspector-cdxgen-linux-amd64"
+            }
+          ],
+          "licenses": [
+            {
+              "license": {
+                "id": "MIT"
+              }
+            }
+          ]
+        },
+        {
+          "group": "@cdxgen",
+          "name": "cdxgen",
+          "version": "13.8.0",
+          "purl": "pkg:npm/%40cdxgen/cdxgen@13.8.0",
+          "type": "application",
+          "bom-ref": "pkg:npm/@cdxgen/cdxgen@13.8.0",
+          "publisher": "OWASP Foundation",
+          "authors": [
+            {
+              "name": "OWASP Foundation"
+            }
+          ]
+        }
+      ]
+    },
+    "authors": [
+      {
+        "name": "OWASP Foundation"
+      }
+    ],
+    "lifecycles": [
+      {
+        "phase": "build"
+      }
+    ],
+    "component": {
+      "group": "",
+      "name": "src",
+      "version": "latest",
+      "type": "application",
+      "purl": "pkg:pypi/src@latest",
+      "bom-ref": "pkg:pypi/src@latest"
+    },
+    "properties": [
+      {
+        "name": "cdx:bom:componentSrcFiles",
+        "value": "../src/ops/health/requirements.txt\\n../src/testdata/relay-cert.pem\\n../testdata/peer-mtls-key.pem\\n../testdata/relay-key.pem\\ncdxgen-venv-HxGNk1"
+      },
+      {
+        "name": "cdx:bom:componentTypes",
+        "value": "pypi"
+      }
+    ]
+  },
+  "components": [
+    {
+      "group": "",
+      "name": "falcon",
+      "version": "4.3.1",
+      "purl": "pkg:pypi/falcon@4.3.1",
+      "type": "library",
+      "bom-ref": "pkg:pypi/falcon@4.3.1",
+      "properties": [
+        {
+          "name": "internal:SrcFile",
+          "value": "../src/ops/health/requirements.txt"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 1,
+            "methods": [
+              {
+                "technique": "instrumentation",
+                "confidence": 1,
+                "value": "cdxgen-venv-HxGNk1"
+              }
+            ],
+            "concludedValue": "cdxgen-venv-HxGNk1"
+          }
+        ],
+        "callstack": {
+          "frames": [
+            {
+              "package": "",
+              "module": "ops.health.api.HealthResource",
+              "function": "on_get",
+              "line": 31,
+              "column": 43,
+              "fullFilename": "ops/health/api.py"
+            },
+            {
+              "package": "",
+              "module": "ops.health.api.HealthResource",
+              "function": "on_get",
+              "line": 32,
+              "column": 9,
+              "fullFilename": "ops/health/api.py"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "peer-mtls-key.pem",
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/related-crypto-material/private-key/%2Ftestdata%2Fpeer-mtls-key.pem",
+      "cryptoProperties": {
+        "assetType": "related-crypto-material",
+        "relatedCryptoMaterialProperties": {
+          "type": "private-key",
+          "format": "EC"
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "/testdata/peer-mtls-key.pem"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:crypto:sourceType",
+          "value": "generic"
+        },
+        {
+          "name": "internal:SrcFile",
+          "value": "../testdata/peer-mtls-key.pem"
+        }
+      ],
+      "tags": [
+        "cryptographic-asset"
+      ]
+    },
+    {
+      "name": "relay-key.pem",
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/related-crypto-material/private-key/%2Ftestdata%2Frelay-key.pem",
+      "cryptoProperties": {
+        "assetType": "related-crypto-material",
+        "relatedCryptoMaterialProperties": {
+          "type": "private-key",
+          "format": "PKCS8"
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "/testdata/relay-key.pem"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:crypto:sourceType",
+          "value": "generic"
+        },
+        {
+          "name": "internal:SrcFile",
+          "value": "../testdata/relay-key.pem"
+        }
+      ],
+      "tags": [
+        "cryptographic-asset"
+      ]
+    },
+    {
+      "bom-ref": "crypto/algorithm/RSA@1.2.840.113549.1.1.1",
+      "name": "RSA",
+      "type": "cryptographic-asset",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "oid": "1.2.840.113549.1.1.1",
+        "algorithmProperties": {
+          "nistQuantumSecurityLevel": 0
+        }
+      },
+      "properties": [],
+      "tags": [
+        "cryptographic-asset"
+      ]
+    },
+    {
+      "bom-ref": "crypto/algorithm/SHA256-RSA@1.2.840.113549.1.1.11",
+      "name": "SHA256-RSA",
+      "type": "cryptographic-asset",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "oid": "1.2.840.113549.1.1.11",
+        "algorithmProperties": {
+          "nistQuantumSecurityLevel": 0
+        }
+      },
+      "properties": [],
+      "tags": [
+        "cryptographic-asset"
+      ]
+    },
+    {
+      "bom-ref": "crypto/certificate/relay.beacon.internal@sha256:8c76db71548d15c879042d6b0afed10c0bce12dda2afa50e2ea9e2cf4b572bc8",
+      "name": "relay.beacon.internal",
+      "type": "cryptographic-asset",
+      "version": "8c76db71548d15c879042d6b0afed10c0bce12dda2afa50e2ea9e2cf4b572bc8",
+      "hashes": [
+        {
+          "alg": "SHA-1",
+          "content": "ae52a959d3c4ba318ea1a8b4207abd45e4fb9401"
+        },
+        {
+          "alg": "SHA-256",
+          "content": "4563ecf33210ebc7b2a4f64c9793f834cf82943f1166f293e148a8a234a12c91"
+        }
+      ],
+      "description": "CN=relay.beacon.internal,OU=NOT A REAL KEY,O=Proofstein Corpus",
+      "cryptoProperties": {
+        "assetType": "certificate",
+        "algorithmProperties": {
+          "executionEnvironment": "unknown",
+          "implementationPlatform": "unknown"
+        },
+        "certificateProperties": {
+          "subjectName": "CN=relay.beacon.internal,OU=NOT A REAL KEY,O=Proofstein Corpus",
+          "issuerName": "CN=relay.beacon.internal,OU=NOT A REAL KEY,O=Proofstein Corpus",
+          "notValidBefore": "2026-07-27T14:34:43Z",
+          "notValidAfter": "2036-07-24T14:34:43Z",
+          "certificateFormat": "X.509",
+          "certificateExtension": "pem",
+          "subjectPublicKeyRef": "crypto/public-key/RSA-2048@spki-sha256:8b42c38aa399ea785824762ac855058480a19ed4d6c0e8749d8564631beb99a3",
+          "signatureAlgorithmRef": "crypto/algorithm/SHA256-RSA@1.2.840.113549.1.1.11"
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "/src/testdata/relay-cert.pem"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:crypto:algorithm",
+          "value": "RSA"
+        },
+        {
+          "name": "cdx:crypto:authorityKeyId",
+          "value": "ad60df3609360216983a333370f6f756461a689b"
+        },
+        {
+          "name": "cdx:crypto:certRole",
+          "value": "root"
+        },
+        {
+          "name": "cdx:crypto:fingerprint",
+          "value": "8c76db71548d15c879042d6b0afed10c0bce12dda2afa50e2ea9e2cf4b572bc8"
+        },
+        {
+          "name": "cdx:crypto:isCA",
+          "value": "true"
+        },
+        {
+          "name": "cdx:crypto:keyStrength",
+          "value": "2048"
+        },
+        {
+          "name": "cdx:crypto:publicKeyAlgorithmOid",
+          "value": "1.2.840.113549.1.1.1"
+        },
+        {
+          "name": "cdx:crypto:selfSigned",
+          "value": "true"
+        },
+        {
+          "name": "cdx:crypto:signatureAlgorithm",
+          "value": "SHA256-RSA"
+        },
+        {
+          "name": "cdx:crypto:signatureAlgorithmOid",
+          "value": "1.2.840.113549.1.1.11"
+        },
+        {
+          "name": "cdx:crypto:sourceType",
+          "value": "generic"
+        },
+        {
+          "name": "cdx:crypto:spkiSha256",
+          "value": "8b42c38aa399ea785824762ac855058480a19ed4d6c0e8749d8564631beb99a3"
+        },
+        {
+          "name": "cdx:crypto:subjectKeyId",
+          "value": "ad60df3609360216983a333370f6f756461a689b"
+        },
+        {
+          "name": "cdx:crypto:trustDomain",
+          "value": "generic"
+        },
+        {
+          "name": "internal:SrcFile",
+          "value": "../src/testdata/relay-cert.pem"
+        }
+      ],
+      "tags": [
+        "cryptographic-asset"
+      ]
+    },
+    {
+      "bom-ref": "crypto/public-key/RSA-2048@spki-sha256:8b42c38aa399ea785824762ac855058480a19ed4d6c0e8749d8564631beb99a3",
+      "name": "RSA-2048",
+      "type": "cryptographic-asset",
+      "version": "8b42c38aa399ea785824762ac855058480a19ed4d6c0e8749d8564631beb99a3",
+      "cryptoProperties": {
+        "assetType": "related-crypto-material",
+        "relatedCryptoMaterialProperties": {
+          "type": "public-key",
+          "size": 2048,
+          "format": "SPKI",
+          "id": "ad60df3609360216983a333370f6f756461a689b",
+          "algorithmRef": "crypto/algorithm/RSA@1.2.840.113549.1.1.1"
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "/src/testdata/relay-cert.pem"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:crypto:publicKeyAlgorithmOid",
+          "value": "1.2.840.113549.1.1.1"
+        },
+        {
+          "name": "cdx:crypto:sourceType",
+          "value": "certificate"
+        },
+        {
+          "name": "cdx:crypto:spkiSha256",
+          "value": "8b42c38aa399ea785824762ac855058480a19ed4d6c0e8749d8564631beb99a3"
+        },
+        {
+          "name": "cdx:crypto:spkiSha256Base64",
+          "value": "i0LDiqOZ6nhYJHYqyFUFhIChntTWwOh0nYVkYxvrmaM="
+        }
+      ],
+      "tags": [
+        "cryptographic-asset"
+      ]
+    }
+  ],
+  "services": [
+    {
+      "name": "api-service",
+      "endpoints": [
+        "/healthz",
+        "/readyz"
+      ],
+      "authenticated": false,
+      "properties": []
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "pkg:pypi/src@latest",
+      "dependsOn": [
+        "pkg:pypi/falcon@4.3.1"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/falcon@4.3.1",
+      "dependsOn": []
+    }
+  ],
+  "annotations": [
+    {
+      "bom-ref": "metadata-annotations",
+      "subjects": [
+        "pkg:pypi/src@latest"
+      ],
+      "annotator": {
+        "component": {
+          "group": "@cdxgen",
+          "name": "cdxgen",
+          "version": "13.8.0",
+          "purl": "pkg:npm/%40cdxgen/cdxgen@13.8.0",
+          "type": "application",
+          "bom-ref": "pkg:npm/@cdxgen/cdxgen@13.8.0",
+          "publisher": "OWASP Foundation",
+          "authors": [
+            {
+              "name": "OWASP Foundation"
+            }
+          ]
+        }
+      },
+      "timestamp": "2026-11-24T11:57:41Z",
+      "text": "This Cryptography Bill-of-Materials (CBOM) document was created on Tuesday, November 24, 2026. The xBOM tools used are: go, python, python3, trustinspector, and cdxgen. The data was captured during the build lifecycle phase. The document describes an application named 'src'. There are 6 cryptographic assets listed under components in this CBOM. There are 7 components. This SBOM contains 1 dynamically instrumented library components discovered during process execution tracing. These libraries were loaded at runtime and mapped back to system packages."
+    }
+  ]
+}

@@ -1,0 +1,378 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:d1f492ec-0489-48f7-92e1-b1c434ffc847",
+  "version": 2,
+  "metadata": {
+    "timestamp": "2026-11-24T11:57:55Z",
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "name": "mvn"
+        },
+        {
+          "name": "trustinspector",
+          "version": "4.3.1",
+          "description": "cdxgen trust-material inspection helper for repository keys, certificate stores, macOS code-signing, notarization, and Windows trust policy inventory.",
+          "purl": "pkg:generic/github.com/cdxgen/cdxgen-plugins-bin/trustinspector-cdxgen@4.3.1",
+          "bom-ref": "pkg:generic/github.com/cdxgen/cdxgen-plugins-bin/trustinspector-cdxgen@4.3.1",
+          "type": "application",
+          "hashes": [
+            {
+              "alg": "SHA-256",
+              "content": "714dad5fdd6b2be8f52cec750b812187a55e5a9ee7707ea9764b969fd732b8d5"
+            }
+          ],
+          "externalReferences": [
+            {
+              "type": "vcs",
+              "url": "https://github.com/cdxgen/cdxgen-plugins-bin/tree/main/thirdparty/trustinspector"
+            },
+            {
+              "type": "issue-tracker",
+              "url": "https://github.com/cdxgen/cdxgen/issues"
+            }
+          ],
+          "properties": [
+            {
+              "name": "cdx:plugin:manifest:name",
+              "value": "trustinspector"
+            },
+            {
+              "name": "internal:binary_path",
+              "value": "plugins/trustinspector/trustinspector-cdxgen-linux-amd64"
+            }
+          ],
+          "licenses": [
+            {
+              "license": {
+                "id": "MIT"
+              }
+            }
+          ]
+        },
+        {
+          "group": "@cdxgen",
+          "name": "cdxgen",
+          "version": "13.8.0",
+          "purl": "pkg:npm/%40cdxgen/cdxgen@13.8.0",
+          "type": "application",
+          "bom-ref": "pkg:npm/@cdxgen/cdxgen@13.8.0",
+          "publisher": "OWASP Foundation",
+          "authors": [
+            {
+              "name": "OWASP Foundation"
+            }
+          ]
+        }
+      ]
+    },
+    "authors": [
+      {
+        "name": "OWASP Foundation"
+      }
+    ],
+    "lifecycles": [
+      {
+        "phase": "build"
+      }
+    ],
+    "component": {
+      "group": "io.proofstein",
+      "name": "ledger-svc",
+      "version": "1.7.0",
+      "properties": [
+        {
+          "name": "internal:SrcFile",
+          "value": "../src/pom.xml"
+        }
+      ],
+      "purl": "pkg:maven/io.proofstein/ledger-svc@1.7.0?type=jar",
+      "bom-ref": "pkg:maven/io.proofstein/ledger-svc@1.7.0?type=jar",
+      "type": "application"
+    },
+    "properties": [
+      {
+        "name": "cdx:bom:componentNamespaces",
+        "value": "org.bouncycastle"
+      },
+      {
+        "name": "cdx:bom:componentSrcFiles",
+        "value": "../keys/block-signing-key.pem\\n../keys/ledger-node.p12\\n../src/pom.xml"
+      },
+      {
+        "name": "cdx:bom:componentTypes",
+        "value": "maven"
+      }
+    ]
+  },
+  "components": [
+    {
+      "group": "org.bouncycastle",
+      "name": "bcprov-jdk18on",
+      "version": "1.79",
+      "description": "The Bouncy Castle Crypto package is a Java implementation of cryptographic algorithms. This jar contains JCE provider and lightweight API for the Bouncy Castle Cryptography APIs for JDK 1.8 and up.",
+      "scope": "required",
+      "licenses": [
+        {
+          "license": {
+            "name": "Bouncy Castle Licence",
+            "properties": [
+              {
+                "name": "cdx:license:category",
+                "value": "Unstated License"
+              },
+              {
+                "name": "cdx:license:foss",
+                "value": "false"
+              },
+              {
+                "name": "cdx:license:osiApproved",
+                "value": "false"
+              },
+              {
+                "name": "cdx:license:fsfLibre",
+                "value": "false"
+              },
+              {
+                "name": "cdx:license:deprecated",
+                "value": "false"
+              }
+            ]
+          }
+        }
+      ],
+      "purl": "pkg:maven/org.bouncycastle/bcprov-jdk18on@1.79?type=jar",
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/bcgit/bc-java"
+        }
+      ],
+      "type": "framework",
+      "bom-ref": "pkg:maven/org.bouncycastle/bcprov-jdk18on@1.79?type=jar",
+      "properties": [
+        {
+          "name": "cdx:license:category",
+          "value": "Unstated License"
+        },
+        {
+          "name": "internal:SrcFile",
+          "value": "../src/pom.xml"
+        }
+      ],
+      "evidence": {
+        "identity": [
+          {
+            "field": "purl",
+            "confidence": 0.5,
+            "methods": [
+              {
+                "technique": "manifest-analysis",
+                "confidence": 0.5,
+                "value": "../src/pom.xml"
+              }
+            ],
+            "concludedValue": "../src/pom.xml"
+          }
+        ],
+        "occurrences": [
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/AuditSeal.java",
+            "symbol": "org.bouncycastle.jce.provider.BouncyCastleProvider",
+            "line": 31
+          },
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/AuditSeal.java",
+            "line": 50
+          },
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/AuditSeal.java",
+            "line": 55
+          },
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/AuditSeal.java",
+            "symbol": "org.bouncycastle.pqc.jcajce.spec.XMSSParameterSpec.SHA256",
+            "line": 52,
+            "offset": 54
+          },
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/AuditSeal.java",
+            "symbol": "org.bouncycastle.pqc.crypto.lms.LMSigParameters.lms_sha256_n32_h10",
+            "line": 56,
+            "offset": 44
+          },
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/AuditSeal.java",
+            "symbol": "org.bouncycastle.pqc.crypto.lms.LMOtsParameters.sha256_n32_w4",
+            "line": 56,
+            "offset": 64
+          },
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/BlockSeal.java",
+            "symbol": "org.bouncycastle.jce.provider.BouncyCastleProvider",
+            "line": 28
+          },
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/BlockSeal.java",
+            "symbol": "org.bouncycastle.jcajce.spec.MLDSAParameterSpec.ml_dsa_65",
+            "line": 37,
+            "offset": 30
+          },
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/BlockSeal.java",
+            "symbol": "org.bouncycastle.jcajce.spec.SLHDSAParameterSpec.slh_dsa_sha2_128s",
+            "line": 44,
+            "offset": 30
+          },
+          {
+            "location": "src/main/java/io/proofstein/ledger/crypto/BlockSeal.java",
+            "symbol": "org.bouncycastle.pqc.jcajce.spec.FalconParameterSpec.falcon_512",
+            "line": 51,
+            "offset": 30
+          }
+        ]
+      },
+      "tags": [
+        "api",
+        "crypto",
+        "framework",
+        "jce"
+      ]
+    },
+    {
+      "name": "ledger-node.p12",
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/related-crypto-material/keystore/%2Fkeys%2Fledger-node.p12",
+      "cryptoProperties": {
+        "assetType": "related-crypto-material",
+        "relatedCryptoMaterialProperties": {
+          "type": "other",
+          "format": "PKCS12"
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "/keys/ledger-node.p12"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:crypto:keystoreReadable",
+          "value": "false"
+        },
+        {
+          "name": "cdx:crypto:sourceType",
+          "value": "generic"
+        },
+        {
+          "name": "internal:SrcFile",
+          "value": "../keys/ledger-node.p12"
+        }
+      ],
+      "tags": [
+        "cryptographic-asset"
+      ]
+    },
+    {
+      "name": "block-signing-key.pem",
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/related-crypto-material/private-key/%2Fkeys%2Fblock-signing-key.pem",
+      "cryptoProperties": {
+        "assetType": "related-crypto-material",
+        "relatedCryptoMaterialProperties": {
+          "type": "private-key",
+          "format": "PKCS8"
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "/keys/block-signing-key.pem"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:crypto:sourceType",
+          "value": "generic"
+        },
+        {
+          "name": "internal:SrcFile",
+          "value": "../keys/block-signing-key.pem"
+        }
+      ],
+      "tags": [
+        "cryptographic-asset"
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "name": "aes",
+      "bom-ref": "crypto/algorithm/aes@2.16.840.1.101.3.4.1",
+      "description": "NIST Algorithm",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "oid": "2.16.840.1.101.3.4.1"
+      },
+      "tags": [
+        "cryptographic-asset"
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "name": "sha-256",
+      "bom-ref": "crypto/algorithm/sha-256@2.16.840.1.101.3.4.2.1",
+      "description": "NIST Algorithm",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "oid": "2.16.840.1.101.3.4.2.1"
+      },
+      "tags": [
+        "cryptographic-asset"
+      ]
+    }
+  ],
+  "services": [],
+  "dependencies": [
+    {
+      "ref": "pkg:maven/io.proofstein/ledger-svc@1.7.0?type=jar",
+      "dependsOn": [
+        "pkg:maven/org.bouncycastle/bcprov-jdk18on@1.79?type=jar"
+      ]
+    },
+    {
+      "ref": "pkg:maven/org.bouncycastle/bcprov-jdk18on@1.79?type=jar",
+      "dependsOn": []
+    }
+  ],
+  "annotations": [
+    {
+      "bom-ref": "metadata-annotations",
+      "subjects": [
+        "pkg:maven/io.proofstein/ledger-svc@1.7.0?type=jar"
+      ],
+      "annotator": {
+        "component": {
+          "group": "@cdxgen",
+          "name": "cdxgen",
+          "version": "13.8.0",
+          "purl": "pkg:npm/%40cdxgen/cdxgen@13.8.0",
+          "type": "application",
+          "bom-ref": "pkg:npm/@cdxgen/cdxgen@13.8.0",
+          "publisher": "OWASP Foundation",
+          "authors": [
+            {
+              "name": "OWASP Foundation"
+            }
+          ]
+        }
+      },
+      "timestamp": "2026-11-24T11:57:55Z",
+      "text": "This Cryptography Bill-of-Materials (CBOM) document was created on Tuesday, November 24, 2026. The xBOM tools used are: mvn, trustinspector, and cdxgen. The data was captured during the build lifecycle phase. The document describes an application named 'ledger-svc' with version '1.7.0'. There are 4 cryptographic assets listed under components in this CBOM. There are 5 components. The package type in this CBOM is maven with a single purl namespace 'org.bouncycastle' described under components. The components were identified from 3 source files."
+    }
+  ]
+}

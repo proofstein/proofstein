@@ -65,6 +65,17 @@ separately (METHODOLOGY.md §6).
 
 | run | date | kind | assets | tool | detection rate |
 |---|---|---|---|---|---|
+| [2026-11-24T1156Z-public](runs/2026-11-24T1156Z-public/) | 2026-11-24 | public | 131 | cdxgen 12.8.2 | 5% (6/131) |
+|  |  |  |  | cdxgen 13.8.0 | 8% (11/131) |
+|  |  |  |  | pqprobe 5.1.2 | 96% (126/131) |
+|  |  |  |  | cryptoscan 1.5.0, `--include-quantum-safe` | 56% (74/131) |
+|  |  |  |  | cryptoscan 1.5.0 | 41% (54/131) |
+|  |  |  |  | CodeQL 2.27.5 | 19% (17/90) |
+|  |  |  |  | cbomkit-theia 1.1.2 | 13% (17/131) |
+|  |  |  |  | Opengrep 2.0.0 | 0% (0/131) |
+| [2026-11-24T1156Z-holdout](runs/2026-11-24T1156Z-holdout/) | 2026-11-24 | holdout | 131 | cdxgen 12.8.2 | 5% (6/131) |
+|  |  |  |  | pqprobe 5.1.2 | 96% (126/131) |
+| [2026-11-24T1156Z-ecdsa-scan](runs/2026-11-24T1156Z-ecdsa-scan/) | 2026-11-24 | ecdsa-scan, outside the main table | 131 | ecdsa-scan 0.1.1 | 12% (16/131) |
 | [2026-10-22T1007Z-holdout](runs/2026-10-22T1007Z-holdout/) | 2026-10-22 | holdout | 124 | cdxgen 12.8.2 | 5% (6/124) |
 |  |  |  |  | pqprobe 4.0.2 | 96% (119/124) |
 | [2026-10-22T1005Z-public](runs/2026-10-22T1005Z-public/) | 2026-10-22 | public | 124 | cdxgen 12.8.2 | 5% (6/124) |

@@ -1,0 +1,230 @@
+{
+  "_comment": [
+    "Generator definitions for run 2026-11-24T1156Z.",
+    "Paths may use ${VAR}, expanded from the environment; an unset variable is an error."
+  ],
+  "tools": [
+    {
+      "name": "cdxgen",
+      "binary": "tools/cdxgen-docker.sh",
+      "package_version": "@cyclonedx/cdxgen@12.8.2",
+      "image": "ghcr.io/cyclonedx/cdxgen@sha256:d2a9f784c6d3d71a9d143dd69e6ca43fdb340282b1e43d1b99ad07e9321a4783",
+      "version_command": [
+        "tools/cdxgen-docker.sh",
+        "--version"
+      ],
+      "invocation": [
+        "tools/cdxgen-docker.sh",
+        "--json-pretty",
+        "--include-crypto",
+        "-o",
+        "{out}",
+        "{project}"
+      ],
+      "output": "file",
+      "cwd": "project",
+      "accept_exit": [
+        0
+      ],
+      "env": {
+        "CDXGEN_DEBUG_MODE": "info",
+        "FETCH_LICENSE": "false"
+      },
+      "notes": "Held at 12.8.2 in every run, pinned by digest. Records source files in properties[].SrcFile without line numbers."
+    },
+    {
+      "name": "cdxgen-13.8.0",
+      "binary": "runs/2026-11-24T1156Z-public/harness/cdxgen-own-dir.sh",
+      "package_version": "@cdxgen/cdxgen@13.8.0",
+      "image": "ghcr.io/cdxgen/cdxgen@sha256:2bbfeffaa64801cac126e60441acaf8ceedd8eb939b32c3dad15519dce3ef5c6",
+      "version_command": [
+        "runs/2026-11-24T1156Z-public/harness/cdxgen-own-dir.sh",
+        "--version"
+      ],
+      "invocation": [
+        "runs/2026-11-24T1156Z-public/harness/cdxgen-own-dir.sh",
+        "--json-pretty",
+        "--include-crypto",
+        "--spec-version=1.6",
+        "-o",
+        "{out}",
+        "{project}"
+      ],
+      "output": "file",
+      "cwd": "project",
+      "accept_exit": [
+        0
+      ],
+      "env": {
+        "CDXGEN_DEBUG_MODE": "info",
+        "FETCH_LICENSE": "false"
+      },
+      "notes": "--spec-version=1.6; otherwise the arguments of cdxgen 12.8.2. Each project gets its own output directory (harness/cdxgen-own-dir.sh)."
+    },
+    {
+      "name": "pqprobe",
+      "binary": "${PQPROBE_BIN}",
+      "package_version": "pqprobe 5.1.2",
+      "image": "proofstein-build:f366ff5",
+      "version_command": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "${PQPROBE_BIN}",
+        "--version"
+      ],
+      "invocation": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "${PQPROBE_BIN}",
+        "--output",
+        "cbom",
+        "scan",
+        "."
+      ],
+      "output": "stdout",
+      "cwd": "project",
+      "accept_exit": [
+        0,
+        1
+      ],
+      "env": {
+        "TOOLS_DIR": "${TOOLS_DIR}"
+      }
+    },
+    {
+      "name": "cryptoscan",
+      "binary": "${CRYPTOSCAN_BIN}",
+      "package_version": "cryptoscan 1.5.0 (release tarball cryptoscan_1.5.0_linux_amd64.tar.gz, sha256 a9e05cf3a78cdb3a2a5cb7fb55fcc2e8d53a6d35519e1b15444432065716a0cc, checksum verified)",
+      "image": "proofstein-build:f366ff5",
+      "version_command": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "${CRYPTOSCAN_BIN}",
+        "version"
+      ],
+      "invocation": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "${CRYPTOSCAN_BIN}",
+        "scan",
+        ".",
+        "--format",
+        "cbom",
+        "--no-color"
+      ],
+      "output": "stdout",
+      "cwd": "project",
+      "accept_exit": [
+        0,
+        1
+      ],
+      "env": {
+        "TOOLS_DIR": "${TOOLS_DIR}"
+      },
+      "notes": "Defaults. Withholds findings it classes as quantum-safe (AES, SHA-2)."
+    },
+    {
+      "name": "cryptoscan-quantum-safe",
+      "binary": "${CRYPTOSCAN_BIN}",
+      "package_version": "cryptoscan 1.5.0 (release tarball cryptoscan_1.5.0_linux_amd64.tar.gz, sha256 a9e05cf3a78cdb3a2a5cb7fb55fcc2e8d53a6d35519e1b15444432065716a0cc, checksum verified)",
+      "image": "proofstein-build:f366ff5",
+      "version_command": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "${CRYPTOSCAN_BIN}",
+        "version"
+      ],
+      "invocation": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "${CRYPTOSCAN_BIN}",
+        "scan",
+        ".",
+        "--format",
+        "cbom",
+        "--no-color",
+        "--include-quantum-safe"
+      ],
+      "output": "stdout",
+      "cwd": "project",
+      "accept_exit": [
+        0,
+        1
+      ],
+      "env": {
+        "TOOLS_DIR": "${TOOLS_DIR}"
+      },
+      "notes": "--include-quantum-safe: also reports AES and SHA-2."
+    },
+    {
+      "name": "cbomkit-theia",
+      "binary": "${THEIA_BIN}",
+      "package_version": "cbomkit-theia v1.1.2 (dcd95ac), built from source of github.com/cbomkit/cbomkit-theia inside the pinned build image",
+      "image": "proofstein-build:f366ff5",
+      "version_command": [
+        "/bin/echo",
+        "cbomkit-theia v1.1.2 (dcd95ac)"
+      ],
+      "invocation": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "${THEIA_BIN}",
+        "dir",
+        "."
+      ],
+      "output": "stdout",
+      "cwd": "project",
+      "accept_exit": [
+        0
+      ],
+      "env": {
+        "TOOLS_DIR": "${TOOLS_DIR}"
+      },
+      "notes": "Default plugins. Reads certificates, keys, java.security and OpenSSL configuration; no source code."
+    },
+    {
+      "name": "opengrep",
+      "binary": "runs/2026-11-24T1156Z-public/harness/opengrep-cbom.sh",
+      "package_version": "opengrep 2.0.0 (opengrep_linux_x86, sha256 37e93f4da5fd04a18c5c1febbdd12f7e98dfccd4d0c9cf2593bcb25eeb462da0, cosign signature verified) with the 100 cryptography rules (harness/select_rules.py, by CWE) of opengrep-rules at f1d2b562, the archived head, rule content of 0f5a85ce (2024-12-13); rule set sha256/16 f98b5696b0867c1f by harness/ruleset-digest.sh",
+      "image": "proofstein-build:f366ff5",
+      "version_command": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "runs/2026-11-24T1156Z-public/harness/opengrep-cbom.sh",
+        "--version"
+      ],
+      "invocation": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "runs/2026-11-24T1156Z-public/harness/opengrep-cbom.sh"
+      ],
+      "output": "stdout",
+      "cwd": "project",
+      "accept_exit": [
+        0
+      ],
+      "env": {
+        "TOOLS_DIR": "${TOOLS_DIR}",
+        "OPENGREP_BIN": "${OPENGREP_BIN}",
+        "OPENGREP_RULES": "${OPENGREP_RULES}"
+      },
+      "notes": "Each result is a component named by its rule id, at the reported file and line. Rule-set digest recipe: sha256 over sha256sum's lines (\"<sha256>  <path>\") for every selected rule file, paths relative to the rule directory and sorted bytewise, first 16 hex digits (harness/ruleset-digest.sh)."
+    },
+    {
+      "name": "codeql",
+      "binary": "runs/2026-11-24T1156Z-public/harness/codeql-cbom.sh",
+      "package_version": "CodeQL bundle 2.27.5 (codeql-bundle-linux64.tar.gz, sha256 a5f205466b976ea9b345957fc133eeea9021e71aeffc99243ec7b9e99b1d6ed5, checksum verified), inventory queries only",
+      "image": "proofstein-build:f366ff5",
+      "version_command": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "runs/2026-11-24T1156Z-public/harness/codeql-cbom.sh",
+        "--version"
+      ],
+      "invocation": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "runs/2026-11-24T1156Z-public/harness/codeql-cbom.sh"
+      ],
+      "output": "stdout",
+      "cwd": "project",
+      "accept_exit": [
+        0
+      ],
+      "env": {
+        "TOOLS_DIR": "${TOOLS_DIR}",
+        "CODEQL_BIN": "${CODEQL_BIN}"
+      },
+      "notes": "Inventory queries for C/C++, Python and Java, every one of those languages present in a project, build-mode none, inside the pinned build image; a project with none of them gets no document."
+    }
+  ]
+}

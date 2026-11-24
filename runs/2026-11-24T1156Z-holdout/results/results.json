@@ -1,0 +1,3532 @@
+{
+  "meta": {
+    "corpus_version": "f366ff5",
+    "line_tolerance": 2,
+    "scorer_commit": "f366ff5",
+    "corpus": "holdout",
+    "schema_validated": true,
+    "cboms_scored": 12,
+    "projects": [
+      "cachekeeper",
+      "journal-svc",
+      "microquote",
+      "signal-bridge",
+      "ticket-gateway",
+      "vaultcrate"
+    ],
+    "tools": [
+      "cdxgen",
+      "pqprobe"
+    ],
+    "unscored_pairs": 0,
+    "problems": [],
+    "run": {
+      "manifest": "runs/2026-11-24T1156Z-holdout/manifest.json",
+      "started_utc": "2026-11-24T11:59:28Z",
+      "corpus_commit": "f366ff5b08c7e82ec0ef9f8da17f6cbea64f4c85",
+      "corpus_tree_dirty": false,
+      "attempted": 12,
+      "succeeded": 12,
+      "tool_versions": {
+        "cdxgen": "cdxgen 12.8.2",
+        "pqprobe": "pqprobe 5.1.2"
+      },
+      "judgement_tables": {
+        "oid_algorithms": {
+          "entries": 27,
+          "sha256_16": "f6fd6fa101db7a4d"
+        },
+        "location_property_names": {
+          "entries": 8,
+          "sha256_16": "0b8c15cc33ce242a"
+        },
+        "line_property_names": {
+          "entries": 5,
+          "sha256_16": "ed438ed351a5b930"
+        },
+        "token_aliases": {
+          "entries": 33,
+          "sha256_16": "c13677feee250d8b"
+        },
+        "family_markers": {
+          "entries": 47,
+          "sha256_16": "9db8169c695be2c5"
+        },
+        "jose_names": {
+          "entries": 10,
+          "sha256_16": "08d16fb9eb9aecef"
+        },
+        "hybrid_groups": {
+          "entries": 4,
+          "sha256_16": "ebb21ecb7cbea298"
+        },
+        "whole_token_only": {
+          "entries": 8,
+          "sha256_16": "b9a4a30aab68fec0"
+        },
+        "known_unplanted": {
+          "entries": 15,
+          "sha256_16": "3a7fca80174e0cdd"
+        }
+      },
+      "judgement_tables_collected": null,
+      "failed_invocations": []
+    }
+  },
+  "tools": {
+    "cdxgen": {
+      "detected": 6,
+      "total": 131,
+      "detection_rate": 0.0458,
+      "precision": 0.1818,
+      "claim_precision": 0.2,
+      "matched_components": 4,
+      "reported_components": 22,
+      "credited_claims": 4,
+      "total_claims": 20,
+      "false_positives": 0,
+      "by_layer": {
+        "1": {
+          "detected": 2,
+          "total": 51,
+          "rate": 0.0392
+        },
+        "2": {
+          "detected": 1,
+          "total": 9,
+          "rate": 0.1111
+        },
+        "3": {
+          "detected": 0,
+          "total": 6,
+          "rate": 0.0
+        },
+        "4": {
+          "detected": 0,
+          "total": 40,
+          "rate": 0.0
+        },
+        "5": {
+          "detected": 2,
+          "total": 8,
+          "rate": 0.25
+        },
+        "6": {
+          "detected": 1,
+          "total": 17,
+          "rate": 0.0588
+        }
+      }
+    },
+    "pqprobe": {
+      "detected": 126,
+      "total": 131,
+      "detection_rate": 0.9618,
+      "precision": 0.7031,
+      "claim_precision": 0.6729,
+      "matched_components": 90,
+      "reported_components": 128,
+      "credited_claims": 144,
+      "total_claims": 214,
+      "false_positives": 0,
+      "by_layer": {
+        "1": {
+          "detected": 51,
+          "total": 51,
+          "rate": 1.0
+        },
+        "2": {
+          "detected": 9,
+          "total": 9,
+          "rate": 1.0
+        },
+        "3": {
+          "detected": 1,
+          "total": 6,
+          "rate": 0.1667
+        },
+        "4": {
+          "detected": 40,
+          "total": 40,
+          "rate": 1.0
+        },
+        "5": {
+          "detected": 8,
+          "total": 8,
+          "rate": 1.0
+        },
+        "6": {
+          "detected": 17,
+          "total": 17,
+          "rate": 1.0
+        }
+      }
+    }
+  },
+  "results": [
+    {
+      "project": "cachekeeper",
+      "language": "python",
+      "tool": "cdxgen",
+      "source": "cachekeeper__cdxgen.json",
+      "schema_valid": true,
+      "schema_errors": [],
+      "parse_error": null,
+      "detected": 1,
+      "total": 23,
+      "detection_rate": 0.0435,
+      "precision": 0.0,
+      "claim_precision": 0.0,
+      "matched_components": 0,
+      "credited_claims": 0,
+      "by_layer": {
+        "1": {
+          "detected": 0,
+          "total": 7
+        },
+        "2": {
+          "detected": 0,
+          "total": 1
+        },
+        "3": {
+          "detected": 0,
+          "total": 1
+        },
+        "4": {
+          "detected": 0,
+          "total": 9
+        },
+        "5": {
+          "detected": 1,
+          "total": 2
+        },
+        "6": {
+          "detected": 0,
+          "total": 3
+        }
+      },
+      "false_positives": 0,
+      "phantom_location": 0,
+      "phantom_algorithm": 0,
+      "unmatched_reports": 0,
+      "evidence": {
+        "crypto_components": 3,
+        "total_occurrences": 3,
+        "distinct_claims": 3,
+        "with_location": 3,
+        "with_location_pct": 1.0,
+        "with_line": 0,
+        "with_line_pct": 0.0,
+        "using_spec_evidence": 0,
+        "using_properties_only": 3,
+        "resolvable_locations": 3,
+        "unresolvable_locations": 0,
+        "occurrences_per_component": 1.0
+      },
+      "assets": [
+        {
+          "id": "py-l4-yaml-cipher",
+          "algorithm": "AES-128-GCM",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "py-l4-yaml-sig",
+          "algorithm": "Ed25519",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "py-l4-yaml-attestation",
+          "algorithm": "SLH-DSA",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "py-l4-yaml-kem",
+          "algorithm": "ML-KEM-768",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "py-l4-yaml-audit",
+          "algorithm": "RSA-2048",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "py-l4-yaml-hash",
+          "algorithm": "SHA-256",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "py-l4-helm-cipher",
+          "algorithm": "AES-128-GCM",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "py-l4-helm-tls",
+          "algorithm": "TLSv1.3",
+          "layer": 4,
+          "cyclonedx_asset_type": "protocol",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "py-l4-helm-kem",
+          "algorithm": "ML-KEM-768",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "py-dep-pynacl",
+          "algorithm": "PyNaCl",
+          "layer": 5,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": true
+        },
+        {
+          "id": "py-dep-pynacl-req",
+          "algorithm": "PyNaCl",
+          "layer": 5,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": false,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "py-l6-manifest-key",
+          "algorithm": "Ed25519",
+          "layer": 6,
+          "cyclonedx_asset_type": "related-crypto-material",
+          "detected": false,
+          "located": false,
+          "file_only": true,
+          "name_only": false
+        },
+        {
+          "id": "py-l6-mesh-cert",
+          "algorithm": "ECDSA-P256",
+          "layer": 6,
+          "cyclonedx_asset_type": "certificate",
+          "detected": false,
+          "located": false,
+          "file_only": true,
+          "name_only": false
+        },
+        {
+          "id": "py-l6-mesh-key",
+          "algorithm": "ECDSA-P256",
+          "layer": 6,
+          "cyclonedx_asset_type": "related-crypto-material",
+          "detected": false,
+          "located": false,
+          "file_only": true,
+          "name_only": false
+        },
+        {
+          "id": "py-l1-falcon",
+          "algorithm": "Falcon-1024",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "py-l3-wrapper",
+          "algorithm": "AES-128-GCM",
+          "layer": 3,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "py-l1-aesgcm",
+          "algorithm": "AES-128-GCM",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "py-l2-sha256",
+          "algorithm": "SHA-256",
+          "layer": 2,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "py-l1-rsa",
+          "algorithm": "RSA-2048",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "py-l1-ecdsa",
+          "algorithm": "ECDSA-P256",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "py-l1-ed25519",
+          "algorithm": "Ed25519",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "py-l1-sha256",
+          "algorithm": "SHA-256",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "py-l1-mlkem",
+          "algorithm": "ML-KEM-768",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        }
+      ]
+    },
+    {
+      "project": "cachekeeper",
+      "language": "python",
+      "tool": "pqprobe",
+      "source": "cachekeeper__pqprobe.json",
+      "schema_valid": true,
+      "schema_errors": [],
+      "parse_error": null,
+      "detected": 22,
+      "total": 23,
+      "detection_rate": 0.9565,
+      "precision": 0.6522,
+      "claim_precision": 0.6757,
+      "matched_components": 15,
+      "credited_claims": 25,
+      "by_layer": {
+        "1": {
+          "detected": 7,
+          "total": 7
+        },
+        "2": {
+          "detected": 1,
+          "total": 1
+        },
+        "3": {
+          "detected": 0,
+          "total": 1
+        },
+        "4": {
+          "detected": 9,
+          "total": 9
+        },
+        "5": {
+          "detected": 2,
+          "total": 2
+        },
+        "6": {
+          "detected": 3,
+          "total": 3
+        }
+      },
+      "false_positives": 0,
+      "phantom_location": 0,
+      "phantom_algorithm": 0,
+      "unmatched_reports": 0,
+      "evidence": {
+        "crypto_components": 23,
+        "total_occurrences": 37,
+        "distinct_claims": 37,
+        "with_location": 23,
+        "with_location_pct": 1.0,
+        "with_line": 23,
+        "with_line_pct": 1.0,
+        "using_spec_evidence": 23,
+        "using_properties_only": 0,
+        "resolvable_locations": 37,
+        "unresolvable_locations": 0,
+        "occurrences_per_component": 1.609
+      },
+      "assets": [
+        {
+          "id": "py-l4-yaml-cipher",
+          "algorithm": "AES-128-GCM",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "py-l4-yaml-sig",
+          "algorithm": "Ed25519",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "py-l4-yaml-attestation",
+          "algorithm": "SLH-DSA",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "py-l4-yaml-kem",
+          "algorithm": "ML-KEM-768",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "py-l4-yaml-audit",
+          "algorithm": "RSA-2048",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "py-l4-yaml-hash",
+          "algorithm": "SHA-256",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "py-l4-helm-cipher",
+          "algorithm": "AES-128-GCM",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "py-l4-helm-tls",
+          "algorithm": "TLSv1.3",
+          "layer": 4,
+          "cyclonedx_asset_type": "protocol",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "py-l4-helm-kem",
+          "algorithm": "ML-KEM-768",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "py-dep-pynacl",
+          "algorithm": "PyNaCl",
+          "layer": 5,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "py-dep-pynacl-req",
+          "algorithm": "PyNaCl",
+          "layer": 5,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "py-l6-manifest-key",
+          "algorithm": "Ed25519",
+          "layer": 6,
+          "cyclonedx_asset_type": "related-crypto-material",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "py-l6-mesh-cert",
+          "algorithm": "ECDSA-P256",
+          "layer": 6,
+          "cyclonedx_asset_type": "certificate",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "py-l6-mesh-key",
+          "algorithm": "ECDSA-P256",
+          "layer": 6,
+          "cyclonedx_asset_type": "related-crypto-material",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "py-l1-falcon",
+          "algorithm": "Falcon-1024",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "py-l3-wrapper",
+          "algorithm": "AES-128-GCM",
+          "layer": 3,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": true
+        },
+        {
+          "id": "py-l1-aesgcm",
+          "algorithm": "AES-128-GCM",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "py-l2-sha256",
+          "algorithm": "SHA-256",
+          "layer": 2,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "py-l1-rsa",
+          "algorithm": "RSA-2048",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "py-l1-ecdsa",
+          "algorithm": "ECDSA-P256",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "py-l1-ed25519",
+          "algorithm": "Ed25519",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "py-l1-sha256",
+          "algorithm": "SHA-256",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "py-l1-mlkem",
+          "algorithm": "ML-KEM-768",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        }
+      ]
+    },
+    {
+      "project": "journal-svc",
+      "language": "java",
+      "tool": "cdxgen",
+      "source": "journal-svc__cdxgen.json",
+      "schema_valid": true,
+      "schema_errors": [],
+      "parse_error": null,
+      "detected": 2,
+      "total": 25,
+      "detection_rate": 0.08,
+      "precision": 0.25,
+      "claim_precision": 0.5,
+      "matched_components": 1,
+      "credited_claims": 1,
+      "by_layer": {
+        "1": {
+          "detected": 0,
+          "total": 10
+        },
+        "2": {
+          "detected": 0,
+          "total": 3
+        },
+        "3": {
+          "detected": 0,
+          "total": 1
+        },
+        "4": {
+          "detected": 0,
+          "total": 8
+        },
+        "5": {
+          "detected": 1,
+          "total": 1
+        },
+        "6": {
+          "detected": 1,
+          "total": 2
+        }
+      },
+      "false_positives": 0,
+      "phantom_location": 0,
+      "phantom_algorithm": 0,
+      "unmatched_reports": 2,
+      "evidence": {
+        "crypto_components": 4,
+        "total_occurrences": 2,
+        "distinct_claims": 2,
+        "with_location": 2,
+        "with_location_pct": 0.5,
+        "with_line": 0,
+        "with_line_pct": 0.0,
+        "using_spec_evidence": 0,
+        "using_properties_only": 2,
+        "resolvable_locations": 2,
+        "unresolvable_locations": 0,
+        "occurrences_per_component": 0.5
+      },
+      "assets": [
+        {
+          "id": "java-l4-jvm-tls",
+          "algorithm": "TLSv1.3",
+          "layer": 4,
+          "cyclonedx_asset_type": "protocol",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "java-l4-jvm-groups",
+          "algorithm": "X25519MLKEM768",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "java-l6-block-key",
+          "algorithm": "Ed25519",
+          "layer": 6,
+          "cyclonedx_asset_type": "related-crypto-material",
+          "detected": false,
+          "located": false,
+          "file_only": true,
+          "name_only": false
+        },
+        {
+          "id": "java-l6-keystore",
+          "algorithm": "PKCS#12",
+          "layer": 6,
+          "cyclonedx_asset_type": "related-crypto-material",
+          "detected": true,
+          "located": false,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "java-dep-bouncycastle",
+          "algorithm": "bcprov-jdk18on",
+          "layer": 5,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": false,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "java-l1-xmss",
+          "algorithm": "XMSS",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "java-l2-lms",
+          "algorithm": "LMS",
+          "layer": 2,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "java-l1-mldsa",
+          "algorithm": "ML-DSA",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "java-l2-slhdsa",
+          "algorithm": "SLH-DSA",
+          "layer": 2,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "java-l1-falcon",
+          "algorithm": "Falcon-512",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "java-l1-aesgcm",
+          "algorithm": "AES-256-GCM",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": true
+        },
+        {
+          "id": "java-l2-sha256",
+          "algorithm": "SHA-256",
+          "layer": 2,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": true
+        },
+        {
+          "id": "java-l1-ed25519",
+          "algorithm": "Ed25519",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "java-l1-ecdsa",
+          "algorithm": "ECDSA-P256",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": true
+        },
+        {
+          "id": "java-l1-rsa",
+          "algorithm": "RSA-2048",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "java-l1-sha256rsa",
+          "algorithm": "RSA-2048",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "java-l1-sha256",
+          "algorithm": "SHA-256",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": true
+        },
+        {
+          "id": "java-l1-mlkem",
+          "algorithm": "ML-KEM",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "java-l3-wrapper",
+          "algorithm": "AES-256-GCM",
+          "layer": 3,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": true
+        },
+        {
+          "id": "java-l4-prop-kem",
+          "algorithm": "ML-KEM-768",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "java-l4-prop-audit-seal",
+          "algorithm": "XMSS",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "java-l4-prop-cipher",
+          "algorithm": "AES-256-GCM",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": true
+        },
+        {
+          "id": "java-l4-prop-sig",
+          "algorithm": "Ed25519",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "java-l4-prop-settlement",
+          "algorithm": "RSA-2048",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "java-l4-prop-hash",
+          "algorithm": "SHA-256",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": true
+        }
+      ]
+    },
+    {
+      "project": "journal-svc",
+      "language": "java",
+      "tool": "pqprobe",
+      "source": "journal-svc__pqprobe.json",
+      "schema_valid": true,
+      "schema_errors": [],
+      "parse_error": null,
+      "detected": 24,
+      "total": 25,
+      "detection_rate": 0.96,
+      "precision": 0.6667,
+      "claim_precision": 0.6585,
+      "matched_components": 18,
+      "credited_claims": 27,
+      "by_layer": {
+        "1": {
+          "detected": 10,
+          "total": 10
+        },
+        "2": {
+          "detected": 3,
+          "total": 3
+        },
+        "3": {
+          "detected": 0,
+          "total": 1
+        },
+        "4": {
+          "detected": 8,
+          "total": 8
+        },
+        "5": {
+          "detected": 1,
+          "total": 1
+        },
+        "6": {
+          "detected": 2,
+          "total": 2
+        }
+      },
+      "false_positives": 0,
+      "phantom_location": 0,
+      "phantom_algorithm": 0,
+      "unmatched_reports": 1,
+      "evidence": {
+        "crypto_components": 27,
+        "total_occurrences": 41,
+        "distinct_claims": 41,
+        "with_location": 26,
+        "with_location_pct": 0.963,
+        "with_line": 26,
+        "with_line_pct": 0.963,
+        "using_spec_evidence": 26,
+        "using_properties_only": 0,
+        "resolvable_locations": 41,
+        "unresolvable_locations": 0,
+        "occurrences_per_component": 1.519
+      },
+      "assets": [
+        {
+          "id": "java-l4-jvm-tls",
+          "algorithm": "TLSv1.3",
+          "layer": 4,
+          "cyclonedx_asset_type": "protocol",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "java-l4-jvm-groups",
+          "algorithm": "X25519MLKEM768",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "java-l6-block-key",
+          "algorithm": "Ed25519",
+          "layer": 6,
+          "cyclonedx_asset_type": "related-crypto-material",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "java-l6-keystore",
+          "algorithm": "PKCS#12",
+          "layer": 6,
+          "cyclonedx_asset_type": "related-crypto-material",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "java-dep-bouncycastle",
+          "algorithm": "bcprov-jdk18on",
+          "layer": 5,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "java-l1-xmss",
+          "algorithm": "XMSS",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "java-l2-lms",
+          "algorithm": "LMS",
+          "layer": 2,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "java-l1-mldsa",
+          "algorithm": "ML-DSA",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "java-l2-slhdsa",
+          "algorithm": "SLH-DSA",
+          "layer": 2,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "java-l1-falcon",
+          "algorithm": "Falcon-512",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "java-l1-aesgcm",
+          "algorithm": "AES-256-GCM",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "java-l2-sha256",
+          "algorithm": "SHA-256",
+          "layer": 2,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "java-l1-ed25519",
+          "algorithm": "Ed25519",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "java-l1-ecdsa",
+          "algorithm": "ECDSA-P256",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "java-l1-rsa",
+          "algorithm": "RSA-2048",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "java-l1-sha256rsa",
+          "algorithm": "RSA-2048",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "java-l1-sha256",
+          "algorithm": "SHA-256",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "java-l1-mlkem",
+          "algorithm": "ML-KEM",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "java-l3-wrapper",
+          "algorithm": "AES-256-GCM",
+          "layer": 3,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": true
+        },
+        {
+          "id": "java-l4-prop-kem",
+          "algorithm": "ML-KEM-768",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "java-l4-prop-audit-seal",
+          "algorithm": "XMSS",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "java-l4-prop-cipher",
+          "algorithm": "AES-256-GCM",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "java-l4-prop-sig",
+          "algorithm": "Ed25519",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "java-l4-prop-settlement",
+          "algorithm": "RSA-2048",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "java-l4-prop-hash",
+          "algorithm": "SHA-256",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        }
+      ]
+    },
+    {
+      "project": "microquote",
+      "language": "c",
+      "tool": "cdxgen",
+      "source": "microquote__cdxgen.json",
+      "schema_valid": true,
+      "schema_errors": [],
+      "parse_error": null,
+      "detected": 0,
+      "total": 23,
+      "detection_rate": 0.0,
+      "precision": 0.0,
+      "claim_precision": 0.0,
+      "matched_components": 0,
+      "credited_claims": 0,
+      "by_layer": {
+        "1": {
+          "detected": 0,
+          "total": 11
+        },
+        "2": {
+          "detected": 0,
+          "total": 1
+        },
+        "3": {
+          "detected": 0,
+          "total": 1
+        },
+        "4": {
+          "detected": 0,
+          "total": 6
+        },
+        "5": {
+          "detected": 0,
+          "total": 1
+        },
+        "6": {
+          "detected": 0,
+          "total": 3
+        }
+      },
+      "false_positives": 0,
+      "phantom_location": 0,
+      "phantom_algorithm": 0,
+      "unmatched_reports": 0,
+      "evidence": {
+        "crypto_components": 3,
+        "total_occurrences": 3,
+        "distinct_claims": 3,
+        "with_location": 3,
+        "with_location_pct": 1.0,
+        "with_line": 0,
+        "with_line_pct": 0.0,
+        "using_spec_evidence": 0,
+        "using_properties_only": 3,
+        "resolvable_locations": 3,
+        "unresolvable_locations": 0,
+        "occurrences_per_component": 1.0
+      },
+      "assets": [
+        {
+          "id": "c-dep-libsodium",
+          "algorithm": "libsodium",
+          "layer": 5,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": true
+        },
+        {
+          "id": "c-l4-conf-record-seal",
+          "algorithm": "LMS",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "c-l4-conf-cipher",
+          "algorithm": "AES-256-GCM",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "c-l4-conf-kem",
+          "algorithm": "ML-KEM-768",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "c-l4-conf-digest",
+          "algorithm": "SHA-256",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "c-l4-conf-archive-sig",
+          "algorithm": "Falcon-512",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "c-l4-conf-sig",
+          "algorithm": "Ed25519",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "c-l6-provisioning-cert",
+          "algorithm": "RSA-2048",
+          "layer": 6,
+          "cyclonedx_asset_type": "certificate",
+          "detected": false,
+          "located": false,
+          "file_only": true,
+          "name_only": false
+        },
+        {
+          "id": "c-l6-provisioning-key",
+          "algorithm": "RSA-2048",
+          "layer": 6,
+          "cyclonedx_asset_type": "related-crypto-material",
+          "detected": false,
+          "located": false,
+          "file_only": true,
+          "name_only": false
+        },
+        {
+          "id": "c-l6-report-key",
+          "algorithm": "Ed25519",
+          "layer": 6,
+          "cyclonedx_asset_type": "related-crypto-material",
+          "detected": false,
+          "located": false,
+          "file_only": true,
+          "name_only": false
+        },
+        {
+          "id": "c-l2-sha256",
+          "algorithm": "SHA-256",
+          "layer": 2,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "c-l1-ecdsa",
+          "algorithm": "ECDSA-P256",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "c-l1-ed25519",
+          "algorithm": "Ed25519",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "c-l1-rsa",
+          "algorithm": "RSA-2048",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "c-l1-mlkem",
+          "algorithm": "ML-KEM-768",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "c-l1-aesgcm",
+          "algorithm": "AES-256-GCM",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "c-l1-xmss",
+          "algorithm": "XMSS",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "c-l1-lms",
+          "algorithm": "LMS",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "c-l1-tls-ciphers",
+          "algorithm": "ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "c-l1-tls-dh",
+          "algorithm": "ffdhe3072",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "c-l1-tls-groups",
+          "algorithm": "X25519MLKEM768",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "c-l3-wrapper",
+          "algorithm": "AES-256-GCM",
+          "layer": 3,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "c-l1-cng-ecdh",
+          "algorithm": "ECDH-P256",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        }
+      ]
+    },
+    {
+      "project": "microquote",
+      "language": "c",
+      "tool": "pqprobe",
+      "source": "microquote__pqprobe.json",
+      "schema_valid": true,
+      "schema_errors": [],
+      "parse_error": null,
+      "detected": 22,
+      "total": 23,
+      "detection_rate": 0.9565,
+      "precision": 0.72,
+      "claim_precision": 0.6522,
+      "matched_components": 18,
+      "credited_claims": 30,
+      "by_layer": {
+        "1": {
+          "detected": 11,
+          "total": 11
+        },
+        "2": {
+          "detected": 1,
+          "total": 1
+        },
+        "3": {
+          "detected": 0,
+          "total": 1
+        },
+        "4": {
+          "detected": 6,
+          "total": 6
+        },
+        "5": {
+          "detected": 1,
+          "total": 1
+        },
+        "6": {
+          "detected": 3,
+          "total": 3
+        }
+      },
+      "false_positives": 0,
+      "phantom_location": 0,
+      "phantom_algorithm": 0,
+      "unmatched_reports": 0,
+      "evidence": {
+        "crypto_components": 25,
+        "total_occurrences": 46,
+        "distinct_claims": 46,
+        "with_location": 25,
+        "with_location_pct": 1.0,
+        "with_line": 25,
+        "with_line_pct": 1.0,
+        "using_spec_evidence": 25,
+        "using_properties_only": 0,
+        "resolvable_locations": 46,
+        "unresolvable_locations": 0,
+        "occurrences_per_component": 1.84
+      },
+      "assets": [
+        {
+          "id": "c-dep-libsodium",
+          "algorithm": "libsodium",
+          "layer": 5,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "c-l4-conf-record-seal",
+          "algorithm": "LMS",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "c-l4-conf-cipher",
+          "algorithm": "AES-256-GCM",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "c-l4-conf-kem",
+          "algorithm": "ML-KEM-768",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "c-l4-conf-digest",
+          "algorithm": "SHA-256",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "c-l4-conf-archive-sig",
+          "algorithm": "Falcon-512",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "c-l4-conf-sig",
+          "algorithm": "Ed25519",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "c-l6-provisioning-cert",
+          "algorithm": "RSA-2048",
+          "layer": 6,
+          "cyclonedx_asset_type": "certificate",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "c-l6-provisioning-key",
+          "algorithm": "RSA-2048",
+          "layer": 6,
+          "cyclonedx_asset_type": "related-crypto-material",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "c-l6-report-key",
+          "algorithm": "Ed25519",
+          "layer": 6,
+          "cyclonedx_asset_type": "related-crypto-material",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "c-l2-sha256",
+          "algorithm": "SHA-256",
+          "layer": 2,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "c-l1-ecdsa",
+          "algorithm": "ECDSA-P256",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "c-l1-ed25519",
+          "algorithm": "Ed25519",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "c-l1-rsa",
+          "algorithm": "RSA-2048",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "c-l1-mlkem",
+          "algorithm": "ML-KEM-768",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "c-l1-aesgcm",
+          "algorithm": "AES-256-GCM",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "c-l1-xmss",
+          "algorithm": "XMSS",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "c-l1-lms",
+          "algorithm": "LMS",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "c-l1-tls-ciphers",
+          "algorithm": "ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "c-l1-tls-dh",
+          "algorithm": "ffdhe3072",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "c-l1-tls-groups",
+          "algorithm": "X25519MLKEM768",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "c-l3-wrapper",
+          "algorithm": "AES-256-GCM",
+          "layer": 3,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": true
+        },
+        {
+          "id": "c-l1-cng-ecdh",
+          "algorithm": "ECDH-P256",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        }
+      ]
+    },
+    {
+      "project": "signal-bridge",
+      "language": "go",
+      "tool": "cdxgen",
+      "source": "signal-bridge__cdxgen.json",
+      "schema_valid": true,
+      "schema_errors": [],
+      "parse_error": null,
+      "detected": 0,
+      "total": 19,
+      "detection_rate": 0.0,
+      "precision": 0.0,
+      "claim_precision": 0.0,
+      "matched_components": 0,
+      "credited_claims": 0,
+      "by_layer": {
+        "1": {
+          "detected": 0,
+          "total": 7
+        },
+        "2": {
+          "detected": 0,
+          "total": 1
+        },
+        "3": {
+          "detected": 0,
+          "total": 1
+        },
+        "4": {
+          "detected": 0,
+          "total": 6
+        },
+        "5": {
+          "detected": 0,
+          "total": 1
+        },
+        "6": {
+          "detected": 0,
+          "total": 3
+        }
+      },
+      "false_positives": 0,
+      "phantom_location": 0,
+      "phantom_algorithm": 0,
+      "unmatched_reports": 0,
+      "evidence": {
+        "crypto_components": 3,
+        "total_occurrences": 3,
+        "distinct_claims": 3,
+        "with_location": 3,
+        "with_location_pct": 1.0,
+        "with_line": 0,
+        "with_line_pct": 0.0,
+        "using_spec_evidence": 0,
+        "using_properties_only": 3,
+        "resolvable_locations": 3,
+        "unresolvable_locations": 0,
+        "occurrences_per_component": 1.0
+      },
+      "assets": [
+        {
+          "id": "go-l4-yaml-suite",
+          "algorithm": "AES-256-GCM",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "go-l4-yaml-kex",
+          "algorithm": "ML-KEM-1024",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "go-l4-yaml-sig",
+          "algorithm": "Ed25519",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "go-l4-yaml-hash",
+          "algorithm": "SHA-256",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "go-l4-nginx-proto",
+          "algorithm": "TLSv1.3",
+          "layer": 4,
+          "cyclonedx_asset_type": "protocol",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "go-l4-nginx-ciphers",
+          "algorithm": "ECDHE-ECDSA-AES256-GCM-SHA384",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "go-dep-xcrypto",
+          "algorithm": "golang.org/x/crypto",
+          "layer": 5,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": true
+        },
+        {
+          "id": "go-l2-sha256",
+          "algorithm": "SHA-256",
+          "layer": 2,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "go-l1-rsa",
+          "algorithm": "RSA-2048",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "go-l1-ecdsa",
+          "algorithm": "ECDSA-P256",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "go-l1-ed25519",
+          "algorithm": "Ed25519",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "go-l1-sha256",
+          "algorithm": "SHA-256",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "go-l1-aes-block",
+          "algorithm": "AES-256",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "go-l1-aes-gcm",
+          "algorithm": "AES-256-GCM",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "go-l3-wrapper",
+          "algorithm": "AES-256-GCM",
+          "layer": 3,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "go-l1-mlkem",
+          "algorithm": "ML-KEM-1024",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "go-l6-peer-key",
+          "algorithm": "ECDSA-P256",
+          "layer": 6,
+          "cyclonedx_asset_type": "related-crypto-material",
+          "detected": false,
+          "located": false,
+          "file_only": true,
+          "name_only": false
+        },
+        {
+          "id": "go-l6-relay-cert",
+          "algorithm": "RSA-2048",
+          "layer": 6,
+          "cyclonedx_asset_type": "certificate",
+          "detected": false,
+          "located": false,
+          "file_only": true,
+          "name_only": false
+        },
+        {
+          "id": "go-l6-relay-key",
+          "algorithm": "RSA-2048",
+          "layer": 6,
+          "cyclonedx_asset_type": "related-crypto-material",
+          "detected": false,
+          "located": false,
+          "file_only": true,
+          "name_only": false
+        }
+      ]
+    },
+    {
+      "project": "signal-bridge",
+      "language": "go",
+      "tool": "pqprobe",
+      "source": "signal-bridge__pqprobe.json",
+      "schema_valid": true,
+      "schema_errors": [],
+      "parse_error": null,
+      "detected": 19,
+      "total": 19,
+      "detection_rate": 1.0,
+      "precision": 0.6667,
+      "claim_precision": 0.7931,
+      "matched_components": 14,
+      "credited_claims": 23,
+      "by_layer": {
+        "1": {
+          "detected": 7,
+          "total": 7
+        },
+        "2": {
+          "detected": 1,
+          "total": 1
+        },
+        "3": {
+          "detected": 1,
+          "total": 1
+        },
+        "4": {
+          "detected": 6,
+          "total": 6
+        },
+        "5": {
+          "detected": 1,
+          "total": 1
+        },
+        "6": {
+          "detected": 3,
+          "total": 3
+        }
+      },
+      "false_positives": 0,
+      "phantom_location": 0,
+      "phantom_algorithm": 0,
+      "unmatched_reports": 1,
+      "evidence": {
+        "crypto_components": 21,
+        "total_occurrences": 29,
+        "distinct_claims": 29,
+        "with_location": 20,
+        "with_location_pct": 0.9524,
+        "with_line": 20,
+        "with_line_pct": 0.9524,
+        "using_spec_evidence": 20,
+        "using_properties_only": 0,
+        "resolvable_locations": 29,
+        "unresolvable_locations": 0,
+        "occurrences_per_component": 1.381
+      },
+      "assets": [
+        {
+          "id": "go-l4-yaml-suite",
+          "algorithm": "AES-256-GCM",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "go-l4-yaml-kex",
+          "algorithm": "ML-KEM-1024",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "go-l4-yaml-sig",
+          "algorithm": "Ed25519",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "go-l4-yaml-hash",
+          "algorithm": "SHA-256",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "go-l4-nginx-proto",
+          "algorithm": "TLSv1.3",
+          "layer": 4,
+          "cyclonedx_asset_type": "protocol",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "go-l4-nginx-ciphers",
+          "algorithm": "ECDHE-ECDSA-AES256-GCM-SHA384",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "go-dep-xcrypto",
+          "algorithm": "golang.org/x/crypto",
+          "layer": 5,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "go-l2-sha256",
+          "algorithm": "SHA-256",
+          "layer": 2,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "go-l1-rsa",
+          "algorithm": "RSA-2048",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "go-l1-ecdsa",
+          "algorithm": "ECDSA-P256",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "go-l1-ed25519",
+          "algorithm": "Ed25519",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "go-l1-sha256",
+          "algorithm": "SHA-256",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "go-l1-aes-block",
+          "algorithm": "AES-256",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "go-l1-aes-gcm",
+          "algorithm": "AES-256-GCM",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": false,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "go-l3-wrapper",
+          "algorithm": "AES-256-GCM",
+          "layer": 3,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": false,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "go-l1-mlkem",
+          "algorithm": "ML-KEM-1024",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "go-l6-peer-key",
+          "algorithm": "ECDSA-P256",
+          "layer": 6,
+          "cyclonedx_asset_type": "related-crypto-material",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "go-l6-relay-cert",
+          "algorithm": "RSA-2048",
+          "layer": 6,
+          "cyclonedx_asset_type": "certificate",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "go-l6-relay-key",
+          "algorithm": "RSA-2048",
+          "layer": 6,
+          "cyclonedx_asset_type": "related-crypto-material",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        }
+      ]
+    },
+    {
+      "project": "ticket-gateway",
+      "language": "javascript",
+      "tool": "cdxgen",
+      "source": "ticket-gateway__cdxgen.json",
+      "schema_valid": true,
+      "schema_errors": [],
+      "parse_error": null,
+      "detected": 3,
+      "total": 23,
+      "detection_rate": 0.1304,
+      "precision": 0.5,
+      "claim_precision": 0.5,
+      "matched_components": 3,
+      "credited_claims": 3,
+      "by_layer": {
+        "1": {
+          "detected": 2,
+          "total": 10
+        },
+        "2": {
+          "detected": 1,
+          "total": 2
+        },
+        "3": {
+          "detected": 0,
+          "total": 1
+        },
+        "4": {
+          "detected": 0,
+          "total": 6
+        },
+        "5": {
+          "detected": 0,
+          "total": 1
+        },
+        "6": {
+          "detected": 0,
+          "total": 3
+        }
+      },
+      "false_positives": 0,
+      "phantom_location": 0,
+      "phantom_algorithm": 0,
+      "unmatched_reports": 0,
+      "evidence": {
+        "crypto_components": 6,
+        "total_occurrences": 6,
+        "distinct_claims": 6,
+        "with_location": 6,
+        "with_location_pct": 1.0,
+        "with_line": 0,
+        "with_line_pct": 0.0,
+        "using_spec_evidence": 0,
+        "using_properties_only": 6,
+        "resolvable_locations": 6,
+        "unresolvable_locations": 0,
+        "occurrences_per_component": 1.0
+      },
+      "assets": [
+        {
+          "id": "js-l4-yaml-kem",
+          "algorithm": "ML-KEM-768",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "js-l4-yaml-cipher",
+          "algorithm": "AES-256-GCM",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "js-l4-yaml-assertion",
+          "algorithm": "ML-DSA-65",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "js-l4-yaml-sig",
+          "algorithm": "Ed25519",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": true
+        },
+        {
+          "id": "js-l4-yaml-jwks",
+          "algorithm": "RS256",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": true
+        },
+        {
+          "id": "js-l4-yaml-hash",
+          "algorithm": "SHA-256",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": true
+        },
+        {
+          "id": "js-l6-jwks-cert",
+          "algorithm": "RSA-2048",
+          "layer": 6,
+          "cyclonedx_asset_type": "certificate",
+          "detected": false,
+          "located": false,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "js-l6-jwks-key",
+          "algorithm": "RSA-2048",
+          "layer": 6,
+          "cyclonedx_asset_type": "related-crypto-material",
+          "detected": false,
+          "located": false,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "js-l6-token-key",
+          "algorithm": "Ed25519",
+          "layer": 6,
+          "cyclonedx_asset_type": "related-crypto-material",
+          "detected": false,
+          "located": false,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "js-dep-forge",
+          "algorithm": "node-forge",
+          "layer": 5,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": true
+        },
+        {
+          "id": "js-l1-mldsa",
+          "algorithm": "ML-DSA-65",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "js-l2-slhdsa",
+          "algorithm": "SLH-DSA",
+          "layer": 2,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "js-l1-aesgcm",
+          "algorithm": "AES-256-GCM",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "js-l2-sha256",
+          "algorithm": "SHA-256",
+          "layer": 2,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": false,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "js-l1-ed25519",
+          "algorithm": "Ed25519",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": false,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "js-l1-rsa",
+          "algorithm": "RSA-2048",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": false,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "js-l1-ecdsa",
+          "algorithm": "ECDSA-P256",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": true,
+          "name_only": false
+        },
+        {
+          "id": "js-l1-sha256",
+          "algorithm": "SHA-256",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "js-l1-jose-es256",
+          "algorithm": "ECDSA-P256",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "js-l1-jose-oaep",
+          "algorithm": "RSAES-OAEP",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": true
+        },
+        {
+          "id": "js-l1-jose-ps256",
+          "algorithm": "RSASSA-PSS",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": true
+        },
+        {
+          "id": "js-l1-mlkem",
+          "algorithm": "ML-KEM-768",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "js-l3-wrapper",
+          "algorithm": "AES-256-GCM",
+          "layer": 3,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        }
+      ]
+    },
+    {
+      "project": "ticket-gateway",
+      "language": "javascript",
+      "tool": "pqprobe",
+      "source": "ticket-gateway__pqprobe.json",
+      "schema_valid": true,
+      "schema_errors": [],
+      "parse_error": null,
+      "detected": 22,
+      "total": 23,
+      "detection_rate": 0.9565,
+      "precision": 0.875,
+      "claim_precision": 0.6216,
+      "matched_components": 14,
+      "credited_claims": 23,
+      "by_layer": {
+        "1": {
+          "detected": 10,
+          "total": 10
+        },
+        "2": {
+          "detected": 2,
+          "total": 2
+        },
+        "3": {
+          "detected": 0,
+          "total": 1
+        },
+        "4": {
+          "detected": 6,
+          "total": 6
+        },
+        "5": {
+          "detected": 1,
+          "total": 1
+        },
+        "6": {
+          "detected": 3,
+          "total": 3
+        }
+      },
+      "false_positives": 0,
+      "phantom_location": 0,
+      "phantom_algorithm": 0,
+      "unmatched_reports": 0,
+      "evidence": {
+        "crypto_components": 16,
+        "total_occurrences": 37,
+        "distinct_claims": 37,
+        "with_location": 16,
+        "with_location_pct": 1.0,
+        "with_line": 16,
+        "with_line_pct": 1.0,
+        "using_spec_evidence": 16,
+        "using_properties_only": 0,
+        "resolvable_locations": 37,
+        "unresolvable_locations": 0,
+        "occurrences_per_component": 2.312
+      },
+      "assets": [
+        {
+          "id": "js-l4-yaml-kem",
+          "algorithm": "ML-KEM-768",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "js-l4-yaml-cipher",
+          "algorithm": "AES-256-GCM",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "js-l4-yaml-assertion",
+          "algorithm": "ML-DSA-65",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "js-l4-yaml-sig",
+          "algorithm": "Ed25519",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "js-l4-yaml-jwks",
+          "algorithm": "RS256",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "js-l4-yaml-hash",
+          "algorithm": "SHA-256",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "js-l6-jwks-cert",
+          "algorithm": "RSA-2048",
+          "layer": 6,
+          "cyclonedx_asset_type": "certificate",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "js-l6-jwks-key",
+          "algorithm": "RSA-2048",
+          "layer": 6,
+          "cyclonedx_asset_type": "related-crypto-material",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "js-l6-token-key",
+          "algorithm": "Ed25519",
+          "layer": 6,
+          "cyclonedx_asset_type": "related-crypto-material",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "js-dep-forge",
+          "algorithm": "node-forge",
+          "layer": 5,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "js-l1-mldsa",
+          "algorithm": "ML-DSA-65",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "js-l2-slhdsa",
+          "algorithm": "SLH-DSA",
+          "layer": 2,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "js-l1-aesgcm",
+          "algorithm": "AES-256-GCM",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "js-l2-sha256",
+          "algorithm": "SHA-256",
+          "layer": 2,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "js-l1-ed25519",
+          "algorithm": "Ed25519",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "js-l1-rsa",
+          "algorithm": "RSA-2048",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "js-l1-ecdsa",
+          "algorithm": "ECDSA-P256",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "js-l1-sha256",
+          "algorithm": "SHA-256",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "js-l1-jose-es256",
+          "algorithm": "ECDSA-P256",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "js-l1-jose-oaep",
+          "algorithm": "RSAES-OAEP",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "js-l1-jose-ps256",
+          "algorithm": "RSASSA-PSS",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "js-l1-mlkem",
+          "algorithm": "ML-KEM-768",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "js-l3-wrapper",
+          "algorithm": "AES-256-GCM",
+          "layer": 3,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": true
+        }
+      ]
+    },
+    {
+      "project": "vaultcrate",
+      "language": "rust",
+      "tool": "cdxgen",
+      "source": "vaultcrate__cdxgen.json",
+      "schema_valid": true,
+      "schema_errors": [],
+      "parse_error": null,
+      "detected": 0,
+      "total": 18,
+      "detection_rate": 0.0,
+      "precision": 0.0,
+      "claim_precision": 0.0,
+      "matched_components": 0,
+      "credited_claims": 0,
+      "by_layer": {
+        "1": {
+          "detected": 0,
+          "total": 6
+        },
+        "2": {
+          "detected": 0,
+          "total": 1
+        },
+        "3": {
+          "detected": 0,
+          "total": 1
+        },
+        "4": {
+          "detected": 0,
+          "total": 5
+        },
+        "5": {
+          "detected": 0,
+          "total": 2
+        },
+        "6": {
+          "detected": 0,
+          "total": 3
+        }
+      },
+      "false_positives": 0,
+      "phantom_location": 0,
+      "phantom_algorithm": 0,
+      "unmatched_reports": 0,
+      "evidence": {
+        "crypto_components": 3,
+        "total_occurrences": 3,
+        "distinct_claims": 3,
+        "with_location": 3,
+        "with_location_pct": 1.0,
+        "with_line": 0,
+        "with_line_pct": 0.0,
+        "using_spec_evidence": 0,
+        "using_properties_only": 3,
+        "resolvable_locations": 3,
+        "unresolvable_locations": 0,
+        "occurrences_per_component": 1.0
+      },
+      "assets": [
+        {
+          "id": "rust-dep-mldsa",
+          "algorithm": "ML-DSA",
+          "layer": 5,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": true
+        },
+        {
+          "id": "rust-dep-chacha",
+          "algorithm": "chacha20poly1305",
+          "layer": 5,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": true
+        },
+        {
+          "id": "rust-l4-toml-sig",
+          "algorithm": "Ed25519",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "rust-l4-toml-kem",
+          "algorithm": "ML-KEM-768",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "rust-l4-toml-cipher",
+          "algorithm": "AES-256-GCM",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "rust-l4-toml-archive",
+          "algorithm": "RSA-2048",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "rust-l4-toml-hash",
+          "algorithm": "SHA-256",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "rust-l6-archive-cert",
+          "algorithm": "RSA-2048",
+          "layer": 6,
+          "cyclonedx_asset_type": "certificate",
+          "detected": false,
+          "located": false,
+          "file_only": true,
+          "name_only": false
+        },
+        {
+          "id": "rust-l6-archive-key",
+          "algorithm": "RSA-2048",
+          "layer": 6,
+          "cyclonedx_asset_type": "related-crypto-material",
+          "detected": false,
+          "located": false,
+          "file_only": true,
+          "name_only": false
+        },
+        {
+          "id": "rust-l6-manifest-key",
+          "algorithm": "Ed25519",
+          "layer": 6,
+          "cyclonedx_asset_type": "related-crypto-material",
+          "detected": false,
+          "located": false,
+          "file_only": true,
+          "name_only": false
+        },
+        {
+          "id": "rust-l1-aesgcm",
+          "algorithm": "AES-256-GCM",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "rust-l2-sha256",
+          "algorithm": "SHA-256",
+          "layer": 2,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "rust-l1-ed25519",
+          "algorithm": "Ed25519",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "rust-l1-ecdsa",
+          "algorithm": "ECDSA-P256",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "rust-l1-rsa",
+          "algorithm": "RSA-2048",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "rust-l1-sha256",
+          "algorithm": "SHA-256",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "rust-l1-mlkem",
+          "algorithm": "ML-KEM-768",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        },
+        {
+          "id": "rust-l3-wrapper",
+          "algorithm": "AES-256-GCM",
+          "layer": 3,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": false
+        }
+      ]
+    },
+    {
+      "project": "vaultcrate",
+      "language": "rust",
+      "tool": "pqprobe",
+      "source": "vaultcrate__pqprobe.json",
+      "schema_valid": true,
+      "schema_errors": [],
+      "parse_error": null,
+      "detected": 17,
+      "total": 18,
+      "detection_rate": 0.9444,
+      "precision": 0.6875,
+      "claim_precision": 0.6667,
+      "matched_components": 11,
+      "credited_claims": 16,
+      "by_layer": {
+        "1": {
+          "detected": 6,
+          "total": 6
+        },
+        "2": {
+          "detected": 1,
+          "total": 1
+        },
+        "3": {
+          "detected": 0,
+          "total": 1
+        },
+        "4": {
+          "detected": 5,
+          "total": 5
+        },
+        "5": {
+          "detected": 2,
+          "total": 2
+        },
+        "6": {
+          "detected": 3,
+          "total": 3
+        }
+      },
+      "false_positives": 0,
+      "phantom_location": 0,
+      "phantom_algorithm": 0,
+      "unmatched_reports": 1,
+      "evidence": {
+        "crypto_components": 16,
+        "total_occurrences": 24,
+        "distinct_claims": 24,
+        "with_location": 16,
+        "with_location_pct": 1.0,
+        "with_line": 16,
+        "with_line_pct": 1.0,
+        "using_spec_evidence": 16,
+        "using_properties_only": 0,
+        "resolvable_locations": 24,
+        "unresolvable_locations": 0,
+        "occurrences_per_component": 1.5
+      },
+      "assets": [
+        {
+          "id": "rust-dep-mldsa",
+          "algorithm": "ML-DSA",
+          "layer": 5,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "rust-dep-chacha",
+          "algorithm": "chacha20poly1305",
+          "layer": 5,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "rust-l4-toml-sig",
+          "algorithm": "Ed25519",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "rust-l4-toml-kem",
+          "algorithm": "ML-KEM-768",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "rust-l4-toml-cipher",
+          "algorithm": "AES-256-GCM",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "rust-l4-toml-archive",
+          "algorithm": "RSA-2048",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "rust-l4-toml-hash",
+          "algorithm": "SHA-256",
+          "layer": 4,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "rust-l6-archive-cert",
+          "algorithm": "RSA-2048",
+          "layer": 6,
+          "cyclonedx_asset_type": "certificate",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "rust-l6-archive-key",
+          "algorithm": "RSA-2048",
+          "layer": 6,
+          "cyclonedx_asset_type": "related-crypto-material",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "rust-l6-manifest-key",
+          "algorithm": "Ed25519",
+          "layer": 6,
+          "cyclonedx_asset_type": "related-crypto-material",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "rust-l1-aesgcm",
+          "algorithm": "AES-256-GCM",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": false,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "rust-l2-sha256",
+          "algorithm": "SHA-256",
+          "layer": 2,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "rust-l1-ed25519",
+          "algorithm": "Ed25519",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "rust-l1-ecdsa",
+          "algorithm": "ECDSA-P256",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "rust-l1-rsa",
+          "algorithm": "RSA-2048",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "rust-l1-sha256",
+          "algorithm": "SHA-256",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "rust-l1-mlkem",
+          "algorithm": "ML-KEM-768",
+          "layer": 1,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": true,
+          "located": true,
+          "file_only": true,
+          "name_only": true
+        },
+        {
+          "id": "rust-l3-wrapper",
+          "algorithm": "AES-256-GCM",
+          "layer": 3,
+          "cyclonedx_asset_type": "algorithm",
+          "detected": false,
+          "located": false,
+          "file_only": false,
+          "name_only": true
+        }
+      ]
+    }
+  ]
+}

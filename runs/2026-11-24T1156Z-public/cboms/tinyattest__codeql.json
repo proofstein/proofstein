@@ -1,0 +1,154 @@
+{
+ "bomFormat": "CycloneDX",
+ "specVersion": "1.6",
+ "version": 1,
+ "metadata": {
+  "tools": {
+   "components": [
+    {
+     "type": "application",
+     "name": "codeql",
+     "version": "2.27.5"
+    }
+   ]
+  }
+ },
+ "components": [
+  {
+   "type": "cryptographic-asset",
+   "bom-ref": "alg-d39bdabf506cf167",
+   "name": "AES256",
+   "cryptoProperties": {
+    "assetType": "algorithm"
+   },
+   "evidence": {
+    "occurrences": [
+     {
+      "location": "src/seal.c",
+      "line": 32
+     },
+     {
+      "location": "src/seal.c",
+      "line": 71
+     }
+    ]
+   }
+  },
+  {
+   "type": "cryptographic-asset",
+   "bom-ref": "alg-65d35a1535f0ffd8",
+   "name": "DH",
+   "cryptoProperties": {
+    "assetType": "algorithm"
+   },
+   "evidence": {
+    "occurrences": [
+     {
+      "location": "src/tls.c",
+      "line": 21
+     },
+     {
+      "location": "src/tls.c",
+      "line": 56
+     }
+    ]
+   }
+  },
+  {
+   "type": "cryptographic-asset",
+   "bom-ref": "alg-ec1420e3ec9e1bd7",
+   "name": "ED25519",
+   "cryptoProperties": {
+    "assetType": "algorithm"
+   },
+   "evidence": {
+    "occurrences": [
+     {
+      "location": "src/identity.c",
+      "line": 75
+     }
+    ]
+   }
+  },
+  {
+   "type": "cryptographic-asset",
+   "bom-ref": "alg-bba0aacb9f2b746f",
+   "name": "GCM",
+   "cryptoProperties": {
+    "assetType": "algorithm"
+   },
+   "evidence": {
+    "occurrences": [
+     {
+      "location": "src/seal.c",
+      "line": 32
+     },
+     {
+      "location": "src/seal.c",
+      "line": 71
+     }
+    ]
+   }
+  },
+  {
+   "type": "cryptographic-asset",
+   "bom-ref": "alg-87a10fd1d9e3a305",
+   "name": "RSA",
+   "cryptoProperties": {
+    "assetType": "algorithm"
+   },
+   "evidence": {
+    "occurrences": [
+     {
+      "location": "src/identity.c",
+      "line": 35
+     },
+     {
+      "location": "src/identity.c",
+      "line": 77
+     }
+    ]
+   }
+  },
+  {
+   "type": "cryptographic-asset",
+   "bom-ref": "alg-b3abe5d8c69b3873",
+   "name": "SHA256",
+   "cryptoProperties": {
+    "assetType": "algorithm"
+   },
+   "evidence": {
+    "occurrences": [
+     {
+      "location": "src/digest.c",
+      "line": 30
+     }
+    ]
+   }
+  },
+  {
+   "type": "cryptographic-asset",
+   "bom-ref": "alg-23759997b3c59884",
+   "name": "UNKNOWN",
+   "cryptoProperties": {
+    "assetType": "algorithm"
+   },
+   "evidence": {
+    "occurrences": [
+     {
+      "location": "src/identity.c",
+      "line": 48
+     },
+     {
+      "location": "src/identity.c",
+      "line": 57
+     },
+     {
+      "location": "src/kem.c",
+      "line": 22
+     }
+    ]
+   }
+  }
+ ]
+}

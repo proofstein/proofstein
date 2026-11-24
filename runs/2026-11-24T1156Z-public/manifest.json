@@ -1,0 +1,1195 @@
+{
+  "run": {
+    "started_utc": "2026-11-24T11:57:03Z",
+    "scan_tree": "git archive HEAD",
+    "ground_truth": "ground-truth",
+    "holdout": false,
+    "corpus_commit": "f366ff5b08c7e82ec0ef9f8da17f6cbea64f4c85",
+    "corpus_commit_short": "f366ff5",
+    "corpus_tree_dirty": false,
+    "uncommitted_paths": [],
+    "host_platform": "linux",
+    "python": "3.12.3",
+    "finished_utc": "2026-11-24T11:59:28Z",
+    "succeeded": 46,
+    "attempted": 48,
+    "build_image": {
+      "image": "proofstein-build:f366ff5",
+      "image_id": "sha256:3d16c8bfbf683df091999be2894de91ff1d561a285a16da96f8d15d6ec3b4864",
+      "dockerfile": "tools/build.Dockerfile at f366ff5",
+      "base": "debian@sha256:3cda3ca472ce45507a5109c6a3907093e24d9ae67d55954c9a07a45665dafba2",
+      "jdk": "Temurin 25.0.5.1+2, sha256 760f91b22c3efc9bd1b64ff950598231be82928cc807e30691a0e7a2995a62c0"
+    },
+    "build_verification": {
+      "command": "tools/build-all.sh and tools/build-all.sh ground-truth-holdout, in the build image",
+      "public": "6 of 6 projects built and ran",
+      "holdout": "6 of 6 projects built and ran"
+    }
+  },
+  "judgement_tables": {
+    "oid_algorithms": {
+      "entries": 27,
+      "sha256_16": "f6fd6fa101db7a4d"
+    },
+    "location_property_names": {
+      "entries": 8,
+      "sha256_16": "0b8c15cc33ce242a"
+    },
+    "line_property_names": {
+      "entries": 5,
+      "sha256_16": "ed438ed351a5b930"
+    },
+    "token_aliases": {
+      "entries": 33,
+      "sha256_16": "c13677feee250d8b"
+    },
+    "family_markers": {
+      "entries": 47,
+      "sha256_16": "9db8169c695be2c5"
+    },
+    "jose_names": {
+      "entries": 10,
+      "sha256_16": "08d16fb9eb9aecef"
+    },
+    "hybrid_groups": {
+      "entries": 4,
+      "sha256_16": "ebb21ecb7cbea298"
+    },
+    "whole_token_only": {
+      "entries": 8,
+      "sha256_16": "b9a4a30aab68fec0"
+    },
+    "known_unplanted": {
+      "entries": 15,
+      "sha256_16": "3a7fca80174e0cdd"
+    }
+  },
+  "judgement_table_changes": {
+    "since_run": "2026-10-22T1005Z-public",
+    "changes": [
+      {
+        "table": "family_markers",
+        "before": {
+          "entries": 43,
+          "sha256_16": "e4639e0dd1414815"
+        },
+        "after": {
+          "entries": 47,
+          "sha256_16": "9db8169c695be2c5"
+        }
+      },
+      {
+        "table": "hybrid_groups",
+        "before": null,
+        "after": {
+          "entries": 4,
+          "sha256_16": "ebb21ecb7cbea298"
+        }
+      },
+      {
+        "table": "jose_names",
+        "before": null,
+        "after": {
+          "entries": 10,
+          "sha256_16": "08d16fb9eb9aecef"
+        }
+      },
+      {
+        "table": "oid_algorithms",
+        "before": {
+          "entries": 27,
+          "sha256_16": "031a3c27915e6dde"
+        },
+        "after": {
+          "entries": 27,
+          "sha256_16": "f6fd6fa101db7a4d"
+        }
+      },
+      {
+        "table": "token_aliases",
+        "before": {
+          "entries": 32,
+          "sha256_16": "637f0e9d5f2cf137"
+        },
+        "after": {
+          "entries": 33,
+          "sha256_16": "c13677feee250d8b"
+        }
+      },
+      {
+        "table": "whole_token_only",
+        "before": {
+          "entries": 7,
+          "sha256_16": "88a20cf6715e9c84"
+        },
+        "after": {
+          "entries": 8,
+          "sha256_16": "b9a4a30aab68fec0"
+        }
+      }
+    ],
+    "prompted_by": [
+      "pqprobe"
+    ]
+  },
+  "tools": {
+    "cdxgen": {
+      "version": "cdxgen 12.8.2",
+      "binary": "tools/cdxgen-docker.sh",
+      "binary_sha256": "b8467bc649481eff58f508713be809b7a76ac86ebe7bf3df012357ca775cef81",
+      "package_version": "@cyclonedx/cdxgen@12.8.2",
+      "accept_exit": [
+        0
+      ],
+      "notes": "Held at 12.8.2 in every run, pinned by digest. Records source files in properties[].SrcFile without line numbers.",
+      "image": "ghcr.io/cyclonedx/cdxgen@sha256:d2a9f784c6d3d71a9d143dd69e6ca43fdb340282b1e43d1b99ad07e9321a4783",
+      "image_digest": "sha256:d2a9f784c6d3d71a9d143dd69e6ca43fdb340282b1e43d1b99ad07e9321a4783",
+      "image_id": "sha256:d2a9f784c6d3d71a9d143dd69e6ca43fdb340282b1e43d1b99ad07e9321a4783"
+    },
+    "cdxgen-13.8.0": {
+      "version": "cdxgen 13.8.0",
+      "binary": "runs/2026-11-24T1156Z-public/harness/cdxgen-own-dir.sh",
+      "binary_sha256": "4c8957efff9c6bf4fae66553d3cbcf205aea05c3f56699387855744d15f9eeed",
+      "package_version": "@cdxgen/cdxgen@13.8.0",
+      "accept_exit": [
+        0
+      ],
+      "notes": "--spec-version=1.6; otherwise the arguments of cdxgen 12.8.2. Each project gets its own output directory (harness/cdxgen-own-dir.sh).",
+      "image": "ghcr.io/cdxgen/cdxgen@sha256:2bbfeffaa64801cac126e60441acaf8ceedd8eb939b32c3dad15519dce3ef5c6",
+      "image_digest": "sha256:2bbfeffaa64801cac126e60441acaf8ceedd8eb939b32c3dad15519dce3ef5c6",
+      "image_id": "sha256:2bbfeffaa64801cac126e60441acaf8ceedd8eb939b32c3dad15519dce3ef5c6"
+    },
+    "pqprobe": {
+      "version": "pqprobe 5.1.2",
+      "binary": "<external>/pqprobe",
+      "binary_sha256": "4d05d488ff48bc1cd92b4293c9ce9b64a095055b766285f2ca801720d9b36e33",
+      "package_version": "pqprobe 5.1.2",
+      "accept_exit": [
+        0,
+        1
+      ],
+      "image": "proofstein-build:f366ff5",
+      "image_digest": "sha256:3d16c8bfbf683df091999be2894de91ff1d561a285a16da96f8d15d6ec3b4864",
+      "image_id": "sha256:3d16c8bfbf683df091999be2894de91ff1d561a285a16da96f8d15d6ec3b4864"
+    },
+    "cryptoscan": {
+      "version": "cryptoscan 1.5.0",
+      "binary": "<external>/cryptoscan",
+      "binary_sha256": "3d96b0631ac07869096478424d5010ac14302f7d5570249598848f9998684b60",
+      "package_version": "cryptoscan 1.5.0 (release tarball cryptoscan_1.5.0_linux_amd64.tar.gz, sha256 a9e05cf3a78cdb3a2a5cb7fb55fcc2e8d53a6d35519e1b15444432065716a0cc, checksum verified)",
+      "accept_exit": [
+        0,
+        1
+      ],
+      "notes": "Defaults. Withholds findings it classes as quantum-safe (AES, SHA-2).",
+      "image": "proofstein-build:f366ff5",
+      "image_digest": "sha256:3d16c8bfbf683df091999be2894de91ff1d561a285a16da96f8d15d6ec3b4864",
+      "image_id": "sha256:3d16c8bfbf683df091999be2894de91ff1d561a285a16da96f8d15d6ec3b4864"
+    },
+    "cryptoscan-quantum-safe": {
+      "version": "cryptoscan 1.5.0",
+      "binary": "<external>/cryptoscan",
+      "binary_sha256": "3d96b0631ac07869096478424d5010ac14302f7d5570249598848f9998684b60",
+      "package_version": "cryptoscan 1.5.0 (release tarball cryptoscan_1.5.0_linux_amd64.tar.gz, sha256 a9e05cf3a78cdb3a2a5cb7fb55fcc2e8d53a6d35519e1b15444432065716a0cc, checksum verified)",
+      "accept_exit": [
+        0,
+        1
+      ],
+      "notes": "--include-quantum-safe: also reports AES and SHA-2.",
+      "image": "proofstein-build:f366ff5",
+      "image_digest": "sha256:3d16c8bfbf683df091999be2894de91ff1d561a285a16da96f8d15d6ec3b4864",
+      "image_id": "sha256:3d16c8bfbf683df091999be2894de91ff1d561a285a16da96f8d15d6ec3b4864"
+    },
+    "cbomkit-theia": {
+      "version": "cbomkit-theia 1.1.2",
+      "binary": "<external>/cbomkit-theia-v1.1.2",
+      "binary_sha256": "77a28db2c7478976561885bc424fb5800a2034d8c5a47b71147043c8ea232096",
+      "package_version": "cbomkit-theia v1.1.2 (dcd95ac), built from source of github.com/cbomkit/cbomkit-theia inside the pinned build image",
+      "accept_exit": [
+        0
+      ],
+      "notes": "Default plugins. Reads certificates, keys, java.security and OpenSSL configuration; no source code.",
+      "image": "proofstein-build:f366ff5",
+      "image_digest": "sha256:3d16c8bfbf683df091999be2894de91ff1d561a285a16da96f8d15d6ec3b4864",
+      "image_id": "sha256:3d16c8bfbf683df091999be2894de91ff1d561a285a16da96f8d15d6ec3b4864"
+    },
+    "opengrep": {
+      "version": "Opengrep 2.0.0",
+      "binary": "runs/2026-11-24T1156Z-public/harness/opengrep-cbom.sh",
+      "binary_sha256": "4ae324b9da5e1a09b121b4f305a1885303330b8becba1760256ed7724dc87986",
+      "package_version": "opengrep 2.0.0 (opengrep_linux_x86, sha256 37e93f4da5fd04a18c5c1febbdd12f7e98dfccd4d0c9cf2593bcb25eeb462da0, cosign signature verified) with the 100 cryptography rules (harness/select_rules.py, by CWE) of opengrep-rules at f1d2b562, the archived head, rule content of 0f5a85ce (2024-12-13); rule set sha256/16 f98b5696b0867c1f by harness/ruleset-digest.sh",
+      "accept_exit": [
+        0
+      ],
+      "notes": "Each result is a component named by its rule id, at the reported file and line. Rule-set digest recipe: sha256 over sha256sum's lines (\"<sha256>  <path>\") for every selected rule file, paths relative to the rule directory and sorted bytewise, first 16 hex digits (harness/ruleset-digest.sh).",
+      "image": "proofstein-build:f366ff5",
+      "image_digest": "sha256:3d16c8bfbf683df091999be2894de91ff1d561a285a16da96f8d15d6ec3b4864",
+      "image_id": "sha256:3d16c8bfbf683df091999be2894de91ff1d561a285a16da96f8d15d6ec3b4864"
+    },
+    "codeql": {
+      "version": "CodeQL 2.27.5",
+      "binary": "runs/2026-11-24T1156Z-public/harness/codeql-cbom.sh",
+      "binary_sha256": "6aa308f7b5a852294714081f3ce49152e5a4e63bb724008db3623688be1f9c86",
+      "package_version": "CodeQL bundle 2.27.5 (codeql-bundle-linux64.tar.gz, sha256 a5f205466b976ea9b345957fc133eeea9021e71aeffc99243ec7b9e99b1d6ed5, checksum verified), inventory queries only",
+      "accept_exit": [
+        0
+      ],
+      "notes": "Inventory queries for C/C++, Python and Java, every one of those languages present in a project, build-mode none, inside the pinned build image; a project with none of them gets no document.",
+      "image": "proofstein-build:f366ff5",
+      "image_digest": "sha256:3d16c8bfbf683df091999be2894de91ff1d561a285a16da96f8d15d6ec3b4864",
+      "image_id": "sha256:3d16c8bfbf683df091999be2894de91ff1d561a285a16da96f8d15d6ec3b4864"
+    }
+  },
+  "projects": {
+    "beacon-relay": {
+      "language": "go",
+      "assets": 19
+    },
+    "ledger-svc": {
+      "language": "java",
+      "assets": 25
+    },
+    "sealbox": {
+      "language": "rust",
+      "assets": 18
+    },
+    "session-broker": {
+      "language": "javascript",
+      "assets": 23
+    },
+    "tinyattest": {
+      "language": "c",
+      "assets": 23
+    },
+    "vaultkeeper": {
+      "language": "python",
+      "assets": 23
+    }
+  },
+  "invocations": [
+    {
+      "argv": [
+        "tools/cdxgen-docker.sh",
+        "--json-pretty",
+        "--include-crypto",
+        "-o",
+        "runs/2026-11-24T1156Z-public/.work/bom.json",
+        "runs/2026-11-24T1156Z-public/.work/scan/beacon-relay"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 4.54,
+      "bytes": 6994,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "beacon-relay__cdxgen.json",
+      "tool": "cdxgen",
+      "project": "beacon-relay",
+      "language": "go"
+    },
+    {
+      "argv": [
+        "tools/cdxgen-docker.sh",
+        "--json-pretty",
+        "--include-crypto",
+        "-o",
+        "runs/2026-11-24T1156Z-public/.work/bom.json",
+        "runs/2026-11-24T1156Z-public/.work/scan/ledger-svc"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 13.03,
+      "bytes": 7834,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "ledger-svc__cdxgen.json",
+      "tool": "cdxgen",
+      "project": "ledger-svc",
+      "language": "java"
+    },
+    {
+      "argv": [
+        "tools/cdxgen-docker.sh",
+        "--json-pretty",
+        "--include-crypto",
+        "-o",
+        "runs/2026-11-24T1156Z-public/.work/bom.json",
+        "runs/2026-11-24T1156Z-public/.work/scan/sealbox"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 2.19,
+      "bytes": 92995,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "sealbox__cdxgen.json",
+      "tool": "cdxgen",
+      "project": "sealbox",
+      "language": "rust"
+    },
+    {
+      "argv": [
+        "tools/cdxgen-docker.sh",
+        "--json-pretty",
+        "--include-crypto",
+        "-o",
+        "runs/2026-11-24T1156Z-public/.work/bom.json",
+        "runs/2026-11-24T1156Z-public/.work/scan/session-broker"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 2.19,
+      "bytes": 18860,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "session-broker__cdxgen.json",
+      "tool": "cdxgen",
+      "project": "session-broker",
+      "language": "javascript"
+    },
+    {
+      "argv": [
+        "tools/cdxgen-docker.sh",
+        "--json-pretty",
+        "--include-crypto",
+        "-o",
+        "runs/2026-11-24T1156Z-public/.work/bom.json",
+        "runs/2026-11-24T1156Z-public/.work/scan/tinyattest"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 2.21,
+      "bytes": 4569,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "tinyattest__cdxgen.json",
+      "tool": "cdxgen",
+      "project": "tinyattest",
+      "language": "c"
+    },
+    {
+      "argv": [
+        "tools/cdxgen-docker.sh",
+        "--json-pretty",
+        "--include-crypto",
+        "-o",
+        "runs/2026-11-24T1156Z-public/.work/bom.json",
+        "runs/2026-11-24T1156Z-public/.work/scan/vaultkeeper"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 4.88,
+      "bytes": 7039,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "vaultkeeper__cdxgen.json",
+      "tool": "cdxgen",
+      "project": "vaultkeeper",
+      "language": "python"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/cdxgen-own-dir.sh",
+        "--json-pretty",
+        "--include-crypto",
+        "--spec-version=1.6",
+        "-o",
+        "runs/2026-11-24T1156Z-public/.work/bom.json",
+        "runs/2026-11-24T1156Z-public/.work/scan/beacon-relay"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 6.23,
+      "bytes": 13110,
+      "stderr_tail": "\u2714 Post-processing BOM  0.0s | Creating reachables slice for /src. Please wait ... | Creating usages slice for /src. Please wait ... | Callsites attribution: 18 records; 0 by purl, 0 by the ecosystem rule, 0 to the runtime, 18 unattributed. | <external>/bom.json created successfully. | \u2714 Validating BOM  valid (js)  0.0s",
+      "status": "ok",
+      "written": "beacon-relay__cdxgen-13.8.0.json",
+      "tool": "cdxgen-13.8.0",
+      "project": "beacon-relay",
+      "language": "go"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/cdxgen-own-dir.sh",
+        "--json-pretty",
+        "--include-crypto",
+        "--spec-version=1.6",
+        "-o",
+        "runs/2026-11-24T1156Z-public/.work/bom.json",
+        "runs/2026-11-24T1156Z-public/.work/scan/ledger-svc"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 13.86,
+      "bytes": 11356,
+      "stderr_tail": "Executing '<external>/mvn in /src | Creating reachables slice for /src. Please wait ... | Creating usages slice for /src. Please wait ... | Callsites attribution: 209 records; 0 by purl, 10 by the ecosystem rule, 0 to the runtime, 199 unattributed. | <external>/bom.json created successfully. | \u2714 Validating BOM  valid (js)  0.0s",
+      "status": "ok",
+      "written": "ledger-svc__cdxgen-13.8.0.json",
+      "tool": "cdxgen-13.8.0",
+      "project": "ledger-svc",
+      "language": "java"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/cdxgen-own-dir.sh",
+        "--json-pretty",
+        "--include-crypto",
+        "--spec-version=1.6",
+        "-o",
+        "runs/2026-11-24T1156Z-public/.work/bom.json",
+        "runs/2026-11-24T1156Z-public/.work/scan/sealbox"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 2.29,
+      "bytes": 156451,
+      "stderr_tail": "  84 cargo, 6 cryptographic-asset in /src | \u2714 Scanning 1 path  90 components  0.2s | \u2714 Generating BOM  90 components  0.2s | \u2714 Post-processing BOM  0.0s | <external>/bom.json created successfully. | \u2714 Validating BOM  valid (js)  0.0s",
+      "status": "ok",
+      "written": "sealbox__cdxgen-13.8.0.json",
+      "tool": "cdxgen-13.8.0",
+      "project": "sealbox",
+      "language": "rust"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/cdxgen-own-dir.sh",
+        "--json-pretty",
+        "--include-crypto",
+        "--spec-version=1.6",
+        "-o",
+        "runs/2026-11-24T1156Z-public/.work/bom.json",
+        "runs/2026-11-24T1156Z-public/.work/scan/session-broker"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 4.48,
+      "bytes": 26697,
+      "stderr_tail": "\u2714 Post-processing BOM  0.0s | Creating reachables slice for /src. Please wait ... | Creating usages slice for /src. Please wait ... | Callsites attribution: 34 records; 0 by purl, 5 by the ecosystem rule, 0 to the runtime, 29 unattributed. | <external>/bom.json created successfully. | \u2714 Validating BOM  valid (js)  0.0s",
+      "status": "ok",
+      "written": "session-broker__cdxgen-13.8.0.json",
+      "tool": "cdxgen-13.8.0",
+      "project": "session-broker",
+      "language": "javascript"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/cdxgen-own-dir.sh",
+        "--json-pretty",
+        "--include-crypto",
+        "--spec-version=1.6",
+        "-o",
+        "runs/2026-11-24T1156Z-public/.work/bom.json",
+        "runs/2026-11-24T1156Z-public/.work/scan/tinyattest"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 4.39,
+      "bytes": 11096,
+      "stderr_tail": "\u2714 Post-processing BOM  0.0s | Creating reachables slice for /src. Please wait ... | Creating usages slice for /src. Please wait ... | Callsites attribution: 190 records; 0 by purl, 0 by the ecosystem rule, 0 to the runtime, 190 unattributed. | Unable to identify component evidence for the input SBOM based on the slices from atom. The slices are either empty or lack appropriate tags. | \u2714 Validating BOM  valid (js)  0.0s",
+      "status": "ok",
+      "written": "tinyattest__cdxgen-13.8.0.json",
+      "tool": "cdxgen-13.8.0",
+      "project": "tinyattest",
+      "language": "c"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/cdxgen-own-dir.sh",
+        "--json-pretty",
+        "--include-crypto",
+        "--spec-version=1.6",
+        "-o",
+        "runs/2026-11-24T1156Z-public/.work/bom.json",
+        "runs/2026-11-24T1156Z-public/.work/scan/vaultkeeper"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 6.67,
+      "bytes": 15694,
+      "stderr_tail": "\u2714 Post-processing BOM  0.0s | Creating reachables slice for /src. Please wait ... | Creating usages slice for /src. Please wait ... | Callsites attribution: 39 records; 0 by purl, 0 by the ecosystem rule, 0 to the runtime, 39 unattributed. | <external>/bom.json created successfully. | \u2714 Validating BOM  valid (js)  0.0s",
+      "status": "ok",
+      "written": "vaultkeeper__cdxgen-13.8.0.json",
+      "tool": "cdxgen-13.8.0",
+      "project": "vaultkeeper",
+      "language": "python"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "<external>/pqprobe",
+        "--output",
+        "cbom",
+        "scan",
+        "."
+      ],
+      "exit_code": 1,
+      "exit_accepted": true,
+      "duration_sec": 0.18,
+      "bytes": 33774,
+      "stderr_tail": "cbom: no CycloneDX representation for doc_claim finding \"Documentation: Post-quantum cryptography claim \u2014 verify against actual implementation\" (README.md:23) | cbom: no CycloneDX representation for doc_claim finding \"Documentation: ML-KEM claim \u2014 verify actual implementation exists\" (README.md:31) | cbom: \"SHA-2\" mapped with loss: the call site names the SHA-2 family without a determinable digest length | cbom: \"AES-GCM\" mapped with loss: the call site does not reveal the AES key size | cbom: \"AES\" mapped with loss: the call names AES without a key size or mode | cbom: \"ML-KEM\" mapped with loss: the parameter set is not named, so no OID or NIST security category is asserted",
+      "status": "ok",
+      "written": "beacon-relay__pqprobe.json",
+      "tool": "pqprobe",
+      "project": "beacon-relay",
+      "language": "go"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "<external>/pqprobe",
+        "--output",
+        "cbom",
+        "scan",
+        "."
+      ],
+      "exit_code": 1,
+      "exit_accepted": true,
+      "duration_sec": 0.18,
+      "bytes": 43963,
+      "stderr_tail": "cbom: \"ML-DSA\" mapped with loss: the parameter set is not named, so no OID or NIST security category is asserted | cbom: \"AES-GCM\" mapped with loss: the call site does not reveal the AES key size | cbom: \"AES\" mapped with loss: the call names AES without a key size or mode | cbom: \"AES-GCM\" mapped with loss: the call names a mode without a key size | cbom: \"ML-KEM\" mapped with loss: the parameter set is not named, so no OID or NIST security category is asserted | cbom: configuration value \"keys/ledger-node.p12\" is not an algorithm, curve, protocol, cipher suite or cipher string; counted under pqprobe:unrecognised:config-value, not inventoried (src/main/resources/application.properties:16)",
+      "status": "ok",
+      "written": "ledger-svc__pqprobe.json",
+      "tool": "pqprobe",
+      "project": "ledger-svc",
+      "language": "java"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "<external>/pqprobe",
+        "--output",
+        "cbom",
+        "scan",
+        "."
+      ],
+      "exit_code": 1,
+      "exit_accepted": true,
+      "duration_sec": 0.18,
+      "bytes": 34648,
+      "stderr_tail": "cbom: no CycloneDX representation for doc_claim finding \"Documentation: ML-KEM claim \u2014 verify actual implementation exists\" (README.md:29) | cbom: no CycloneDX representation for doc_claim finding \"Documentation: Post-quantum cryptography claim \u2014 verify against actual implementation\" (README.md:36) | cbom: \"AES-GCM\" mapped with loss: the call site does not reveal the AES key size | cbom: \"SHA-2\" mapped with loss: the call site names the SHA-2 family without a determinable digest length",
+      "status": "ok",
+      "written": "sealbox__pqprobe.json",
+      "tool": "pqprobe",
+      "project": "sealbox",
+      "language": "rust"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "<external>/pqprobe",
+        "--output",
+        "cbom",
+        "scan",
+        "."
+      ],
+      "exit_code": 1,
+      "exit_accepted": true,
+      "duration_sec": 0.19,
+      "bytes": 31304,
+      "stderr_tail": "cbom: 1 case label(s) name \"Falcon-512\" and no code or configuration in this scan does; counted under pqprobe:uncorroborated:case-label, not a component | cbom: no CycloneDX representation for doc_claim finding \"Documentation: Post-quantum cryptography claim \u2014 verify against actual implementation\" (README.md:25) | cbom: no CycloneDX representation for doc_claim finding \"Documentation: ML-KEM claim \u2014 verify actual implementation exists\" (README.md:27) | cbom: \"SLH-DSA\" mapped with loss: the parameter set is not named, so no OID or NIST security category is asserted | cbom: \"AES-GCM\" mapped with loss: the call site does not reveal the AES key size | cbom: \"SHA-2\" mapped with loss: the call site names the SHA-2 family without a determinable digest length",
+      "status": "ok",
+      "written": "session-broker__pqprobe.json",
+      "tool": "pqprobe",
+      "project": "session-broker",
+      "language": "javascript"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "<external>/pqprobe",
+        "--output",
+        "cbom",
+        "scan",
+        "."
+      ],
+      "exit_code": 1,
+      "exit_accepted": true,
+      "duration_sec": 0.19,
+      "bytes": 46262,
+      "stderr_tail": "cbom: no CycloneDX representation for doc_claim finding \"Documentation: ML-KEM claim \u2014 verify actual implementation exists\" (README.md:13) | cbom: \"SHA-2\" mapped with loss: the call site names the SHA-2 family without a determinable digest length | cbom: \"AES-GCM\" mapped with loss: the call site does not reveal the AES key size | cbom: \"XMSS\" mapped with loss: the parameter set is not named, so the signature capacity of the key is unknown | cbom: \"LMS\" mapped with loss: the parameter set is not named, so the signature capacity of the key is unknown",
+      "status": "ok",
+      "written": "tinyattest__pqprobe.json",
+      "tool": "pqprobe",
+      "project": "tinyattest",
+      "language": "c"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "<external>/pqprobe",
+        "--output",
+        "cbom",
+        "scan",
+        "."
+      ],
+      "exit_code": 1,
+      "exit_accepted": true,
+      "duration_sec": 0.18,
+      "bytes": 37639,
+      "stderr_tail": "cbom: no CycloneDX representation for doc_claim finding \"Documentation: ML-KEM claim \u2014 verify actual implementation exists\" (README.md:31) | cbom: \"SPHINCS+\" mapped with loss: the parameter set is not named, so no OID or NIST security category is asserted | cbom: \"AES-GCM\" mapped with loss: the call names a mode without a key size | cbom: \"SHA-2\" mapped with loss: the call site names the SHA-2 family without a determinable digest length | cbom: \"Public key (runtime)\" mapped with loss: the key is loaded or serialized at runtime; its algorithm is decided by the data | cbom: \"ML-KEM\" mapped with loss: the parameter set is not named, so no OID or NIST security category is asserted",
+      "status": "ok",
+      "written": "vaultkeeper__pqprobe.json",
+      "tool": "pqprobe",
+      "project": "vaultkeeper",
+      "language": "python"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "<external>/cryptoscan",
+        "scan",
+        ".",
+        "--format",
+        "cbom",
+        "--no-color"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 0.18,
+      "bytes": 8027,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "beacon-relay__cryptoscan.json",
+      "tool": "cryptoscan",
+      "project": "beacon-relay",
+      "language": "go"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "<external>/cryptoscan",
+        "scan",
+        ".",
+        "--format",
+        "cbom",
+        "--no-color"
+      ],
+      "exit_code": 1,
+      "exit_accepted": true,
+      "duration_sec": 0.18,
+      "bytes": 15975,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "ledger-svc__cryptoscan.json",
+      "tool": "cryptoscan",
+      "project": "ledger-svc",
+      "language": "java"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "<external>/cryptoscan",
+        "scan",
+        ".",
+        "--format",
+        "cbom",
+        "--no-color"
+      ],
+      "exit_code": 1,
+      "exit_accepted": true,
+      "duration_sec": 0.18,
+      "bytes": 6444,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "sealbox__cryptoscan.json",
+      "tool": "cryptoscan",
+      "project": "sealbox",
+      "language": "rust"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "<external>/cryptoscan",
+        "scan",
+        ".",
+        "--format",
+        "cbom",
+        "--no-color"
+      ],
+      "exit_code": 1,
+      "exit_accepted": true,
+      "duration_sec": 0.19,
+      "bytes": 10345,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "session-broker__cryptoscan.json",
+      "tool": "cryptoscan",
+      "project": "session-broker",
+      "language": "javascript"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "<external>/cryptoscan",
+        "scan",
+        ".",
+        "--format",
+        "cbom",
+        "--no-color"
+      ],
+      "exit_code": 1,
+      "exit_accepted": true,
+      "duration_sec": 0.17,
+      "bytes": 9539,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "tinyattest__cryptoscan.json",
+      "tool": "cryptoscan",
+      "project": "tinyattest",
+      "language": "c"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "<external>/cryptoscan",
+        "scan",
+        ".",
+        "--format",
+        "cbom",
+        "--no-color"
+      ],
+      "exit_code": 1,
+      "exit_accepted": true,
+      "duration_sec": 0.18,
+      "bytes": 9973,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "vaultkeeper__cryptoscan.json",
+      "tool": "cryptoscan",
+      "project": "vaultkeeper",
+      "language": "python"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "<external>/cryptoscan",
+        "scan",
+        ".",
+        "--format",
+        "cbom",
+        "--no-color",
+        "--include-quantum-safe"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 0.19,
+      "bytes": 9304,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "beacon-relay__cryptoscan-quantum-safe.json",
+      "tool": "cryptoscan-quantum-safe",
+      "project": "beacon-relay",
+      "language": "go"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "<external>/cryptoscan",
+        "scan",
+        ".",
+        "--format",
+        "cbom",
+        "--no-color",
+        "--include-quantum-safe"
+      ],
+      "exit_code": 1,
+      "exit_accepted": true,
+      "duration_sec": 0.19,
+      "bytes": 17365,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "ledger-svc__cryptoscan-quantum-safe.json",
+      "tool": "cryptoscan-quantum-safe",
+      "project": "ledger-svc",
+      "language": "java"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "<external>/cryptoscan",
+        "scan",
+        ".",
+        "--format",
+        "cbom",
+        "--no-color",
+        "--include-quantum-safe"
+      ],
+      "exit_code": 1,
+      "exit_accepted": true,
+      "duration_sec": 0.18,
+      "bytes": 7691,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "sealbox__cryptoscan-quantum-safe.json",
+      "tool": "cryptoscan-quantum-safe",
+      "project": "sealbox",
+      "language": "rust"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "<external>/cryptoscan",
+        "scan",
+        ".",
+        "--format",
+        "cbom",
+        "--no-color",
+        "--include-quantum-safe"
+      ],
+      "exit_code": 1,
+      "exit_accepted": true,
+      "duration_sec": 0.19,
+      "bytes": 11586,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "session-broker__cryptoscan-quantum-safe.json",
+      "tool": "cryptoscan-quantum-safe",
+      "project": "session-broker",
+      "language": "javascript"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "<external>/cryptoscan",
+        "scan",
+        ".",
+        "--format",
+        "cbom",
+        "--no-color",
+        "--include-quantum-safe"
+      ],
+      "exit_code": 1,
+      "exit_accepted": true,
+      "duration_sec": 0.17,
+      "bytes": 10289,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "tinyattest__cryptoscan-quantum-safe.json",
+      "tool": "cryptoscan-quantum-safe",
+      "project": "tinyattest",
+      "language": "c"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "<external>/cryptoscan",
+        "scan",
+        ".",
+        "--format",
+        "cbom",
+        "--no-color",
+        "--include-quantum-safe"
+      ],
+      "exit_code": 1,
+      "exit_accepted": true,
+      "duration_sec": 0.17,
+      "bytes": 11423,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "vaultkeeper__cryptoscan-quantum-safe.json",
+      "tool": "cryptoscan-quantum-safe",
+      "project": "vaultkeeper",
+      "language": "python"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "<external>/cbomkit-theia-v1.1.2",
+        "dir",
+        "."
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 0.21,
+      "bytes": 7197,
+      "stderr_tail": "time=\"2026-11-24T11:58:16Z\" level=info msg=\"Secret detected\" file=testdata/relay-key.pem type=private-key | time=\"2026-11-24T11:58:16Z\" level=info msg=\"Found 1 private key(s) in testdata/relay-key.pem\" | time=\"2026-11-24T11:58:16Z\" level=info msg=\"=> Running OpenSSL Config Plugin\" | time=\"2026-11-24T11:58:16Z\" level=info msg=\"No OpenSSL configuration files found.\" | time=\"2026-11-24T11:58:16Z\" level=info msg=\"=> Running Problematic CA Detection Plugin\" | time=\"2026-11-24T11:58:16Z\" level=info msg=\"Problematic CA detection completed\" checked=0 flagged=0",
+      "status": "ok",
+      "written": "beacon-relay__cbomkit-theia.json",
+      "tool": "cbomkit-theia",
+      "project": "beacon-relay",
+      "language": "go"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "<external>/cbomkit-theia-v1.1.2",
+        "dir",
+        "."
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 0.21,
+      "bytes": 1947,
+      "stderr_tail": "time=\"2026-11-24T11:58:17Z\" level=info msg=\"Found 1 private key(s) in keys/block-signing-key.pem\" | time=\"2026-11-24T11:58:17Z\" level=info msg=\"Secret detected\" file=keys/ledger-node.p12 type=pkcs12-file | time=\"2026-11-24T11:58:17Z\" level=info msg=\"=> Running OpenSSL Config Plugin\" | time=\"2026-11-24T11:58:17Z\" level=info msg=\"No OpenSSL configuration files found.\" | time=\"2026-11-24T11:58:17Z\" level=info msg=\"=> Running Problematic CA Detection Plugin\" | time=\"2026-11-24T11:58:17Z\" level=info msg=\"Problematic CA detection completed\" checked=0 flagged=0",
+      "status": "ok",
+      "written": "ledger-svc__cbomkit-theia.json",
+      "tool": "cbomkit-theia",
+      "project": "ledger-svc",
+      "language": "java"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "<external>/cbomkit-theia-v1.1.2",
+        "dir",
+        "."
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 0.2,
+      "bytes": 6408,
+      "stderr_tail": "time=\"2026-11-24T11:58:17Z\" level=info msg=\"Secret detected\" file=keys/manifest-signing-key.pem type=private-key | time=\"2026-11-24T11:58:17Z\" level=info msg=\"Found 1 private key(s) in keys/manifest-signing-key.pem\" | time=\"2026-11-24T11:58:17Z\" level=info msg=\"=> Running OpenSSL Config Plugin\" | time=\"2026-11-24T11:58:17Z\" level=info msg=\"No OpenSSL configuration files found.\" | time=\"2026-11-24T11:58:17Z\" level=info msg=\"=> Running Problematic CA Detection Plugin\" | time=\"2026-11-24T11:58:17Z\" level=info msg=\"Problematic CA detection completed\" checked=0 flagged=0",
+      "status": "ok",
+      "written": "sealbox__cbomkit-theia.json",
+      "tool": "cbomkit-theia",
+      "project": "sealbox",
+      "language": "rust"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "<external>/cbomkit-theia-v1.1.2",
+        "dir",
+        "."
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 0.19,
+      "bytes": 6374,
+      "stderr_tail": "time=\"2026-11-24T11:58:17Z\" level=info msg=\"Secret detected\" file=keys/token-signing-key.pem type=private-key | time=\"2026-11-24T11:58:17Z\" level=info msg=\"Found 1 private key(s) in keys/token-signing-key.pem\" | time=\"2026-11-24T11:58:17Z\" level=info msg=\"=> Running OpenSSL Config Plugin\" | time=\"2026-11-24T11:58:17Z\" level=info msg=\"No OpenSSL configuration files found.\" | time=\"2026-11-24T11:58:17Z\" level=info msg=\"=> Running Problematic CA Detection Plugin\" | time=\"2026-11-24T11:58:17Z\" level=info msg=\"Problematic CA detection completed\" checked=0 flagged=0",
+      "status": "ok",
+      "written": "session-broker__cbomkit-theia.json",
+      "tool": "cbomkit-theia",
+      "project": "session-broker",
+      "language": "javascript"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "<external>/cbomkit-theia-v1.1.2",
+        "dir",
+        "."
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 0.2,
+      "bytes": 6376,
+      "stderr_tail": "time=\"2026-11-24T11:58:17Z\" level=info msg=\"Secret detected\" file=keys/report-signing-key.pem type=private-key | time=\"2026-11-24T11:58:17Z\" level=info msg=\"Found 1 private key(s) in keys/report-signing-key.pem\" | time=\"2026-11-24T11:58:17Z\" level=info msg=\"=> Running OpenSSL Config Plugin\" | time=\"2026-11-24T11:58:17Z\" level=info msg=\"No OpenSSL configuration files found.\" | time=\"2026-11-24T11:58:17Z\" level=info msg=\"=> Running Problematic CA Detection Plugin\" | time=\"2026-11-24T11:58:17Z\" level=info msg=\"Problematic CA detection completed\" checked=0 flagged=0",
+      "status": "ok",
+      "written": "tinyattest__cbomkit-theia.json",
+      "tool": "cbomkit-theia",
+      "project": "tinyattest",
+      "language": "c"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "<external>/cbomkit-theia-v1.1.2",
+        "dir",
+        "."
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 0.21,
+      "bytes": 6492,
+      "stderr_tail": "time=\"2026-11-24T11:58:17Z\" level=info msg=\"Found 1 private key(s) in secrets/peer-mesh-key.pem\" | time=\"2026-11-24T11:58:17Z\" level=info msg=\"Secret detected\" file=src/vaultkeeper/kem.py type=generic-api-key | time=\"2026-11-24T11:58:17Z\" level=info msg=\"=> Running OpenSSL Config Plugin\" | time=\"2026-11-24T11:58:17Z\" level=info msg=\"No OpenSSL configuration files found.\" | time=\"2026-11-24T11:58:17Z\" level=info msg=\"=> Running Problematic CA Detection Plugin\" | time=\"2026-11-24T11:58:17Z\" level=info msg=\"Problematic CA detection completed\" checked=0 flagged=0",
+      "status": "ok",
+      "written": "vaultkeeper__cbomkit-theia.json",
+      "tool": "cbomkit-theia",
+      "project": "vaultkeeper",
+      "language": "python"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "runs/2026-11-24T1156Z-public/harness/opengrep-cbom.sh"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 0.44,
+      "bytes": 236,
+      "stderr_tail": "[00.05][WARNING]: -c is given; ignoring $OPENGREP_RULES",
+      "status": "ok",
+      "written": "beacon-relay__opengrep.json",
+      "tool": "opengrep",
+      "project": "beacon-relay",
+      "language": "go"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "runs/2026-11-24T1156Z-public/harness/opengrep-cbom.sh"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 0.43,
+      "bytes": 890,
+      "stderr_tail": "[00.05][WARNING]: -c is given; ignoring $OPENGREP_RULES",
+      "status": "ok",
+      "written": "ledger-svc__opengrep.json",
+      "tool": "opengrep",
+      "project": "ledger-svc",
+      "language": "java"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "runs/2026-11-24T1156Z-public/harness/opengrep-cbom.sh"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 0.28,
+      "bytes": 236,
+      "stderr_tail": "[00.05][WARNING]: -c is given; ignoring $OPENGREP_RULES",
+      "status": "ok",
+      "written": "sealbox__opengrep.json",
+      "tool": "opengrep",
+      "project": "sealbox",
+      "language": "rust"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "runs/2026-11-24T1156Z-public/harness/opengrep-cbom.sh"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 0.44,
+      "bytes": 236,
+      "stderr_tail": "[00.06][WARNING]: -c is given; ignoring $OPENGREP_RULES",
+      "status": "ok",
+      "written": "session-broker__opengrep.json",
+      "tool": "opengrep",
+      "project": "session-broker",
+      "language": "javascript"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "runs/2026-11-24T1156Z-public/harness/opengrep-cbom.sh"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 0.33,
+      "bytes": 236,
+      "stderr_tail": "[00.05][WARNING]: -c is given; ignoring $OPENGREP_RULES",
+      "status": "ok",
+      "written": "tinyattest__opengrep.json",
+      "tool": "opengrep",
+      "project": "tinyattest",
+      "language": "c"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "runs/2026-11-24T1156Z-public/harness/opengrep-cbom.sh"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 0.42,
+      "bytes": 236,
+      "stderr_tail": "[00.05][WARNING]: -c is given; ignoring $OPENGREP_RULES",
+      "status": "ok",
+      "written": "vaultkeeper__opengrep.json",
+      "tool": "opengrep",
+      "project": "vaultkeeper",
+      "language": "python"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "runs/2026-11-24T1156Z-public/harness/codeql-cbom.sh"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 4.86,
+      "bytes": 235,
+      "stderr_tail": "[2026-11-24 11:58:21] [build-stdout] [WARN] [12] Failed to find dynload path | [2026-11-24 11:58:21] [build-stdout] [WARN] [11] Failed to find dynload path | [2026-11-24 11:58:21] [build-stdout] [WARN] [4] Failed to find dynload path | [2026-11-24 11:58:21] [build-stderr] Scanning for files in runs/2026-11-24T1156Z-public/.work/scan/beacon-relay... | [2026-11-24 11:58:21] [build-stderr] <external>/db: Indexing files in in runs/2026-11-24T1156Z-public/.work/scan/beacon-relay... | [2026-11-24 11:58:21] [build-stderr] Running command in runs/2026-11-24T1156Z-public/.work/scan/beacon-relay: [<external>/index-files.sh, <external>/files-to-index1154432688380479600.list]",
+      "status": "ok",
+      "written": "beacon-relay__codeql.json",
+      "tool": "codeql",
+      "project": "beacon-relay",
+      "language": "go"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "runs/2026-11-24T1156Z-public/harness/codeql-cbom.sh"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 49.7,
+      "bytes": 3551,
+      "stderr_tail": "[2026-11-24 11:58:33] [build-stdout] [2026-11-24 11:58:33] [build-stdout] [2026-11-24 11:58:33] [XMLExtractor] Processed 1 files in 33 ms; produced 0 bytes of compressed TRAP | [2026-11-24 11:58:33] [build-stdout] [2026-11-24 11:58:33] [build-stdout] 11:58:33.178 [main] INFO com.semmle.cli.SimpleExtractor.Stats -- Processed 1 files in 33 ms; produced 0 bytes of compressed TRAP | [2026-11-24 11:58:33] [build-stderr] Scanning for files in runs/2026-11-24T1156Z-public/.work/scan/ledger-svc... | [2026-11-24 11:58:33] [build-stderr] <external>/db: Indexing files in in runs/2026-11-24T1156Z-public/.work/scan/ledger-svc... | [2026-11-24 11:58:33] [build-stderr] Running command in runs/2026-11-24T1156Z-public/.work/scan/ledger-svc: [<external>/index-files.sh, <external>/files-to-index11326470371373349602.list] | [2026-11-24 11:58:33] [build-stdout] [2026-11-24 11:58:33] [build-stdout] [2026-11-24 11:58:33] [PropertiesExtractor] Processed 1 files in 24 ms; produced 0 bytes of compressed TRAP",
+      "status": "ok",
+      "written": "ledger-svc__codeql.json",
+      "tool": "codeql",
+      "project": "ledger-svc",
+      "language": "java"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "runs/2026-11-24T1156Z-public/harness/codeql-cbom.sh"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 0.16,
+      "bytes": 0,
+      "stderr_tail": "codeql: no inventory query for this project's languages",
+      "status": "empty",
+      "error": "generator produced no document",
+      "tool": "codeql",
+      "project": "sealbox",
+      "language": "rust"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "runs/2026-11-24T1156Z-public/harness/codeql-cbom.sh"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 0.18,
+      "bytes": 0,
+      "stderr_tail": "codeql: no inventory query for this project's languages",
+      "status": "empty",
+      "error": "generator produced no document",
+      "tool": "codeql",
+      "project": "session-broker",
+      "language": "javascript"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "runs/2026-11-24T1156Z-public/harness/codeql-cbom.sh"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 8.03,
+      "bytes": 2549,
+      "stderr_tail": "  - C/C++ was extracted with build-mode set to 'none' (1 result): |     * C/C++ was extracted with build-mode set to 'none'. This means that all C/C++ source in the working directory will be scanned. |      |     If you would prefer to analyse using a build command, see the manual[1]. |      |     [1]: https://docs.github.com/en/enterprise-server/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-the-codeql-workflow-for-compiled-languages#adding-build-steps-for-a-compiled-language",
+      "status": "ok",
+      "written": "tinyattest__codeql.json",
+      "tool": "codeql",
+      "project": "tinyattest",
+      "language": "c"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-public/harness/in-image.sh",
+        "runs/2026-11-24T1156Z-public/harness/codeql-cbom.sh"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 5.17,
+      "bytes": 2300,
+      "stderr_tail": "[2026-11-24 11:59:24] [build-stdout] [WARN] [3] Failed to find dynload path | [2026-11-24 11:59:24] [build-stdout] [WARN] [13] Failed to find dynload path | [2026-11-24 11:59:24] [build-stdout] [WARN] [16] Failed to find dynload path | [2026-11-24 11:59:24] [build-stderr] Scanning for files in runs/2026-11-24T1156Z-public/.work/scan/vaultkeeper... | [2026-11-24 11:59:24] [build-stderr] <external>/db: Indexing files in in runs/2026-11-24T1156Z-public/.work/scan/vaultkeeper... | [2026-11-24 11:59:24] [build-stderr] Running command in runs/2026-11-24T1156Z-public/.work/scan/vaultkeeper: [<external>/index-files.sh, <external>/files-to-index6404109117602645562.list]",
+      "status": "ok",
+      "written": "vaultkeeper__codeql.json",
+      "tool": "codeql",
+      "project": "vaultkeeper",
+      "language": "python"
+    }
+  ]
+}

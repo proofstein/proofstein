@@ -1,0 +1,382 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:182790e9-50c0-4075-b08d-cd010f36326f",
+  "version": 2,
+  "metadata": {
+    "timestamp": "2026-11-24T11:58:06Z",
+    "tools": {
+      "components": [
+        {
+          "name": "trustinspector",
+          "version": "4.3.1",
+          "description": "cdxgen trust-material inspection helper for repository keys, certificate stores, macOS code-signing, notarization, and Windows trust policy inventory.",
+          "purl": "pkg:generic/github.com/cdxgen/cdxgen-plugins-bin/trustinspector-cdxgen@4.3.1",
+          "bom-ref": "pkg:generic/github.com/cdxgen/cdxgen-plugins-bin/trustinspector-cdxgen@4.3.1",
+          "type": "application",
+          "hashes": [
+            {
+              "alg": "SHA-256",
+              "content": "714dad5fdd6b2be8f52cec750b812187a55e5a9ee7707ea9764b969fd732b8d5"
+            }
+          ],
+          "externalReferences": [
+            {
+              "type": "vcs",
+              "url": "https://github.com/cdxgen/cdxgen-plugins-bin/tree/main/thirdparty/trustinspector"
+            },
+            {
+              "type": "issue-tracker",
+              "url": "https://github.com/cdxgen/cdxgen/issues"
+            }
+          ],
+          "properties": [
+            {
+              "name": "cdx:plugin:manifest:name",
+              "value": "trustinspector"
+            },
+            {
+              "name": "internal:binary_path",
+              "value": "plugins/trustinspector/trustinspector-cdxgen-linux-amd64"
+            }
+          ],
+          "licenses": [
+            {
+              "license": {
+                "id": "MIT"
+              }
+            }
+          ]
+        },
+        {
+          "group": "@cdxgen",
+          "name": "cdxgen",
+          "version": "13.8.0",
+          "purl": "pkg:npm/%40cdxgen/cdxgen@13.8.0",
+          "type": "application",
+          "bom-ref": "pkg:npm/@cdxgen/cdxgen@13.8.0",
+          "publisher": "OWASP Foundation",
+          "authors": [
+            {
+              "name": "OWASP Foundation"
+            }
+          ]
+        }
+      ]
+    },
+    "authors": [
+      {
+        "name": "OWASP Foundation"
+      }
+    ],
+    "lifecycles": [
+      {
+        "phase": "build"
+      }
+    ],
+    "properties": [
+      {
+        "name": "cdx:bom:componentSrcFiles",
+        "value": "../keys/provisioning-key.pem\\n../keys/report-signing-key.pem\\n../src/keys/provisioning-cert.pem"
+      },
+      {
+        "name": "cdx:bom:componentTypes",
+        "value": "conan"
+      }
+    ]
+  },
+  "components": [
+    {
+      "group": "",
+      "name": "openssl",
+      "version": "3.5.5",
+      "scope": "required",
+      "purl": "pkg:conan/openssl@3.5.5",
+      "type": "library",
+      "bom-ref": "pkg:conan/openssl@3.5.5"
+    },
+    {
+      "group": "",
+      "name": "libsodium",
+      "version": "1.0.20",
+      "scope": "required",
+      "purl": "pkg:conan/libsodium@1.0.20",
+      "type": "library",
+      "bom-ref": "pkg:conan/libsodium@1.0.20"
+    },
+    {
+      "name": "provisioning-key.pem",
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/related-crypto-material/private-key/%2Fkeys%2Fprovisioning-key.pem",
+      "cryptoProperties": {
+        "assetType": "related-crypto-material",
+        "relatedCryptoMaterialProperties": {
+          "type": "private-key",
+          "format": "PKCS8"
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "/keys/provisioning-key.pem"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:crypto:sourceType",
+          "value": "generic"
+        },
+        {
+          "name": "internal:SrcFile",
+          "value": "../keys/provisioning-key.pem"
+        }
+      ],
+      "tags": [
+        "cryptographic-asset"
+      ]
+    },
+    {
+      "name": "report-signing-key.pem",
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/related-crypto-material/private-key/%2Fkeys%2Freport-signing-key.pem",
+      "cryptoProperties": {
+        "assetType": "related-crypto-material",
+        "relatedCryptoMaterialProperties": {
+          "type": "private-key",
+          "format": "PKCS8"
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "/keys/report-signing-key.pem"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:crypto:sourceType",
+          "value": "generic"
+        },
+        {
+          "name": "internal:SrcFile",
+          "value": "../keys/report-signing-key.pem"
+        }
+      ],
+      "tags": [
+        "cryptographic-asset"
+      ]
+    },
+    {
+      "bom-ref": "crypto/algorithm/RSA@1.2.840.113549.1.1.1",
+      "name": "RSA",
+      "type": "cryptographic-asset",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "oid": "1.2.840.113549.1.1.1",
+        "algorithmProperties": {
+          "nistQuantumSecurityLevel": 0
+        }
+      },
+      "properties": [],
+      "tags": [
+        "cryptographic-asset"
+      ]
+    },
+    {
+      "bom-ref": "crypto/algorithm/SHA256-RSA@1.2.840.113549.1.1.11",
+      "name": "SHA256-RSA",
+      "type": "cryptographic-asset",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "oid": "1.2.840.113549.1.1.11",
+        "algorithmProperties": {
+          "nistQuantumSecurityLevel": 0
+        }
+      },
+      "properties": [],
+      "tags": [
+        "cryptographic-asset"
+      ]
+    },
+    {
+      "bom-ref": "crypto/certificate/field-0417@sha256:1ca06f6d157eb1e666726eb7dc23afab6d0977890873f70a699921212e1909f7",
+      "name": "field-0417",
+      "type": "cryptographic-asset",
+      "version": "1ca06f6d157eb1e666726eb7dc23afab6d0977890873f70a699921212e1909f7",
+      "hashes": [
+        {
+          "alg": "SHA-1",
+          "content": "9c9ab06d3f4b12832df9ffa71609929981004088"
+        },
+        {
+          "alg": "SHA-256",
+          "content": "78e709c63f38984f62d1bc740542ecd831e10e2d157662acb361b7d8e9345bb8"
+        }
+      ],
+      "description": "CN=field-0417,OU=NOT A REAL KEY,O=Proofstein Corpus",
+      "cryptoProperties": {
+        "assetType": "certificate",
+        "algorithmProperties": {
+          "executionEnvironment": "unknown",
+          "implementationPlatform": "unknown"
+        },
+        "certificateProperties": {
+          "subjectName": "CN=field-0417,OU=NOT A REAL KEY,O=Proofstein Corpus",
+          "issuerName": "CN=field-0417,OU=NOT A REAL KEY,O=Proofstein Corpus",
+          "notValidBefore": "2026-07-27T14:51:21Z",
+          "notValidAfter": "2036-07-24T14:51:21Z",
+          "certificateFormat": "X.509",
+          "certificateExtension": "pem",
+          "subjectPublicKeyRef": "crypto/public-key/RSA-2048@spki-sha256:db79dfcbddea87313ed5a8c4afb80ea84d41e7754af52958605b66bf3019ef22",
+          "signatureAlgorithmRef": "crypto/algorithm/SHA256-RSA@1.2.840.113549.1.1.11"
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "/src/keys/provisioning-cert.pem"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:crypto:algorithm",
+          "value": "RSA"
+        },
+        {
+          "name": "cdx:crypto:authorityKeyId",
+          "value": "fe747042cc1d45372f496ea85c8f11dad0d72882"
+        },
+        {
+          "name": "cdx:crypto:certRole",
+          "value": "root"
+        },
+        {
+          "name": "cdx:crypto:fingerprint",
+          "value": "1ca06f6d157eb1e666726eb7dc23afab6d0977890873f70a699921212e1909f7"
+        },
+        {
+          "name": "cdx:crypto:isCA",
+          "value": "true"
+        },
+        {
+          "name": "cdx:crypto:keyStrength",
+          "value": "2048"
+        },
+        {
+          "name": "cdx:crypto:publicKeyAlgorithmOid",
+          "value": "1.2.840.113549.1.1.1"
+        },
+        {
+          "name": "cdx:crypto:selfSigned",
+          "value": "true"
+        },
+        {
+          "name": "cdx:crypto:signatureAlgorithm",
+          "value": "SHA256-RSA"
+        },
+        {
+          "name": "cdx:crypto:signatureAlgorithmOid",
+          "value": "1.2.840.113549.1.1.11"
+        },
+        {
+          "name": "cdx:crypto:sourceType",
+          "value": "generic"
+        },
+        {
+          "name": "cdx:crypto:spkiSha256",
+          "value": "db79dfcbddea87313ed5a8c4afb80ea84d41e7754af52958605b66bf3019ef22"
+        },
+        {
+          "name": "cdx:crypto:subjectKeyId",
+          "value": "fe747042cc1d45372f496ea85c8f11dad0d72882"
+        },
+        {
+          "name": "cdx:crypto:trustDomain",
+          "value": "generic"
+        },
+        {
+          "name": "internal:SrcFile",
+          "value": "../src/keys/provisioning-cert.pem"
+        }
+      ],
+      "tags": [
+        "cryptographic-asset"
+      ]
+    },
+    {
+      "bom-ref": "crypto/public-key/RSA-2048@spki-sha256:db79dfcbddea87313ed5a8c4afb80ea84d41e7754af52958605b66bf3019ef22",
+      "name": "RSA-2048",
+      "type": "cryptographic-asset",
+      "version": "db79dfcbddea87313ed5a8c4afb80ea84d41e7754af52958605b66bf3019ef22",
+      "cryptoProperties": {
+        "assetType": "related-crypto-material",
+        "relatedCryptoMaterialProperties": {
+          "type": "public-key",
+          "size": 2048,
+          "format": "SPKI",
+          "id": "fe747042cc1d45372f496ea85c8f11dad0d72882",
+          "algorithmRef": "crypto/algorithm/RSA@1.2.840.113549.1.1.1"
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "/src/keys/provisioning-cert.pem"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "cdx:crypto:publicKeyAlgorithmOid",
+          "value": "1.2.840.113549.1.1.1"
+        },
+        {
+          "name": "cdx:crypto:sourceType",
+          "value": "certificate"
+        },
+        {
+          "name": "cdx:crypto:spkiSha256",
+          "value": "db79dfcbddea87313ed5a8c4afb80ea84d41e7754af52958605b66bf3019ef22"
+        },
+        {
+          "name": "cdx:crypto:spkiSha256Base64",
+          "value": "23nfy93qhzE+1ajEr7gOqE1B53VK9SlYYFtmvzAZ7yI="
+        }
+      ],
+      "tags": [
+        "cryptographic-asset"
+      ]
+    }
+  ],
+  "services": [],
+  "dependencies": [],
+  "annotations": [
+    {
+      "bom-ref": "metadata-annotations",
+      "subjects": [
+        "urn:uuid:182790e9-50c0-4075-b08d-cd010f36326f"
+      ],
+      "annotator": {
+        "component": {
+          "group": "@cdxgen",
+          "name": "cdxgen",
+          "version": "13.8.0",
+          "purl": "pkg:npm/%40cdxgen/cdxgen@13.8.0",
+          "type": "application",
+          "bom-ref": "pkg:npm/@cdxgen/cdxgen@13.8.0",
+          "publisher": "OWASP Foundation",
+          "authors": [
+            {
+              "name": "OWASP Foundation"
+            }
+          ]
+        }
+      },
+      "timestamp": "2026-11-24T11:58:06Z",
+      "text": "This Cryptography Bill-of-Materials (CBOM) document was created on Tuesday, November 24, 2026. The xBOM tools used are: trustinspector and cdxgen. The data was captured during the build lifecycle phase. There are 8 components."
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+ "bomFormat": "CycloneDX",
+ "specVersion": "1.6",
+ "version": 1,
+ "metadata": {
+  "tools": {
+   "components": [
+    {
+     "type": "application",
+     "name": "ecdsa-scan",
+     "version": "0.1.0"
+    }
+   ]
+  }
+ },
+ "components": [
+  {
+   "type": "cryptographic-asset",
+   "bom-ref": "algorithm-b38ab6780e120a0e",
+   "name": "EdDSA",
+   "evidence": {
+    "occurrences": [
+     {
+      "location": "src/identity.ts"
+     }
+    ]
+   },
+   "cryptoProperties": {
+    "assetType": "algorithm"
+   }
+  },
+  {
+   "type": "cryptographic-asset",
+   "bom-ref": "algorithm-0614604657d6ef52",
+   "name": "ES256",
+   "evidence": {
+    "occurrences": [
+     {
+      "location": "src/jose.ts"
+     }
+    ]
+   },
+   "cryptoProperties": {
+    "assetType": "algorithm"
+   }
+  },
+  {
+   "type": "cryptographic-asset",
+   "bom-ref": "algorithm-e2da130154f7486d",
+   "name": "PS256",
+   "evidence": {
+    "occurrences": [
+     {
+      "location": "src/jose.ts"
+     },
+     {
+      "location": "src/jws-pss.ts"
+     }
+    ]
+   },
+   "cryptoProperties": {
+    "assetType": "algorithm"
+   }
+  },
+  {
+   "type": "cryptographic-asset",
+   "bom-ref": "curve-e70631d6fa27276c",
+   "name": "P-256",
+   "evidence": {
+    "occurrences": [
+     {
+      "location": "src/identity.ts"
+     }
+    ]
+   },
+   "cryptoProperties": {
+    "assetType": "algorithm"
+   }
+  }
+ ]
+}

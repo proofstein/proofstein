@@ -1,0 +1,274 @@
+{
+  "run": {
+    "started_utc": "2026-11-24T11:59:58Z",
+    "scan_tree": "git archive HEAD",
+    "ground_truth": "ground-truth",
+    "holdout": false,
+    "corpus_commit": "f366ff5b08c7e82ec0ef9f8da17f6cbea64f4c85",
+    "corpus_commit_short": "f366ff5",
+    "corpus_tree_dirty": false,
+    "uncommitted_paths": [],
+    "host_platform": "linux",
+    "python": "3.12.3",
+    "finished_utc": "2026-11-24T12:00:00Z",
+    "succeeded": 6,
+    "attempted": 6,
+    "build_image": {
+      "image": "proofstein-build:f366ff5",
+      "image_id": "sha256:3d16c8bfbf683df091999be2894de91ff1d561a285a16da96f8d15d6ec3b4864",
+      "dockerfile": "tools/build.Dockerfile at f366ff5",
+      "base": "debian@sha256:3cda3ca472ce45507a5109c6a3907093e24d9ae67d55954c9a07a45665dafba2",
+      "jdk": "Temurin 25.0.5.1+2, sha256 760f91b22c3efc9bd1b64ff950598231be82928cc807e30691a0e7a2995a62c0"
+    },
+    "build_verification": {
+      "command": "tools/build-all.sh and tools/build-all.sh ground-truth-holdout, in the build image",
+      "public": "6 of 6 projects built and ran",
+      "holdout": "6 of 6 projects built and ran"
+    }
+  },
+  "judgement_tables": {
+    "oid_algorithms": {
+      "entries": 27,
+      "sha256_16": "f6fd6fa101db7a4d"
+    },
+    "location_property_names": {
+      "entries": 8,
+      "sha256_16": "0b8c15cc33ce242a"
+    },
+    "line_property_names": {
+      "entries": 5,
+      "sha256_16": "ed438ed351a5b930"
+    },
+    "token_aliases": {
+      "entries": 33,
+      "sha256_16": "c13677feee250d8b"
+    },
+    "family_markers": {
+      "entries": 47,
+      "sha256_16": "9db8169c695be2c5"
+    },
+    "jose_names": {
+      "entries": 10,
+      "sha256_16": "08d16fb9eb9aecef"
+    },
+    "hybrid_groups": {
+      "entries": 4,
+      "sha256_16": "ebb21ecb7cbea298"
+    },
+    "whole_token_only": {
+      "entries": 8,
+      "sha256_16": "b9a4a30aab68fec0"
+    },
+    "known_unplanted": {
+      "entries": 15,
+      "sha256_16": "3a7fca80174e0cdd"
+    }
+  },
+  "judgement_table_changes": {
+    "since_run": "2026-10-07T2016Z-ecdsa-scan",
+    "changes": [
+      {
+        "table": "family_markers",
+        "before": {
+          "entries": 43,
+          "sha256_16": "e4639e0dd1414815"
+        },
+        "after": {
+          "entries": 47,
+          "sha256_16": "9db8169c695be2c5"
+        }
+      },
+      {
+        "table": "hybrid_groups",
+        "before": null,
+        "after": {
+          "entries": 4,
+          "sha256_16": "ebb21ecb7cbea298"
+        }
+      },
+      {
+        "table": "jose_names",
+        "before": null,
+        "after": {
+          "entries": 10,
+          "sha256_16": "08d16fb9eb9aecef"
+        }
+      },
+      {
+        "table": "oid_algorithms",
+        "before": {
+          "entries": 27,
+          "sha256_16": "031a3c27915e6dde"
+        },
+        "after": {
+          "entries": 27,
+          "sha256_16": "f6fd6fa101db7a4d"
+        }
+      },
+      {
+        "table": "token_aliases",
+        "before": {
+          "entries": 32,
+          "sha256_16": "637f0e9d5f2cf137"
+        },
+        "after": {
+          "entries": 33,
+          "sha256_16": "c13677feee250d8b"
+        }
+      },
+      {
+        "table": "whole_token_only",
+        "before": {
+          "entries": 7,
+          "sha256_16": "88a20cf6715e9c84"
+        },
+        "after": {
+          "entries": 8,
+          "sha256_16": "b9a4a30aab68fec0"
+        }
+      }
+    ],
+    "prompted_by": [
+      "pqprobe"
+    ]
+  },
+  "tools": {
+    "ecdsa-scan": {
+      "version": "ecdsa-scan 0.1.1",
+      "binary": "runs/2026-11-24T1156Z-ecdsa-scan/converter/ecdsa-scan-cbom.sh",
+      "binary_sha256": "95ebf7ddcf8bdfbb6c22fdaf3339e673be30faef1f95756d443af6db5b0a73ad",
+      "package_version": "ecdsa-scan@0.1.1 (npm tarball sha512-g2CwpG1YMSXtVfvg0W8D9WW3wnrkYeDTsnuxpYxGvGWFFF3Rj/ca9WsQ06lIglKiZDPn/Wd9v1h4133tx4ua6Q==), Node v20.19.2 in the pinned build image",
+      "accept_exit": [
+        0
+      ],
+      "notes": "Self-reports 0.1.0; the package is 0.1.1. MIT. Defect scanner for signature code with an inventory collector; the wrapper converts its --json inventory to CycloneDX, files only, no lines. Reads JS, TS, Python and Go source and key files.",
+      "image": "proofstein-build:f366ff5",
+      "image_digest": "sha256:3d16c8bfbf683df091999be2894de91ff1d561a285a16da96f8d15d6ec3b4864",
+      "image_id": "sha256:3d16c8bfbf683df091999be2894de91ff1d561a285a16da96f8d15d6ec3b4864"
+    }
+  },
+  "projects": {
+    "beacon-relay": {
+      "language": "go",
+      "assets": 19
+    },
+    "ledger-svc": {
+      "language": "java",
+      "assets": 25
+    },
+    "sealbox": {
+      "language": "rust",
+      "assets": 18
+    },
+    "session-broker": {
+      "language": "javascript",
+      "assets": 23
+    },
+    "tinyattest": {
+      "language": "c",
+      "assets": 23
+    },
+    "vaultkeeper": {
+      "language": "python",
+      "assets": 23
+    }
+  },
+  "invocations": [
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-ecdsa-scan/converter/in-image.sh",
+        "runs/2026-11-24T1156Z-ecdsa-scan/converter/ecdsa-scan-cbom.sh"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 0.29,
+      "bytes": 2057,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "beacon-relay__ecdsa-scan.json",
+      "tool": "ecdsa-scan",
+      "project": "beacon-relay",
+      "language": "go"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-ecdsa-scan/converter/in-image.sh",
+        "runs/2026-11-24T1156Z-ecdsa-scan/converter/ecdsa-scan-cbom.sh"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 0.28,
+      "bytes": 237,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "ledger-svc__ecdsa-scan.json",
+      "tool": "ecdsa-scan",
+      "project": "ledger-svc",
+      "language": "java"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-ecdsa-scan/converter/in-image.sh",
+        "runs/2026-11-24T1156Z-ecdsa-scan/converter/ecdsa-scan-cbom.sh"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 0.29,
+      "bytes": 237,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "sealbox__ecdsa-scan.json",
+      "tool": "ecdsa-scan",
+      "project": "sealbox",
+      "language": "rust"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-ecdsa-scan/converter/in-image.sh",
+        "runs/2026-11-24T1156Z-ecdsa-scan/converter/ecdsa-scan-cbom.sh"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 0.3,
+      "bytes": 2159,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "session-broker__ecdsa-scan.json",
+      "tool": "ecdsa-scan",
+      "project": "session-broker",
+      "language": "javascript"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-ecdsa-scan/converter/in-image.sh",
+        "runs/2026-11-24T1156Z-ecdsa-scan/converter/ecdsa-scan-cbom.sh"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 0.27,
+      "bytes": 237,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "tinyattest__ecdsa-scan.json",
+      "tool": "ecdsa-scan",
+      "project": "tinyattest",
+      "language": "c"
+    },
+    {
+      "argv": [
+        "runs/2026-11-24T1156Z-ecdsa-scan/converter/in-image.sh",
+        "runs/2026-11-24T1156Z-ecdsa-scan/converter/ecdsa-scan-cbom.sh"
+      ],
+      "exit_code": 0,
+      "exit_accepted": true,
+      "duration_sec": 0.3,
+      "bytes": 1748,
+      "stderr_tail": "",
+      "status": "ok",
+      "written": "vaultkeeper__ecdsa-scan.json",
+      "tool": "ecdsa-scan",
+      "project": "vaultkeeper",
+      "language": "python"
+    }
+  ]
+}
